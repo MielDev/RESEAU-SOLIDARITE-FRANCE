@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Actions internationales · RSF Admin</title>
+  <link rel="stylesheet" href="admin-style.css"/>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <a href="admin-dashboard.html" class="brand-logo">
+      <div class="brand-icon">RSF</div>
+      <div><div class="brand-name">RSF Admin</div></div>
+    </a>
+    <div class="brand-sub">Back-office</div>
+  </div>
+
+  <div class="sidebar-section-label">Tableau de bord</div>
+  <nav>
+    <a href="admin-dashboard.html" class="sidebar-link"><span class="si">🏠</span>Dashboard</a>
+  </nav>
+
+  <div class="sidebar-section-label">Pages du site</div>
+  <nav>
+    <a href="admin-accueil.html" class="sidebar-link"><span class="si">🏠</span>Accueil</a>
+    <a href="admin-qui-sommes-nous.html" class="sidebar-link"><span class="si">📖</span>Qui sommes-nous ?</a>
+    <a href="admin-organisation.html" class="sidebar-link"><span class="si">👥</span>Organisation</a>
+    <a href="admin-missions.html" class="sidebar-link"><span class="si">🎯</span>Nos missions</a>
+    <a href="admin-actions-solidaires.html" class="sidebar-link"><span class="si">🤝</span>Actions solidaires</a>
+    <a href="admin-soutien.html" class="sidebar-link"><span class="si">💙</span>Soutien aux membres</a>
+    <a href="admin-evenements.html" class="sidebar-link"><span class="si">📅</span>Événements</a>
+    <a href="admin-rencontre.html" class="sidebar-link"><span class="si">🎉</span>Rencontre annuelle</a>
+    <a href="admin-international.html" class="sidebar-link active"><span class="si">🌍</span>Actions internationales</a>
+    <a href="admin-temoignages.html" class="sidebar-link"><span class="si">💬</span>Témoignages</a>
+    <a href="admin-rejoindre.html" class="sidebar-link"><span class="si">🙌</span>Nous rejoindre</a>
+    <a href="admin-actualites.html" class="sidebar-link"><span class="si">📰</span>Actualités</a>
+    <a href="admin-don.html" class="sidebar-link"><span class="si">❤️</span>Faire un don</a>
+    <a href="admin-contact.html" class="sidebar-link"><span class="si">✉️</span>Contact</a>
+  </nav>
+
+  <div class="sidebar-section-label">Paramètres</div>
+  <nav>
+    <a href="admin-settings.html" class="sidebar-link"><span class="si">⚙️</span>Paramètres généraux</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="../rsf/index.html" target="_blank">🌐 Voir le site</a>
+    <a href="admin-login.html">🚪 Déconnexion</a>
+  </div>
+</aside>
+<div class="overlay" id="overlay"></div>
+<div id="toast"></div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mob-toggle" id="menuToggle"><span style="font-size:22px;">☰</span></button>
+      <div>
+        <div class="page-title">Actions internationales</div>
+        <div class="page-breadcrumb"><a href="admin-dashboard.html">Admin</a><span>›</span>Actions internationales</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="../rsf/index.html" target="_blank" class="topbar-btn tb-preview">👁 Voir la page</a>
+      <button class="topbar-btn tb-save btn-save" data-label="💾 Enregistrer">💾 Enregistrer</button>
+      <div class="topbar-avatar">AT</div>
+    </div>
+  </div>
+  <div class="content">
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🖼️</span>En-tête de la page</div>
+      
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid" style="display:grid;gap:12px;">
+  
+<div class="form-group">
+  <label for="int_title">Titre</label>
+  <input class="input" type="text" id="int_title" name="int_title" value="Actions internationales" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="int_desc">Description</label>
+  <textarea class="textarea" id="int_desc" name="int_desc" style="min-height:64px">Parce que la solidarité ne connaît pas de frontières, nous œuvrons pour un monde plus humain et plus solidaire.</textarea>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🌍</span>Section principale — Distribution de nourriture</div>
+      <div class="panel-desc">Contenu principal de la page</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid" style="display:grid;gap:14px;">
+  
+<div class="form-group">
+  <label for="int_s_title">Titre de section</label>
+  <input class="input" type="text" id="int_s_title" name="int_s_title" value="Solidarité sans frontières" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="int_p1">Paragraphe 1</label>
+  <textarea class="textarea" id="int_p1" name="int_p1" style="min-height:88px">Dans le cadre de ses actions solidaires internationales, RÉSEAU SOLIDARITÉ FRANCE a organisé une distribution de nourriture au profit des personnes en situation de précarité.</textarea>
+  
+</div>
+  
+<div class="form-group">
+  <label for="int_p2">Paragraphe 2</label>
+  <textarea class="textarea" id="int_p2" name="int_p2" style="min-height:88px">Cette initiative s'inscrit dans notre engagement à apporter un soutien concret aux populations les plus vulnérables, au-delà des frontières.</textarea>
+  
+</div>
+  
+<div class="form-group">
+  <label for="int_p3">Paragraphe 3</label>
+  <textarea class="textarea" id="int_p3" name="int_p3" style="min-height:88px">À travers cette action, nous avons souhaité partager un moment de solidarité, d'écoute et de respect, en contribuant, à notre échelle, à améliorer le quotidien de ces personnes.</textarea>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🎯</span>3 engagements (cartes)</div>
+      <div class="panel-desc">Les 3 cartes d'engagements internationaux</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div style="display:flex;flex-direction:column;gap:12px;">
+
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="eng1_icon">Icône</label>
+  <input class="input" type="text" id="eng1_icon" name="eng1_icon" value="🍽️" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="eng1_title">Titre</label>
+  <input class="input" type="text" id="eng1_title" name="eng1_title" value="Distribution alimentaire" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="eng1_desc">Description</label>
+  <input class="input" type="text" id="eng1_desc" name="eng1_desc" value="Aide aux populations vulnérables dans l'accès à la nourriture." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="eng2_icon">Icône</label>
+  <input class="input" type="text" id="eng2_icon" name="eng2_icon" value="🤝" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="eng2_title">Titre</label>
+  <input class="input" type="text" id="eng2_title" name="eng2_title" value="Solidarité active" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="eng2_desc">Description</label>
+  <input class="input" type="text" id="eng2_desc" name="eng2_desc" value="Des actions concrètes et humaines pour améliorer le quotidien." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="eng3_icon">Icône</label>
+  <input class="input" type="text" id="eng3_icon" name="eng3_icon" value="🌱" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="eng3_title">Titre</label>
+  <input class="input" type="text" id="eng3_title" name="eng3_title" value="Engagement durable" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="eng3_desc">Description</label>
+  <input class="input" type="text" id="eng3_desc" name="eng3_desc" value="Un engagement sur le long terme pour un impact réel et durable." placeholder=""/>
+  
+</div>
+  </div></div></div>
+</div>
+
+  </div>
+</div>
+
+<script>
+// Sidebar toggle (mobile)
+const sb=document.getElementById('sidebar');
+const ov=document.getElementById('overlay');
+document.querySelectorAll('.mob-toggle').forEach(b=>b.addEventListener('click',()=>{
+  sb.classList.toggle('open'); ov.classList.toggle('show');
+}));
+if(ov) ov.addEventListener('click',()=>{sb.classList.remove('open');ov.classList.remove('show');});
+
+// Save toast
+function showToast(msg='✅ Modifications enregistrées !'){
+  const t=document.getElementById('toast');
+  t.innerHTML='<span>✅</span> '+msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// All save buttons
+document.querySelectorAll('.tb-save,.btn-save').forEach(b=>{
+  b.addEventListener('click',e=>{
+    e.preventDefault();
+    b.innerHTML='<span>⏳</span> Enregistrement…';
+    setTimeout(()=>{
+      b.innerHTML=b.dataset.label||'💾 Enregistrer';
+      showToast();
+    },800);
+  });
+});
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const group=t.closest('.tabs-wrap');
+    if(!group){
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(x=>x.style.display='none');
+      t.classList.add('active');
+      const target=document.getElementById('panel-'+t.dataset.tab);
+      if(target) target.style.display='block';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

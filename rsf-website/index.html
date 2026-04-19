@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Accueil · Réseau Solidarité France</title>
+  <meta name="description" content="Réseau Solidarité France – Association d'accompagnement des étudiants, salariés et personnes en précarité à Rennes."/>
+  <link rel="stylesheet" href="style.css"/>
+  
+</head>
+<body>
+
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo">RSF</div>
+      <div>
+        <div class="nav-title">Réseau Solidarité France</div>
+        <div class="nav-sub">Association</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Accueil</a></li>
+      <li>
+        <a href="qui-sommes-nous.html">À propos <span class="arrow">▾</span></a>
+        <ul class="dropdown">
+          <li><a href="qui-sommes-nous.html"><span class="dicon">📖</span>Qui sommes-nous ?</a></li>
+          <li><a href="organisation.html"><span class="dicon">👥</span>Organisation</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="nos-missions.html">Nos actions <span class="arrow">▾</span></a>
+        <ul class="dropdown">
+          <li><a href="nos-missions.html"><span class="dicon">🎯</span>Nos missions</a></li>
+          <li><a href="actions-solidaires.html"><span class="dicon">🤝</span>Actions solidaires</a></li>
+          <li><a href="soutien-aux-membres.html"><span class="dicon">💙</span>Soutien aux membres</a></li>
+          <li><a href="actions-internationales.html"><span class="dicon">🌍</span>Actions internationales</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="evenements.html">Événements <span class="arrow">▾</span></a>
+        <ul class="dropdown">
+          <li><a href="evenements.html"><span class="dicon">📅</span>Tous les événements</a></li>
+          <li><a href="rencontre-annuelle.html"><span class="dicon">🎉</span>Rencontre annuelle 2025</a></li>
+        </ul>
+      </li>
+      <li><a href="temoignages.html">Témoignages</a></li>
+      <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
+      <li><a href="actualites.html">Actualités</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="don.html" class="nav-cta">❤️ Faire un don</a></li>
+    </ul>
+    <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" class="mob-item">🏠 Accueil</a>
+  <div class="mob-section">À propos</div>
+  <a href="qui-sommes-nous.html" class="mob-item">📖 Qui sommes-nous ?</a>
+  <a href="organisation.html" class="mob-item">👥 Organisation</a>
+  <div class="mob-section">Nos actions</div>
+  <a href="nos-missions.html" class="mob-item">🎯 Nos missions</a>
+  <a href="actions-solidaires.html" class="mob-item">🤝 Actions solidaires</a>
+  <a href="soutien-aux-membres.html" class="mob-item">💙 Soutien aux membres</a>
+  <a href="actions-internationales.html" class="mob-item">🌍 Actions internationales</a>
+  <div class="mob-section">Événements</div>
+  <a href="evenements.html" class="mob-item">📅 Tous les événements</a>
+  <a href="rencontre-annuelle.html" class="mob-item">🎉 Rencontre annuelle 2025</a>
+  <div class="mob-section">Communauté</div>
+  <a href="temoignages.html" class="mob-item">💬 Témoignages</a>
+  <a href="nous-rejoindre.html" class="mob-item">🙌 Nous rejoindre</a>
+  <a href="actualites.html" class="mob-item">📰 Actualités</a>
+  <a href="contact.html" class="mob-item">✉️ Contact</a>
+  <a href="don.html" class="mob-item mob-cta">❤️ Faire un don</a>
+</div>
+
+
+<section style="min-height:calc(100vh - var(--nav-h));display:flex;align-items:center;padding:clamp(48px,7vw,96px) clamp(16px,5vw,80px);background:linear-gradient(155deg,#F1F5F9 0%,#E8EFFE 55%,#EDE9FE 100%);position:relative;overflow:hidden;">
+  <div style="position:absolute;width:600px;height:600px;border-radius:50%;background:var(--primary);opacity:.08;top:-220px;right:-120px;pointer-events:none;"></div>
+  <div style="position:absolute;width:350px;height:350px;border-radius:50%;background:var(--secondary);opacity:.07;bottom:-80px;left:-80px;pointer-events:none;"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="grid-2" style="align-items:center;gap:64px;">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(47,93,255,.08);border:1px solid rgba(47,93,255,.15);color:var(--primary);font-size:12px;font-weight:700;padding:6px 16px;border-radius:50px;margin-bottom:20px;letter-spacing:.05em;text-transform:uppercase;">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--support);animation:pulse 2s infinite;display:block;"></span>
+          Association à but non lucratif · Rennes
+        </div>
+        <h1 style="font-size:clamp(36px,5.5vw,70px);line-height:1.08;letter-spacing:-.025em;color:var(--primary-dark);margin-bottom:12px;">
+          Unis pour aider,<br><span style="color:var(--primary);position:relative;">ensemble<span style="position:absolute;left:0;bottom:-5px;width:100%;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent-light));"></span></span><br>pour avancer
+        </h1>
+        <p style="font-size:clamp(15px,1.8vw,18px);color:var(--text-mid);line-height:1.75;max-width:520px;margin:24px 0 36px;">
+          Nous accompagnons les étudiants, les salariés et les personnes en situation de précarité dans leurs démarches administratives, leur insertion professionnelle et leur vie quotidienne en France.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+          <a href="nos-missions.html" class="btn btn-primary">Découvrir nos missions →</a>
+          <a href="nous-rejoindre.html" class="btn btn-outline">Rejoindre le réseau</a>
+          <a href="don.html" class="btn btn-accent">❤️ Faire un don</a>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;">
+          <div style="background:white;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border-top:3px solid var(--primary);text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--primary-dark);">100+</div>
+            <div style="font-size:12px;color:var(--text-light);text-transform:uppercase;letter-spacing:.05em;margin-top:4px;">Membres actifs</div>
+          </div>
+          <div style="background:white;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border-top:3px solid var(--accent);text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--primary-dark);">5</div>
+            <div style="font-size:12px;color:var(--text-light);text-transform:uppercase;letter-spacing:.05em;margin-top:4px;">Domaines d'action</div>
+          </div>
+          <div style="background:white;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border-top:3px solid var(--support);text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--primary-dark);">∞</div>
+            <div style="font-size:12px;color:var(--text-light);text-transform:uppercase;letter-spacing:.05em;margin-top:4px;">Solidarité</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px;" class="fade-up">
+        <!-- Feature cards -->
+        <div style="background:white;border-radius:20px;padding:28px;box-shadow:var(--shadow-lg);display:flex;gap:18px;align-items:flex-start;">
+          <div class="icon-box" style="background:rgba(47,93,255,.1);">📋</div>
+          <div><h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:6px;">Aide administrative</h3><p style="font-size:13.5px;color:var(--text-mid);line-height:1.65;">CAF, titre de séjour, logement, carte vitale… Nous vous accompagnons étape par étape.</p></div>
+        </div>
+        <div style="background:white;border-radius:20px;padding:28px;box-shadow:var(--shadow-lg);display:flex;gap:18px;align-items:flex-start;">
+          <div class="icon-box" style="background:rgba(124,58,237,.1);">💼</div>
+          <div><h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:6px;">Emploi & Formation</h3><p style="font-size:13.5px;color:var(--text-mid);line-height:1.65;">CV, entretiens, alternance, formations certifiantes — nous ouvrons des portes.</p></div>
+        </div>
+        <div style="background:white;border-radius:20px;padding:28px;box-shadow:var(--shadow-lg);display:flex;gap:18px;align-items:flex-start;">
+          <div class="icon-box" style="background:rgba(34,197,94,.1);">🤝</div>
+          <div><h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:6px;">Réseau d'entraide</h3><p style="font-size:13.5px;color:var(--text-mid);line-height:1.65;">Une communauté soudée où chacun peut trouver écoute, conseil et soutien concret.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick links -->
+<section class="section-pad" style="background:var(--bg-light);">
+  <div class="container">
+    <div class="s-label">Naviguer</div>
+    <h2 class="s-title">Tout ce que nous faisons</h2>
+    <div class="grid-auto" style="margin-top:40px;">
+      <a href="qui-sommes-nous.html" class="card" style="padding:28px;text-decoration:none;display:block;">
+        <div class="icon-box" style="background:rgba(47,93,255,.1);margin-bottom:14px;">📖</div>
+        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Qui sommes-nous ?</h3>
+        <p style="font-size:13.5px;color:var(--text-mid);">Notre histoire, nos valeurs et notre engagement au quotidien.</p>
+      </a>
+      <a href="organisation.html" class="card" style="padding:28px;text-decoration:none;display:block;">
+        <div class="icon-box" style="background:rgba(124,58,237,.1);margin-bottom:14px;">👥</div>
+        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Organisation</h3>
+        <p style="font-size:13.5px;color:var(--text-mid);">Président fondateur et équipe structurée et engagée.</p>
+      </a>
+      <a href="nos-missions.html" class="card" style="padding:28px;text-decoration:none;display:block;">
+        <div class="icon-box" style="background:rgba(255,140,0,.1);margin-bottom:14px;">🎯</div>
+        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Nos missions</h3>
+        <p style="font-size:13.5px;color:var(--text-mid);">Démarches administratives, emploi, logement, insertion sociale.</p>
+      </a>
+      <a href="actions-solidaires.html" class="card" style="padding:28px;text-decoration:none;display:block;">
+        <div class="icon-box" style="background:rgba(34,197,94,.1);margin-bottom:14px;">🤝</div>
+        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Actions solidaires</h3>
+        <p style="font-size:13.5px;color:var(--text-mid);">Nos actions concrètes sur le terrain, pour et avec la communauté.</p>
+      </a>
+      <a href="evenements.html" class="card" style="padding:28px;text-decoration:none;display:block;">
+        <div class="icon-box" style="background:rgba(47,93,255,.1);margin-bottom:14px;">📅</div>
+        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Événements</h3>
+        <p style="font-size:13.5px;color:var(--text-mid);">Rencontres, journées de cohésion et activités pour tous.</p>
+      </a>
+      <a href="temoignages.html" class="card" style="padding:28px;text-decoration:none;display:block;">
+        <div class="icon-box" style="background:rgba(124,58,237,.1);margin-bottom:14px;">💬</div>
+        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Témoignages</h3>
+        <p style="font-size:13.5px;color:var(--text-mid);">Les mots de ceux que nous avons accompagnés.</p>
+      </a>
+      <a href="nous-rejoindre.html" class="card" style="padding:28px;text-decoration:none;display:block;">
+        <div class="icon-box" style="background:rgba(255,140,0,.1);margin-bottom:14px;">🙌</div>
+        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Nous rejoindre</h3>
+        <p style="font-size:13.5px;color:var(--text-mid);">Devenir bénévole ou intégrer le réseau comme membre.</p>
+      </a>
+      <a href="don.html" class="card" style="padding:28px;text-decoration:none;display:block;border-top:3px solid var(--accent);">
+        <div class="icon-box" style="background:rgba(255,140,0,.1);margin-bottom:14px;">❤️</div>
+        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Faire un don</h3>
+        <p style="font-size:13.5px;color:var(--text-mid);">Soutenir nos actions financièrement ou en nature.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Valeurs highlight -->
+<section class="section-pad" style="background:var(--bg-dark);">
+  <div class="container">
+    <div class="s-label on-dark">Notre engagement</div>
+    <h2 class="s-title on-dark">Nos valeurs fondatrices</h2>
+    <div class="grid-4" style="margin-top:40px;">
+      <div style="text-align:center;padding:28px 20px;">
+        <div style="font-size:44px;margin-bottom:14px;">🤝</div>
+        <h3 style="font-size:17px;color:white;margin-bottom:8px;">Solidarité</h3>
+        <p style="font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.65;">Personne ne doit être oublié</p>
+      </div>
+      <div style="text-align:center;padding:28px 20px;">
+        <div style="font-size:44px;margin-bottom:14px;">⚖️</div>
+        <h3 style="font-size:17px;color:white;margin-bottom:8px;">Respect</h3>
+        <p style="font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.65;">De chacun, de la loi et des parcours de vie</p>
+      </div>
+      <div style="text-align:center;padding:28px 20px;">
+        <div style="font-size:44px;margin-bottom:14px;">💪</div>
+        <h3 style="font-size:17px;color:white;margin-bottom:8px;">Engagement</h3>
+        <p style="font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.65;">Dans nos actions, au quotidien</p>
+      </div>
+      <div style="text-align:center;padding:28px 20px;">
+        <div style="font-size:44px;margin-bottom:14px;">❤️</div>
+        <h3 style="font-size:17px;color:white;margin-bottom:8px;">Humanité</h3>
+        <p style="font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.65;">L'écoute et l'empathie guident tout</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA strip -->
+<section style="padding:56px clamp(16px,5vw,80px);background:linear-gradient(135deg,var(--primary),var(--secondary));">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;">
+    <div>
+      <h2 style="font-size:clamp(22px,3vw,32px);color:white;margin-bottom:8px;">Ensemble, construisons une solidarité qui change des vies.</h2>
+      <p style="font-size:15px;color:rgba(255,255,255,.75);">Rejoignez Réseau Solidarité France — en tant que bénévole, membre ou donateur.</p>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="nous-rejoindre.html" class="btn" style="background:white;color:var(--primary);">Nous rejoindre</a>
+      <a href="don.html" class="btn btn-accent">Faire un don</a>
+    </div>
+  </div>
+</section>
+<style>
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.6}}
+</style>
+
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="fl">Réseau Solidarité France</div>
+      <p>Une association à but non lucratif née d'un engagement simple : ne laisser personne de côté. Solidarité, respect, engagement, humanité.</p>
+      <p style="margin-top:14px;font-size:12px;color:rgba(255,255,255,.3)">📍 7 Rue Maréchal Lyautey, 35000 Rennes</p>
+    </div>
+    <div class="footer-col">
+      <h5>L'association</h5>
+      <ul>
+        <li><a href="qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+        <li><a href="organisation.html">Organisation</a></li>
+        <li><a href="temoignages.html">Témoignages</a></li>
+        <li><a href="actualites.html">Actualités</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Nos actions</h5>
+      <ul>
+        <li><a href="nos-missions.html">Nos missions</a></li>
+        <li><a href="actions-solidaires.html">Actions solidaires</a></li>
+        <li><a href="soutien-aux-membres.html">Soutien aux membres</a></li>
+        <li><a href="actions-internationales.html">Actions internationales</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Nous rejoindre</h5>
+      <ul>
+        <li><a href="nous-rejoindre.html">Devenir bénévole</a></li>
+        <li><a href="don.html">Faire un don</a></li>
+        <li><a href="evenements.html">Événements</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 – 2026 Réseau Solidarité France · Tous droits réservés</p>
+    <p>Made with ❤️ for solidarity · Rennes, France</p>
+  </div>
+</footer>
+<button id="scrollTop" title="Retour en haut">↑</button>
+<script>
+  const nav=document.getElementById('mainNav');
+  const st=document.getElementById('scrollTop');
+  window.addEventListener('scroll',()=>{
+    nav.classList.toggle('scrolled',scrollY>30);
+    st.classList.toggle('show',scrollY>400);
+  });
+  st.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  document.getElementById('burgerBtn').addEventListener('click',()=>{
+    document.getElementById('mobileNav').classList.toggle('open');
+  });
+  document.querySelectorAll('.fade-up').forEach(el=>{
+    new IntersectionObserver(([e])=>{if(e.isIntersecting)el.classList.add('visible')},{threshold:.1}).observe(el);
+  });
+  document.querySelectorAll('.form-submit').forEach(b=>{
+    b.addEventListener('click',()=>{
+      b.textContent='✅ Envoyé !';
+      b.style.background='linear-gradient(135deg,#22C55E,#16A34A)';
+      setTimeout(()=>{b.textContent='Envoyer →';b.style.background='';},3000);
+    });
+  });
+</script>
+
+</body>
+</html>

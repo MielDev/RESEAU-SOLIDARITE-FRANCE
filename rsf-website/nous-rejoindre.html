@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Nous rejoindre · Réseau Solidarité France</title>
+  <meta name="description" content="Réseau Solidarité France – Association d'accompagnement des étudiants, salariés et personnes en précarité à Rennes."/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .nav-links > li > a .arrow i { font-size: 10px; }
+    .sep i { font-size: 10px; margin: 0 8px; opacity: 0.6; }
+    .mob-item i { width: 24px; text-align: center; margin-right: 8px; }
+    .icon-box i { font-size: 20px; }
+    .form-group label i { margin-right: 6px; color: var(--primary); }
+    .form-submit i { transition: transform 0.2s; }
+    .form-submit:hover i { transform: translateX(4px); }
+  </style>
+  
+</head>
+<body>
+
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo">RSF</div>
+      <div>
+        <div class="nav-title">Réseau Solidarité France</div>
+        <div class="nav-sub">Association</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li>
+        <a href="qui-sommes-nous.html">À propos <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span></a>
+        <ul class="dropdown">
+          <li><a href="qui-sommes-nous.html"><span class="dicon"><i class="fa-solid fa-book-open"></i></span>Qui sommes-nous ?</a></li>
+          <li><a href="organisation.html"><span class="dicon"><i class="fa-solid fa-users"></i></span>Organisation</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="nos-missions.html">Nos actions <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span></a>
+        <ul class="dropdown">
+          <li><a href="nos-missions.html"><span class="dicon"><i class="fa-solid fa-bullseye"></i></span>Nos missions</a></li>
+          <li><a href="actions-solidaires.html"><span class="dicon"><i class="fa-solid fa-handshake-angle"></i></span>Actions solidaires</a></li>
+          <li><a href="soutien-aux-membres.html"><span class="dicon"><i class="fa-solid fa-heart-pulse"></i></span>Soutien aux membres</a></li>
+          <li><a href="actions-internationales.html"><span class="dicon"><i class="fa-solid fa-earth-africa"></i></span>Actions internationales</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="evenements.html">Événements <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span></a>
+        <ul class="dropdown">
+          <li><a href="evenements.html"><span class="dicon"><i class="fa-solid fa-calendar-days"></i></span>Tous les événements</a></li>
+          <li><a href="rencontre-annuelle.html"><span class="dicon"><i class="fa-solid fa-star"></i></span>Rencontre annuelle 2025</a></li>
+        </ul>
+      </li>
+      <li><a href="temoignages.html">Témoignages</a></li>
+      <li><a href="nous-rejoindre.html" class="active">Nous rejoindre</a></li>
+      <li><a href="actualites.html">Actualités</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="don.html" class="nav-cta"><i class="fa-solid fa-heart"></i> Faire un don</a></li>
+    </ul>
+    <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" class="mob-item"><i class="fa-solid fa-house"></i> Accueil</a>
+  <div class="mob-section">À propos</div>
+  <a href="qui-sommes-nous.html" class="mob-item"><i class="fa-solid fa-book-open"></i> Qui sommes-nous ?</a>
+  <a href="organisation.html" class="mob-item"><i class="fa-solid fa-users"></i> Organisation</a>
+  <div class="mob-section">Nos actions</div>
+  <a href="nos-missions.html" class="mob-item"><i class="fa-solid fa-bullseye"></i> Nos missions</a>
+  <a href="actions-solidaires.html" class="mob-item"><i class="fa-solid fa-handshake-angle"></i> Actions solidaires</a>
+  <a href="soutien-aux-membres.html" class="mob-item"><i class="fa-solid fa-heart-pulse"></i> Soutien aux membres</a>
+  <a href="actions-internationales.html" class="mob-item"><i class="fa-solid fa-earth-africa"></i> Actions internationales</a>
+  <div class="mob-section">Événements</div>
+  <a href="evenements.html" class="mob-item"><i class="fa-solid fa-calendar-days"></i> Tous les événements</a>
+  <a href="rencontre-annuelle.html" class="mob-item"><i class="fa-solid fa-star"></i> Rencontre annuelle 2025</a>
+  <div class="mob-section">Communauté</div>
+  <a href="temoignages.html" class="mob-item"><i class="fa-solid fa-comments"></i> Témoignages</a>
+  <a href="nous-rejoindre.html" class="mob-item"><i class="fa-solid fa-user-plus"></i> Nous rejoindre</a>
+  <a href="actualites.html" class="mob-item"><i class="fa-solid fa-newspaper"></i> Actualités</a>
+  <a href="contact.html" class="mob-item"><i class="fa-solid fa-envelope"></i> Contact</a>
+  <a href="don.html" class="mob-item mob-cta"><i class="fa-solid fa-heart"></i> Faire un don</a>
+</div>
+
+
+<header class="page-header" style="background:linear-gradient(135deg,#FF8C00,#DC4E00);color:white;">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Accueil</a><span class="sep"><i class="fa-solid fa-chevron-right"></i></span>Nous rejoindre</div>
+    <div class="badge" style="background:rgba(255,255,255,.15);color:white;"><i class="fa-solid fa-user-plus"></i> Engagement</div>
+    <h1 style="color:white;">Nous rejoindre</h1>
+    <p style="color:rgba(255,255,255,.85);">Tu veux faire une différence ? Tu crois en la solidarité, au respect et à l'entraide ? Rejoins-nous !</p>
+  </div>
+</header>
+<section class="section-pad">
+  <div class="container">
+    <div class="grid-2" style="gap:56px;align-items:start;">
+      <div>
+        <div class="s-label">Devenir bénévole</div>
+        <h2 class="s-title">Tu peux faire la différence</h2>
+        <p style="font-size:15px;color:var(--text-mid);margin-bottom:28px;line-height:1.75;">Tu peux t'engager à ton rythme, selon tes disponibilités. Pas besoin d'être expert : il suffit d'avoir du cœur et de la volonté.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:36px;">
+          <li style="display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--bg-light);border-radius:var(--radius);">
+            <div class="icon-box" style="background:rgba(47,93,255,.1);font-size:22px;width:44px;height:44px;"><i class="fa-solid fa-clipboard-list"></i></div>
+            <div><strong style="display:block;color:var(--primary-dark);margin-bottom:4px;">Accompagnement administratif</strong><span style="font-size:13.5px;color:var(--text-mid);">Aider les membres dans leurs démarches administratives.</span></div>
+          </li>
+          <li style="display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--bg-light);border-radius:var(--radius);">
+            <div class="icon-box" style="background:rgba(255,140,0,.1);font-size:22px;width:44px;height:44px;"><i class="fa-solid fa-utensils"></i></div>
+            <div><strong style="display:block;color:var(--primary-dark);margin-bottom:4px;">Distribution de repas et vêtements</strong><span style="font-size:13.5px;color:var(--text-mid);">Participer aux actions solidaires sur le terrain.</span></div>
+          </li>
+          <li style="display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--bg-light);border-radius:var(--radius);">
+            <div class="icon-box" style="background:rgba(34,197,94,.1);font-size:22px;width:44px;height:44px;"><i class="fa-solid fa-masks-theater"></i></div>
+            <div><strong style="display:block;color:var(--primary-dark);margin-bottom:4px;">Animation d'événements</strong><span style="font-size:13.5px;color:var(--text-mid);">Organiser et animer nos journées de cohésion.</span></div>
+          </li>
+          <li style="display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--bg-light);border-radius:var(--radius);">
+            <div class="icon-box" style="background:rgba(124,58,237,.1);font-size:22px;width:44px;height:44px;"><i class="fa-solid fa-laptop-code"></i></div>
+            <div><strong style="display:block;color:var(--primary-dark);margin-bottom:4px;">Communication & digital</strong><span style="font-size:13.5px;color:var(--text-mid);">Contribuer à la communication et à la présence en ligne.</span></div>
+          </li>
+          <li style="display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--bg-light);border-radius:var(--radius);">
+            <div class="icon-box" style="background:rgba(99,102,241,.1);font-size:22px;width:44px;height:44px;"><i class="fa-solid fa-bullseye"></i></div>
+            <div><strong style="display:block;color:var(--primary-dark);margin-bottom:4px;">Coaching professionnel</strong><span style="font-size:13.5px;color:var(--text-mid);">CV, orientation, recherche d'emploi ou de logement.</span></div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div style="background:white;border-radius:24px;padding:40px;box-shadow:var(--shadow-lg);" class="fade-up">
+          <h3 style="font-size:22px;color:var(--primary-dark);margin-bottom:24px;">Remplir le formulaire</h3>
+          <div class="grid-2" style="gap:16px;margin-bottom:16px;">
+            <div class="form-group" style="margin-bottom:0;"><label>Nom *</label><input type="text" placeholder="Nom"/></div>
+            <div class="form-group" style="margin-bottom:0;"><label>Prénom *</label><input type="text" placeholder="Prénom"/></div>
+          </div>
+          <div class="grid-2" style="gap:16px;margin-bottom:16px;">
+            <div class="form-group" style="margin-bottom:0;"><label>Adresse e-mail *</label><input type="email" placeholder="votre@email.com"/></div>
+            <div class="form-group" style="margin-bottom:0;"><label>Téléphone *</label><input type="tel" placeholder="+33 6 ..."/></div>
+          </div>
+          <div class="grid-2" style="gap:16px;margin-bottom:16px;">
+            <div class="form-group" style="margin-bottom:0;"><label>Statut *</label>
+              <select>
+                <option disabled selected>Sélectionnez votre statut</option>
+                <option>Étudiant</option>
+                <option>Salarié</option>
+                <option>Recherche d'emploi</option>
+                <option>Auto-entrepreneur</option>
+                <option>Retraité</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0;"><label>Ville de résidence *</label><input type="text" placeholder="Ex: Rennes"/></div>
+          </div>
+          <div class="form-group"><label>Je souhaite…</label>
+            <select>
+              <option>Devenir bénévole</option>
+              <option>Bénéficier d'un accompagnement</option>
+              <option>Devenir partenaire</option>
+              <option>En savoir plus</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Centres d'intérêt (optionnel)</label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">
+              <label style="font-size:13px;display:flex;align-items:center;gap:8px;font-weight:400;"><input type="checkbox"/> Distribution</label>
+              <label style="font-size:13px;display:flex;align-items:center;gap:8px;font-weight:400;"><input type="checkbox"/> Administratif</label>
+              <label style="font-size:13px;display:flex;align-items:center;gap:8px;font-weight:400;"><input type="checkbox"/> Communication</label>
+              <label style="font-size:13px;display:flex;align-items:center;gap:8px;font-weight:400;"><input type="checkbox"/> Événementiel</label>
+            </div>
+          </div>
+          <div class="form-group"><label>Message *</label><textarea placeholder="Parlez-nous de vous, de votre motivation ou de votre situation…" style="min-height:100px;"></textarea></div>
+          <button class="form-submit">Envoyer ma demande <i class="fa-solid fa-paper-plane" style="margin-left:8px;"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="fl">Réseau Solidarité France</div>
+      <p>Une association à but non lucratif née d'un engagement simple : ne laisser personne de côté. Solidarité, respect, engagement, humanité.</p>
+      <p style="margin-top:14px;font-size:12px;color:rgba(255,255,255,.3)"><i class="fa-solid fa-location-dot"></i> 7 Rue Maréchal Lyautey, 35000 Rennes</p>
+    </div>
+    <div class="footer-col">
+      <h5>L'association</h5>
+      <ul>
+        <li><a href="qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+        <li><a href="organisation.html">Organisation</a></li>
+        <li><a href="temoignages.html">Témoignages</a></li>
+        <li><a href="actualites.html">Actualités</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Nos actions</h5>
+      <ul>
+        <li><a href="nos-missions.html">Nos missions</a></li>
+        <li><a href="actions-solidaires.html">Actions solidaires</a></li>
+        <li><a href="soutien-aux-membres.html">Soutien aux membres</a></li>
+        <li><a href="actions-internationales.html">Actions internationales</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Nous rejoindre</h5>
+      <ul>
+        <li><a href="nous-rejoindre.html">Devenir bénévole</a></li>
+        <li><a href="don.html">Faire un don</a></li>
+        <li><a href="evenements.html">Événements</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 – 2026 Réseau Solidarité France · Tous droits réservés</p>
+    <p>Made with <i class="fa-solid fa-heart" style="color:#ef4444;"></i> for solidarity · Rennes, France</p>
+  </div>
+</footer>
+<button id="scrollTop" title="Retour en haut">↑</button>
+<script>
+  const nav=document.getElementById('mainNav');
+  const st=document.getElementById('scrollTop');
+  window.addEventListener('scroll',()=>{
+    nav.classList.toggle('scrolled',scrollY>30);
+    st.classList.toggle('show',scrollY>400);
+  });
+  st.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  document.getElementById('burgerBtn').addEventListener('click',()=>{
+    document.getElementById('mobileNav').classList.toggle('open');
+  });
+  document.querySelectorAll('.fade-up').forEach(el=>{
+    new IntersectionObserver(([e])=>{if(e.isIntersecting)el.classList.add('visible')},{threshold:.1}).observe(el);
+  });
+  document.querySelectorAll('.form-submit').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const originalContent = b.innerHTML;
+      b.innerHTML='<i class="fa-solid fa-check"></i> Envoyé !';
+      b.style.background='linear-gradient(135deg,#22C55E,#16A34A)';
+      setTimeout(()=>{b.innerHTML=originalContent;b.style.background='';},3000);
+    });
+  });
+</script>
+
+</body>
+</html>

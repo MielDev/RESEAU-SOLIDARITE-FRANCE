@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Connexion · RSF Admin</title>
+  <link rel="stylesheet" href="admin-style.css"/>
+  <style>
+    body{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#0F172A,#1E3A8A);}
+    .login-card{background:white;border-radius:20px;padding:44px;width:100%;max-width:400px;box-shadow:0 24px 64px rgba(0,0,0,.3);}
+    .login-logo{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:white;margin:0 auto 20px;}
+    .login-card h1{font-family:'Playfair Display',serif;font-size:24px;text-align:center;color:#0F172A;margin-bottom:6px;}
+    .login-card p{font-size:13.5px;color:#94A3B8;text-align:center;margin-bottom:28px;}
+    .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+    .form-group label{font-size:12.5px;font-weight:700;color:#0F172A;}
+    .form-group input{padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
+    .form-group input:focus{border-color:#2F5DFF;box-shadow:0 0 0 3px rgba(47,93,255,.08);}
+    .login-btn{width:100%;padding:13px;background:linear-gradient(135deg,#2F5DFF,#4F7CFF);color:white;border:none;border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s;}
+    .login-btn:hover{opacity:.9;}
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="login-logo">RSF</div>
+    <h1>Back-office RSF</h1>
+    <p>Connectez-vous pour gérer le contenu du site</p>
+    <div class="form-group"><label>Adresse e-mail</label><input type="email" value="admin@reseau-solidarite-france.fr"/></div>
+    <div class="form-group"><label>Mot de passe</label><input type="password" value="••••••••"/></div>
+    <button class="login-btn" onclick="window.location='admin-dashboard.html'">Se connecter →</button>
+    <p style="font-size:12px;color:#CBD5E1;text-align:center;margin-top:20px;">Réseau Solidarité France · Administration</p>
+  </div>
+</body>
+</html>

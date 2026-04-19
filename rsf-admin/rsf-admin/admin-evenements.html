@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Événements · RSF Admin</title>
+  <link rel="stylesheet" href="admin-style.css"/>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <a href="admin-dashboard.html" class="brand-logo">
+      <div class="brand-icon">RSF</div>
+      <div><div class="brand-name">RSF Admin</div></div>
+    </a>
+    <div class="brand-sub">Back-office</div>
+  </div>
+
+  <div class="sidebar-section-label">Tableau de bord</div>
+  <nav>
+    <a href="admin-dashboard.html" class="sidebar-link"><span class="si">🏠</span>Dashboard</a>
+  </nav>
+
+  <div class="sidebar-section-label">Pages du site</div>
+  <nav>
+    <a href="admin-accueil.html" class="sidebar-link"><span class="si">🏠</span>Accueil</a>
+    <a href="admin-qui-sommes-nous.html" class="sidebar-link"><span class="si">📖</span>Qui sommes-nous ?</a>
+    <a href="admin-organisation.html" class="sidebar-link"><span class="si">👥</span>Organisation</a>
+    <a href="admin-missions.html" class="sidebar-link"><span class="si">🎯</span>Nos missions</a>
+    <a href="admin-actions-solidaires.html" class="sidebar-link"><span class="si">🤝</span>Actions solidaires</a>
+    <a href="admin-soutien.html" class="sidebar-link"><span class="si">💙</span>Soutien aux membres</a>
+    <a href="admin-evenements.html" class="sidebar-link active"><span class="si">📅</span>Événements</a>
+    <a href="admin-rencontre.html" class="sidebar-link"><span class="si">🎉</span>Rencontre annuelle</a>
+    <a href="admin-international.html" class="sidebar-link"><span class="si">🌍</span>Actions internationales</a>
+    <a href="admin-temoignages.html" class="sidebar-link"><span class="si">💬</span>Témoignages</a>
+    <a href="admin-rejoindre.html" class="sidebar-link"><span class="si">🙌</span>Nous rejoindre</a>
+    <a href="admin-actualites.html" class="sidebar-link"><span class="si">📰</span>Actualités</a>
+    <a href="admin-don.html" class="sidebar-link"><span class="si">❤️</span>Faire un don</a>
+    <a href="admin-contact.html" class="sidebar-link"><span class="si">✉️</span>Contact</a>
+  </nav>
+
+  <div class="sidebar-section-label">Paramètres</div>
+  <nav>
+    <a href="admin-settings.html" class="sidebar-link"><span class="si">⚙️</span>Paramètres généraux</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="../rsf/index.html" target="_blank">🌐 Voir le site</a>
+    <a href="admin-login.html">🚪 Déconnexion</a>
+  </div>
+</aside>
+<div class="overlay" id="overlay"></div>
+<div id="toast"></div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mob-toggle" id="menuToggle"><span style="font-size:22px;">☰</span></button>
+      <div>
+        <div class="page-title">Événements</div>
+        <div class="page-breadcrumb"><a href="admin-dashboard.html">Admin</a><span>›</span>Événements</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="../rsf/index.html" target="_blank" class="topbar-btn tb-preview">👁 Voir la page</a>
+      <button class="topbar-btn tb-save btn-save" data-label="💾 Enregistrer">💾 Enregistrer</button>
+      <div class="topbar-avatar">AT</div>
+    </div>
+  </div>
+  <div class="content">
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🖼️</span>En-tête de la page</div>
+      
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid" style="display:grid;gap:14px;">
+  
+<div class="form-group">
+  <label for="ev_title">Titre</label>
+  <input class="input" type="text" id="ev_title" name="ev_title" value="Événements" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="ev_desc">Description</label>
+  <textarea class="textarea" id="ev_desc" name="ev_desc" style="min-height:64px">Des moments de rassemblement, d'échange et de cohésion pour renforcer les liens entre tous nos membres.</textarea>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">⭐</span>Événement mis en avant (featured)</div>
+      <div class="panel-desc">L'événement principal affiché en grand sur la page</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+  
+<div class="form-group">
+  <label for="feat_title">Titre</label>
+  <input class="input" type="text" id="feat_title" name="feat_title" value="2ᵉ Édition — Journée Annuelle de Cohésion" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="feat_date">Date</label>
+  <input class="input" type="text" id="feat_date" name="feat_date" value="Samedi 26 juillet 2025" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="feat_time">Horaire</label>
+  <input class="input" type="text" id="feat_time" name="feat_time" value="10h–22h" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="feat_place">Lieu</label>
+  <input class="input" type="text" id="feat_place" name="feat_place" value="Parc des Gayeulles, Rennes" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="feat_badge">Étiquette badge</label>
+  <input class="input" type="text" id="feat_badge" name="feat_badge" value="⭐ ÉVÉNEMENT PHARE 2025" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="feat_btn_href">Lien bouton</label>
+  <input class="input" type="text" id="feat_btn_href" name="feat_btn_href" value="rencontre-annuelle.html" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="feat_desc">Description</label>
+  <textarea class="textarea" id="feat_desc" name="feat_desc" style="min-height:64px">Rejoignez-nous pour notre grande journée annuelle, un moment fort de solidarité, de convivialité et de partage au cœur de Rennes.</textarea>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🔁</span>Activités régulières (3 cartes)</div>
+      <div class="panel-desc">Les rendez-vous habituels de l'association</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div style="display:flex;flex-direction:column;gap:12px;">
+
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="reg1_icon">Icône</label>
+  <input class="input" type="text" id="reg1_icon" name="reg1_icon" value="☕" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="reg1_title">Titre</label>
+  <input class="input" type="text" id="reg1_title" name="reg1_title" value="Rencontres mensuelles" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="reg1_desc">Description</label>
+  <input class="input" type="text" id="reg1_desc" name="reg1_desc" value="Des réunions régulières pour partager les actualités et renforcer les liens entre membres." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="reg2_icon">Icône</label>
+  <input class="input" type="text" id="reg2_icon" name="reg2_icon" value="🎓" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="reg2_title">Titre</label>
+  <input class="input" type="text" id="reg2_title" name="reg2_title" value="Ateliers pratiques" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="reg2_desc">Description</label>
+  <input class="input" type="text" id="reg2_desc" name="reg2_desc" value="Sessions d'aide à la rédaction de CV, préparation aux entretiens et orientation professionnelle." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="reg3_icon">Icône</label>
+  <input class="input" type="text" id="reg3_icon" name="reg3_icon" value="🌿" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="reg3_title">Titre</label>
+  <input class="input" type="text" id="reg3_title" name="reg3_title" value="Sorties conviviales" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="reg3_desc">Description</label>
+  <input class="input" type="text" id="reg3_desc" name="reg3_desc" value="Pique-niques, sorties culturelles et activités sportives pour renforcer la cohésion du groupe." placeholder=""/>
+  
+</div>
+  </div></div></div>
+</div>
+
+  </div>
+</div>
+
+<script>
+// Sidebar toggle (mobile)
+const sb=document.getElementById('sidebar');
+const ov=document.getElementById('overlay');
+document.querySelectorAll('.mob-toggle').forEach(b=>b.addEventListener('click',()=>{
+  sb.classList.toggle('open'); ov.classList.toggle('show');
+}));
+if(ov) ov.addEventListener('click',()=>{sb.classList.remove('open');ov.classList.remove('show');});
+
+// Save toast
+function showToast(msg='✅ Modifications enregistrées !'){
+  const t=document.getElementById('toast');
+  t.innerHTML='<span>✅</span> '+msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// All save buttons
+document.querySelectorAll('.tb-save,.btn-save').forEach(b=>{
+  b.addEventListener('click',e=>{
+    e.preventDefault();
+    b.innerHTML='<span>⏳</span> Enregistrement…';
+    setTimeout(()=>{
+      b.innerHTML=b.dataset.label||'💾 Enregistrer';
+      showToast();
+    },800);
+  });
+});
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const group=t.closest('.tabs-wrap');
+    if(!group){
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(x=>x.style.display='none');
+      t.classList.add('active');
+      const target=document.getElementById('panel-'+t.dataset.tab);
+      if(target) target.style.display='block';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

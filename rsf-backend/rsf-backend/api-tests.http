@@ -1,0 +1,409 @@
+### ════════════════════════════════════════════════════════════
+### RSF API — Fichier de tests (VSCode REST Client / Insomnia)
+### ════════════════════════════════════════════════════════════
+### Installer l'extension "REST Client" dans VSCode
+### Puis cliquer sur "Send Request" au-dessus de chaque requête
+### ════════════════════════════════════════════════════════════
+
+@base = http://localhost:3001
+@token = REMPLACEZ_PAR_VOTRE_TOKEN_JWT
+
+### ─── SANTÉ ──────────────────────────────────────────────────
+
+# @name health
+GET {{base}}/health
+
+###
+
+### ─── AUTHENTIFICATION ───────────────────────────────────────
+
+# @name login
+POST {{base}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@reseau-solidarite-france.fr",
+  "password": "Admin@RSF2025!"
+}
+
+###
+
+# @name me
+GET {{base}}/api/auth/me
+Authorization: Bearer {{token}}
+
+###
+
+POST {{base}}/api/auth/change-password
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "current_password": "Admin@RSF2025!",
+  "new_password": "NouveauMotDePasse2025!"
+}
+
+###
+
+### ─── API PUBLIQUE (sans token) ──────────────────────────────
+
+GET {{base}}/api/public/pages/accueil
+
+###
+
+GET {{base}}/api/public/team
+
+###
+
+GET {{base}}/api/public/missions
+
+###
+
+GET {{base}}/api/public/testimonials
+
+###
+
+GET {{base}}/api/public/events
+
+###
+
+GET {{base}}/api/public/actualities
+
+###
+
+GET {{base}}/api/public/settings
+
+###
+
+GET {{base}}/api/public/nav
+
+###
+
+### ─── PAGES (admin) ──────────────────────────────────────────
+
+GET {{base}}/api/pages
+Authorization: Bearer {{token}}
+
+###
+
+GET {{base}}/api/pages/accueil
+Authorization: Bearer {{token}}
+
+###
+
+PUT {{base}}/api/pages/accueil
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "fields": {
+    "hero_title1": "Unis pour aider,",
+    "hero_title2": "ensemble",
+    "hero_title3": "pour avancer",
+    "hero_desc": "Nous accompagnons les étudiants, les salariés et les personnes en situation de précarité.",
+    "hero_badge": "Association à but non lucratif · Rennes"
+  }
+}
+
+###
+
+### ─── ÉQUIPE (admin) ─────────────────────────────────────────
+
+GET {{base}}/api/team
+Authorization: Bearer {{token}}
+
+###
+
+POST {{base}}/api/team
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "NOUVEAU Membre",
+  "initials": "NM",
+  "role": "Responsable Communication",
+  "color1": "#2F5DFF",
+  "color2": "#1E3A8A",
+  "sort_order": 9
+}
+
+###
+
+PUT {{base}}/api/team/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "role": "Président fondateur & Directeur"
+}
+
+###
+
+PUT {{base}}/api/team/reorder
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "order": [
+    { "id": 1, "sort_order": 0 },
+    { "id": 2, "sort_order": 1 },
+    { "id": 3, "sort_order": 2 }
+  ]
+}
+
+###
+
+DELETE {{base}}/api/team/9
+Authorization: Bearer {{token}}
+
+###
+
+### ─── MISSIONS (admin) ───────────────────────────────────────
+
+GET {{base}}/api/missions
+Authorization: Bearer {{token}}
+
+###
+
+POST {{base}}/api/missions
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "icon": "🌟",
+  "title": "Nouvelle mission",
+  "color_name": "primary",
+  "sort_order": 6,
+  "items": [
+    "Premier point de la mission",
+    "Deuxième point de la mission",
+    "Troisième point de la mission"
+  ]
+}
+
+###
+
+PUT {{base}}/api/missions/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Aide aux démarches administratives (mis à jour)",
+  "items": [
+    "Dossiers CAF, APL et autres aides sociales",
+    "Demandes de titre de séjour",
+    "Inscription scolaire ou universitaire",
+    "Dossiers de logement",
+    "Carte vitale et mutuelle santé"
+  ]
+}
+
+###
+
+DELETE {{base}}/api/missions/6
+Authorization: Bearer {{token}}
+
+###
+
+### ─── TÉMOIGNAGES (admin) ────────────────────────────────────
+
+GET {{base}}/api/testimonials
+Authorization: Bearer {{token}}
+
+###
+
+POST {{base}}/api/testimonials
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "first_name": "Marie",
+  "initials": "M",
+  "profile": "étudiant(e)",
+  "quote": "L'association m'a vraiment aidée dans mon parcours. Je recommande à tous.",
+  "color1": "#2F5DFF",
+  "color2": "#1E3A8A",
+  "is_published": true,
+  "sort_order": 12
+}
+
+###
+
+PUT {{base}}/api/testimonials/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "is_published": false
+}
+
+###
+
+### ─── ÉVÉNEMENTS (admin) ─────────────────────────────────────
+
+GET {{base}}/api/events
+Authorization: Bearer {{token}}
+
+###
+
+POST {{base}}/api/events
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Atelier CV et Emploi",
+  "edition": "1ère session",
+  "event_date": "2025-09-15",
+  "time_start": "14:00",
+  "time_end": "17:00",
+  "location": "Maison des associations, Rennes",
+  "description": "Atelier pratique d'aide à la rédaction de CV et préparation aux entretiens.",
+  "is_featured": false,
+  "is_published": true,
+  "sort_order": 1
+}
+
+###
+
+### ─── ACTUALITÉS (admin) ─────────────────────────────────────
+
+GET {{base}}/api/actualities
+Authorization: Bearer {{token}}
+
+###
+
+POST {{base}}/api/actualities
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "icon": "🎊",
+  "title": "Nouvelle actualité RSF",
+  "category": "Événement",
+  "summary": "Description courte de l'actualité...",
+  "link_href": "evenements.html",
+  "published_at": "2025-08-01",
+  "is_published": true,
+  "sort_order": 0
+}
+
+###
+
+### ─── ACTIONS SOLIDAIRES (admin) ─────────────────────────────
+
+GET {{base}}/api/actions
+Authorization: Bearer {{token}}
+
+###
+
+POST {{base}}/api/actions
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "icon": "🎁",
+  "title": "Distribution de colis alimentaires",
+  "category": "Action solidaire",
+  "description": "Distribution de colis alimentaires aux familles dans le besoin.",
+  "page_type": "solidaire",
+  "is_published": true,
+  "sort_order": 6
+}
+
+###
+
+### ─── MODES DE DON (admin) ───────────────────────────────────
+
+GET {{base}}/api/don
+Authorization: Bearer {{token}}
+
+###
+
+PUT {{base}}/api/don/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Don financier ponctuel",
+  "description": "Un geste unique qui finance directement nos actions solidaires.",
+  "btn_text": "Je fais un don →",
+  "link_href": "mailto:contact@reseau-solidarite-france.fr?subject=Don"
+}
+
+###
+
+### ─── NAVIGATION (admin) ─────────────────────────────────────
+
+GET {{base}}/api/nav
+Authorization: Bearer {{token}}
+
+###
+
+PUT {{base}}/api/nav/reorder
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "order": [
+    { "id": 1, "sort_order": 0 },
+    { "id": 2, "sort_order": 1 },
+    { "id": 3, "sort_order": 2 }
+  ]
+}
+
+###
+
+### ─── PARAMÈTRES GLOBAUX (admin) ─────────────────────────────
+
+GET {{base}}/api/settings
+Authorization: Bearer {{token}}
+
+###
+
+GET {{base}}/api/settings?group=contact
+Authorization: Bearer {{token}}
+
+###
+
+PUT {{base}}/api/settings
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "assoc_name": "Réseau Solidarité France",
+  "contact_phone": "+33 6 51 91 07 73",
+  "contact_email": "contact@reseau-solidarite-france.fr",
+  "addr_street": "7 Rue Maréchal Lyautey",
+  "addr_city": "35000 Rennes"
+}
+
+###
+
+### ─── FORMULAIRE DE CONTACT (public) ────────────────────────
+
+POST {{base}}/api/contact
+Content-Type: application/json
+
+{
+  "name": "Jean Dupont",
+  "email": "jean.dupont@example.com",
+  "subject": "Demande d'aide administrative",
+  "message": "Bonjour, j'aurais besoin d'aide pour constituer mon dossier CAF. Merci."
+}
+
+###
+
+GET {{base}}/api/contact/messages
+Authorization: Bearer {{token}}
+
+###
+
+PATCH {{base}}/api/contact/messages/1/read
+Authorization: Bearer {{token}}
+
+###
+
+DELETE {{base}}/api/contact/messages/1
+Authorization: Bearer {{token}}
+
+###

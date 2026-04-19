@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Qui sommes-nous ? · RSF Admin</title>
+  <link rel="stylesheet" href="admin-style.css"/>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <a href="admin-dashboard.html" class="brand-logo">
+      <div class="brand-icon">RSF</div>
+      <div><div class="brand-name">RSF Admin</div></div>
+    </a>
+    <div class="brand-sub">Back-office</div>
+  </div>
+
+  <div class="sidebar-section-label">Tableau de bord</div>
+  <nav>
+    <a href="admin-dashboard.html" class="sidebar-link"><span class="si">🏠</span>Dashboard</a>
+  </nav>
+
+  <div class="sidebar-section-label">Pages du site</div>
+  <nav>
+    <a href="admin-accueil.html" class="sidebar-link"><span class="si">🏠</span>Accueil</a>
+    <a href="admin-qui-sommes-nous.html" class="sidebar-link active"><span class="si">📖</span>Qui sommes-nous ?</a>
+    <a href="admin-organisation.html" class="sidebar-link"><span class="si">👥</span>Organisation</a>
+    <a href="admin-missions.html" class="sidebar-link"><span class="si">🎯</span>Nos missions</a>
+    <a href="admin-actions-solidaires.html" class="sidebar-link"><span class="si">🤝</span>Actions solidaires</a>
+    <a href="admin-soutien.html" class="sidebar-link"><span class="si">💙</span>Soutien aux membres</a>
+    <a href="admin-evenements.html" class="sidebar-link"><span class="si">📅</span>Événements</a>
+    <a href="admin-rencontre.html" class="sidebar-link"><span class="si">🎉</span>Rencontre annuelle</a>
+    <a href="admin-international.html" class="sidebar-link"><span class="si">🌍</span>Actions internationales</a>
+    <a href="admin-temoignages.html" class="sidebar-link"><span class="si">💬</span>Témoignages</a>
+    <a href="admin-rejoindre.html" class="sidebar-link"><span class="si">🙌</span>Nous rejoindre</a>
+    <a href="admin-actualites.html" class="sidebar-link"><span class="si">📰</span>Actualités</a>
+    <a href="admin-don.html" class="sidebar-link"><span class="si">❤️</span>Faire un don</a>
+    <a href="admin-contact.html" class="sidebar-link"><span class="si">✉️</span>Contact</a>
+  </nav>
+
+  <div class="sidebar-section-label">Paramètres</div>
+  <nav>
+    <a href="admin-settings.html" class="sidebar-link"><span class="si">⚙️</span>Paramètres généraux</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="../rsf/index.html" target="_blank">🌐 Voir le site</a>
+    <a href="admin-login.html">🚪 Déconnexion</a>
+  </div>
+</aside>
+<div class="overlay" id="overlay"></div>
+<div id="toast"></div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mob-toggle" id="menuToggle"><span style="font-size:22px;">☰</span></button>
+      <div>
+        <div class="page-title">Qui sommes-nous ?</div>
+        <div class="page-breadcrumb"><a href="admin-dashboard.html">Admin</a><span>›</span>Qui sommes-nous ?</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="../rsf/index.html" target="_blank" class="topbar-btn tb-preview">👁 Voir la page</a>
+      <button class="topbar-btn tb-save btn-save" data-label="💾 Enregistrer">💾 Enregistrer</button>
+      <div class="topbar-avatar">AT</div>
+    </div>
+  </div>
+  <div class="content">
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🖼️</span>En-tête de la page</div>
+      <div class="panel-desc">Bandeau coloré en haut de la page</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid" style="display:grid;gap:14px;">
+  
+<div class="form-group">
+  <label for="ph_title">Titre de la page</label>
+  <input class="input" type="text" id="ph_title" name="ph_title" value="Qui sommes-nous ?" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="ph_desc">Description (sous-titre)</label>
+  <textarea class="textarea" id="ph_desc" name="ph_desc" style="min-height:112px">RÉSEAU SOLIDARITÉ FRANCE est né de la volonté de citoyens engagés, ayant connu eux-mêmes les difficultés liées à l'intégration en France.</textarea>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">📖</span>Section — Notre histoire</div>
+      <div class="panel-desc">Texte principal présentant l'histoire de l'association</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid" style="display:grid;gap:14px;">
+  
+<div class="form-group">
+  <label for="hist_title">Titre de section</label>
+  <input class="input" type="text" id="hist_title" name="hist_title" value="Une association née de l'engagement" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="hist_p1">Paragraphe 1</label>
+  <textarea class="textarea" id="hist_p1" name="hist_p1" style="min-height:88px">Créée à Rennes, l'association répond à un besoin simple mais crucial : ne laisser personne seul face à la précarité, à l'isolement ou aux démarches complexes.</textarea>
+  
+</div>
+  
+<div class="form-group">
+  <label for="hist_p2">Paragraphe 2</label>
+  <textarea class="textarea" id="hist_p2" name="hist_p2" style="min-height:112px">Notre engagement est concret, humain et solidaire. Depuis notre création, nous accompagnons des étudiants, des salariés et des personnes en situation de précarité, dont des sans-abri, pour les aider à mieux vivre en France.</textarea>
+  
+</div>
+  
+<div class="form-group">
+  <label for="hist_p3">Paragraphe 3</label>
+  <textarea class="textarea" id="hist_p3" name="hist_p3" style="min-height:88px">Nous œuvrons chaque jour dans un esprit de solidarité, d'entraide et de responsabilité, en promouvant le respect des lois et des valeurs de la République.</textarea>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">💎</span>Nos valeurs (5 valeurs)</div>
+      <div class="panel-desc">Les cartes de valeurs affichées à droite</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div style="display:flex;flex-direction:column;gap:12px;">
+
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="val1_icon">Icône</label>
+  <input class="input" type="text" id="val1_icon" name="val1_icon" value="🤝" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="val1_title">Titre</label>
+  <input class="input" type="text" id="val1_title" name="val1_title" value="Solidarité" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="val1_desc">Description</label>
+  <input class="input" type="text" id="val1_desc" name="val1_desc" value="Personne ne doit être oublié. Nous sommes là pour tous." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="val2_icon">Icône</label>
+  <input class="input" type="text" id="val2_icon" name="val2_icon" value="⚖️" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="val2_title">Titre</label>
+  <input class="input" type="text" id="val2_title" name="val2_title" value="Respect" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="val2_desc">Description</label>
+  <input class="input" type="text" id="val2_desc" name="val2_desc" value="De chacun, de la loi française et des parcours de vie." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="val3_icon">Icône</label>
+  <input class="input" type="text" id="val3_icon" name="val3_icon" value="💪" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="val3_title">Titre</label>
+  <input class="input" type="text" id="val3_title" name="val3_title" value="Engagement" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="val3_desc">Description</label>
+  <input class="input" type="text" id="val3_desc" name="val3_desc" value="Dans nos actions, au quotidien, sur le terrain." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="val4_icon">Icône</label>
+  <input class="input" type="text" id="val4_icon" name="val4_icon" value="❤️" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="val4_title">Titre</label>
+  <input class="input" type="text" id="val4_title" name="val4_title" value="Humanité" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="val4_desc">Description</label>
+  <input class="input" type="text" id="val4_desc" name="val4_desc" value="L'écoute et l'empathie guident tout ce que nous faisons." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="val5_icon">Icône</label>
+  <input class="input" type="text" id="val5_icon" name="val5_icon" value="🌱" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="val5_title">Titre</label>
+  <input class="input" type="text" id="val5_title" name="val5_title" value="Autonomie" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="val5_desc">Description</label>
+  <input class="input" type="text" id="val5_desc" name="val5_desc" value="Nous accompagnons sans assister. Chacun avance à son rythme." placeholder=""/>
+  
+</div>
+  </div></div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🎯</span>Nos objectifs (5 cartes)</div>
+      <div class="panel-desc">Les cartes d'objectifs en bas de page</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div style="display:flex;flex-direction:column;gap:12px;">
+
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="obj1_icon">Icône</label>
+  <input class="input" type="text" id="obj1_icon" name="obj1_icon" value="📋" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="obj1_title">Titre</label>
+  <input class="input" type="text" id="obj1_title" name="obj1_title" value="Démarches administratives" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="obj1_desc">Description</label>
+  <input class="input" type="text" id="obj1_desc" name="obj1_desc" value="Faciliter les démarches en préfecture, logement, CAF et formalités." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="obj2_icon">Icône</label>
+  <input class="input" type="text" id="obj2_icon" name="obj2_icon" value="🎓" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="obj2_title">Titre</label>
+  <input class="input" type="text" id="obj2_title" name="obj2_title" value="Formation & emploi" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="obj2_desc">Description</label>
+  <input class="input" type="text" id="obj2_desc" name="obj2_desc" value="Favoriser l'accès à la formation, aux diplômes et à l'emploi." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="obj3_icon">Icône</label>
+  <input class="input" type="text" id="obj3_icon" name="obj3_icon" value="🏠" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="obj3_title">Titre</label>
+  <input class="input" type="text" id="obj3_title" name="obj3_title" value="Lutte contre l'exclusion" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="obj3_desc">Description</label>
+  <input class="input" type="text" id="obj3_desc" name="obj3_desc" value="Soutenir les personnes sans abri et lutter contre l'exclusion sociale." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="obj4_icon">Icône</label>
+  <input class="input" type="text" id="obj4_icon" name="obj4_icon" value="🇫🇷" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="obj4_title">Titre</label>
+  <input class="input" type="text" id="obj4_title" name="obj4_title" value="Engagement citoyen" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="obj4_desc">Description</label>
+  <input class="input" type="text" id="obj4_desc" name="obj4_desc" value="Promouvoir le respect des lois françaises et l'engagement citoyen." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="obj5_icon">Icône</label>
+  <input class="input" type="text" id="obj5_icon" name="obj5_icon" value="🌉" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="obj5_title">Titre</label>
+  <input class="input" type="text" id="obj5_title" name="obj5_title" value="Vivre-ensemble" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="obj5_desc">Description</label>
+  <input class="input" type="text" id="obj5_desc" name="obj5_desc" value="Créer des ponts entre communautés et encourager l'entraide." placeholder=""/>
+  
+</div>
+  </div></div></div>
+</div>
+
+  </div>
+</div>
+
+<script>
+// Sidebar toggle (mobile)
+const sb=document.getElementById('sidebar');
+const ov=document.getElementById('overlay');
+document.querySelectorAll('.mob-toggle').forEach(b=>b.addEventListener('click',()=>{
+  sb.classList.toggle('open'); ov.classList.toggle('show');
+}));
+if(ov) ov.addEventListener('click',()=>{sb.classList.remove('open');ov.classList.remove('show');});
+
+// Save toast
+function showToast(msg='✅ Modifications enregistrées !'){
+  const t=document.getElementById('toast');
+  t.innerHTML='<span>✅</span> '+msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// All save buttons
+document.querySelectorAll('.tb-save,.btn-save').forEach(b=>{
+  b.addEventListener('click',e=>{
+    e.preventDefault();
+    b.innerHTML='<span>⏳</span> Enregistrement…';
+    setTimeout(()=>{
+      b.innerHTML=b.dataset.label||'💾 Enregistrer';
+      showToast();
+    },800);
+  });
+});
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const group=t.closest('.tabs-wrap');
+    if(!group){
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(x=>x.style.display='none');
+      t.classList.add('active');
+      const target=document.getElementById('panel-'+t.dataset.tab);
+      if(target) target.style.display='block';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

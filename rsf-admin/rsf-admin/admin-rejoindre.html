@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Nous rejoindre · RSF Admin</title>
+  <link rel="stylesheet" href="admin-style.css"/>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <a href="admin-dashboard.html" class="brand-logo">
+      <div class="brand-icon">RSF</div>
+      <div><div class="brand-name">RSF Admin</div></div>
+    </a>
+    <div class="brand-sub">Back-office</div>
+  </div>
+
+  <div class="sidebar-section-label">Tableau de bord</div>
+  <nav>
+    <a href="admin-dashboard.html" class="sidebar-link"><span class="si">🏠</span>Dashboard</a>
+  </nav>
+
+  <div class="sidebar-section-label">Pages du site</div>
+  <nav>
+    <a href="admin-accueil.html" class="sidebar-link"><span class="si">🏠</span>Accueil</a>
+    <a href="admin-qui-sommes-nous.html" class="sidebar-link"><span class="si">📖</span>Qui sommes-nous ?</a>
+    <a href="admin-organisation.html" class="sidebar-link"><span class="si">👥</span>Organisation</a>
+    <a href="admin-missions.html" class="sidebar-link"><span class="si">🎯</span>Nos missions</a>
+    <a href="admin-actions-solidaires.html" class="sidebar-link"><span class="si">🤝</span>Actions solidaires</a>
+    <a href="admin-soutien.html" class="sidebar-link"><span class="si">💙</span>Soutien aux membres</a>
+    <a href="admin-evenements.html" class="sidebar-link"><span class="si">📅</span>Événements</a>
+    <a href="admin-rencontre.html" class="sidebar-link"><span class="si">🎉</span>Rencontre annuelle</a>
+    <a href="admin-international.html" class="sidebar-link"><span class="si">🌍</span>Actions internationales</a>
+    <a href="admin-temoignages.html" class="sidebar-link"><span class="si">💬</span>Témoignages</a>
+    <a href="admin-rejoindre.html" class="sidebar-link active"><span class="si">🙌</span>Nous rejoindre</a>
+    <a href="admin-actualites.html" class="sidebar-link"><span class="si">📰</span>Actualités</a>
+    <a href="admin-don.html" class="sidebar-link"><span class="si">❤️</span>Faire un don</a>
+    <a href="admin-contact.html" class="sidebar-link"><span class="si">✉️</span>Contact</a>
+  </nav>
+
+  <div class="sidebar-section-label">Paramètres</div>
+  <nav>
+    <a href="admin-settings.html" class="sidebar-link"><span class="si">⚙️</span>Paramètres généraux</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="../rsf/index.html" target="_blank">🌐 Voir le site</a>
+    <a href="admin-login.html">🚪 Déconnexion</a>
+  </div>
+</aside>
+<div class="overlay" id="overlay"></div>
+<div id="toast"></div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mob-toggle" id="menuToggle"><span style="font-size:22px;">☰</span></button>
+      <div>
+        <div class="page-title">Nous rejoindre</div>
+        <div class="page-breadcrumb"><a href="admin-dashboard.html">Admin</a><span>›</span>Nous rejoindre</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="../rsf/index.html" target="_blank" class="topbar-btn tb-preview">👁 Voir la page</a>
+      <button class="topbar-btn tb-save btn-save" data-label="💾 Enregistrer">💾 Enregistrer</button>
+      <div class="topbar-avatar">AT</div>
+    </div>
+  </div>
+  <div class="content">
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🖼️</span>En-tête et introduction</div>
+      
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid" style="display:grid;gap:14px;">
+  
+<div class="form-group">
+  <label for="nr_title">Titre</label>
+  <input class="input" type="text" id="nr_title" name="nr_title" value="Nous rejoindre" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="nr_desc">Description</label>
+  <textarea class="textarea" id="nr_desc" name="nr_desc" style="min-height:64px">Tu veux faire une différence ? Tu crois en la solidarité, au respect et à l'entraide ? Rejoins-nous !</textarea>
+  
+</div>
+  
+<div class="form-group">
+  <label for="nr_sub">Texte d'accroche</label>
+  <input class="input" type="text" id="nr_sub" name="nr_sub" value="Tu peux t'engager à ton rythme, selon tes disponibilités. Pas besoin d'être expert : il suffit d'avoir du cœur et de la volonté." placeholder=""/>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🙌</span>Rôles bénévoles (liste)</div>
+      <div class="panel-desc">Les activités proposées aux bénévoles</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div id="roles-list" style="display:flex;flex-direction:column;gap:8px;">
+
+  <div class="sortable-item">
+    <span class="drag-handle">⠿</span>
+    <span style="font-size:20px;">📋</span>
+    <div class="si-content">
+      <input class="input" type="text" value="Accompagnement administratif" style="margin-bottom:4px;"/>
+      <input class="input" type="text" value="Aider les membres dans leurs démarches administratives." style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+  </div>
+  <div class="sortable-item">
+    <span class="drag-handle">⠿</span>
+    <span style="font-size:20px;">🍽️</span>
+    <div class="si-content">
+      <input class="input" type="text" value="Distribution de repas et vêtements" style="margin-bottom:4px;"/>
+      <input class="input" type="text" value="Participer aux actions solidaires sur le terrain." style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+  </div>
+  <div class="sortable-item">
+    <span class="drag-handle">⠿</span>
+    <span style="font-size:20px;">🎉</span>
+    <div class="si-content">
+      <input class="input" type="text" value="Animation d'événements" style="margin-bottom:4px;"/>
+      <input class="input" type="text" value="Organiser et animer nos journées de cohésion." style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+  </div>
+  <div class="sortable-item">
+    <span class="drag-handle">⠿</span>
+    <span style="font-size:20px;">💻</span>
+    <div class="si-content">
+      <input class="input" type="text" value="Communication & digital" style="margin-bottom:4px;"/>
+      <input class="input" type="text" value="Contribuer à la communication et à la présence en ligne." style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+  </div>
+  <div class="sortable-item">
+    <span class="drag-handle">⠿</span>
+    <span style="font-size:20px;">🎯</span>
+    <div class="si-content">
+      <input class="input" type="text" value="Coaching professionnel" style="margin-bottom:4px;"/>
+      <input class="input" type="text" value="CV, orientation, recherche d'emploi ou de logement." style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+  </div>
+</div>
+<button class="btn btn-ghost btn-sm" style="margin-top:10px;">+ Ajouter un rôle</button></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">📝</span>Champs du formulaire de contact</div>
+      <div class="panel-desc">Configurez les champs affichés dans le formulaire</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div style="display:flex;flex-direction:column;gap:6px;">
+  
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Champ Nom complet</strong><span>Affiché en premier</span></div>
+  <label class="toggle"><input type="checkbox" checked name="field_name"/><span class="toggle-slider"></span></label>
+</div>
+  
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Champ Adresse e-mail</strong><span>Obligatoire</span></div>
+  <label class="toggle"><input type="checkbox" checked name="field_email"/><span class="toggle-slider"></span></label>
+</div>
+  
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Champ Téléphone</strong><span>Optionnel</span></div>
+  <label class="toggle"><input type="checkbox" checked name="field_phone"/><span class="toggle-slider"></span></label>
+</div>
+  
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Menu déroulant 'Je souhaite…'</strong><span>Choix du type de demande</span></div>
+  <label class="toggle"><input type="checkbox" checked name="field_select"/><span class="toggle-slider"></span></label>
+</div>
+  
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Champ Message</strong><span>Zone de texte libre</span></div>
+  <label class="toggle"><input type="checkbox" checked name="field_message"/><span class="toggle-slider"></span></label>
+</div>
+</div>
+<hr style="margin:16px 0;border:none;border-top:1px solid #E2E8F0;"/>
+<h4 style="font-size:13px;font-weight:700;margin-bottom:10px;">Options du menu déroulant</h4>
+<div style="display:flex;flex-direction:column;gap:8px;">
+  
+<div class="form-group">
+  <label for="opt1">Option 1</label>
+  <input class="input" type="text" id="opt1" name="opt1" value="Devenir bénévole" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="opt2">Option 2</label>
+  <input class="input" type="text" id="opt2" name="opt2" value="Bénéficier d'un accompagnement" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="opt3">Option 3</label>
+  <input class="input" type="text" id="opt3" name="opt3" value="Devenir partenaire" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="opt4">Option 4</label>
+  <input class="input" type="text" id="opt4" name="opt4" value="En savoir plus" placeholder=""/>
+  
+</div>
+</div></div>
+</div>
+
+  </div>
+</div>
+
+<script>
+// Sidebar toggle (mobile)
+const sb=document.getElementById('sidebar');
+const ov=document.getElementById('overlay');
+document.querySelectorAll('.mob-toggle').forEach(b=>b.addEventListener('click',()=>{
+  sb.classList.toggle('open'); ov.classList.toggle('show');
+}));
+if(ov) ov.addEventListener('click',()=>{sb.classList.remove('open');ov.classList.remove('show');});
+
+// Save toast
+function showToast(msg='✅ Modifications enregistrées !'){
+  const t=document.getElementById('toast');
+  t.innerHTML='<span>✅</span> '+msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// All save buttons
+document.querySelectorAll('.tb-save,.btn-save').forEach(b=>{
+  b.addEventListener('click',e=>{
+    e.preventDefault();
+    b.innerHTML='<span>⏳</span> Enregistrement…';
+    setTimeout(()=>{
+      b.innerHTML=b.dataset.label||'💾 Enregistrer';
+      showToast();
+    },800);
+  });
+});
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const group=t.closest('.tabs-wrap');
+    if(!group){
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(x=>x.style.display='none');
+      t.classList.add('active');
+      const target=document.getElementById('panel-'+t.dataset.tab);
+      if(target) target.style.display='block';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

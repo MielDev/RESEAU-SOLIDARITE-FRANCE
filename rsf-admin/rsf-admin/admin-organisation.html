@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Organisation · RSF Admin</title>
+  <link rel="stylesheet" href="admin-style.css"/>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <a href="admin-dashboard.html" class="brand-logo">
+      <div class="brand-icon">RSF</div>
+      <div><div class="brand-name">RSF Admin</div></div>
+    </a>
+    <div class="brand-sub">Back-office</div>
+  </div>
+
+  <div class="sidebar-section-label">Tableau de bord</div>
+  <nav>
+    <a href="admin-dashboard.html" class="sidebar-link"><span class="si">🏠</span>Dashboard</a>
+  </nav>
+
+  <div class="sidebar-section-label">Pages du site</div>
+  <nav>
+    <a href="admin-accueil.html" class="sidebar-link"><span class="si">🏠</span>Accueil</a>
+    <a href="admin-qui-sommes-nous.html" class="sidebar-link"><span class="si">📖</span>Qui sommes-nous ?</a>
+    <a href="admin-organisation.html" class="sidebar-link active"><span class="si">👥</span>Organisation</a>
+    <a href="admin-missions.html" class="sidebar-link"><span class="si">🎯</span>Nos missions</a>
+    <a href="admin-actions-solidaires.html" class="sidebar-link"><span class="si">🤝</span>Actions solidaires</a>
+    <a href="admin-soutien.html" class="sidebar-link"><span class="si">💙</span>Soutien aux membres</a>
+    <a href="admin-evenements.html" class="sidebar-link"><span class="si">📅</span>Événements</a>
+    <a href="admin-rencontre.html" class="sidebar-link"><span class="si">🎉</span>Rencontre annuelle</a>
+    <a href="admin-international.html" class="sidebar-link"><span class="si">🌍</span>Actions internationales</a>
+    <a href="admin-temoignages.html" class="sidebar-link"><span class="si">💬</span>Témoignages</a>
+    <a href="admin-rejoindre.html" class="sidebar-link"><span class="si">🙌</span>Nous rejoindre</a>
+    <a href="admin-actualites.html" class="sidebar-link"><span class="si">📰</span>Actualités</a>
+    <a href="admin-don.html" class="sidebar-link"><span class="si">❤️</span>Faire un don</a>
+    <a href="admin-contact.html" class="sidebar-link"><span class="si">✉️</span>Contact</a>
+  </nav>
+
+  <div class="sidebar-section-label">Paramètres</div>
+  <nav>
+    <a href="admin-settings.html" class="sidebar-link"><span class="si">⚙️</span>Paramètres généraux</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="../rsf/index.html" target="_blank">🌐 Voir le site</a>
+    <a href="admin-login.html">🚪 Déconnexion</a>
+  </div>
+</aside>
+<div class="overlay" id="overlay"></div>
+<div id="toast"></div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mob-toggle" id="menuToggle"><span style="font-size:22px;">☰</span></button>
+      <div>
+        <div class="page-title">Organisation</div>
+        <div class="page-breadcrumb"><a href="admin-dashboard.html">Admin</a><span>›</span>Organisation</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="../rsf/index.html" target="_blank" class="topbar-btn tb-preview">👁 Voir la page</a>
+      <button class="topbar-btn tb-save btn-save" data-label="💾 Enregistrer">💾 Enregistrer</button>
+      <div class="topbar-avatar">AT</div>
+    </div>
+  </div>
+  <div class="content">
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">👤</span>Président fondateur</div>
+      <div class="panel-desc">Informations sur le président de l'association</div>
+    </div>
+    <div class="panel-actions"><button class="btn btn-ghost btn-sm">+ Ajouter un diplôme</button></div>
+  </div>
+  <div class="panel-body">
+<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+  
+<div class="form-group">
+  <label for="pres_name">Nom complet</label>
+  <input class="input" type="text" id="pres_name" name="pres_name" value="TODEDJRAPOU Aimé" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="pres_role">Titre / Rôle</label>
+  <input class="input" type="text" id="pres_role" name="pres_role" value="Président fondateur" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="pres_initials">Initiales (avatar)</label>
+  <input class="input" type="text" id="pres_initials" name="pres_initials" value="AT" placeholder=""/>
+  <div class="hint">Lettres affichées dans l'avatar rond</div>
+</div>
+</div>
+<div class="form-grid" style="display:grid;gap:14px;margin-top:14px;">
+  
+<div class="form-group">
+  <label for="pres_bio">Biographie / Description</label>
+  <textarea class="textarea" id="pres_bio" name="pres_bio" style="min-height:112px">Titulaire de plusieurs diplômes en communication, relations internationales et management, il met ses compétences au service de l'accompagnement des étudiants et des salariés. À travers RÉSEAU SOLIDARITÉ FRANCE, il œuvre activement pour faciliter les démarches administratives, l'orientation et l'insertion professionnelle en France.</textarea>
+  
+</div>
+</div>
+<hr style="margin:18px 0;border:none;border-top:1px solid #E2E8F0;"/>
+<h4 style="font-size:13px;font-weight:700;margin-bottom:12px;">Diplômes (un par ligne)</h4>
+<div class="form-grid" style="display:grid;gap:10px;">
+  
+<div class="form-group">
+  <label for="dip1">Diplôme 1</label>
+  <input class="input" type="text" id="dip1" name="dip1" value="Licence Communication & Relations Internationales" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="dip2">Diplôme 2</label>
+  <input class="input" type="text" id="dip2" name="dip2" value="Licence Chargé d'affaires" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="dip3">Diplôme 3</label>
+  <input class="input" type="text" id="dip3" name="dip3" value="Master Communication & Marketing International" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="dip4">Diplôme 4</label>
+  <input class="input" type="text" id="dip4" name="dip4" value="Master Management des Affaires" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="dip5">Diplôme 5</label>
+  <input class="input" type="text" id="dip5" name="dip5" value="MBA Expert en Stratégie Digitale" placeholder=""/>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">👥</span>Membres de l'équipe</div>
+      <div class="panel-desc">Gérez les membres affichés sur la page Organisation</div>
+    </div>
+    
+  </div>
+  <div class="panel-body"><div class="alert alert-info" style="margin-bottom:16px;">ℹ️ Faites glisser pour réorganiser les membres dans la liste.</div><div id="team-list">
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">AGBOCOU Belkis</div>
+    <div class="si-sub">Comptable</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" onclick="editMember(this)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div>
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">NOUAZE Alexandre</div>
+    <div class="si-sub">Responsable Appui Événements</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" onclick="editMember(this)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div>
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">DOSSOU Oluwakèmi</div>
+    <div class="si-sub">Secrétaire Générale</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" onclick="editMember(this)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div>
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">AGONDANOU Constant</div>
+    <div class="si-sub">Coordinateur</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" onclick="editMember(this)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div>
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">NOUAZE Helticia</div>
+    <div class="si-sub">Responsable Événements</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" onclick="editMember(this)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div>
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">SEHLIN Samson</div>
+    <div class="si-sub">Responsable Partenariats</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" onclick="editMember(this)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div>
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">BASSALE Abiyé</div>
+    <div class="si-sub">Responsable Accompagnement Administratif</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" onclick="editMember(this)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div>
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">KOSSOKO Herwick</div>
+    <div class="si-sub">Responsable Solidarité</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" onclick="editMember(this)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div></div><button class="btn btn-primary" style="margin-top:16px;" onclick="addMember()">+ Ajouter un membre</button>
+<div id="member-form" style="display:none;margin-top:20px;background:#F8FAFC;border-radius:10px;padding:20px;border:1px solid #E2E8F0;">
+  <h4 style="font-size:14px;font-weight:700;margin-bottom:14px;">Nouveau / modifier membre</h4>
+  <div style="display:grid;grid-template-columns:1fr 1fr 80px;gap:12px;">
+    <div class="form-group"><label>Nom complet</label><input class="input" type="text" placeholder="NOM Prénom"/></div>
+    <div class="form-group"><label>Rôle / Poste</label><input class="input" type="text" placeholder="Responsable…"/></div>
+    <div class="form-group"><label>Initiales</label><input class="input" type="text" placeholder="AB" maxlength="2"/></div>
+  </div>
+  <div style="display:flex;gap:8px;margin-top:8px;">
+    <button class="btn btn-primary btn-sm">Enregistrer</button>
+    <button class="btn btn-ghost btn-sm" onclick="document.getElementById('member-form').style.display='none'">Annuler</button>
+  </div>
+</div>
+<script>
+function addMember(){document.getElementById('member-form').style.display='block';}
+function editMember(btn){document.getElementById('member-form').style.display='block';}
+</script></div>
+</div>
+
+  </div>
+</div>
+
+<script>
+// Sidebar toggle (mobile)
+const sb=document.getElementById('sidebar');
+const ov=document.getElementById('overlay');
+document.querySelectorAll('.mob-toggle').forEach(b=>b.addEventListener('click',()=>{
+  sb.classList.toggle('open'); ov.classList.toggle('show');
+}));
+if(ov) ov.addEventListener('click',()=>{sb.classList.remove('open');ov.classList.remove('show');});
+
+// Save toast
+function showToast(msg='✅ Modifications enregistrées !'){
+  const t=document.getElementById('toast');
+  t.innerHTML='<span>✅</span> '+msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// All save buttons
+document.querySelectorAll('.tb-save,.btn-save').forEach(b=>{
+  b.addEventListener('click',e=>{
+    e.preventDefault();
+    b.innerHTML='<span>⏳</span> Enregistrement…';
+    setTimeout(()=>{
+      b.innerHTML=b.dataset.label||'💾 Enregistrer';
+      showToast();
+    },800);
+  });
+});
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const group=t.closest('.tabs-wrap');
+    if(!group){
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(x=>x.style.display='none');
+      t.classList.add('active');
+      const target=document.getElementById('panel-'+t.dataset.tab);
+      if(target) target.style.display='block';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

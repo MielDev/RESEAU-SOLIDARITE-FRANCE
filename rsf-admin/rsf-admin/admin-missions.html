@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Nos missions · RSF Admin</title>
+  <link rel="stylesheet" href="admin-style.css"/>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <a href="admin-dashboard.html" class="brand-logo">
+      <div class="brand-icon">RSF</div>
+      <div><div class="brand-name">RSF Admin</div></div>
+    </a>
+    <div class="brand-sub">Back-office</div>
+  </div>
+
+  <div class="sidebar-section-label">Tableau de bord</div>
+  <nav>
+    <a href="admin-dashboard.html" class="sidebar-link"><span class="si">🏠</span>Dashboard</a>
+  </nav>
+
+  <div class="sidebar-section-label">Pages du site</div>
+  <nav>
+    <a href="admin-accueil.html" class="sidebar-link"><span class="si">🏠</span>Accueil</a>
+    <a href="admin-qui-sommes-nous.html" class="sidebar-link"><span class="si">📖</span>Qui sommes-nous ?</a>
+    <a href="admin-organisation.html" class="sidebar-link"><span class="si">👥</span>Organisation</a>
+    <a href="admin-missions.html" class="sidebar-link active"><span class="si">🎯</span>Nos missions</a>
+    <a href="admin-actions-solidaires.html" class="sidebar-link"><span class="si">🤝</span>Actions solidaires</a>
+    <a href="admin-soutien.html" class="sidebar-link"><span class="si">💙</span>Soutien aux membres</a>
+    <a href="admin-evenements.html" class="sidebar-link"><span class="si">📅</span>Événements</a>
+    <a href="admin-rencontre.html" class="sidebar-link"><span class="si">🎉</span>Rencontre annuelle</a>
+    <a href="admin-international.html" class="sidebar-link"><span class="si">🌍</span>Actions internationales</a>
+    <a href="admin-temoignages.html" class="sidebar-link"><span class="si">💬</span>Témoignages</a>
+    <a href="admin-rejoindre.html" class="sidebar-link"><span class="si">🙌</span>Nous rejoindre</a>
+    <a href="admin-actualites.html" class="sidebar-link"><span class="si">📰</span>Actualités</a>
+    <a href="admin-don.html" class="sidebar-link"><span class="si">❤️</span>Faire un don</a>
+    <a href="admin-contact.html" class="sidebar-link"><span class="si">✉️</span>Contact</a>
+  </nav>
+
+  <div class="sidebar-section-label">Paramètres</div>
+  <nav>
+    <a href="admin-settings.html" class="sidebar-link"><span class="si">⚙️</span>Paramètres généraux</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="../rsf/index.html" target="_blank">🌐 Voir le site</a>
+    <a href="admin-login.html">🚪 Déconnexion</a>
+  </div>
+</aside>
+<div class="overlay" id="overlay"></div>
+<div id="toast"></div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mob-toggle" id="menuToggle"><span style="font-size:22px;">☰</span></button>
+      <div>
+        <div class="page-title">Nos missions</div>
+        <div class="page-breadcrumb"><a href="admin-dashboard.html">Admin</a><span>›</span>Nos missions</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="../rsf/index.html" target="_blank" class="topbar-btn tb-preview">👁 Voir la page</a>
+      <button class="topbar-btn tb-save btn-save" data-label="💾 Enregistrer">💾 Enregistrer</button>
+      <div class="topbar-avatar">AT</div>
+    </div>
+  </div>
+  <div class="content">
+
+<div class="alert alert-info">ℹ️ Chaque mission correspond à une carte sur la page publique <strong>Nos missions</strong>.</div>
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">📋</span>Mission 1 — Aide aux démarches administratives</div>
+      
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:60px 1fr 120px;gap:12px;margin-bottom:16px;">
+  
+<div class="form-group">
+  <label for="m1_icon">Icône</label>
+  <input class="input" type="text" id="m1_icon" name="m1_icon" value="📋" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="m1_title">Titre</label>
+  <input class="input" type="text" id="m1_title" name="m1_title" value="Aide aux démarches administratives" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="m{i}_color">Couleur</label>
+  <select class="select" id="m{i}_color" name="m{i}_color"><option >Bleu</option><option >Violet</option><option >Orange</option><option >Vert</option><option >Gris</option></select>
+</div>
+</div>
+<h4 style="font-size:12.5px;font-weight:700;margin-bottom:10px;color:#475569;">Points de la liste</h4>
+
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Dossiers CAF, APL et autres aides sociales" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Demandes de titre de séjour, changement de statut" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Inscription scolaire, universitaire ou en formation" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Dossiers de logement (CROUS, bailleurs sociaux)" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Carte vitale, mutuelle, banque et formalités" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+<button class="btn btn-ghost btn-sm" style="margin-top:8px;">+ Ajouter un point</button></div>
+</div>
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">💼</span>Mission 2 — Accompagnement formation & emploi</div>
+      
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:60px 1fr 120px;gap:12px;margin-bottom:16px;">
+  
+<div class="form-group">
+  <label for="m2_icon">Icône</label>
+  <input class="input" type="text" id="m2_icon" name="m2_icon" value="💼" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="m2_title">Titre</label>
+  <input class="input" type="text" id="m2_title" name="m2_title" value="Accompagnement formation & emploi" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="m{i}_color">Couleur</label>
+  <select class="select" id="m{i}_color" name="m{i}_color"><option >Bleu</option><option >Violet</option><option >Orange</option><option >Vert</option><option >Gris</option></select>
+</div>
+</div>
+<h4 style="font-size:12.5px;font-weight:700;margin-bottom:10px;color:#475569;">Points de la liste</h4>
+
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Recherche de stage, alternance ou emploi" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Aide à la rédaction de CV et lettres de motivation" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Préparation aux entretiens d'embauche" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Orientation vers des formations certifiantes" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Mise en relation avec nos partenaires professionnels" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+<button class="btn btn-ghost btn-sm" style="margin-top:8px;">+ Ajouter un point</button></div>
+</div>
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🏠</span>Mission 3 — Soutien aux personnes sans-abri</div>
+      
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:60px 1fr 120px;gap:12px;margin-bottom:16px;">
+  
+<div class="form-group">
+  <label for="m3_icon">Icône</label>
+  <input class="input" type="text" id="m3_icon" name="m3_icon" value="🏠" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="m3_title">Titre</label>
+  <input class="input" type="text" id="m3_title" name="m3_title" value="Soutien aux personnes sans-abri" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="m{i}_color">Couleur</label>
+  <select class="select" id="m{i}_color" name="m{i}_color"><option >Bleu</option><option >Violet</option><option >Orange</option><option >Vert</option><option >Gris</option></select>
+</div>
+</div>
+<h4 style="font-size:12.5px;font-weight:700;margin-bottom:10px;color:#475569;">Points de la liste</h4>
+
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Distribution de repas chauds, vêtements, couvertures" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Écoute et accompagnement humain bienveillant" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Aide à la réinsertion administrative et sociale" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Partenariats avec centres d'accueil et associations" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+<button class="btn btn-ghost btn-sm" style="margin-top:8px;">+ Ajouter un point</button></div>
+</div>
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🤝</span>Mission 4 — Entraide communautaire</div>
+      
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:60px 1fr 120px;gap:12px;margin-bottom:16px;">
+  
+<div class="form-group">
+  <label for="m4_icon">Icône</label>
+  <input class="input" type="text" id="m4_icon" name="m4_icon" value="🤝" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="m4_title">Titre</label>
+  <input class="input" type="text" id="m4_title" name="m4_title" value="Entraide communautaire" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="m{i}_color">Couleur</label>
+  <select class="select" id="m{i}_color" name="m{i}_color"><option >Bleu</option><option >Violet</option><option >Orange</option><option >Vert</option><option >Gris</option></select>
+</div>
+</div>
+<h4 style="font-size:12.5px;font-weight:700;margin-bottom:10px;color:#475569;">Points de la liste</h4>
+
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Groupes d'entraide entre anciens et nouveaux arrivants" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Partage d'expériences et d'adresses utiles" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Groupes de parole pour briser l'isolement" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Orientation vers des structures partenaires" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+<button class="btn btn-ghost btn-sm" style="margin-top:8px;">+ Ajouter un point</button></div>
+</div>
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🇫🇷</span>Mission 5 — Sensibilisation citoyenne</div>
+      
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:60px 1fr 120px;gap:12px;margin-bottom:16px;">
+  
+<div class="form-group">
+  <label for="m5_icon">Icône</label>
+  <input class="input" type="text" id="m5_icon" name="m5_icon" value="🇫🇷" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="m5_title">Titre</label>
+  <input class="input" type="text" id="m5_title" name="m5_title" value="Sensibilisation citoyenne" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="m{i}_color">Couleur</label>
+  <select class="select" id="m{i}_color" name="m{i}_color"><option >Bleu</option><option >Violet</option><option >Orange</option><option >Vert</option><option >Gris</option></select>
+</div>
+</div>
+<h4 style="font-size:12.5px;font-weight:700;margin-bottom:10px;color:#475569;">Points de la liste</h4>
+
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Connaître, respecter et appliquer les droits et devoirs" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="S'insérer avec dignité dans la vie citoyenne" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Participer à des projets solidaires collectifs" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+<button class="btn btn-ghost btn-sm" style="margin-top:8px;">+ Ajouter un point</button></div>
+</div>
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🎭</span>Mission 6 — Cohésion & convivialité</div>
+      
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:60px 1fr 120px;gap:12px;margin-bottom:16px;">
+  
+<div class="form-group">
+  <label for="m6_icon">Icône</label>
+  <input class="input" type="text" id="m6_icon" name="m6_icon" value="🎭" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="m6_title">Titre</label>
+  <input class="input" type="text" id="m6_title" name="m6_title" value="Cohésion & convivialité" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="m{i}_color">Couleur</label>
+  <select class="select" id="m{i}_color" name="m{i}_color"><option >Bleu</option><option >Violet</option><option >Orange</option><option >Vert</option><option >Gris</option></select>
+</div>
+</div>
+<h4 style="font-size:12.5px;font-weight:700;margin-bottom:10px;color:#475569;">Points de la liste</h4>
+
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Journées de rencontre (Parc des Gayeulles…)" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Jeux, pique-niques, karaoké, sorties culturelles" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+      <input class="input" type="text" value="Groupes de parole et soutien moral" style="flex:1;"/>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+<button class="btn btn-ghost btn-sm" style="margin-top:8px;">+ Ajouter un point</button></div>
+</div>
+<button class="btn btn-primary">+ Ajouter une nouvelle mission</button>
+
+  </div>
+</div>
+
+<script>
+// Sidebar toggle (mobile)
+const sb=document.getElementById('sidebar');
+const ov=document.getElementById('overlay');
+document.querySelectorAll('.mob-toggle').forEach(b=>b.addEventListener('click',()=>{
+  sb.classList.toggle('open'); ov.classList.toggle('show');
+}));
+if(ov) ov.addEventListener('click',()=>{sb.classList.remove('open');ov.classList.remove('show');});
+
+// Save toast
+function showToast(msg='✅ Modifications enregistrées !'){
+  const t=document.getElementById('toast');
+  t.innerHTML='<span>✅</span> '+msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// All save buttons
+document.querySelectorAll('.tb-save,.btn-save').forEach(b=>{
+  b.addEventListener('click',e=>{
+    e.preventDefault();
+    b.innerHTML='<span>⏳</span> Enregistrement…';
+    setTimeout(()=>{
+      b.innerHTML=b.dataset.label||'💾 Enregistrer';
+      showToast();
+    },800);
+  });
+});
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const group=t.closest('.tabs-wrap');
+    if(!group){
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(x=>x.style.display='none');
+      t.classList.add('active');
+      const target=document.getElementById('panel-'+t.dataset.tab);
+      if(target) target.style.display='block';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

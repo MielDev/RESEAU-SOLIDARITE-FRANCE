@@ -1,0 +1,115 @@
+<nav id="mainNav" [class.scrolled]="isScrolled">
+  <div class="nav-inner">
+    <a routerLink="/" class="nav-brand">
+      <div class="nav-logo">RSF</div>
+      <div>
+        <div class="nav-title">Réseau Solidarité France</div>
+        <div class="nav-sub">Association</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Accueil</a></li>
+      <li>
+        <a routerLink="/qui-sommes-nous">À propos <span class="arrow">▾</span></a>
+        <ul class="dropdown">
+          <li><a routerLink="/qui-sommes-nous"><span class="dicon"><i class="fas fa-book-open"></i></span>Qui sommes-nous ?</a></li>
+          <li><a routerLink="/organisation"><span class="dicon"><i class="fas fa-users"></i></span>Organisation</a></li>
+        </ul>
+      </li>
+      <li>
+        <a routerLink="/nos-missions">Nos actions <span class="arrow">▾</span></a>
+        <ul class="dropdown">
+          <li><a routerLink="/nos-missions"><span class="dicon"><i class="fas fa-bullseye"></i></span>Nos missions</a></li>
+          <li><a routerLink="/actions-solidaires"><span class="dicon"><i class="fas fa-hands-helping"></i></span>Actions solidaires</a></li>
+          <li><a routerLink="/soutien-aux-membres"><span class="dicon"><i class="fas fa-heart"></i></span>Soutien aux membres</a></li>
+          <li><a routerLink="/actions-internationales"><span class="dicon"><i class="fas fa-globe"></i></span>Actions internationales</a></li>
+        </ul>
+      </li>
+      <li>
+        <a routerLink="/evenements">Événements <span class="arrow">▾</span></a>
+        <ul class="dropdown">
+          <li><a routerLink="/evenements"><span class="dicon"><i class="fas fa-calendar-alt"></i></span>Tous les événements</a></li>
+          <li><a routerLink="/rencontre-annuelle"><span class="dicon"><i class="fas fa-glass-cheers"></i></span>Rencontre annuelle 2025</a></li>
+        </ul>
+      </li>
+      <li><a routerLink="/temoignages">Témoignages</a></li>
+      <li><a routerLink="/nous-rejoindre">Nous rejoindre</a></li>
+      <li><a routerLink="/actualites">Actualités</a></li>
+      <li><a routerLink="/contact">Contact</a></li>
+      <li><a routerLink="/don" class="nav-cta"><i class="fas fa-heart"></i> Faire un don</a></li>
+    </ul>
+    <button class="burger" id="burgerBtn" (click)="toggleMobileNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav" [class.open]="isMobileNavOpen">
+  <a routerLink="/" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-home"></i> Accueil</a>
+  <div class="mob-section">À propos</div>
+  <a routerLink="/qui-sommes-nous" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-book-open"></i> Qui sommes-nous ?</a>
+  <a routerLink="/organisation" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-users"></i> Organisation</a>
+  <div class="mob-section">Nos actions</div>
+  <a routerLink="/nos-missions" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-bullseye"></i> Nos missions</a>
+  <a routerLink="/actions-solidaires" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-hands-helping"></i> Actions solidaires</a>
+  <a routerLink="/soutien-aux-membres" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-heart"></i> Soutien aux membres</a>
+  <a routerLink="/actions-internationales" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-globe"></i> Actions internationales</a>
+  <div class="mob-section">Événements</div>
+  <a routerLink="/evenements" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-calendar-alt"></i> Tous les événements</a>
+  <a routerLink="/rencontre-annuelle" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-glass-cheers"></i> Rencontre annuelle 2025</a>
+  <div class="mob-section">Communauté</div>
+  <a routerLink="/temoignages" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-comments"></i> Témoignages</a>
+  <a routerLink="/nous-rejoindre" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-hands"></i> Nous rejoindre</a>
+  <a routerLink="/actualites" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-newspaper"></i> Actualités</a>
+  <a routerLink="/contact" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-envelope"></i> Contact</a>
+  <a routerLink="/don" class="mob-item mob-cta" (click)="toggleMobileNav()"><i class="fas fa-heart"></i> Faire un don</a>
+</div>
+
+<main>
+  <router-outlet />
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="fl">Réseau Solidarité France</div>
+      <p>Une association à but non lucratif née d'un engagement simple : ne laisser personne de côté. Solidarité, respect, engagement, humanité.</p>
+      <p style="margin-top:14px;font-size:12px;color:rgba(255,255,255,.3)"><i class="fas fa-map-marker-alt"></i> 7 Rue Maréchal Lyautey, 35000 Rennes</p>
+    </div>
+    <div class="footer-col">
+      <h5>L'association</h5>
+      <ul>
+        <li><a routerLink="/qui-sommes-nous">Qui sommes-nous ?</a></li>
+        <li><a routerLink="/organisation">Organisation</a></li>
+        <li><a routerLink="/temoignages">Témoignages</a></li>
+        <li><a routerLink="/actualites">Actualités</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Nos actions</h5>
+      <ul>
+        <li><a routerLink="/nos-missions">Nos missions</a></li>
+        <li><a routerLink="/actions-solidaires">Actions solidaires</a></li>
+        <li><a routerLink="/soutien-aux-membres">Soutien aux membres</a></li>
+        <li><a routerLink="/actions-internationales">Actions internationales</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Nous rejoindre</h5>
+      <ul>
+        <li><a routerLink="/nous-rejoindre">Devenir bénévole</a></li>
+        <li><a routerLink="/don">Faire un don</a></li>
+        <li><a routerLink="/evenements">Événements</a></li>
+        <li><a routerLink="/contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 – 2026 Réseau Solidarité France · Tous droits réservés</p>
+    <p>Made with <i class="fas fa-heart" style="color: #e25555;"></i> for solidarity · Rennes, France</p>
+  </div>
+</footer>
+
+<button id="scrollTop" [class.show]="showScrollTop" (click)="scrollToTop()" title="Retour en haut">
+  <i class="fas fa-arrow-up"></i>
+</button>

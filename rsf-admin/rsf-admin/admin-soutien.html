@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Soutien aux membres · RSF Admin</title>
+  <link rel="stylesheet" href="admin-style.css"/>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <a href="admin-dashboard.html" class="brand-logo">
+      <div class="brand-icon">RSF</div>
+      <div><div class="brand-name">RSF Admin</div></div>
+    </a>
+    <div class="brand-sub">Back-office</div>
+  </div>
+
+  <div class="sidebar-section-label">Tableau de bord</div>
+  <nav>
+    <a href="admin-dashboard.html" class="sidebar-link"><span class="si">🏠</span>Dashboard</a>
+  </nav>
+
+  <div class="sidebar-section-label">Pages du site</div>
+  <nav>
+    <a href="admin-accueil.html" class="sidebar-link"><span class="si">🏠</span>Accueil</a>
+    <a href="admin-qui-sommes-nous.html" class="sidebar-link"><span class="si">📖</span>Qui sommes-nous ?</a>
+    <a href="admin-organisation.html" class="sidebar-link"><span class="si">👥</span>Organisation</a>
+    <a href="admin-missions.html" class="sidebar-link"><span class="si">🎯</span>Nos missions</a>
+    <a href="admin-actions-solidaires.html" class="sidebar-link"><span class="si">🤝</span>Actions solidaires</a>
+    <a href="admin-soutien.html" class="sidebar-link active"><span class="si">💙</span>Soutien aux membres</a>
+    <a href="admin-evenements.html" class="sidebar-link"><span class="si">📅</span>Événements</a>
+    <a href="admin-rencontre.html" class="sidebar-link"><span class="si">🎉</span>Rencontre annuelle</a>
+    <a href="admin-international.html" class="sidebar-link"><span class="si">🌍</span>Actions internationales</a>
+    <a href="admin-temoignages.html" class="sidebar-link"><span class="si">💬</span>Témoignages</a>
+    <a href="admin-rejoindre.html" class="sidebar-link"><span class="si">🙌</span>Nous rejoindre</a>
+    <a href="admin-actualites.html" class="sidebar-link"><span class="si">📰</span>Actualités</a>
+    <a href="admin-don.html" class="sidebar-link"><span class="si">❤️</span>Faire un don</a>
+    <a href="admin-contact.html" class="sidebar-link"><span class="si">✉️</span>Contact</a>
+  </nav>
+
+  <div class="sidebar-section-label">Paramètres</div>
+  <nav>
+    <a href="admin-settings.html" class="sidebar-link"><span class="si">⚙️</span>Paramètres généraux</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="../rsf/index.html" target="_blank">🌐 Voir le site</a>
+    <a href="admin-login.html">🚪 Déconnexion</a>
+  </div>
+</aside>
+<div class="overlay" id="overlay"></div>
+<div id="toast"></div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mob-toggle" id="menuToggle"><span style="font-size:22px;">☰</span></button>
+      <div>
+        <div class="page-title">Soutien aux membres</div>
+        <div class="page-breadcrumb"><a href="admin-dashboard.html">Admin</a><span>›</span>Soutien aux membres</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="../rsf/index.html" target="_blank" class="topbar-btn tb-preview">👁 Voir la page</a>
+      <button class="topbar-btn tb-save btn-save" data-label="💾 Enregistrer">💾 Enregistrer</button>
+      <div class="topbar-avatar">AT</div>
+    </div>
+  </div>
+  <div class="content">
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🖼️</span>En-tête & introduction</div>
+      
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid" style="display:grid;gap:14px;">
+  
+<div class="form-group">
+  <label for="s_title">Titre de la page</label>
+  <input class="input" type="text" id="s_title" name="s_title" value="Soutien aux membres" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="s_desc">Description</label>
+  <textarea class="textarea" id="s_desc" name="s_desc" style="min-height:64px">Un réseau d'entraide solide où chaque membre peut compter sur la communauté dans les moments difficiles.</textarea>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">💙</span>Services proposés aux membres</div>
+      <div class="panel-desc">Liste des services affichés en cartes</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div style="display:flex;flex-direction:column;gap:12px;">
+
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="srv1_icon">Icône</label>
+  <input class="input" type="text" id="srv1_icon" name="srv1_icon" value="📋" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="srv1_title">Titre</label>
+  <input class="input" type="text" id="srv1_title" name="srv1_title" value="Accompagnement administratif personnalisé" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="srv1_desc">Description</label>
+  <input class="input" type="text" id="srv1_desc" name="srv1_desc" value="Suivi individualisé pour toutes vos démarches, de A à Z." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="srv2_icon">Icône</label>
+  <input class="input" type="text" id="srv2_icon" name="srv2_icon" value="💬" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="srv2_title">Titre</label>
+  <input class="input" type="text" id="srv2_title" name="srv2_title" value="Écoute et soutien moral" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="srv2_desc">Description</label>
+  <input class="input" type="text" id="srv2_desc" name="srv2_desc" value="Des membres disponibles pour vous écouter et vous soutenir." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="srv3_icon">Icône</label>
+  <input class="input" type="text" id="srv3_icon" name="srv3_icon" value="💰" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="srv3_title">Titre</label>
+  <input class="input" type="text" id="srv3_title" name="srv3_title" value="Aide financière d'urgence" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="srv3_desc">Description</label>
+  <input class="input" type="text" id="srv3_desc" name="srv3_desc" value="Un soutien de la communauté en cas de difficultés financières ponctuelles." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="srv4_icon">Icône</label>
+  <input class="input" type="text" id="srv4_icon" name="srv4_icon" value="🌐" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="srv4_title">Titre</label>
+  <input class="input" type="text" id="srv4_title" name="srv4_title" value="Réseau & opportunités" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="srv4_desc">Description</label>
+  <input class="input" type="text" id="srv4_desc" name="srv4_desc" value="Accès au réseau de contacts, partage d'opportunités professionnelles." placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
+    
+<div class="form-group">
+  <label for="srv5_icon">Icône</label>
+  <input class="input" type="text" id="srv5_icon" name="srv5_icon" value="🏠" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="srv5_title">Titre</label>
+  <input class="input" type="text" id="srv5_title" name="srv5_title" value="Aide au logement" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="srv5_desc">Description</label>
+  <input class="input" type="text" id="srv5_desc" name="srv5_desc" value="Accompagnement dans la constitution de dossiers de logement." placeholder=""/>
+  
+</div>
+  </div>
+  <button class="btn btn-ghost btn-sm" style="margin-top:4px;">+ Ajouter un service</button>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">📣</span>Encart d'appel à l'action</div>
+      <div class="panel-desc">Bloc coloré qui invite à contacter l'association</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid" style="display:grid;gap:12px;">
+  
+<div class="form-group">
+  <label for="cta_title">Titre</label>
+  <input class="input" type="text" id="cta_title" name="cta_title" value="Vous avez besoin d'aide ?" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="cta_body">Texte</label>
+  <textarea class="textarea" id="cta_body" name="cta_body" style="min-height:64px">Notre équipe est disponible du lundi au samedi de 8h à 18h pour répondre à toutes vos questions.</textarea>
+  
+</div>
+  
+<div class="form-group">
+  <label for="cta_btn">Texte du bouton</label>
+  <input class="input" type="text" id="cta_btn" name="cta_btn" value="Nous contacter →" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="cta_href">Lien du bouton</label>
+  <input class="input" type="text" id="cta_href" name="cta_href" value="contact.html" placeholder=""/>
+  
+</div>
+</div></div>
+</div>
+
+  </div>
+</div>
+
+<script>
+// Sidebar toggle (mobile)
+const sb=document.getElementById('sidebar');
+const ov=document.getElementById('overlay');
+document.querySelectorAll('.mob-toggle').forEach(b=>b.addEventListener('click',()=>{
+  sb.classList.toggle('open'); ov.classList.toggle('show');
+}));
+if(ov) ov.addEventListener('click',()=>{sb.classList.remove('open');ov.classList.remove('show');});
+
+// Save toast
+function showToast(msg='✅ Modifications enregistrées !'){
+  const t=document.getElementById('toast');
+  t.innerHTML='<span>✅</span> '+msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// All save buttons
+document.querySelectorAll('.tb-save,.btn-save').forEach(b=>{
+  b.addEventListener('click',e=>{
+    e.preventDefault();
+    b.innerHTML='<span>⏳</span> Enregistrement…';
+    setTimeout(()=>{
+      b.innerHTML=b.dataset.label||'💾 Enregistrer';
+      showToast();
+    },800);
+  });
+});
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const group=t.closest('.tabs-wrap');
+    if(!group){
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(x=>x.style.display='none');
+      t.classList.add('active');
+      const target=document.getElementById('panel-'+t.dataset.tab);
+      if(target) target.style.display='block';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

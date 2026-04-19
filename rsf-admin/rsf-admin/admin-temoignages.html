@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Témoignages · RSF Admin</title>
+  <link rel="stylesheet" href="admin-style.css"/>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <a href="admin-dashboard.html" class="brand-logo">
+      <div class="brand-icon">RSF</div>
+      <div><div class="brand-name">RSF Admin</div></div>
+    </a>
+    <div class="brand-sub">Back-office</div>
+  </div>
+
+  <div class="sidebar-section-label">Tableau de bord</div>
+  <nav>
+    <a href="admin-dashboard.html" class="sidebar-link"><span class="si">🏠</span>Dashboard</a>
+  </nav>
+
+  <div class="sidebar-section-label">Pages du site</div>
+  <nav>
+    <a href="admin-accueil.html" class="sidebar-link"><span class="si">🏠</span>Accueil</a>
+    <a href="admin-qui-sommes-nous.html" class="sidebar-link"><span class="si">📖</span>Qui sommes-nous ?</a>
+    <a href="admin-organisation.html" class="sidebar-link"><span class="si">👥</span>Organisation</a>
+    <a href="admin-missions.html" class="sidebar-link"><span class="si">🎯</span>Nos missions</a>
+    <a href="admin-actions-solidaires.html" class="sidebar-link"><span class="si">🤝</span>Actions solidaires</a>
+    <a href="admin-soutien.html" class="sidebar-link"><span class="si">💙</span>Soutien aux membres</a>
+    <a href="admin-evenements.html" class="sidebar-link"><span class="si">📅</span>Événements</a>
+    <a href="admin-rencontre.html" class="sidebar-link"><span class="si">🎉</span>Rencontre annuelle</a>
+    <a href="admin-international.html" class="sidebar-link"><span class="si">🌍</span>Actions internationales</a>
+    <a href="admin-temoignages.html" class="sidebar-link active"><span class="si">💬</span>Témoignages</a>
+    <a href="admin-rejoindre.html" class="sidebar-link"><span class="si">🙌</span>Nous rejoindre</a>
+    <a href="admin-actualites.html" class="sidebar-link"><span class="si">📰</span>Actualités</a>
+    <a href="admin-don.html" class="sidebar-link"><span class="si">❤️</span>Faire un don</a>
+    <a href="admin-contact.html" class="sidebar-link"><span class="si">✉️</span>Contact</a>
+  </nav>
+
+  <div class="sidebar-section-label">Paramètres</div>
+  <nav>
+    <a href="admin-settings.html" class="sidebar-link"><span class="si">⚙️</span>Paramètres généraux</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="../rsf/index.html" target="_blank">🌐 Voir le site</a>
+    <a href="admin-login.html">🚪 Déconnexion</a>
+  </div>
+</aside>
+<div class="overlay" id="overlay"></div>
+<div id="toast"></div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mob-toggle" id="menuToggle"><span style="font-size:22px;">☰</span></button>
+      <div>
+        <div class="page-title">Témoignages</div>
+        <div class="page-breadcrumb"><a href="admin-dashboard.html">Admin</a><span>›</span>Témoignages</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="../rsf/index.html" target="_blank" class="topbar-btn tb-preview">👁 Voir la page</a>
+      <button class="topbar-btn tb-save btn-save" data-label="💾 Enregistrer">💾 Enregistrer</button>
+      <div class="topbar-avatar">AT</div>
+    </div>
+  </div>
+  <div class="content">
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">💬</span>Liste des témoignages</div>
+      <div class="panel-desc">12 témoignages publiés</div>
+    </div>
+    
+  </div>
+  <div class="panel-body"><div style="display:flex;justify-content:flex-end;margin-bottom:16px;"><button class="btn btn-primary" onclick="document.getElementById('new-testi').style.display='block'">+ Nouveau témoignage</button></div><div class="table-wrap"><table><thead><tr><th>Avatar</th><th>Nom</th><th>Profil</th><th>Témoignage</th><th>Statut</th><th>Actions</th></tr></thead><tbody>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">S</div></td>
+  <td><strong>Sarah</strong></td>
+  <td><span class="badge badge-gray">Étudiante</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"À mon arrivée à Rennes, j'étais perdue. L'association m'a aidée pour l…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️</button>
+      <button class="btn btn-ghost btn-sm">👁</button>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">F</div></td>
+  <td><strong>Franck</strong></td>
+  <td><span class="badge badge-gray">Salarié</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"J'ai été orienté par le Réseau vers une formation en alternance, j'ai …"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️</button>
+      <button class="btn btn-ghost btn-sm">👁</button>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">L</div></td>
+  <td><strong>Lucie</strong></td>
+  <td><span class="badge badge-gray">Bénévole</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Rejoindre l'association a été l'une de mes meilleures décisions. Donne…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️</button>
+      <button class="btn btn-ghost btn-sm">👁</button>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">J</div></td>
+  <td><strong>Judith</strong></td>
+  <td><span class="badge badge-gray">Étudiante</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Grâce à RÉSEAU SOLIDARITÉ FRANCE, j'ai pu renouveler mon titre de séjo…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️</button>
+      <button class="btn btn-ghost btn-sm">👁</button>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">H</div></td>
+  <td><strong>Hélène</strong></td>
+  <td><span class="badge badge-gray">Étudiante</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Je traversais une période très difficile. L'association m'a apporté un…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️</button>
+      <button class="btn btn-ghost btn-sm">👁</button>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">C</div></td>
+  <td><strong>Capello</strong></td>
+  <td><span class="badge badge-gray">Étudiant</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"J'ai pu améliorer mon CV et me préparer aux entretiens. Quelques semai…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️</button>
+      <button class="btn btn-ghost btn-sm">👁</button>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">E</div></td>
+  <td><strong>Erwan</strong></td>
+  <td><span class="badge badge-gray">Étudiant</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"En arrivant en France, je me sentais seul. Grâce aux rencontres organi…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️</button>
+      <button class="btn btn-ghost btn-sm">👁</button>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">J</div></td>
+  <td><strong>Josué</strong></td>
+  <td><span class="badge badge-gray">Étudiant</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Ce que j'apprécie le plus, c'est le sérieux et la disponibilité de l'é…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️</button>
+      <button class="btn btn-ghost btn-sm">👁</button>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">S</div></td>
+  <td><strong>Sandrîe</strong></td>
+  <td><span class="badge badge-gray">Étudiante</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Grâce à l'accompagnement, j'ai été guidée dans la constitution de mon …"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️</button>
+      <button class="btn btn-ghost btn-sm">👁</button>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">T</div></td>
+  <td><strong>Teddy</strong></td>
+  <td><span class="badge badge-gray">Étudiant</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Je ne comprenais rien aux démarches administratives. Grâce à l'associa…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️</button>
+      <button class="btn btn-ghost btn-sm">👁</button>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">A</div></td>
+  <td><strong>Ariane</strong></td>
+  <td><span class="badge badge-gray">Étudiante</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Au-delà de l'aide concrète, j'ai trouvé une vraie écoute. Cela m'a per…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️</button>
+      <button class="btn btn-ghost btn-sm">👁</button>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">P</div></td>
+  <td><strong>Parfait</strong></td>
+  <td><span class="badge badge-gray">Étudiant</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Intégrer le groupe m'a permis de rencontrer des personnes formidables.…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️</button>
+      <button class="btn btn-ghost btn-sm">👁</button>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+  </td>
+</tr></tbody></table></div>
+<div id="new-testi" style="display:none;margin-top:20px;background:#F8FAFC;border-radius:10px;padding:20px;border:1px solid #E2E8F0;">
+  <h4 style="font-size:14px;font-weight:700;margin-bottom:14px;">Nouveau témoignage</h4>
+  <div style="display:grid;grid-template-columns:1fr 1fr 80px;gap:12px;margin-bottom:12px;">
+    <div class="form-group"><label>Prénom</label><input class="input" type="text" placeholder="Marie"/></div>
+    <div class="form-group"><label>Profil</label><select class="select"><option>étudiant(e)</option><option>salarié(e)</option><option>bénévole</option><option>autre</option></select></div>
+    <div class="form-group"><label>Initiales</label><input class="input" type="text" maxlength="2" placeholder="MA"/></div>
+  </div>
+  <div class="form-group" style="margin-bottom:12px;"><label>Témoignage</label><textarea class="textarea" placeholder="Saisissez le témoignage…" style="min-height:100px;"></textarea></div>
+  <div style="display:flex;gap:8px;">
+    <button class="btn btn-primary btn-sm">Publier</button>
+    <button class="btn btn-ghost btn-sm" onclick="document.getElementById('new-testi').style.display='none'">Annuler</button>
+  </div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">📣</span>Appel à témoignages (bas de page)</div>
+      
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid" style="display:grid;gap:12px;">
+  
+<div class="form-group">
+  <label for="ta_title">Titre</label>
+  <input class="input" type="text" id="ta_title" name="ta_title" value="Et toi ? Tu veux témoigner ?" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="ta_desc">Description</label>
+  <input class="input" type="text" id="ta_desc" name="ta_desc" value="Raconte-nous ton expérience avec RÉSEAU SOLIDARITÉ FRANCE." placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="ta_btn">Texte du bouton</label>
+  <input class="input" type="text" id="ta_btn" name="ta_btn" value="Partager mon témoignage →" placeholder=""/>
+  
+</div>
+</div></div>
+</div>
+
+  </div>
+</div>
+
+<script>
+// Sidebar toggle (mobile)
+const sb=document.getElementById('sidebar');
+const ov=document.getElementById('overlay');
+document.querySelectorAll('.mob-toggle').forEach(b=>b.addEventListener('click',()=>{
+  sb.classList.toggle('open'); ov.classList.toggle('show');
+}));
+if(ov) ov.addEventListener('click',()=>{sb.classList.remove('open');ov.classList.remove('show');});
+
+// Save toast
+function showToast(msg='✅ Modifications enregistrées !'){
+  const t=document.getElementById('toast');
+  t.innerHTML='<span>✅</span> '+msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// All save buttons
+document.querySelectorAll('.tb-save,.btn-save').forEach(b=>{
+  b.addEventListener('click',e=>{
+    e.preventDefault();
+    b.innerHTML='<span>⏳</span> Enregistrement…';
+    setTimeout(()=>{
+      b.innerHTML=b.dataset.label||'💾 Enregistrer';
+      showToast();
+    },800);
+  });
+});
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const group=t.closest('.tabs-wrap');
+    if(!group){
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(x=>x.style.display='none');
+      t.classList.add('active');
+      const target=document.getElementById('panel-'+t.dataset.tab);
+      if(target) target.style.display='block';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

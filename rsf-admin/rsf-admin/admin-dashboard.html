@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Tableau de bord · RSF Admin</title>
+  <link rel="stylesheet" href="admin-style.css"/>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <a href="admin-dashboard.html" class="brand-logo">
+      <div class="brand-icon">RSF</div>
+      <div><div class="brand-name">RSF Admin</div></div>
+    </a>
+    <div class="brand-sub">Back-office</div>
+  </div>
+
+  <div class="sidebar-section-label">Tableau de bord</div>
+  <nav>
+    <a href="admin-dashboard.html" class="sidebar-link active"><span class="si">🏠</span>Dashboard</a>
+  </nav>
+
+  <div class="sidebar-section-label">Pages du site</div>
+  <nav>
+    <a href="admin-accueil.html" class="sidebar-link"><span class="si">🏠</span>Accueil</a>
+    <a href="admin-qui-sommes-nous.html" class="sidebar-link"><span class="si">📖</span>Qui sommes-nous ?</a>
+    <a href="admin-organisation.html" class="sidebar-link"><span class="si">👥</span>Organisation</a>
+    <a href="admin-missions.html" class="sidebar-link"><span class="si">🎯</span>Nos missions</a>
+    <a href="admin-actions-solidaires.html" class="sidebar-link"><span class="si">🤝</span>Actions solidaires</a>
+    <a href="admin-soutien.html" class="sidebar-link"><span class="si">💙</span>Soutien aux membres</a>
+    <a href="admin-evenements.html" class="sidebar-link"><span class="si">📅</span>Événements</a>
+    <a href="admin-rencontre.html" class="sidebar-link"><span class="si">🎉</span>Rencontre annuelle</a>
+    <a href="admin-international.html" class="sidebar-link"><span class="si">🌍</span>Actions internationales</a>
+    <a href="admin-temoignages.html" class="sidebar-link"><span class="si">💬</span>Témoignages</a>
+    <a href="admin-rejoindre.html" class="sidebar-link"><span class="si">🙌</span>Nous rejoindre</a>
+    <a href="admin-actualites.html" class="sidebar-link"><span class="si">📰</span>Actualités</a>
+    <a href="admin-don.html" class="sidebar-link"><span class="si">❤️</span>Faire un don</a>
+    <a href="admin-contact.html" class="sidebar-link"><span class="si">✉️</span>Contact</a>
+  </nav>
+
+  <div class="sidebar-section-label">Paramètres</div>
+  <nav>
+    <a href="admin-settings.html" class="sidebar-link"><span class="si">⚙️</span>Paramètres généraux</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="../rsf/index.html" target="_blank">🌐 Voir le site</a>
+    <a href="admin-login.html">🚪 Déconnexion</a>
+  </div>
+</aside>
+<div class="overlay" id="overlay"></div>
+<div id="toast"></div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mob-toggle" id="menuToggle"><span style="font-size:22px;">☰</span></button>
+      <div>
+        <div class="page-title">Tableau de bord</div>
+        <div class="page-breadcrumb"><a href="admin-dashboard.html">Admin</a><span>›</span>Dashboard</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="../rsf/index.html" target="_blank" class="topbar-btn tb-preview">👁 Voir la page</a>
+      
+      <div class="topbar-avatar">AT</div>
+    </div>
+  </div>
+  <div class="content">
+
+<div class="alert alert-info">ℹ️ Bienvenue dans le back-office de <strong>Réseau Solidarité France</strong>. Sélectionnez une page dans le menu pour modifier son contenu.</div>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="sc-label">Pages du site</div>
+    <div class="sc-val">14 <span style="font-size:16px;color:#94A3B8">pages</span></div>
+    <div class="sc-sub">Toutes en ligne</div>
+    <div class="sc-icon">📄</div>
+  </div>
+  <div class="stat-card">
+    <div class="sc-label">Témoignages</div>
+    <div class="sc-val">12</div>
+    <div class="sc-sub">Publiés</div>
+    <div class="sc-icon">💬</div>
+  </div>
+  <div class="stat-card">
+    <div class="sc-label">Membres équipe</div>
+    <div class="sc-val">8</div>
+    <div class="sc-sub">+ 1 président</div>
+    <div class="sc-icon">👥</div>
+  </div>
+  <div class="stat-card">
+    <div class="sc-label">Prochain événement</div>
+    <div class="sc-val" style="font-size:18px;">26 Juil.</div>
+    <div class="sc-sub">Parc des Gayeulles</div>
+    <div class="sc-icon">📅</div>
+  </div>
+</div>
+
+<div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;">
+  
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">⚡</span>Accès rapides aux pages</div>
+      <div class="panel-desc">Cliquez sur une page pour modifier son contenu</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;">
+<a href="admin-accueil.html" style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#0F172A;font-size:13.5px;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='white'""><span>🏠</span>Accueil</a><a href="admin-qui-sommes-nous.html" style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#0F172A;font-size:13.5px;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='white'""><span>📖</span>Qui sommes-nous ?</a><a href="admin-organisation.html" style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#0F172A;font-size:13.5px;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='white'""><span>👥</span>Organisation</a><a href="admin-missions.html" style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#0F172A;font-size:13.5px;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='white'""><span>🎯</span>Nos missions</a><a href="admin-actions-solidaires.html" style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#0F172A;font-size:13.5px;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='white'""><span>🤝</span>Actions solidaires</a><a href="admin-soutien.html" style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#0F172A;font-size:13.5px;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='white'""><span>💙</span>Soutien aux membres</a><a href="admin-evenements.html" style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#0F172A;font-size:13.5px;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='white'""><span>📅</span>Événements</a><a href="admin-rencontre.html" style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#0F172A;font-size:13.5px;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='white'""><span>🎉</span>Rencontre annuelle</a><a href="admin-international.html" style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#0F172A;font-size:13.5px;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='white'""><span>🌍</span>Actions internationales</a><a href="admin-temoignages.html" style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#0F172A;font-size:13.5px;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='white'""><span>💬</span>Témoignages</a><a href="admin-rejoindre.html" style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#0F172A;font-size:13.5px;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='white'""><span>🙌</span>Nous rejoindre</a><a href="admin-actualites.html" style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#0F172A;font-size:13.5px;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='white'""><span>📰</span>Actualités</a><a href="admin-don.html" style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#0F172A;font-size:13.5px;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='white'""><span>❤️</span>Faire un don</a><a href="admin-contact.html" style="display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#0F172A;font-size:13.5px;font-weight:500;transition:background .2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='white'""><span>✉️</span>Contact</a></div></div>
+</div>
+
+  <div>
+    
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">⚙️</span>Informations du site</div>
+      
+    </div>
+    
+  </div>
+  <div class="panel-body">
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="font-size:13px;color:#475569;"><strong style="color:#0F172A;display:block;margin-bottom:2px;">Nom de l'association</strong>Réseau Solidarité France</div>
+      <div style="font-size:13px;color:#475569;"><strong style="color:#0F172A;display:block;margin-bottom:2px;">Adresse</strong>7 Rue Maréchal Lyautey, 35000 Rennes</div>
+      <div style="font-size:13px;color:#475569;"><strong style="color:#0F172A;display:block;margin-bottom:2px;">Email</strong>contact@reseau-solidarite-france.fr</div>
+      <div style="font-size:13px;color:#475569;"><strong style="color:#0F172A;display:block;margin-bottom:2px;">Téléphone</strong>+33 6 51 91 07 73</div>
+      <a href="admin-settings.html" class="btn btn-ghost btn-sm" style="margin-top:8px;">⚙️ Modifier les infos</a>
+    </div></div>
+</div>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<script>
+// Sidebar toggle (mobile)
+const sb=document.getElementById('sidebar');
+const ov=document.getElementById('overlay');
+document.querySelectorAll('.mob-toggle').forEach(b=>b.addEventListener('click',()=>{
+  sb.classList.toggle('open'); ov.classList.toggle('show');
+}));
+if(ov) ov.addEventListener('click',()=>{sb.classList.remove('open');ov.classList.remove('show');});
+
+// Save toast
+function showToast(msg='✅ Modifications enregistrées !'){
+  const t=document.getElementById('toast');
+  t.innerHTML='<span>✅</span> '+msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// All save buttons
+document.querySelectorAll('.tb-save,.btn-save').forEach(b=>{
+  b.addEventListener('click',e=>{
+    e.preventDefault();
+    b.innerHTML='<span>⏳</span> Enregistrement…';
+    setTimeout(()=>{
+      b.innerHTML=b.dataset.label||'💾 Enregistrer';
+      showToast();
+    },800);
+  });
+});
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const group=t.closest('.tabs-wrap');
+    if(!group){
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(x=>x.style.display='none');
+      t.classList.add('active');
+      const target=document.getElementById('panel-'+t.dataset.tab);
+      if(target) target.style.display='block';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

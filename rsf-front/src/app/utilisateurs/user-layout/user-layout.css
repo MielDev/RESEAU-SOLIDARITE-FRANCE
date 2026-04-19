@@ -1,0 +1,32 @@
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: .6; }
+}
+
+#scrollTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+  transition: opacity 0.3s;
+}
+
+#scrollTop.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main {
+  min-height: calc(100vh - var(--nav-h));
+}
