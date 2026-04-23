@@ -40,7 +40,22 @@ const updatePage = async (req, res, next) => {
       return res.status(400).json({ success: false, message: 'Champ "fields" requis.' });
     }
 
-    // Upsert chaque champ
+    // Gestion spécifique pour la page d'accueil
+    if (pageKey === 'accueil') {
+      const { Accueil } = require('../models');
+      const dataToUpdate = {
+        hero_badge: fields.hero_badge,
+        hero_title: fields.hero_title,
+        hero_text: fields.hero_text,
+        hero_features: fields.hero_features,
+        stats_members: fields.stats_members,
+        stats_domains: fields.stats_domains
+      };
+      await Accueil.upsert({ id: 1, ...dataToUpdate });
+      return res.json({ success: true, message: `Page "${pageKey}" mise à jour.` });
+    }
+
+    // Upsert chaque champ pour les autres pages
     const operations = Object.entries(fields).map(([field_key, value]) =>
       PageContent.upsert({ page_key: pageKey, field_key, value })
     );

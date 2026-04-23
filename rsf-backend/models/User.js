@@ -38,6 +38,12 @@ module.exports = (sequelize) => {
     },
   }, {
     tableName: 'users',
+    indexes: [
+      {
+        unique: true,
+        fields: ['email'],
+      },
+    ],
     hooks: {
       // Hash automatique du mot de passe avant création ou mise à jour
       beforeCreate: async (user) => {

@@ -1,1 +1,42 @@
-<p>nos-missions works!</p>
+<header class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a routerLink="/">Accueil</a>
+      <span class="sep">›</span>
+      Nos missions
+    </div>
+    <div class="badge">
+      <i class="fas fa-bullseye"></i> Nos missions
+    </div>
+    <h1>Nos missions</h1>
+    <p>RÉSEAU SOLIDARITÉ FRANCE agit sur plusieurs fronts pour apporter des solutions concrètes aux personnes en difficulté.</p>
+  </div>
+</header>
+
+<section class="section-pad">
+  <div class="container">
+    <div class="grid-2" style="align-items:start;gap:40px;">
+      <!-- Missions dynamiques -->
+      <div *ngFor="let m of missions" class="card fade-up mission-card" [ngClass]="m.cardClass">
+        <div class="icon-box" [ngClass]="m.iconBoxClass">
+          <!-- Support both FontAwesome classes and Emojis -->
+          <i *ngIf="m.icon && m.icon.includes('fa-')" [class]="m.icon"></i>
+          <span *ngIf="m.icon && !m.icon.includes('fa-')">{{ m.icon }}</span>
+        </div>
+        <h3 class="mission-title">{{ m.title }}</h3>
+        <p class="mission-desc" *ngIf="m.description">
+          {{ m.description }}
+        </p>
+        <ul class="mission-list">
+          <li *ngFor="let point of m.points">
+            <i class="fas fa-arrow-right"></i> {{ point }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cta-container">
+      <a routerLink="/nous-rejoindre" class="btn btn-primary">Rejoindre notre réseau →</a>
+    </div>
+  </div>
+</section>

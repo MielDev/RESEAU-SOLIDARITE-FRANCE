@@ -17,6 +17,7 @@ const DonMode      = require('./DonMode')(sequelize);
 const Setting      = require('./Setting')(sequelize);
 const NavItem        = require('./NavItem')(sequelize);
 const ContactMessage = require('./ContactMessage')(sequelize);
+const Accueil      = require('./Accueil')(sequelize);
 
 // ── Associations (relations) ──────────────────────────────────────────────────
 
@@ -45,6 +46,7 @@ const db = {
   Setting,
   NavItem,
   ContactMessage,
+  Accueil,
 };
 
 module.exports = db;

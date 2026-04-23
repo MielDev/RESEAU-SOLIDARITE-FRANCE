@@ -1,0 +1,183 @@
+.page-header {
+  padding: clamp(48px, 7vw, 96px) clamp(16px, 5vw, 80px);
+  background: linear-gradient(135deg, #1E3A8A, #4C1D95);
+  color: white;
+}
+
+.breadcrumb {
+  font-size: 13px;
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.breadcrumb a {
+  color: white;
+  text-decoration: none;
+}
+
+.breadcrumb .sep {
+  margin: 0 8px;
+}
+
+.page-header .badge {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.page-header h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  margin-bottom: 16px;
+  color: white;
+}
+
+.page-header p {
+  font-size: clamp(15px, 2vw, 18px);
+  max-width: 600px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.testimonial-card {
+  padding: 28px;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 64px;
+  font-weight: 900;
+  opacity: 0.1;
+  position: absolute;
+  top: -8px;
+  left: 14px;
+  line-height: 1;
+}
+
+.testimonial-text {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.75;
+  margin-bottom: 20px;
+  font-style: italic;
+  flex-grow: 1;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.author-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.author-name {
+  font-size: 14px;
+  color: var(--primary-dark);
+  display: block;
+}
+
+.author-role {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* Card variants */
+.card-blue { border-left: 4px solid #2F5DFF; }
+.card-blue .quote-mark { color: #2F5DFF; }
+.avatar-blue { background: linear-gradient(135deg, #2F5DFF, #1E3A8A); }
+
+.card-purple { border-left: 4px solid #7C3AED; }
+.card-purple .quote-mark { color: #7C3AED; }
+.avatar-purple { background: linear-gradient(135deg, #7C3AED, #6366F1); }
+
+.card-orange { border-left: 4px solid #FF8C00; }
+.card-orange .quote-mark { color: #FF8C00; }
+.avatar-orange { background: linear-gradient(135deg, #FF8C00, #e07000); }
+
+.card-green { border-left: 4px solid #22C55E; }
+.card-green .quote-mark { color: #22C55E; }
+.avatar-green { background: linear-gradient(135deg, #22C55E, #16A34A); }
+
+.card-indigo { border-left: 4px solid #4F7CFF; }
+.card-indigo .quote-mark { color: #4F7CFF; }
+.avatar-indigo { background: linear-gradient(135deg, #4F7CFF, #7C3AED); }
+
+.card-darkblue { border-left: 4px solid #1E3A8A; }
+.card-darkblue .quote-mark { color: #1E3A8A; }
+.avatar-darkblue { background: linear-gradient(135deg, #1E3A8A, #2F5DFF); }
+
+.card-mix { border-left: 4px solid #FF8C00; }
+.card-mix .quote-mark { color: #FF8C00; }
+.avatar-mix { background: linear-gradient(135deg, #FF8C00, #7C3AED); }
+
+.card-josue { border-left: 4px solid #22C55E; }
+.card-josue .quote-mark { color: #22C55E; }
+.avatar-josue { background: linear-gradient(135deg, #22C55E, #2F5DFF); }
+
+.card-sandrie { border-left: 4px solid #2F5DFF; }
+.card-sandrie .quote-mark { color: #2F5DFF; }
+.avatar-sandrie { background: linear-gradient(135deg, #2F5DFF, #1E3A8A); }
+
+.card-teddy { border-left: 4px solid #7C3AED; }
+.card-teddy .quote-mark { color: #7C3AED; }
+.avatar-teddy { background: linear-gradient(135deg, #7C3AED, #6366F1); }
+
+.card-ariane { border-left: 4px solid #FF8C00; }
+.card-ariane .quote-mark { color: #FF8C00; }
+.avatar-ariane { background: linear-gradient(135deg, #FF8C00, #e07000); }
+
+.card-parfait { border-left: 4px solid #22C55E; }
+.card-parfait .quote-mark { color: #22C55E; }
+.avatar-parfait { background: linear-gradient(135deg, #22C55E, #16A34A); }
+
+.cta-box {
+  text-align: center;
+  margin-top: 56px;
+  padding: 40px;
+  background: var(--bg-light);
+  border-radius: var(--radius);
+}
+
+.cta-title {
+  font-size: 22px;
+  color: var(--primary-dark);
+  margin-bottom: 10px;
+}
+
+.cta-desc {
+  font-size: 15px;
+  color: var(--text-mid);
+  margin-bottom: 24px;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

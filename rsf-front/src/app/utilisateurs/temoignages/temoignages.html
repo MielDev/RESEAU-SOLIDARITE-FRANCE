@@ -1,1 +1,39 @@
-<p>temoignages works!</p>
+<header class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a routerLink="/">Accueil</a>
+      <span class="sep">›</span>
+      Témoignages
+    </div>
+    <div class="badge">
+      <i class="fas fa-comment-dots"></i> Paroles de bénéficiaires
+    </div>
+    <h1>Témoignages</h1>
+    <p>Ils ont bénéficié de notre soutien. Voici ce qu'ils ont à dire.</p>
+  </div>
+</header>
+
+<section class="section-pad">
+  <div class="container">
+    <div class="grid-auto-lg">
+      <!-- Témoignages dynamiques -->
+      <div *ngFor="let t of testimonials" class="card fade-up testimonial-card" [ngClass]="t.variantClass">
+        <div class="quote-mark">"</div>
+        <blockquote class="testimonial-text">{{ t.content }}</blockquote>
+        <div class="author-info">
+          <div class="author-avatar" [ngClass]="t.avatarClass">{{ t.name.charAt(0) }}</div>
+          <div>
+            <strong class="author-name">{{ t.name }}</strong>
+            <span class="author-role">{{ t.role }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-box">
+      <h3 class="cta-title">Et toi ? Tu veux témoigner ?</h3>
+      <p class="cta-desc">Raconte-nous ton expérience avec RÉSEAU SOLIDARITÉ FRANCE. Ton témoignage peut inspirer et donner espoir à d'autres.</p>
+      <a routerLink="/contact" class="btn btn-primary">Partager mon témoignage →</a>
+    </div>
+  </div>
+</section>

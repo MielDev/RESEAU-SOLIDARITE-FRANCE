@@ -6,7 +6,31 @@ const { PageContent, TeamMember, Mission, MissionItem, Testimonial, Event, Event
 // Contenu d'une page
 router.get('/pages/:pageKey', async (req, res, next) => {
   try {
-    const fields = await PageContent.findAll({ where: { page_key: req.params.pageKey }, order: [['sort_order','ASC']] });
+    const { pageKey } = req.params;
+
+    // Si c'est la page d'accueil, on récupère les données structurées de la table Accueil
+    if (pageKey === 'accueil') {
+      const { Accueil } = require('../models');
+      const accueilData = await Accueil.findOne({ where: { id: 1 } });
+      if (accueilData) {
+        // Transformer les données pour correspondre à la structure attendue par le front
+        const formattedData = {
+          hero: {
+            badge: accueilData.hero_badge,
+            title: accueilData.hero_title,
+            text: accueilData.hero_text,
+            features: accueilData.hero_features
+          },
+          stats: {
+            members: accueilData.stats_members,
+            domains: accueilData.stats_domains
+          }
+        };
+        return res.json({ success: true, data: formattedData });
+      }
+    }
+
+    const fields = await PageContent.findAll({ where: { page_key: pageKey }, order: [['sort_order','ASC']] });
     const data = {};
     fields.forEach(f => { data[f.field_key] = f.value; });
     res.json({ success: true, data });
@@ -66,7 +90,14 @@ router.get('/settings', async (req, res, next) => {
   try {
     const rows = await Setting.findAll();
     const data = {};
-    rows.forEach(r => { data[r.key] = r.value; });
+    rows.forEach(r => {
+      let val = r.value;
+      // Essayer de parser si c'est du JSON (pour socialLinks par exemple)
+      if (typeof val === 'string' && (val.startsWith('{') || val.startsWith('['))) {
+        try { val = JSON.parse(val); } catch (e) { /* ignore */ }
+      }
+      data[r.key] = val;
+    });
     res.json({ success: true, data });
   } catch (err) { next(err); }
 });

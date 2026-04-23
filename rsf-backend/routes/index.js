@@ -6,6 +6,7 @@ const { authenticate, authorize } = require('../middleware/auth');
 // ── Routes publiques ──────────────────────────────────────────────────────────
 router.use('/auth',         require('./auth'));
 router.use('/public',       require('./public'));    // API publique (site front)
+router.use('/actions-solidaires', require('./actions-solidaires')); // New route for actions solidaires
 
 router.use('/contact',      require('./contact'));   // public POST + admin GET
 

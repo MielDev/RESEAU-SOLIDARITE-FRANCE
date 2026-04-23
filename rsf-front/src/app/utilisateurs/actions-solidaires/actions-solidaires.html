@@ -1,1 +1,46 @@
-<p>actions-solidaires works!</p>
+<header class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a routerLink="/">Accueil</a>
+      <span class="sep">›</span>
+      Actions solidaires
+    </div>
+    <div class="badge">
+      <i class="fas fa-handshake"></i> Sur le terrain
+    </div>
+    <h1>Actions solidaires</h1>
+    <p>Nos bénévoles agissent concrètement au quotidien pour apporter aide, soutien et dignité à ceux qui en ont besoin.</p>
+  </div>
+</header>
+
+<section class="section-pad">
+  <div class="container">
+    <ng-container *ngIf="actionsSolidaires$ | async as actions">
+      <div class="grid-auto-lg">
+        <article class="card fade-up" style="overflow:hidden;" *ngFor="let action of actions">
+          <div class="card-icon-box" [style.background]="action.gradient" [style.color]="action.iconColor">
+            <img *ngIf="action.image" [src]="action.image" [attr.alt]="action.title" class="action-image">
+            <i *ngIf="!action.image && action.iconType === 'fa'" [class]="action.icon"></i>
+            <span *ngIf="!action.image && action.iconType === 'emoji'" class="action-emoji">{{ action.icon }}</span>
+          </div>
+          <div style="padding:28px;">
+            <span class="tag" [style.background]="action.tagBg" [style.color]="action.tagColor">{{ action.tag }}</span>
+            <h3 style="font-size:18px;color:var(--primary-dark);margin:12px 0 10px;">{{ action.title }}</h3>
+            <p style="font-size:14px;color:var(--text-mid);line-height:1.7;">{{ action.description }}</p>
+          </div>
+        </article>
+      </div>
+    </ng-container>
+  </div>
+</section>
+
+<section class="cta-dark">
+  <div class="container">
+    <h2>Vous aussi, participez à nos actions</h2>
+    <p>Que ce soit comme bénévole ou donateur, votre contribution fait une vraie différence.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a routerLink="/nous-rejoindre" class="btn btn-primary">Devenir bénévole</a>
+      <a routerLink="/don" class="btn btn-accent">Faire un don</a>
+    </div>
+  </div>
+</section>

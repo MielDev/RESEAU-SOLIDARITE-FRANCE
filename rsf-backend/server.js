@@ -19,17 +19,15 @@ const app  = express();
 const PORT = process.env.PORT || 3001;
 
 // ─── MIDDLEWARES GLOBAUX ──────────────────────────────────────────────────────
-app.use(helmet());                          // En-têtes sécurité HTTP
-app.use(cors({
-  origin: (process.env.CORS_ORIGIN || 'http://localhost:5500').split(','),
-  methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
-  allowedHeaders: ['Content-Type','Authorization'],
-  credentials: true,
-}));
+// app.use(helmet());                          // En-têtes sécurité HTTP
+app.use(cors());
 app.use(express.json({ limit: '2mb' }));    // Parse JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(logger);                            // Log des requêtes
 app.use(globalLimiter);                     // Rate limiting
+
+// ─── SERVE FICHIERS STATIQUES (IMAGES) ──────────────────────────────────────────
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 // ─── ROUTES API ───────────────────────────────────────────────────────────────
 app.use('/api', require('./routes'));
@@ -62,7 +60,7 @@ async function start() {
 
     // 2. Vérification automatique des tables au démarrage
     //    alter:true = ajoute les colonnes manquantes SANS supprimer les données
-    await sequelize.sync({ alter: true });
+    // await sequelize.sync({ alter: true });
     console.log('\x1b[32m✅ Schéma base de données synchronisé.\x1b[0m');
 
     // 3. Démarrage du serveur

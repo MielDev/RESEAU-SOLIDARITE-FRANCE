@@ -20,7 +20,7 @@
         <a routerLink="/nos-missions">Nos actions <span class="arrow">▾</span></a>
         <ul class="dropdown">
           <li><a routerLink="/nos-missions"><span class="dicon"><i class="fas fa-bullseye"></i></span>Nos missions</a></li>
-          <li><a routerLink="/actions-solidaires"><span class="dicon"><i class="fas fa-hands-helping"></i></span>Actions solidaires</a></li>
+          <li><a routerLink="/actions-solidaires"><span class="dicon"><i class="fas fa-handshake-angle"></i></span>Actions solidaires</a></li>
           <li><a routerLink="/soutien-aux-membres"><span class="dicon"><i class="fas fa-heart"></i></span>Soutien aux membres</a></li>
           <li><a routerLink="/actions-internationales"><span class="dicon"><i class="fas fa-globe"></i></span>Actions internationales</a></li>
         </ul>
@@ -51,7 +51,7 @@
   <a routerLink="/organisation" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-users"></i> Organisation</a>
   <div class="mob-section">Nos actions</div>
   <a routerLink="/nos-missions" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-bullseye"></i> Nos missions</a>
-  <a routerLink="/actions-solidaires" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-hands-helping"></i> Actions solidaires</a>
+  <a routerLink="/actions-solidaires" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-handshake-angle"></i> Actions solidaires</a>
   <a routerLink="/soutien-aux-membres" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-heart"></i> Soutien aux membres</a>
   <a routerLink="/actions-internationales" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-globe"></i> Actions internationales</a>
   <div class="mob-section">Événements</div>
@@ -72,9 +72,17 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="fl">Réseau Solidarité France</div>
-      <p>Une association à but non lucratif née d'un engagement simple : ne laisser personne de côté. Solidarité, respect, engagement, humanité.</p>
-      <p style="margin-top:14px;font-size:12px;color:rgba(255,255,255,.3)"><i class="fas fa-map-marker-alt"></i> 7 Rue Maréchal Lyautey, 35000 Rennes</p>
+      <div class="fl">{{ settings?.siteName }}</div>
+      <p>{{ settings?.footerDescription }}</p>
+      <p style="margin-top:14px;font-size:12px;color:rgba(255,255,255,.3)" *ngIf="settings?.address">
+        <i class="fas fa-map-marker-alt"></i> {{ settings.address }}
+      </p>
+      <div class="footer-socials" *ngIf="settings?.socialLinks" style="margin-top: 15px; display: flex; gap: 15px;">
+        <a *ngIf="settings.socialLinks.facebook" [href]="settings.socialLinks.facebook" target="_blank" style="color: white; opacity: 0.6;"><i class="fab fa-facebook-f"></i></a>
+        <a *ngIf="settings.socialLinks.twitter" [href]="settings.socialLinks.twitter" target="_blank" style="color: white; opacity: 0.6;"><i class="fab fa-twitter"></i></a>
+        <a *ngIf="settings.socialLinks.instagram" [href]="settings.socialLinks.instagram" target="_blank" style="color: white; opacity: 0.6;"><i class="fab fa-instagram"></i></a>
+        <a *ngIf="settings.socialLinks.linkedin" [href]="settings.socialLinks.linkedin" target="_blank" style="color: white; opacity: 0.6;"><i class="fab fa-linkedin-in"></i></a>
+      </div>
     </div>
     <div class="footer-col">
       <h5>L'association</h5>

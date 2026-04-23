@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
+import { PublicService } from '../../services/public.service';
 
 @Component({
   selector: 'app-accueil',
@@ -10,27 +11,53 @@ import { RouterModule } from '@angular/router';
   styleUrl: './accueil.css',
 })
 export class Accueil implements OnInit {
-  constructor(private renderer: Renderer2) {}
+  pageContent: any = null;
+  testimonials: any[] = [];
+  actualities: any[] = [];
+  private observer: IntersectionObserver | null = null;
+
+  constructor(
+    private renderer: Renderer2,
+    private publicService: PublicService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.setupIntersectionObserver();
+    this.route.data.subscribe((data: any) => {
+      if (data.data) {
+        this.pageContent = data.data.pageContent;
+        this.testimonials = data.data.testimonials?.slice(0, 3) || [];
+        this.actualities = data.data.actualities?.slice(0, 3) || [];
+        
+        setTimeout(() => this.setupIntersectionObserver(), 100);
+      }
+    });
   }
 
   setupIntersectionObserver() {
-    const observer = new IntersectionObserver(
+    const elements = document.querySelectorAll('.fade-up');
+    
+    if (!('IntersectionObserver' in window)) {
+      elements.forEach(el => this.renderer.addClass(el, 'visible'));
+      return;
+    }
+
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+
+    this.observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             this.renderer.addClass(entry.target, 'visible');
+            this.observer?.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.1 }
     );
 
-    setTimeout(() => {
-      const elements = document.querySelectorAll('.fade-up');
-      elements.forEach((el) => observer.observe(el));
-    }, 100);
+    elements.forEach((el) => this.observer?.observe(el));
   }
 }

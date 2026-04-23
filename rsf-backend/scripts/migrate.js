@@ -47,45 +47,169 @@ const MIGRATIONS = [
     },
   },
 
-  // ── Modèle pour ajouter une colonne ─────────────────────────────────────────
-  // {
-  //   name: '002_add_photo_to_team_member',
-  //   description: 'Ajoute la colonne photo_url à team_members',
-  //   up: async (q) => {
-  //     const dialect = sequelize.getDialect();
-  //     const sql = dialect === 'sqlite'
-  //       ? `ALTER TABLE "team_members" ADD COLUMN "photo_url" TEXT`
-  //       : `ALTER TABLE team_members ADD COLUMN photo_url VARCHAR(500) NULL`;
-  //     await q(sql);
-  //   },
-  //   down: async (q) => {
-  //     // SQLite ne supporte pas DROP COLUMN sur les vieilles versions
-  //     warn('Suppression de colonne non supportée sur SQLite < 3.35');
-  //   },
-  // },
+  // ── Nouvelle migration pour actions_solidaires ──────────────────────────────
+  {
+    name: '002_create_actions_solidaires_table',
+    description: 'Création de la table actions_solidaires',
+    up: async (q) => {
+      const dialect = sequelize.getDialect();
+      let sql;
+      if (dialect === 'sqlite') {
+        sql = `
+          CREATE TABLE IF NOT EXISTS actions_solidaires (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            icon        TEXT NOT NULL,
+            iconColor   TEXT NOT NULL,
+            tag         TEXT NOT NULL,
+            tagBg       TEXT NOT NULL,
+            tagColor    TEXT NOT NULL,
+            title       TEXT NOT NULL,
+            description TEXT NOT NULL,
+            gradient    TEXT NOT NULL,
+            createdAt   TEXT DEFAULT CURRENT_TIMESTAMP,
+            updatedAt   TEXT DEFAULT CURRENT_TIMESTAMP
+          )
+        `;
+      } else if (dialect === 'mysql' || dialect === 'mariadb') {
+        sql = `
+          CREATE TABLE IF NOT EXISTS actions_solidaires (
+            id          INT AUTO_INCREMENT PRIMARY KEY,
+            icon        VARCHAR(255) NOT NULL,
+            iconColor   VARCHAR(255) NOT NULL,
+            tag         VARCHAR(255) NOT NULL,
+            tagBg       VARCHAR(255) NOT NULL,
+            tagColor    VARCHAR(255) NOT NULL,
+            title       VARCHAR(255) NOT NULL,
+            description TEXT NOT NULL,
+            gradient    VARCHAR(255) NOT NULL,
+            createdAt   DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updatedAt   DATETIME DEFAULT CURRENT_TIMESTAMP
+          )
+        `;
+      } else {
+        throw new Error(`Unsupported dialect: ${dialect}`);
+      }
+      await q(sql);
+    },
+    down: async (q) => {
+      await q(`DROP TABLE IF EXISTS actions_solidaires`);
+    },
+  },
 
-  // ── Modèle pour créer une nouvelle table ────────────────────────────────────
-  // {
-  //   name: '003_create_contact_messages_table',
-  //   description: 'Table pour stocker les messages du formulaire de contact',
-  //   up: async (q) => {
-  //     await q(`
-  //       CREATE TABLE IF NOT EXISTS contact_messages (
-  //         id         INTEGER PRIMARY KEY AUTOINCREMENT,
-  //         name       TEXT NOT NULL,
-  //         email      TEXT NOT NULL,
-  //         subject    TEXT,
-  //         message    TEXT NOT NULL,
-  //         is_read    INTEGER DEFAULT 0,
-  //         created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-  //         updated_at TEXT DEFAULT CURRENT_TIMESTAMP
-  //       )
-  //     `);
-  //   },
-  //   down: async (q) => {
-  //     await q(`DROP TABLE IF EXISTS contact_messages`);
-  //   },
-  // },
+  // ── Nouvelle migration pour ajouter les colonnes de style à la table actions ──────────────────────────────
+  {
+    name: '003_add_action_style_columns',
+    description: 'Ajoute les colonnes icon_color, tag_bg, tag_color et gradient à la table actions',
+    up: async (q) => {
+      const dialect = sequelize.getDialect();
+      let sqls = [];
+      if (dialect === 'sqlite') {
+        sqls.push(`ALTER TABLE actions ADD COLUMN icon_color VARCHAR(50) NULL`);
+        sqls.push(`ALTER TABLE actions ADD COLUMN tag_bg VARCHAR(50) NULL`);
+        sqls.push(`ALTER TABLE actions ADD COLUMN tag_color VARCHAR(50) NULL`);
+        sqls.push(`ALTER TABLE actions ADD COLUMN gradient VARCHAR(255) NULL`);
+      } else if (dialect === 'mysql' || dialect === 'mariadb') {
+        sqls.push(`ALTER TABLE actions ADD COLUMN icon_color VARCHAR(50) NULL`);
+        sqls.push(`ALTER TABLE actions ADD COLUMN tag_bg VARCHAR(50) NULL`);
+        sqls.push(`ALTER TABLE actions ADD COLUMN tag_color VARCHAR(50) NULL`);
+        sqls.push(`ALTER TABLE actions ADD COLUMN gradient VARCHAR(255) NULL`);
+      } else if (dialect === 'postgres') {
+        sqls.push(`ALTER TABLE actions ADD COLUMN icon_color VARCHAR(50) NULL`);
+        sqls.push(`ALTER TABLE actions ADD COLUMN tag_bg VARCHAR(50) NULL`);
+        sqls.push(`ALTER TABLE actions ADD COLUMN tag_color VARCHAR(50) NULL`);
+        sqls.push(`ALTER TABLE actions ADD COLUMN gradient VARCHAR(255) NULL`);
+      } else {
+        throw new Error(`Unsupported dialect: ${dialect}`);
+      }
+      for (const sql of sqls) {
+        await q(sql);
+      }
+    },
+    down: async (q) => {
+      warn('Suppression de colonne non supportée sur SQLite < 3.35. Pour les autres DBs, cette migration ne sera pas annulée automatiquement.');
+      // For MySQL/Postgres, you would typically do:
+      // await q(`ALTER TABLE actions DROP COLUMN icon_color`);
+      // await q(`ALTER TABLE actions DROP COLUMN tag_bg`);
+      // await q(`ALTER TABLE actions DROP COLUMN tag_color`);
+      // await q(`ALTER TABLE actions DROP COLUMN gradient`);
+    },
+  },
+
+  {
+    name: '004_increase_icon_length',
+    description: 'Augmente la longueur du champ icon à 50 caractères dans la table actions',
+    up: async (q) => {
+      const dialect = sequelize.getDialect();
+      let sql;
+      if (dialect === 'sqlite') {
+        sql = `ALTER TABLE actions ADD COLUMN icon_new VARCHAR(50);
+               UPDATE actions SET icon_new = icon;
+               ALTER TABLE actions DROP COLUMN icon;
+               ALTER TABLE actions RENAME COLUMN icon_new TO icon;`;
+      } else if (dialect === 'mysql' || dialect === 'mariadb') {
+        sql = `ALTER TABLE actions MODIFY COLUMN icon VARCHAR(50);`;
+      } else if (dialect === 'postgres') {
+        sql = `ALTER TABLE actions ALTER COLUMN icon TYPE VARCHAR(50);`;
+      } else {
+        throw new Error(`Unsupported dialect: ${dialect}`);
+      }
+      await q(sql);
+    },
+    down: async (q) => {
+      warn('L\'annulation de cette migration peut entraîner une perte de données si les icônes sont plus longues que 10 caractères.');
+      const dialect = sequelize.getDialect();
+      let sql;
+      if (dialect === 'sqlite') {
+         sql = `ALTER TABLE actions ADD COLUMN icon_old VARCHAR(10);
+                UPDATE actions SET icon_old = SUBSTR(icon, 1, 10);
+                ALTER TABLE actions DROP COLUMN icon;
+                ALTER TABLE actions RENAME COLUMN icon_old TO icon;`;
+      } else if (dialect === 'mysql' || dialect === 'mariadb') {
+        sql = `ALTER TABLE actions MODIFY COLUMN icon VARCHAR(10);`;
+      } else if (dialect === 'postgres') {
+        sql = `ALTER TABLE actions ALTER COLUMN icon TYPE VARCHAR(10);`;
+      } else {
+        throw new Error(`Unsupported dialect: ${dialect}`);
+      }
+      await q(sql);
+    },
+  },
+
+  {
+    name: '005_add_image_to_actions',
+    description: 'Ajoute la colonne image à la table actions',
+    up: async (q) => {
+      const dialect = sequelize.getDialect();
+      let sql;
+      if (dialect === 'sqlite') {
+        sql = `ALTER TABLE actions ADD COLUMN image VARCHAR(255) NULL;`;
+      } else if (dialect === 'mysql' || dialect === 'mariadb') {
+        sql = `ALTER TABLE actions ADD COLUMN image VARCHAR(255) NULL;`;
+      } else if (dialect === 'postgres') {
+        sql = `ALTER TABLE actions ADD COLUMN image VARCHAR(255) NULL;`;
+      } else {
+        throw new Error(`Unsupported dialect: ${dialect}`);
+      }
+      await q(sql);
+    },
+    down: async (q) => {
+      warn('L\'annulation de cette migration peut entraîner une perte de données.');
+      const dialect = sequelize.getDialect();
+      let sql;
+      if (dialect === 'sqlite') {
+        warn('La suppression de colonne n\'est pas entièrement supportée par SQLite sans recréer la table.');
+      } else if (dialect === 'mysql' || dialect === 'mariadb') {
+        sql = `ALTER TABLE actions DROP COLUMN image;`;
+      } else if (dialect === 'postgres') {
+        sql = `ALTER TABLE actions DROP COLUMN image;`;
+      } else {
+        throw new Error(`Unsupported dialect: ${dialect}`);
+      }
+      if (sql) {
+        await q(sql);
+      }
+    },
+  },
 
 ];
 // ═══════════════════════════════════════════════════════════════════════════════

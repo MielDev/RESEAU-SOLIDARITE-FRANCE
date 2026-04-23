@@ -1,0 +1,126 @@
+.page-header {
+  padding: clamp(48px, 7vw, 96px) clamp(16px, 5vw, 80px);
+  background: linear-gradient(135deg, #0F172A, #1E3A8A);
+  color: white;
+}
+
+.breadcrumb {
+  font-size: 13px;
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.breadcrumb a {
+  color: white;
+  text-decoration: none;
+}
+
+.breadcrumb .sep {
+  margin: 0 8px;
+}
+
+.page-header .badge {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.page-header h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  margin-bottom: 16px;
+}
+
+.page-header p {
+  font-size: clamp(15px, 2vw, 18px);
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.act-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.act-img {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--bg-light);
+}
+
+.act-body {
+  padding: 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.act-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.act-date {
+  font-size: 12.5px;
+  color: var(--text-light);
+}
+
+.act-date i {
+  margin-right: 4px;
+}
+
+.act-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: rgba(47, 93, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 50px;
+}
+
+.act-title {
+  font-size: 18px;
+  color: var(--primary-dark);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.act-text {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.act-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.act-link:hover {
+  text-decoration: underline;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -14,25 +14,27 @@ import { NousRejoindre } from './utilisateurs/nous-rejoindre/nous-rejoindre';
 import { Actualites } from './utilisateurs/actualites/actualites';
 import { Contact } from './utilisateurs/contact/contact';
 import { Don } from './utilisateurs/don/don';
+import { settingsResolver, accueilResolver, pageResolver, listResolver } from './resolvers/data.resolver';
 
 export const routes: Routes = [
   {
     path: '',
     component: UserLayout,
+    resolve: { data: settingsResolver },
     children: [
-      { path: '', component: Accueil },
-      { path: 'accueil', component: Accueil },
-      { path: 'qui-sommes-nous', component: QuiSommesNous },
-      { path: 'organisation', component: Organisation },
-      { path: 'nos-missions', component: NosMissions },
+      { path: '', component: Accueil, resolve: { data: accueilResolver } },
+      { path: 'accueil', component: Accueil, resolve: { data: accueilResolver } },
+      { path: 'qui-sommes-nous', component: QuiSommesNous, resolve: { pageContent: pageResolver }, data: { pageKey: 'qui-sommes-nous' } },
+      { path: 'organisation', component: Organisation, resolve: { pageContent: pageResolver, team: listResolver }, data: { pageKey: 'organisation', listType: 'team' } },
+      { path: 'nos-missions', component: NosMissions, resolve: { missions: listResolver }, data: { listType: 'missions' } },
       { path: 'actions-solidaires', component: ActionsSolidaires },
       { path: 'soutien-aux-membres', component: SoutienAuxMembres },
       { path: 'actions-internationales', component: ActionsInternationales },
-      { path: 'evenements', component: Evenements },
-      { path: 'rencontre-annuelle', component: RencontreAnnuelle },
-      { path: 'temoignages', component: Temoignages },
+      { path: 'evenements', component: Evenements, resolve: { events: listResolver }, data: { listType: 'events' } },
+      { path: 'rencontre-annuelle', component: RencontreAnnuelle, resolve: { pageContent: pageResolver }, data: { pageKey: 'rencontre-annuelle' } },
+      { path: 'temoignages', component: Temoignages, resolve: { testimonials: listResolver }, data: { listType: 'testimonials' } },
       { path: 'nous-rejoindre', component: NousRejoindre },
-      { path: 'actualites', component: Actualites },
+      { path: 'actualites', component: Actualites, resolve: { actualities: listResolver }, data: { listType: 'actualities' } },
       { path: 'contact', component: Contact },
       { path: 'don', component: Don },
     ]

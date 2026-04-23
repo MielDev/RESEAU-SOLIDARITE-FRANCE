@@ -1,0 +1,197 @@
+.page-header {
+  padding: clamp(48px, 7vw, 96px) clamp(16px, 5vw, 80px);
+  background: linear-gradient(135deg, #1E3A8A, #4338CA);
+  color: white;
+}
+
+.breadcrumb {
+  font-size: 13px;
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.breadcrumb a {
+  color: white;
+  text-decoration: none;
+}
+
+.breadcrumb .sep {
+  margin: 0 8px;
+}
+
+.page-header .badge {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.85);
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.page-header h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  margin-bottom: 16px;
+  color: white;
+}
+
+.page-header p {
+  font-size: clamp(15px, 2vw, 18px);
+  max-width: 600px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.president-card {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 24px;
+  overflow: hidden;
+  padding: 44px 40px;
+  text-align: center;
+}
+
+.president-avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  font-weight: 900;
+  color: white;
+  margin: 0 auto 20px;
+  background-size: cover;
+  background-position: center;
+}
+
+.president-avatar.has-photo {
+  background-color: white;
+  border-color: white;
+}
+
+.team-member-header {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.team-member-header.has-photo {
+  background-color: #f3f4f6;
+}
+
+.president-badge {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 16px;
+  border-radius: 50px;
+}
+
+.leader-text {
+  font-size: 15.5px;
+  color: var(--text-mid);
+  line-height: 1.8;
+  margin-bottom: 18px;
+  text-align: justify;
+}
+
+.diploma-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.diploma-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.diploma-tag {
+  font-size: 12px;
+  background: rgba(47, 93, 255, 0.1);
+  color: var(--primary);
+  border: 1px solid rgba(47, 93, 255, 0.2);
+  padding: 5px 12px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.team-section {
+  background: var(--bg-light);
+}
+
+.team-member-card {
+  overflow: hidden;
+  height: 100%;
+}
+
+.team-member-header {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-member-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: white;
+}
+
+.team-member-body {
+  padding: 18px 20px;
+}
+
+.member-name {
+  font-size: 15px;
+  color: var(--primary-dark);
+  margin-bottom: 5px;
+}
+
+.member-role {
+  font-size: 12.5px;
+  color: var(--text-light);
+}
+
+/* Background variants */
+.bg-blue { background: linear-gradient(135deg, #2F5DFF, #1E3A8A); }
+.bg-purple { background: linear-gradient(135deg, #7C3AED, #6366F1); }
+.bg-orange { background: linear-gradient(135deg, #FF8C00, #e07000); }
+.bg-green { background: linear-gradient(135deg, #22C55E, #16A34A); }
+.bg-indigo { background: linear-gradient(135deg, #4F7CFF, #7C3AED); }
+.bg-darkblue { background: linear-gradient(135deg, #1E3A8A, #2F5DFF); }
+.bg-mix { background: linear-gradient(135deg, #FF8C00, #7C3AED); }
+.bg-lightgreen { background: linear-gradient(135deg, #22C55E, #2F5DFF); }
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

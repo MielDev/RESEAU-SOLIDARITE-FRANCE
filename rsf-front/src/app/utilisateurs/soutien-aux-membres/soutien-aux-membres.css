@@ -1,0 +1,153 @@
+.page-header {
+  padding: clamp(48px, 7vw, 96px) clamp(16px, 5vw, 80px);
+  background: linear-gradient(135deg, #1E3A8A, #2F5DFF);
+  color: white;
+}
+
+.breadcrumb {
+  font-size: 13px;
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.breadcrumb a {
+  color: white;
+  text-decoration: none;
+}
+
+.breadcrumb .sep {
+  margin: 0 8px;
+}
+
+.page-header .badge {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.page-header h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  margin-bottom: 16px;
+  color: white;
+}
+
+.page-header p {
+  font-size: clamp(15px, 2vw, 18px);
+  max-width: 600px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.service-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.service-item {
+  padding: 22px;
+  background: var(--bg-light);
+  border-radius: var(--radius);
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.icon-box {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 20px;
+}
+
+.box-blue { background: rgba(47, 93, 255, 0.1); color: #2F5DFF; }
+.box-purple { background: rgba(124, 58, 237, 0.1); color: #7C3AED; }
+.box-orange { background: rgba(255, 140, 0, 0.1); color: #FF8C00; }
+.box-green { background: rgba(34, 197, 94, 0.1); color: #22C55E; }
+.box-indigo { background: rgba(99, 102, 241, 0.1); color: #6366F1; }
+
+.service-title {
+  font-size: 16px;
+  color: var(--primary-dark);
+  margin-bottom: 6px;
+}
+
+.service-desc {
+  font-size: 13.5px;
+  color: var(--text-mid);
+}
+
+.help-card {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 24px;
+  padding: 40px;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.help-title {
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+
+.help-desc {
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.btn-white {
+  background: white;
+  color: var(--primary);
+}
+
+.btn-white:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+}
+
+.process-card {
+  background: var(--bg-light);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.process-title {
+  font-size: 17px;
+  color: var(--primary-dark);
+  margin-bottom: 16px;
+}
+
+.process-steps {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.step-item {
+  font-size: 14px;
+  color: var(--text-mid);
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

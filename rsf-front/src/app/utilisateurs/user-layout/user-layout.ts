@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet, ActivatedRoute } from '@angular/router';
+import { PublicService } from '../../services/public.service';
 
 @Component({
   selector: 'app-user-layout',
@@ -13,10 +14,22 @@ export class UserLayout implements OnInit {
   isScrolled = false;
   showScrollTop = false;
   isMobileNavOpen = false;
+  settings: any = null;
+  navItems: any[] = [];
 
-  constructor() {}
+  constructor(
+    private publicService: PublicService,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.data.subscribe((data: any) => {
+      if (data.data) {
+        this.settings = data.data.settings;
+        this.navItems = data.data.nav;
+      }
+    });
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {

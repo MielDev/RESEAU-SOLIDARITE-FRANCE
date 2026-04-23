@@ -1,1 +1,104 @@
-<p>contact works!</p>
+<header class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a routerLink="/">Accueil</a>
+      <span class="sep">›</span>
+      Contact
+    </div>
+    <div class="badge">
+      <i class="fas fa-envelope"></i> Nous écrire
+    </div>
+    <h1>Contactez-nous</h1>
+    <p>Une question ? Besoin d'aide ? Envie de rejoindre le réseau ? Nous sommes à votre écoute !</p>
+  </div>
+</header>
+
+<section class="section-pad">
+  <div class="container">
+    <div class="grid-2" style="gap:56px;align-items:start;">
+      <div class="fade-up">
+        <h2 class="s-title">Nos coordonnées</h2>
+        <div style="display:flex;flex-direction:column;gap:20px;margin-top:28px;">
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div class="icon-box" style="background:rgba(47,93,255,.1); color: var(--primary);">
+              <i class="fas fa-location-dot"></i>
+            </div>
+            <div>
+              <strong style="display:block;color:var(--primary-dark);margin-bottom:4px;">Adresse</strong>
+              <span style="font-size:14px;color:var(--text-mid);">7 Rue Maréchal Lyautey<br>35000 Rennes, France</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div class="icon-box" style="background:rgba(34,197,94,.1); color: #22C55E;">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div>
+              <strong style="display:block;color:var(--primary-dark);margin-bottom:4px;">Téléphone</strong>
+              <a href="tel:+33651910773" style="font-size:14px;color:var(--text-mid);text-decoration:none;">+33 6 51 91 07 73</a>
+              <br>
+              <span style="font-size:12px;color:var(--text-light);">Du lundi au samedi, de 8h à 18h</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div class="icon-box" style="background:rgba(255,140,0,.1); color: var(--accent);">
+              <i class="fas fa-envelope-open-text"></i>
+            </div>
+            <div>
+              <strong style="display:block;color:var(--primary-dark);margin-bottom:4px;">Email</strong>
+              <a href="mailto:contact@reseau-solidarite-france.fr" style="font-size:14px;color:var(--text-mid);text-decoration:none;">contact@reseau-solidarite-france.fr</a>
+              <br>
+              <span style="font-size:12px;color:var(--text-light);">Réponse sous 48h</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div class="icon-box" style="background:rgba(124,58,237,.1); color: var(--secondary);">
+              <i class="fas fa-globe"></i>
+            </div>
+            <div>
+              <strong style="display:block;color:var(--primary-dark);margin-bottom:4px;">Site web</strong>
+              <a href="http://www.reseau-solidarite-france.fr" target="_blank" style="font-size:14px;color:var(--text-mid);text-decoration:none;">www.reseau-solidarite-france.fr</a>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:32px;padding:24px;background:linear-gradient(135deg,rgba(47,93,255,.06),rgba(124,58,237,.06));border-radius:var(--radius);border:1px solid rgba(47,93,255,.1);">
+          <p style="font-size:14px;color:var(--text-mid);line-height:1.7;">
+            <strong style="color:var(--primary-dark);">Notre engagement :</strong> Toute demande reçoit une réponse personnalisée. Nous traitons chaque situation avec confidentialité, bienveillance et professionnalisme.
+          </p>
+        </div>
+      </div>
+      <div>
+        <div style="background:white;border-radius:24px;padding:40px;box-shadow:var(--shadow-lg);" class="fade-up">
+          <h3 style="font-size:22px;color:var(--primary-dark);margin-bottom:24px;">Envoyer un message</h3>
+          <form (submit)="onSubmit(); $event.preventDefault()">
+            <div class="form-group">
+              <label>Nom complet *</label>
+              <input type="text" name="name" [(ngModel)]="contactData.name" placeholder="Votre nom et prénom" required/>
+            </div>
+            <div class="form-group">
+              <label>Adresse e-mail *</label>
+              <input type="email" name="email" [(ngModel)]="contactData.email" placeholder="votre@email.com" required/>
+            </div>
+            <div class="form-group">
+              <label>Objet</label>
+              <select name="subject" [(ngModel)]="contactData.subject">
+                <option>Demande d'aide administrative</option>
+                <option>Rejoindre l'association</option>
+                <option>Faire un don</option>
+                <option>Devenir partenaire</option>
+                <option>Témoignage</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Message *</label>
+              <textarea name="message" [(ngModel)]="contactData.message" placeholder="Décrivez votre demande ou votre message…" required></textarea>
+            </div>
+            <button type="submit" class="form-submit" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer le message →' }}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

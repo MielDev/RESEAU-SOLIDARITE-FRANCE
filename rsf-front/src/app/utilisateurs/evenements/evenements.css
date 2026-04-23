@@ -1,0 +1,141 @@
+.page-header {
+  padding: clamp(48px, 7vw, 96px) clamp(16px, 5vw, 80px);
+  background: linear-gradient(135deg, #4C1D95, #1E3A8A);
+  color: white;
+}
+
+.breadcrumb {
+  font-size: 13px;
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.breadcrumb a {
+  color: white;
+  text-decoration: none;
+}
+
+.breadcrumb .sep {
+  margin: 0 8px;
+}
+
+.page-header .badge {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.page-header h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  margin-bottom: 16px;
+  color: white;
+}
+
+.page-header p {
+  font-size: clamp(15px, 2vw, 18px);
+  max-width: 600px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.featured-event {
+  background: linear-gradient(135deg, var(--primary-dark), #3730A3);
+  border-radius: 24px;
+  padding: clamp(28px, 4vw, 48px);
+  color: white;
+  margin-bottom: 48px;
+}
+
+.featured-badge {
+  background: rgba(255, 140, 0, 0.2);
+  color: var(--accent-light);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 50px;
+  letter-spacing: .05em;
+}
+
+.featured-title {
+  font-size: clamp(22px, 3.5vw, 36px);
+  margin: 16px 0 12px;
+  color: white;
+}
+
+.featured-info {
+  font-size: 15px;
+  color: rgba(255, 255, 255, .75);
+  margin-bottom: 24px;
+}
+
+.featured-info i {
+  margin: 0 4px;
+}
+
+.btn-accent-light {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-accent-light:hover {
+  background: var(--accent-dark);
+  transform: translateY(-2px);
+}
+
+.event-card {
+  padding: 28px;
+  height: 100%;
+}
+
+.event-icon {
+  font-size: 36px;
+  margin-bottom: 14px;
+  color: var(--primary);
+}
+
+.event-title {
+  font-size: 17px;
+  color: var(--primary-dark);
+  margin-bottom: 8px;
+}
+
+.event-desc {
+  font-size: 13.5px;
+  color: var(--text-mid);
+}
+
+.info-cta {
+  text-align: center;
+  margin-top: 48px;
+  padding: 36px;
+  background: var(--bg-light);
+  border-radius: var(--radius);
+}
+
+.cta-title {
+  font-size: 20px;
+  color: var(--primary-dark);
+  margin-bottom: 10px;
+}
+
+.cta-desc {
+  font-size: 14.5px;
+  color: var(--text-mid);
+  margin-bottom: 20px;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
