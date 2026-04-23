@@ -4,7 +4,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   const DonMode = sequelize.define('DonMode', {
     id:          { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    icon:        { type: DataTypes.STRING(10),  defaultValue: '❤️' },
+    icon:        { type: DataTypes.STRING(100), defaultValue: 'fas fa-heart' },
     title:       { type: DataTypes.STRING(200), allowNull: false },
     description: { type: DataTypes.TEXT,        allowNull: false },
     link_href:   { type: DataTypes.STRING(255), allowNull: true },

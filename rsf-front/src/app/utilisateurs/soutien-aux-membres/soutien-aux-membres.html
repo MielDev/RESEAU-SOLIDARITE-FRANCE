@@ -3,13 +3,13 @@
     <div class="breadcrumb">
       <a routerLink="/">Accueil</a>
       <span class="sep">›</span>
-      Soutien aux membres
+      {{ pageContent?.hero?.title || 'Soutien aux membres' }}
     </div>
-    <div class="badge">
-      <i class="fas fa-hand-holding-heart"></i> Pour nos membres
+    <div class="badge" *ngIf="pageContent?.hero?.badge">
+      <i class="fas fa-hand-holding-heart"></i> {{ pageContent.hero.badge }}
     </div>
-    <h1>Soutien aux membres</h1>
-    <p>Un réseau d'entraide solide où chaque membre peut compter sur la communauté dans les moments difficiles.</p>
+    <h1>{{ pageContent?.hero?.title }}</h1>
+    <p>{{ pageContent?.hero?.text }}</p>
   </div>
 </header>
 
@@ -17,71 +17,34 @@
   <div class="container">
     <div class="grid-2" style="gap:40px;align-items:start;">
       <div>
-        <div class="s-label">Ce que nous offrons</div>
-        <h2 class="s-title">Services aux membres</h2>
+        <div class="s-label">{{ pageContent?.services?.label }}</div>
+        <h2 class="s-title">{{ pageContent?.services?.title }}</h2>
         <div class="service-list">
-          <div class="service-item fade-up">
-            <div class="icon-box box-blue">
-              <i class="fas fa-clipboard-check"></i>
+          <div class="service-item fade-up" *ngFor="let service of pageContent?.services?.items">
+            <div class="icon-box" [ngClass]="service.boxClass">
+              <i [class]="service.icon"></i>
             </div>
             <div class="service-content">
-              <h4 class="service-title">Accompagnement administratif personnalisé</h4>
-              <p class="service-desc">Suivi individualisé pour toutes vos démarches, de A à Z.</p>
-            </div>
-          </div>
-          <div class="service-item fade-up">
-            <div class="icon-box box-purple">
-              <i class="fas fa-comments"></i>
-            </div>
-            <div class="service-content">
-              <h4 class="service-title">Écoute et soutien moral</h4>
-              <p class="service-desc">Des membres disponibles pour vous écouter et vous soutenir.</p>
-            </div>
-          </div>
-          <div class="service-item fade-up">
-            <div class="icon-box box-orange">
-              <i class="fas fa-hand-holding-dollar"></i>
-            </div>
-            <div class="service-content">
-              <h4 class="service-title">Aide financière d'urgence</h4>
-              <p class="service-desc">Un soutien de la communauté en cas de difficultés financières ponctuelles.</p>
-            </div>
-          </div>
-          <div class="service-item fade-up">
-            <div class="icon-box box-green">
-              <i class="fas fa-network-wired"></i>
-            </div>
-            <div class="service-content">
-              <h4 class="service-title">Réseau & opportunités</h4>
-              <p class="service-desc">Accès au réseau de contacts, partage d'opportunités professionnelles.</p>
-            </div>
-          </div>
-          <div class="service-item fade-up">
-            <div class="icon-box box-indigo">
-              <i class="fas fa-house-chimney-user"></i>
-            </div>
-            <div class="service-content">
-              <h4 class="service-title">Aide au logement</h4>
-              <p class="service-desc">Accompagnement dans la constitution de dossiers, orientation vers des solutions adaptées.</p>
+              <h4 class="service-title">{{ service.title }}</h4>
+              <p class="service-desc">{{ service.description }}</p>
             </div>
           </div>
         </div>
       </div>
 
       <div class="fade-up">
-        <div class="help-card">
-          <h3 class="help-title">Vous avez besoin d'aide ?</h3>
-          <p class="help-desc">N'hésitez pas à nous contacter. Notre équipe est disponible du lundi au samedi de 8h à 18h pour répondre à toutes vos questions.</p>
-          <a routerLink="/contact" class="btn btn-white">Nous contacter →</a>
+        <div class="help-card" *ngIf="pageContent?.help">
+          <h3 class="help-title">{{ pageContent.help.title }}</h3>
+          <p class="help-desc">{{ pageContent.help.description }}</p>
+          <a *ngIf="pageContent.help.ctaHref" [routerLink]="pageContent.help.ctaHref" class="btn btn-white">
+            {{ pageContent.help.ctaLabel }}
+          </a>
         </div>
-        
-        <div class="process-card">
-          <h4 class="process-title">Comment ça fonctionne</h4>
+
+        <div class="process-card" *ngIf="pageContent?.process">
+          <h4 class="process-title">{{ pageContent.process.title }}</h4>
           <ol class="process-steps">
-            <li class="step-item">Prenez contact via le formulaire ou par téléphone</li>
-            <li class="step-item">Un membre de l'équipe vous répond sous 48h</li>
-            <li class="step-item">Nous évaluons votre situation ensemble</li>
-            <li class="step-item">Nous vous accompagnons avec les solutions adaptées</li>
+            <li class="step-item" *ngFor="let step of pageContent.process.steps">{{ step }}</li>
           </ol>
         </div>
       </div>

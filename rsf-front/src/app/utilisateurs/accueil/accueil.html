@@ -4,41 +4,44 @@
   <div class="container" style="position:relative;z-index:1;">
     <div class="grid-2" style="align-items:center;gap:64px;">
       <div>
-        <div class="badge">
+        <div class="badge" *ngIf="pageContent?.hero?.badge">
           <span class="badge-dot"></span>
-          {{ pageContent?.hero?.badge }}
+          {{ pageContent.hero.badge }}
         </div>
-        <h1 class="hero-title" [innerHTML]="pageContent?.hero?.title">
-        </h1>
-        <p class="hero-text">
-          {{ pageContent?.hero?.text }}
+        <h1 class="hero-title" [innerHTML]="pageContent?.hero?.title"></h1>
+        <p class="hero-text" *ngIf="pageContent?.hero?.text">
+          {{ pageContent.hero.text }}
         </p>
-        <div style="display:flex;flex-wrap:wrap;gap:12px;">
-          <a routerLink="/nos-missions" class="btn btn-primary">Découvrir nos missions →</a>
-          <a routerLink="/nous-rejoindre" class="btn btn-outline">Rejoindre le réseau</a>
-          <a routerLink="/don" class="btn btn-accent"><i class="fas fa-heart"></i> Faire un don</a>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;" *ngIf="pageContent?.heroActions?.length">
+          <a
+            *ngFor="let action of pageContent.heroActions"
+            [routerLink]="action.href"
+            [class]="getButtonClass(action)"
+          >
+            <i *ngIf="action.icon" [class]="action.icon"></i>
+            {{ action.label }}
+          </a>
         </div>
-        <div class="stats-grid">
-          <div class="stat-card" style="border-top:3px solid var(--primary);">
-            <div class="stat-number">{{ pageContent?.stats?.members }}</div>
-            <div class="stat-label">Membres actifs</div>
-          </div>
-          <div class="stat-card" style="border-top:3px solid var(--accent);">
-            <div class="stat-number">{{ pageContent?.stats?.domains }}</div>
-            <div class="stat-label">Domaines d'action</div>
-          </div>
-          <div class="stat-card" style="border-top:3px solid var(--support);">
-            <div class="stat-number">∞</div>
-            <div class="stat-label">Solidarité</div>
+        <div class="stats-grid" *ngIf="pageContent?.statsCards?.length">
+          <div
+            class="stat-card"
+            *ngFor="let stat of pageContent.statsCards"
+            [ngStyle]="{ 'border-top': '3px solid ' + (stat.borderColor || 'var(--primary)') }"
+          >
+            <div class="stat-number">{{ getStatValue(stat) }}</div>
+            <div class="stat-label">{{ stat.label }}</div>
           </div>
         </div>
       </div>
+
       <div class="fade-up" style="display:flex;flex-direction:column;gap:20px;">
-        <div class="feature-card" *ngFor="let f of pageContent?.hero?.features">
-          <div class="icon-box" [style.background]="f.bg" [style.color]="f.color || 'var(--primary)'"><i [class]="f.icon"></i></div>
+        <div class="feature-card" *ngFor="let feature of pageContent?.hero?.features">
+          <div class="icon-box" [style.background]="feature.bg" [style.color]="feature.color || 'var(--primary)'">
+            <i [class]="feature.icon"></i>
+          </div>
           <div>
-            <h3>{{ f.title }}</h3>
-            <p>{{ f.text }}</p>
+            <h3>{{ feature.title }}</h3>
+            <p>{{ feature.text }}</p>
           </div>
         </div>
       </div>
@@ -46,107 +49,61 @@
   </div>
 </section>
 
-<section class="section-pad" style="background:var(--bg-light);">
+<section class="section-pad" style="background:var(--bg-light);" *ngIf="pageContent?.navigation">
   <div class="container">
-    <div class="s-label">Naviguer</div>
-    <h2 class="s-title">Tout ce que nous faisons</h2>
+    <div class="s-label">{{ pageContent.navigation.label }}</div>
+    <h2 class="s-title">{{ pageContent.navigation.title }}</h2>
     <div class="grid-auto" style="margin-top:40px;">
-      <a routerLink="/qui-sommes-nous" class="card" style="padding:28px;text-decoration:none;display:block;">
-        <div class="icon-box" style="background:rgba(47,93,255,.1);margin-bottom:14px;color:var(--primary);"><i class="fas fa-book-open"></i>
+      <a
+        *ngFor="let item of pageContent.navigation.items"
+        [routerLink]="item.href"
+        class="card"
+        style="padding:28px;text-decoration:none;display:block;"
+      >
+        <div
+          class="icon-box"
+          style="margin-bottom:14px;"
+          [style.background]="item.iconBackground"
+          [style.color]="item.iconColor || 'var(--primary)'"
+        >
+          <i [class]="item.icon"></i>
         </div>
-        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Qui sommes-nous ?</h3>
-        <p style="font-size:13.5px;color:var(--text-mid);">Notre histoire, nos valeurs et notre engagement au quotidien.
-        </p>
-      </a>
-      <a routerLink="/organisation" class="card" style="padding:28px;text-decoration:none;display:block;">
-        <div class="icon-box" style="background:rgba(124,58,237,.1);margin-bottom:14px;color:var(--secondary);"><i class="fas fa-users"></i>
-        </div>
-        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Organisation</h3>
-        <p style="font-size:13.5px;color:var(--text-mid);">Président fondateur et équipe structurée et engagée.</p>
-      </a>
-      <a routerLink="/nos-missions" class="card" style="padding:28px;text-decoration:none;display:block;">
-        <div class="icon-box" style="background:rgba(255,140,0,.1);margin-bottom:14px;color:var(--accent);"><i class="fas fa-bullseye"></i>
-        </div>
-        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Nos missions</h3>
-        <p style="font-size:13.5px;color:var(--text-mid);">Démarches administratives, emploi, logement, insertion
-          sociale.</p>
-      </a>
-      <a routerLink="/actions-solidaires" class="card" style="padding:28px;text-decoration:none;display:block;">
-        <div class="icon-box" style="background:rgba(34,197,94,.1);margin-bottom:14px;color:var(--support);"><i
-            class="fas fa-handshake-angle"></i></div>
-        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Actions solidaires</h3>
-        <p style="font-size:13.5px;color:var(--text-mid);">Nos actions concrètes sur le terrain, pour et avec la
-          communauté.</p>
-      </a>
-      <a routerLink="/evenements" class="card" style="padding:28px;text-decoration:none;display:block;">
-        <div class="icon-box" style="background:rgba(47,93,255,.1);margin-bottom:14px;color:var(--primary);"><i
-            class="fas fa-calendar-alt"></i></div>
-        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Événements</h3>
-        <p style="font-size:13.5px;color:var(--text-mid);">Rencontres, journées de cohésion et activités pour tous.</p>
-      </a>
-      <a routerLink="/temoignages" class="card" style="padding:28px;text-decoration:none;display:block;">
-        <div class="icon-box" style="background:rgba(124,58,237,.1);margin-bottom:14px;color:var(--secondary);"><i class="fas fa-comments"></i>
-        </div>
-        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Témoignages</h3>
-        <p style="font-size:13.5px;color:var(--text-mid);">Les mots de ceux que nous avons accompagnés.</p>
-      </a>
-      <a routerLink="/nous-rejoindre" class="card" style="padding:28px;text-decoration:none;display:block;">
-        <div class="icon-box" style="background:rgba(255,140,0,.1);margin-bottom:14px;color:var(--accent);"><i class="fas fa-hands-holding"></i>
-        </div>
-        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Nous rejoindre</h3>
-        <p style="font-size:13.5px;color:var(--text-mid);">Devenir bénévole ou intégrer le réseau comme membre.</p>
-      </a>
-      <a routerLink="/don" class="card"
-        style="padding:28px;text-decoration:none;display:block;border-top:3px solid var(--accent);">
-        <div class="icon-box" style="background:rgba(255,140,0,.1);margin-bottom:14px;color:var(--accent);"><i class="fas fa-heart"></i>
-        </div>
-        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">Faire un don</h3>
-        <p style="font-size:13.5px;color:var(--text-mid);">Soutenir nos actions financièrement ou en nature.</p>
+        <h3 style="font-size:17px;color:var(--primary-dark);margin-bottom:8px;">{{ item.title }}</h3>
+        <p style="font-size:13.5px;color:var(--text-mid);">{{ item.description }}</p>
       </a>
     </div>
   </div>
 </section>
 
-<section class="section-pad" style="background:var(--bg-dark);">
+<section class="section-pad" style="background:var(--bg-dark);" *ngIf="pageContent?.values">
   <div class="container">
-    <div class="s-label on-dark">Notre engagement</div>
-    <h2 class="s-title on-dark">Nos valeurs fondatrices</h2>
+    <div class="s-label on-dark">{{ pageContent.values.label }}</div>
+    <h2 class="s-title on-dark">{{ pageContent.values.title }}</h2>
     <div class="grid-4" style="margin-top:40px;">
-      <div style="text-align:center;padding:28px 20px;">
-        <div style="font-size:44px;margin-bottom:14px;color: var(--support);"><i class="fas fa-handshake-angle"></i></div>
-        <h3 style="font-size:17px;color:white;margin-bottom:8px;">Solidarité</h3>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.65;">Personne ne doit être oublié</p>
-      </div>
-      <div style="text-align:center;padding:28px 20px;">
-        <div style="font-size:44px;margin-bottom:14px;color: var(--secondary);"><i class="fas fa-scale-balanced"></i></div>
-        <h3 style="font-size:17px;color:white;margin-bottom:8px;">Respect</h3>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.65;">De chacun, de la loi et des parcours
-          de vie</p>
-      </div>
-      <div style="text-align:center;padding:28px 20px;">
-        <div style="font-size:44px;margin-bottom:14px;color: var(--accent);"><i class="fas fa-hand-fist"></i></div>
-        <h3 style="font-size:17px;color:white;margin-bottom:8px;">Engagement</h3>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.65;">Dans nos actions, au quotidien</p>
-      </div>
-      <div style="text-align:center;padding:28px 20px;">
-        <div style="font-size:44px;margin-bottom:14px;color: var(--primary);"><i class="fas fa-heart"></i></div>
-        <h3 style="font-size:17px;color:white;margin-bottom:8px;">Humanité</h3>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.65;">L'écoute et l'empathie guident tout
-        </p>
+      <div *ngFor="let item of pageContent.values.items" style="text-align:center;padding:28px 20px;">
+        <div style="font-size:44px;margin-bottom:14px;" [style.color]="item.color || 'var(--primary)'">
+          <i [class]="item.icon"></i>
+        </div>
+        <h3 style="font-size:17px;color:white;margin-bottom:8px;">{{ item.title }}</h3>
+        <p style="font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.65;">{{ item.description }}</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="cta-section">
+<section class="cta-section" *ngIf="pageContent?.cta">
   <div class="container cta-container">
     <div>
-      <h2 class="cta-title">Ensemble, construisons une solidarité qui change des vies.</h2>
-      <p class="cta-text">Rejoignez Réseau Solidarité France — en tant que bénévole, membre ou donateur.</p>
+      <h2 class="cta-title">{{ pageContent.cta.title }}</h2>
+      <p class="cta-text">{{ pageContent.cta.text }}</p>
     </div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a routerLink="/nous-rejoindre" class="btn" style="background:white;color:var(--primary);">Nous rejoindre</a>
-      <a routerLink="/don" class="btn btn-accent">Faire un don</a>
+      <a *ngIf="pageContent.cta.primaryHref" [routerLink]="pageContent.cta.primaryHref" class="btn" style="background:white;color:var(--primary);">
+        {{ pageContent.cta.primaryLabel }}
+      </a>
+      <a *ngIf="pageContent.cta.secondaryHref" [routerLink]="pageContent.cta.secondaryHref" class="btn btn-accent">
+        {{ pageContent.cta.secondaryLabel }}
+      </a>
     </div>
   </div>
 </section>

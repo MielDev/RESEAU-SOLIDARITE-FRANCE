@@ -4,7 +4,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   const Actuality = sequelize.define('Actuality', {
     id:          { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    icon:        { type: DataTypes.STRING(10),  defaultValue: '📰' },
+    icon:        { type: DataTypes.STRING(100), defaultValue: 'fas fa-newspaper' },
     title:       { type: DataTypes.STRING(300), allowNull: false },
     category:    { type: DataTypes.STRING(100), allowNull: true },
     summary:     { type: DataTypes.TEXT,        allowNull: false },

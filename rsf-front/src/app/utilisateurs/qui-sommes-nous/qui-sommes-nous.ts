@@ -19,17 +19,25 @@ export class QuiSommesNous implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe((data: any) => {
-      this.pageContent = data.pageContent;
+      this.pageContent = data.pageContent ?? null;
       setTimeout(() => this.setupIntersectionObserver(), 50);
     });
   }
 
   setupIntersectionObserver() {
+    const elements = document.querySelectorAll('.fade-up');
+
+    if (!('IntersectionObserver' in window)) {
+      elements.forEach((el) => this.renderer.addClass(el, 'visible'));
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             this.renderer.addClass(entry.target, 'visible');
+            observer.unobserve(entry.target);
           }
         });
       },
@@ -37,7 +45,6 @@ export class QuiSommesNous implements OnInit {
     );
 
     setTimeout(() => {
-      const elements = document.querySelectorAll('.fade-up');
       elements.forEach((el) => observer.observe(el));
     }, 100);
   }

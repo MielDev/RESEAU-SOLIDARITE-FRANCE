@@ -3,37 +3,44 @@
     <div class="breadcrumb">
       <a routerLink="/">Accueil</a>
       <span class="sep">›</span>
-      Témoignages
+      {{ pageContent?.hero?.title || 'Temoignages' }}
     </div>
-    <div class="badge">
-      <i class="fas fa-comment-dots"></i> Paroles de bénéficiaires
+    <div class="badge" *ngIf="pageContent?.hero?.badge">
+      <i class="fas fa-comment-dots"></i> {{ pageContent.hero.badge }}
     </div>
-    <h1>Témoignages</h1>
-    <p>Ils ont bénéficié de notre soutien. Voici ce qu'ils ont à dire.</p>
+    <h1>{{ pageContent?.hero?.title }}</h1>
+    <p>{{ pageContent?.hero?.text }}</p>
   </div>
 </header>
 
 <section class="section-pad">
   <div class="container">
     <div class="grid-auto-lg">
-      <!-- Témoignages dynamiques -->
-      <div *ngFor="let t of testimonials" class="card fade-up testimonial-card" [ngClass]="t.variantClass">
-        <div class="quote-mark">"</div>
-        <blockquote class="testimonial-text">{{ t.content }}</blockquote>
+      <div
+        *ngFor="let testimonial of testimonials"
+        class="card fade-up testimonial-card"
+        [style.borderLeft]="'4px solid ' + getQuoteColor(testimonial)"
+      >
+        <div class="quote-mark" [style.color]="getQuoteColor(testimonial)">"</div>
+        <blockquote class="testimonial-text">{{ testimonial.quote }}</blockquote>
         <div class="author-info">
-          <div class="author-avatar" [ngClass]="t.avatarClass">{{ t.name.charAt(0) }}</div>
+          <div class="author-avatar" [style.background]="getAvatarBackground(testimonial)">
+            {{ getInitials(testimonial) }}
+          </div>
           <div>
-            <strong class="author-name">{{ t.name }}</strong>
-            <span class="author-role">{{ t.role }}</span>
+            <strong class="author-name">{{ testimonial.first_name }}</strong>
+            <span class="author-role">{{ testimonial.profile }}</span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="cta-box">
-      <h3 class="cta-title">Et toi ? Tu veux témoigner ?</h3>
-      <p class="cta-desc">Raconte-nous ton expérience avec RÉSEAU SOLIDARITÉ FRANCE. Ton témoignage peut inspirer et donner espoir à d'autres.</p>
-      <a routerLink="/contact" class="btn btn-primary">Partager mon témoignage →</a>
+    <div class="cta-box" *ngIf="pageContent?.cta">
+      <h3 class="cta-title">{{ pageContent.cta.title }}</h3>
+      <p class="cta-desc">{{ pageContent.cta.text }}</p>
+      <a *ngIf="pageContent.cta.href" [routerLink]="pageContent.cta.href" class="btn btn-primary">
+        {{ pageContent.cta.label }}
+      </a>
     </div>
   </div>
 </section>

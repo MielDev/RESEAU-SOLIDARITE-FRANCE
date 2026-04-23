@@ -3,40 +3,38 @@
     <div class="breadcrumb">
       <a routerLink="/">Accueil</a>
       <span class="sep">›</span>
-      Nos missions
+      {{ pageContent?.hero?.title || 'Nos missions' }}
     </div>
-    <div class="badge">
-      <i class="fas fa-bullseye"></i> Nos missions
+    <div class="badge" *ngIf="pageContent?.hero?.badge">
+      <i class="fas fa-bullseye"></i> {{ pageContent.hero.badge }}
     </div>
-    <h1>Nos missions</h1>
-    <p>RÉSEAU SOLIDARITÉ FRANCE agit sur plusieurs fronts pour apporter des solutions concrètes aux personnes en difficulté.</p>
+    <h1>{{ pageContent?.hero?.title }}</h1>
+    <p>{{ pageContent?.hero?.text }}</p>
   </div>
 </header>
 
 <section class="section-pad">
   <div class="container">
     <div class="grid-2" style="align-items:start;gap:40px;">
-      <!-- Missions dynamiques -->
-      <div *ngFor="let m of missions" class="card fade-up mission-card" [ngClass]="m.cardClass">
-        <div class="icon-box" [ngClass]="m.iconBoxClass">
-          <!-- Support both FontAwesome classes and Emojis -->
-          <i *ngIf="m.icon && m.icon.includes('fa-')" [class]="m.icon"></i>
-          <span *ngIf="m.icon && !m.icon.includes('fa-')">{{ m.icon }}</span>
+      <div *ngFor="let mission of missions" class="card fade-up mission-card" [ngClass]="mission.cardClass">
+        <div class="icon-box" [ngClass]="mission.iconBoxClass">
+          <i *ngIf="mission.icon && mission.icon.includes('fa-')" [class]="mission.icon"></i>
+          <span *ngIf="mission.icon && !mission.icon.includes('fa-')">{{ mission.icon }}</span>
         </div>
-        <h3 class="mission-title">{{ m.title }}</h3>
-        <p class="mission-desc" *ngIf="m.description">
-          {{ m.description }}
+        <h3 class="mission-title">{{ mission.title }}</h3>
+        <p class="mission-desc" *ngIf="mission.description">
+          {{ mission.description }}
         </p>
         <ul class="mission-list">
-          <li *ngFor="let point of m.points">
+          <li *ngFor="let point of mission.points">
             <i class="fas fa-arrow-right"></i> {{ point }}
           </li>
         </ul>
       </div>
     </div>
 
-    <div class="cta-container">
-      <a routerLink="/nous-rejoindre" class="btn btn-primary">Rejoindre notre réseau →</a>
+    <div class="cta-container" *ngIf="pageContent?.cta?.href">
+      <a [routerLink]="pageContent.cta.href" class="btn btn-primary">{{ pageContent.cta.label }}</a>
     </div>
   </div>
 </section>

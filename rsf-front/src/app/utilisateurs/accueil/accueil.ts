@@ -1,7 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
-import { PublicService } from '../../services/public.service';
 
 @Component({
   selector: 'app-accueil',
@@ -12,40 +11,57 @@ import { PublicService } from '../../services/public.service';
 })
 export class Accueil implements OnInit {
   pageContent: any = null;
-  testimonials: any[] = [];
-  actualities: any[] = [];
   private observer: IntersectionObserver | null = null;
 
   constructor(
     private renderer: Renderer2,
-    private publicService: PublicService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.route.data.subscribe((data: any) => {
-      if (data.data) {
-        this.pageContent = data.data.pageContent;
-        this.testimonials = data.data.testimonials?.slice(0, 3) || [];
-        this.actualities = data.data.actualities?.slice(0, 3) || [];
-        
-        setTimeout(() => this.setupIntersectionObserver(), 100);
-      }
+      this.pageContent = data.pageContent ?? null;
+      setTimeout(() => this.setupIntersectionObserver(), 100);
     });
+  }
+
+  getButtonClass(action: any): string {
+    switch (action?.variant) {
+      case 'outline':
+        return 'btn btn-outline';
+      case 'accent':
+        return 'btn btn-accent';
+      case 'secondary':
+        return 'btn btn-secondary';
+      case 'support':
+        return 'btn btn-support';
+      default:
+        return 'btn btn-primary';
+    }
+  }
+
+  getStatValue(stat: any): string {
+    if (!stat) {
+      return '';
+    }
+
+    if (stat.value !== undefined && stat.value !== null) {
+      return String(stat.value);
+    }
+
+    const key = stat.key;
+    return key ? String(this.pageContent?.stats?.[key] ?? '') : '';
   }
 
   setupIntersectionObserver() {
     const elements = document.querySelectorAll('.fade-up');
-    
+
     if (!('IntersectionObserver' in window)) {
-      elements.forEach(el => this.renderer.addClass(el, 'visible'));
+      elements.forEach((el) => this.renderer.addClass(el, 'visible'));
       return;
     }
 
-    if (this.observer) {
-      this.observer.disconnect();
-    }
-
+    this.observer?.disconnect();
     this.observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

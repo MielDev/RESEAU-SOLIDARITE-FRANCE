@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 import { PublicService } from '../../services/public.service';
 import { FormsModule } from '@angular/forms';
 
@@ -12,6 +12,10 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './nous-rejoindre.css',
 })
 export class NousRejoindre implements OnInit {
+  pageContent: any = null;
+  statusOptions: string[] = [];
+  intentOptions: string[] = [];
+  interestOptions: string[] = [];
   joinData = {
     lastName: '',
     firstName: '',
@@ -19,7 +23,7 @@ export class NousRejoindre implements OnInit {
     phone: '',
     status: '',
     city: '',
-    intent: 'Devenir bénévole',
+    intent: '',
     interests: [] as string[],
     message: ''
   };
@@ -27,63 +31,98 @@ export class NousRejoindre implements OnInit {
 
   constructor(
     private renderer: Renderer2,
-    private publicService: PublicService
+    private publicService: PublicService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.setupIntersectionObserver();
+    this.route.data.subscribe((data: any) => {
+      this.pageContent = data.pageContent ?? null;
+      this.statusOptions = Array.isArray(this.pageContent?.form?.statusOptions) ? this.pageContent.form.statusOptions : [];
+      this.intentOptions = Array.isArray(this.pageContent?.form?.intentOptions) ? this.pageContent.form.intentOptions : [];
+      this.interestOptions = Array.isArray(this.pageContent?.form?.interestOptions) ? this.pageContent.form.interestOptions : [];
+
+      if (!this.joinData.intent && this.intentOptions.length > 0) {
+        this.joinData.intent = this.intentOptions[0];
+      }
+
+      setTimeout(() => this.setupIntersectionObserver(), 100);
+    });
   }
 
   setupIntersectionObserver() {
+    const elements = document.querySelectorAll('.fade-up');
+
+    if (!('IntersectionObserver' in window)) {
+      elements.forEach((el) => this.renderer.addClass(el, 'visible'));
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             this.renderer.addClass(entry.target, 'visible');
+            observer.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.1 }
     );
 
-    setTimeout(() => {
-      const elements = document.querySelectorAll('.fade-up');
-      elements.forEach((el) => observer.observe(el));
-    }, 100);
+    elements.forEach((el) => observer.observe(el));
   }
 
-  onInterestChange(interest: string, event: any) {
-    if (event.target.checked) {
-      this.joinData.interests.push(interest);
-    } else {
-      this.joinData.interests = this.joinData.interests.filter(i => i !== interest);
+  onInterestChange(interest: string, event: Event) {
+    const target = event.target as HTMLInputElement | null;
+    if (!target) {
+      return;
     }
+
+    if (target.checked) {
+      if (!this.joinData.interests.includes(interest)) {
+        this.joinData.interests = [...this.joinData.interests, interest];
+      }
+      return;
+    }
+
+    this.joinData.interests = this.joinData.interests.filter((item) => item !== interest);
   }
 
   onSubmit() {
     this.isSubmitting = true;
-    const message = `
-      Nom: ${this.joinData.lastName} ${this.joinData.firstName}
-      Ville: ${this.joinData.city}
-      Statut: ${this.joinData.status}
-      Intention: ${this.joinData.intent}
-      Intérêts: ${this.joinData.interests.join(', ')}
-      Message: ${this.joinData.message}
-    `;
+    const message = [
+      `Nom: ${this.joinData.lastName} ${this.joinData.firstName}`,
+      `Ville: ${this.joinData.city}`,
+      `Statut: ${this.joinData.status}`,
+      `Intention: ${this.joinData.intent}`,
+      `Interets: ${this.joinData.interests.join(', ')}`,
+      `Message: ${this.joinData.message}`,
+    ].join('\n');
 
     this.publicService.sendContactMessage({
-      name: `${this.joinData.lastName} ${this.joinData.firstName}`,
+      name: `${this.joinData.lastName} ${this.joinData.firstName}`.trim(),
       email: this.joinData.email,
-      subject: `Nouvelle demande d'adhésion: ${this.joinData.intent}`,
-      message: message
+      subject: `Nouvelle demande d'adhesion: ${this.joinData.intent}`,
+      message,
     }).subscribe({
       next: () => {
-        alert('Votre demande a été envoyée avec succès !');
+        alert('Votre demande a ete envoyee avec succes.');
+        this.joinData = {
+          lastName: '',
+          firstName: '',
+          email: '',
+          phone: '',
+          status: '',
+          city: '',
+          intent: this.intentOptions[0] || '',
+          interests: [],
+          message: ''
+        };
         this.isSubmitting = false;
-        // Reset form data
       },
       error: () => {
-        alert('Une erreur est survenue lors de l\'envoi de votre demande.');
+        alert("Une erreur est survenue lors de l'envoi de votre demande.");
         this.isSubmitting = false;
       }
     });

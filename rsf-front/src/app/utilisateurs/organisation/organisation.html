@@ -3,20 +3,20 @@
     <div class="breadcrumb">
       <a routerLink="/">Accueil</a>
       <span class="sep">›</span>
-      Organisation
+      {{ pageContent?.hero?.title || 'Organisation' }}
     </div>
-    <div class="badge">
-      <i class="fas fa-users-gear"></i> Notre équipe
+    <div class="badge" *ngIf="pageContent?.hero?.badge">
+      <i class="fas fa-users-gear"></i> {{ pageContent.hero.badge }}
     </div>
-    <h1>Organisation</h1>
-    <p>Une équipe structurée et engagée, où chaque membre joue un rôle essentiel dans la réalisation de nos actions.</p>
+    <h1>{{ pageContent?.hero?.title }}</h1>
+    <p>{{ pageContent?.hero?.text }}</p>
   </div>
 </header>
 
 <section class="section-pad">
   <div class="container">
-    <div class="s-label">Leadership</div>
-    <h2 class="s-title">Président fondateur</h2>
+    <div class="s-label">{{ pageContent?.leadership?.label }}</div>
+    <h2 class="s-title">{{ pageContent?.leadership?.title }}</h2>
     <div class="grid-2" style="margin-top:40px;gap:48px;align-items:start;">
       <div class="president-card fade-up" *ngIf="president">
         <div class="president-avatar" [style.background-image]="president.photo_url ? 'url(' + president.photo_url + ')' : null" [class.has-photo]="president.photo_url">
@@ -25,12 +25,13 @@
         <h2 class="president-name">{{ president.name }}</h2>
         <span class="president-badge">{{ president.role }}</span>
       </div>
-      <div class="fade-up">
-        <p class="leader-text">{{ president.bio }}</p>
-        
-        <h4 class="diploma-title">Diplômes</h4>
+
+      <div class="fade-up" *ngIf="president">
+        <p class="leader-text">{{ president?.bio }}</p>
+
+        <h4 class="diploma-title">Diplomes</h4>
         <div class="diploma-list">
-          <span class="diploma-tag" *ngFor="let d of president.diplomas">{{ d }}</span>
+          <span class="diploma-tag" *ngFor="let diploma of president?.diplomas">{{ diploma }}</span>
         </div>
       </div>
     </div>
@@ -39,19 +40,18 @@
 
 <section class="section-pad team-section">
   <div class="container">
-    <div class="s-label">Notre équipe</div>
-    <h2 class="s-title">Les membres de l'équipe</h2>
-    <p class="s-desc">Chaque membre de l'équipe contribue avec ses compétences et son cœur à la réalisation de notre mission.</p>
-    
+    <div class="s-label">{{ pageContent?.teamSection?.label }}</div>
+    <h2 class="s-title">{{ pageContent?.teamSection?.title }}</h2>
+    <p class="s-desc">{{ pageContent?.teamSection?.description }}</p>
+
     <div class="grid-auto" style="margin-top:40px;">
-      <!-- Membres dynamiques -->
-      <div *ngFor="let m of team" class="card fade-up team-member-card">
-        <div class="team-member-header" [ngClass]="m.bgClass" [style.background-image]="m.photo_url ? 'url(' + m.photo_url + ')' : null" [class.has-photo]="m.photo_url">
-          <div class="team-member-avatar" *ngIf="!m.photo_url">{{ m.initials }}</div>
+      <div *ngFor="let member of team" class="card fade-up team-member-card">
+        <div class="team-member-header" [ngClass]="member.bgClass" [style.background-image]="member.photo_url ? 'url(' + member.photo_url + ')' : null" [class.has-photo]="member.photo_url">
+          <div class="team-member-avatar" *ngIf="!member.photo_url">{{ member.initials }}</div>
         </div>
         <div class="team-member-body">
-          <h3 class="member-name">{{ m.name }}</h3>
-          <span class="member-role">{{ m.role }}</span>
+          <h3 class="member-name">{{ member.name }}</h3>
+          <span class="member-role">{{ member.role }}</span>
         </div>
       </div>
     </div>

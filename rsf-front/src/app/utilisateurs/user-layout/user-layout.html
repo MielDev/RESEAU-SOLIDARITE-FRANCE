@@ -1,43 +1,42 @@
 <nav id="mainNav" [class.scrolled]="isScrolled">
   <div class="nav-inner">
     <a routerLink="/" class="nav-brand">
-      <div class="nav-logo">RSF</div>
+      <div class="nav-logo">{{ settings?.assoc_short || 'RSF' }}</div>
       <div>
-        <div class="nav-title">Réseau Solidarité France</div>
-        <div class="nav-sub">Association</div>
+        <div class="nav-title">{{ settings?.siteName || settings?.assoc_name }}</div>
+        <div class="nav-sub">{{ settings?.assoc_slogan || 'Association' }}</div>
       </div>
     </a>
+
     <ul class="nav-links">
-      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Accueil</a></li>
-      <li>
-        <a routerLink="/qui-sommes-nous">À propos <span class="arrow">▾</span></a>
+      <li *ngIf="homeItem">
+        <a [routerLink]="homeItem.href" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ homeItem.label }}</a>
+      </li>
+
+      <li *ngFor="let group of navGroups">
+        <a [routerLink]="group.items[0].href">{{ group.label }} <span class="arrow">▾</span></a>
         <ul class="dropdown">
-          <li><a routerLink="/qui-sommes-nous"><span class="dicon"><i class="fas fa-book-open"></i></span>Qui sommes-nous ?</a></li>
-          <li><a routerLink="/organisation"><span class="dicon"><i class="fas fa-users"></i></span>Organisation</a></li>
+          <li *ngFor="let item of group.items">
+            <a [routerLink]="item.href">
+              <span class="dicon"><i [class]="item.icon"></i></span>{{ item.label }}
+            </a>
+          </li>
         </ul>
       </li>
-      <li>
-        <a routerLink="/nos-missions">Nos actions <span class="arrow">▾</span></a>
-        <ul class="dropdown">
-          <li><a routerLink="/nos-missions"><span class="dicon"><i class="fas fa-bullseye"></i></span>Nos missions</a></li>
-          <li><a routerLink="/actions-solidaires"><span class="dicon"><i class="fas fa-handshake-angle"></i></span>Actions solidaires</a></li>
-          <li><a routerLink="/soutien-aux-membres"><span class="dicon"><i class="fas fa-heart"></i></span>Soutien aux membres</a></li>
-          <li><a routerLink="/actions-internationales"><span class="dicon"><i class="fas fa-globe"></i></span>Actions internationales</a></li>
-        </ul>
+
+      <li *ngFor="let item of navSingleItems">
+        <a [routerLink]="item.href" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: isExactLink(item.href) }">
+          {{ item.label }}
+        </a>
       </li>
-      <li>
-        <a routerLink="/evenements">Événements <span class="arrow">▾</span></a>
-        <ul class="dropdown">
-          <li><a routerLink="/evenements"><span class="dicon"><i class="fas fa-calendar-alt"></i></span>Tous les événements</a></li>
-          <li><a routerLink="/rencontre-annuelle"><span class="dicon"><i class="fas fa-glass-cheers"></i></span>Rencontre annuelle 2025</a></li>
-        </ul>
+
+      <li *ngIf="navCtaItem">
+        <a [routerLink]="navCtaItem.href" class="nav-cta">
+          <i *ngIf="navCtaItem.icon" [class]="navCtaItem.icon"></i> {{ navCtaItem.label }}
+        </a>
       </li>
-      <li><a routerLink="/temoignages">Témoignages</a></li>
-      <li><a routerLink="/nous-rejoindre">Nous rejoindre</a></li>
-      <li><a routerLink="/actualites">Actualités</a></li>
-      <li><a routerLink="/contact">Contact</a></li>
-      <li><a routerLink="/don" class="nav-cta"><i class="fas fa-heart"></i> Faire un don</a></li>
     </ul>
+
     <button class="burger" id="burgerBtn" (click)="toggleMobileNav()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -45,24 +44,24 @@
 </nav>
 
 <div class="mobile-nav" id="mobileNav" [class.open]="isMobileNavOpen">
-  <a routerLink="/" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-home"></i> Accueil</a>
-  <div class="mob-section">À propos</div>
-  <a routerLink="/qui-sommes-nous" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-book-open"></i> Qui sommes-nous ?</a>
-  <a routerLink="/organisation" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-users"></i> Organisation</a>
-  <div class="mob-section">Nos actions</div>
-  <a routerLink="/nos-missions" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-bullseye"></i> Nos missions</a>
-  <a routerLink="/actions-solidaires" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-handshake-angle"></i> Actions solidaires</a>
-  <a routerLink="/soutien-aux-membres" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-heart"></i> Soutien aux membres</a>
-  <a routerLink="/actions-internationales" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-globe"></i> Actions internationales</a>
-  <div class="mob-section">Événements</div>
-  <a routerLink="/evenements" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-calendar-alt"></i> Tous les événements</a>
-  <a routerLink="/rencontre-annuelle" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-glass-cheers"></i> Rencontre annuelle 2025</a>
-  <div class="mob-section">Communauté</div>
-  <a routerLink="/temoignages" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-comments"></i> Témoignages</a>
-  <a routerLink="/nous-rejoindre" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-hands"></i> Nous rejoindre</a>
-  <a routerLink="/actualites" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-newspaper"></i> Actualités</a>
-  <a routerLink="/contact" class="mob-item" (click)="toggleMobileNav()"><i class="fas fa-envelope"></i> Contact</a>
-  <a routerLink="/don" class="mob-item mob-cta" (click)="toggleMobileNav()"><i class="fas fa-heart"></i> Faire un don</a>
+  <a *ngIf="homeItem" [routerLink]="homeItem.href" class="mob-item" (click)="closeMobileNav()">
+    <i *ngIf="homeItem.icon" [class]="homeItem.icon"></i> {{ homeItem.label }}
+  </a>
+
+  <ng-container *ngFor="let group of navGroups">
+    <div class="mob-section">{{ group.label }}</div>
+    <a *ngFor="let item of group.items" [routerLink]="item.href" class="mob-item" (click)="closeMobileNav()">
+      <i *ngIf="item.icon" [class]="item.icon"></i> {{ item.label }}
+    </a>
+  </ng-container>
+
+  <a *ngFor="let item of navSingleItems" [routerLink]="item.href" class="mob-item" (click)="closeMobileNav()">
+    <i *ngIf="item.icon" [class]="item.icon"></i> {{ item.label }}
+  </a>
+
+  <a *ngIf="navCtaItem" [routerLink]="navCtaItem.href" class="mob-item mob-cta" (click)="closeMobileNav()">
+    <i *ngIf="navCtaItem.icon" [class]="navCtaItem.icon"></i> {{ navCtaItem.label }}
+  </a>
 </div>
 
 <main>
@@ -72,7 +71,7 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="fl">{{ settings?.siteName }}</div>
+      <div class="fl">{{ settings?.siteName || settings?.assoc_name }}</div>
       <p>{{ settings?.footerDescription }}</p>
       <p style="margin-top:14px;font-size:12px;color:rgba(255,255,255,.3)" *ngIf="settings?.address">
         <i class="fas fa-map-marker-alt"></i> {{ settings.address }}
@@ -84,37 +83,20 @@
         <a *ngIf="settings.socialLinks.linkedin" [href]="settings.socialLinks.linkedin" target="_blank" style="color: white; opacity: 0.6;"><i class="fab fa-linkedin-in"></i></a>
       </div>
     </div>
-    <div class="footer-col">
-      <h5>L'association</h5>
+
+    <div class="footer-col" *ngFor="let group of footerGroups">
+      <h5>{{ group.title }}</h5>
       <ul>
-        <li><a routerLink="/qui-sommes-nous">Qui sommes-nous ?</a></li>
-        <li><a routerLink="/organisation">Organisation</a></li>
-        <li><a routerLink="/temoignages">Témoignages</a></li>
-        <li><a routerLink="/actualites">Actualités</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Nos actions</h5>
-      <ul>
-        <li><a routerLink="/nos-missions">Nos missions</a></li>
-        <li><a routerLink="/actions-solidaires">Actions solidaires</a></li>
-        <li><a routerLink="/soutien-aux-membres">Soutien aux membres</a></li>
-        <li><a routerLink="/actions-internationales">Actions internationales</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Nous rejoindre</h5>
-      <ul>
-        <li><a routerLink="/nous-rejoindre">Devenir bénévole</a></li>
-        <li><a routerLink="/don">Faire un don</a></li>
-        <li><a routerLink="/evenements">Événements</a></li>
-        <li><a routerLink="/contact">Contact</a></li>
+        <li *ngFor="let item of group.items">
+          <a [routerLink]="item.href">{{ item.label }}</a>
+        </li>
       </ul>
     </div>
   </div>
+
   <div class="footer-bottom">
-    <p>© 2025 – 2026 Réseau Solidarité France · Tous droits réservés</p>
-    <p>Made with <i class="fas fa-heart" style="color: #e25555;"></i> for solidarity · Rennes, France</p>
+    <p>{{ settings?.footer_copy }}</p>
+    <p>{{ settings?.footer_signature }}</p>
   </div>
 </footer>
 

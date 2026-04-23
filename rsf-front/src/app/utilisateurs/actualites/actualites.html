@@ -3,37 +3,53 @@
     <div class="breadcrumb">
       <a routerLink="/">Accueil</a>
       <span class="sep">›</span>
-      Actualités
+      {{ pageContent?.hero?.title || 'Actualites' }}
     </div>
-    <div class="badge">
-      <i class="fas fa-newspaper"></i> Nos actualités
+    <div class="badge" *ngIf="pageContent?.hero?.badge">
+      <i class="fas fa-newspaper"></i> {{ pageContent.hero.badge }}
     </div>
-    <h1>Nos actualités</h1>
-    <p>Suivez les dernières nouvelles et actions de Réseau Solidarité France.</p>
+    <h1>{{ pageContent?.hero?.title }}</h1>
+    <p>{{ pageContent?.hero?.text }}</p>
   </div>
 </header>
 
 <section class="section-pad">
   <div class="container">
     <div class="grid-auto-lg">
-      <!-- Actualités dynamiques -->
-      <div *ngFor="let a of actualities" class="card fade-up act-card">
-        <div class="act-img" [style.background-image]="'url(' + a.image + ')'" *ngIf="a.image"></div>
+      <div *ngFor="let actuality of actualities" class="card fade-up act-card">
+        <div class="act-img" [style.background-image]="'url(' + actuality.image + ')'" *ngIf="actuality.image"></div>
+        <div class="act-img act-icon-panel" *ngIf="!actuality.image">
+          <i [class]="actuality.icon || 'fas fa-newspaper'"></i>
+        </div>
+
         <div class="act-body">
           <div class="act-meta">
-            <span class="act-date"><i class="fas fa-calendar-alt"></i> {{ a.date }}</span>
-            <span class="act-tag">{{ a.tag }}</span>
+            <span class="act-date"><i class="fas fa-calendar-alt"></i> {{ formatDate(actuality.published_at) }}</span>
+            <span class="act-tag">{{ actuality.category }}</span>
           </div>
-          <h3 class="act-title">{{ a.title }}</h3>
-          <p class="act-text">{{ a.excerpt }}</p>
-          <a [routerLink]="['/actualites', a.id]" class="act-link">Lire la suite →</a>
+          <h3 class="act-title">{{ actuality.title }}</h3>
+          <p class="act-text">{{ actuality.summary }}</p>
+
+          <a *ngIf="actuality.link_href && isRouterLink(actuality.link_href)" [routerLink]="actuality.link_href" class="act-link">
+            Lire la suite ->
+          </a>
+          <a
+            *ngIf="actuality.link_href && !isRouterLink(actuality.link_href)"
+            [href]="actuality.link_href"
+            [attr.target]="getLinkTarget(actuality.link_href)"
+            class="act-link"
+          >
+            Lire la suite ->
+          </a>
         </div>
       </div>
     </div>
 
-    <div style="text-align:center;margin-top:48px;padding:32px;background:var(--bg-light);border-radius:var(--radius);">
-      <p style="font-size:15px;color:var(--text-mid);margin-bottom:16px;">De nouvelles actualités sont publiées régulièrement. Rejoignez notre réseau pour ne rien manquer.</p>
-      <a routerLink="/nous-rejoindre" class="btn btn-primary">Rejoindre le réseau →</a>
+    <div style="text-align:center;margin-top:48px;padding:32px;background:var(--bg-light);border-radius:var(--radius);" *ngIf="pageContent?.cta">
+      <p style="font-size:15px;color:var(--text-mid);margin-bottom:16px;">{{ pageContent.cta.text }}</p>
+      <a *ngIf="pageContent.cta.href" [routerLink]="pageContent.cta.href" class="btn btn-primary">
+        {{ pageContent.cta.label }}
+      </a>
     </div>
   </div>
 </section>

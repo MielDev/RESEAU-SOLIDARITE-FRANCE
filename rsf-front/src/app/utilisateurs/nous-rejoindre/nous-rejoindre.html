@@ -2,14 +2,14 @@
   <div class="container">
     <div class="breadcrumb">
       <a routerLink="/">Accueil</a>
-      <span class="sep"><i class="fas fa-chevron-right"></i></span>
-      Nous rejoindre
+      <span class="sep">›</span>
+      {{ pageContent?.hero?.title || 'Nous rejoindre' }}
     </div>
-    <div class="badge">
-      <i class="fas fa-user-plus"></i> Engagement
+    <div class="badge" *ngIf="pageContent?.hero?.badge">
+      <i class="fas fa-user-plus"></i> {{ pageContent.hero.badge }}
     </div>
-    <h1>Nous rejoindre</h1>
-    <p>Tu veux faire une différence ? Tu crois en la solidarité, au respect et à l'entraide ? Rejoins-nous !</p>
+    <h1>{{ pageContent?.hero?.title }}</h1>
+    <p>{{ pageContent?.hero?.text }}</p>
   </div>
 </header>
 
@@ -17,60 +17,18 @@
   <div class="container">
     <div class="grid-2" style="gap:56px;align-items:start;">
       <div>
-        <div class="s-label">Devenir bénévole</div>
-        <h2 class="s-title">Tu peux faire la différence</h2>
-        <p class="join-description">
-          Tu peux t'engager à ton rythme, selon tes disponibilités. Pas besoin d'être expert : il suffit d'avoir du cœur et de la volonté.
-        </p>
-        
+        <div class="s-label">{{ pageContent?.volunteer?.label }}</div>
+        <h2 class="s-title">{{ pageContent?.volunteer?.title }}</h2>
+        <p class="join-description">{{ pageContent?.volunteer?.description }}</p>
+
         <ul class="benefit-list">
-          <li class="benefit-card">
-            <div class="icon-box box-blue">
-              <i class="fas fa-clipboard-list"></i>
+          <li class="benefit-card" *ngFor="let benefit of pageContent?.volunteer?.benefits">
+            <div class="icon-box" [ngClass]="benefit.boxClass">
+              <i [class]="benefit.icon"></i>
             </div>
             <div>
-              <strong class="benefit-title">Accompagnement administratif</strong>
-              <span class="benefit-desc">Aider les membres dans leurs démarches administratives.</span>
-            </div>
-          </li>
-          
-          <li class="benefit-card">
-            <div class="icon-box box-orange">
-              <i class="fas fa-utensils"></i>
-            </div>
-            <div>
-              <strong class="benefit-title">Distribution de repas et vêtements</strong>
-              <span class="benefit-desc">Participer aux actions solidaires sur le terrain.</span>
-            </div>
-          </li>
-          
-          <li class="benefit-card">
-            <div class="icon-box box-green">
-              <i class="fas fa-masks-theater"></i>
-            </div>
-            <div>
-              <strong class="benefit-title">Animation d'événements</strong>
-              <span class="benefit-desc">Organiser et animer nos journées de cohésion.</span>
-            </div>
-          </li>
-          
-          <li class="benefit-card">
-            <div class="icon-box box-purple">
-              <i class="fas fa-laptop-code"></i>
-            </div>
-            <div>
-              <strong class="benefit-title">Communication & digital</strong>
-              <span class="benefit-desc">Contribuer à la communication et à la présence en ligne.</span>
-            </div>
-          </li>
-          
-          <li class="benefit-card">
-            <div class="icon-box box-indigo">
-              <i class="fas fa-bullseye"></i>
-            </div>
-            <div>
-              <strong class="benefit-title">Coaching professionnel</strong>
-              <span class="benefit-desc">CV, orientation, recherche d'emploi ou de logement.</span>
+              <strong class="benefit-title">{{ benefit.title }}</strong>
+              <span class="benefit-desc">{{ benefit.description }}</span>
             </div>
           </li>
         </ul>
@@ -78,7 +36,7 @@
 
       <div>
         <div class="form-card fade-up">
-          <h3 class="form-title">Remplir le formulaire</h3>
+          <h3 class="form-title">{{ pageContent?.form?.title }}</h3>
           <form (submit)="onSubmit(); $event.preventDefault()">
             <div class="grid-2" style="gap:16px;margin-bottom:16px;">
               <div class="form-group" style="margin-bottom:0;">
@@ -86,68 +44,61 @@
                 <input type="text" name="lastName" [(ngModel)]="joinData.lastName" placeholder="Nom" required/>
               </div>
               <div class="form-group" style="margin-bottom:0;">
-                <label>Prénom *</label>
-                <input type="text" name="firstName" [(ngModel)]="joinData.firstName" placeholder="Prénom" required/>
+                <label>Prenom *</label>
+                <input type="text" name="firstName" [(ngModel)]="joinData.firstName" placeholder="Prenom" required/>
               </div>
             </div>
-            
+
             <div class="grid-2" style="gap:16px;margin-bottom:16px;">
               <div class="form-group" style="margin-bottom:0;">
                 <label>Adresse e-mail *</label>
                 <input type="email" name="email" [(ngModel)]="joinData.email" placeholder="votre@email.com" required/>
               </div>
               <div class="form-group" style="margin-bottom:0;">
-                <label>Téléphone *</label>
+                <label>Telephone *</label>
                 <input type="tel" name="phone" [(ngModel)]="joinData.phone" placeholder="+33 6 ..." required/>
               </div>
             </div>
-            
+
             <div class="grid-2" style="gap:16px;margin-bottom:16px;">
               <div class="form-group" style="margin-bottom:0;">
                 <label>Statut *</label>
                 <select name="status" [(ngModel)]="joinData.status" required>
-                  <option value="" disabled selected>Sélectionnez votre statut</option>
-                  <option>Étudiant</option>
-                  <option>Salarié</option>
-                  <option>Recherche d'emploi</option>
-                  <option>Auto-entrepreneur</option>
-                  <option>Retraité</option>
-                  <option>Autre</option>
+                  <option value="" disabled>Selectionnez votre statut</option>
+                  <option *ngFor="let option of statusOptions" [value]="option">{{ option }}</option>
                 </select>
               </div>
               <div class="form-group" style="margin-bottom:0;">
-                <label>Ville de résidence *</label>
+                <label>Ville de residence *</label>
                 <input type="text" name="city" [(ngModel)]="joinData.city" placeholder="Ex: Rennes" required/>
               </div>
             </div>
-            
+
             <div class="form-group">
-              <label>Je souhaite…</label>
+              <label>Je souhaite...</label>
               <select name="intent" [(ngModel)]="joinData.intent" required>
-                <option>Devenir bénévole</option>
-                <option>Bénéficier d'un accompagnement</option>
-                <option>Devenir partenaire</option>
-                <option>En savoir plus</option>
+                <option *ngFor="let option of intentOptions" [value]="option">{{ option }}</option>
               </select>
             </div>
-            
+
             <div class="form-group">
-              <label>Centres d'intérêt (optionnel)</label>
+              <label>Centres d'interet (optionnel)</label>
               <div class="checkbox-grid">
-                <label class="checkbox-item"><input type="checkbox" (change)="onInterestChange('Distribution', $event)"/> Distribution</label>
-                <label class="checkbox-item"><input type="checkbox" (change)="onInterestChange('Administratif', $event)"/> Administratif</label>
-                <label class="checkbox-item"><input type="checkbox" (change)="onInterestChange('Communication', $event)"/> Communication</label>
-                <label class="checkbox-item"><input type="checkbox" (change)="onInterestChange('Événementiel', $event)"/> Événementiel</label>
+                <label class="checkbox-item" *ngFor="let interest of interestOptions">
+                  <input type="checkbox" [checked]="joinData.interests.includes(interest)" (change)="onInterestChange(interest, $event)"/>
+                  {{ interest }}
+                </label>
               </div>
             </div>
-            
+
             <div class="form-group">
               <label>Message *</label>
-              <textarea name="message" [(ngModel)]="joinData.message" placeholder="Parlez-nous de vous, de votre motivation ou de votre situation…" style="min-height:100px;" required></textarea>
+              <textarea name="message" [(ngModel)]="joinData.message" placeholder="Parlez-nous de vous, de votre motivation ou de votre situation..." style="min-height:100px;" required></textarea>
             </div>
-            
+
             <button type="submit" class="form-submit" [disabled]="isSubmitting">
-              {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer ma demande' }} <i class="fas fa-paper-plane" *ngIf="!isSubmitting"></i>
+              {{ isSubmitting ? pageContent?.form?.submitPending : pageContent?.form?.submitIdle }}
+              <i class="fas fa-paper-plane" *ngIf="!isSubmitting"></i>
             </button>
           </form>
         </div>

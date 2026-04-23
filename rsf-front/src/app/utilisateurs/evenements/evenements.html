@@ -3,46 +3,54 @@
     <div class="breadcrumb">
       <a routerLink="/">Accueil</a>
       <span class="sep">›</span>
-      Événements
+      {{ pageContent?.hero?.title || 'Evenements' }}
     </div>
-    <div class="badge">
-      <i class="fas fa-calendar-days"></i> Agenda
+    <div class="badge" *ngIf="pageContent?.hero?.badge">
+      <i class="fas fa-calendar-days"></i> {{ pageContent.hero.badge }}
     </div>
-    <h1>Événements</h1>
-    <p>Des moments de rassemblement, d'échange et de cohésion pour renforcer les liens entre tous nos membres.</p>
+    <h1>{{ pageContent?.hero?.title }}</h1>
+    <p>{{ pageContent?.hero?.text }}</p>
   </div>
 </header>
 
 <section class="section-pad">
   <div class="container">
-    <!-- Featured event -->
-    <div class="featured-event fade-up">
-      <span class="featured-badge">
-        <i class="fas fa-star"></i> ÉVÉNEMENT PHARE 2025
+    <div class="featured-event fade-up" *ngIf="featuredEvent">
+      <span class="featured-badge" *ngIf="featuredEvent.badge_label">
+        <i class="fas fa-star"></i> {{ featuredEvent.badge_label }}
       </span>
-      <h2 class="featured-title">2ᵉ Édition — Journée Annuelle de Cohésion</h2>
+      <h2 class="featured-title">{{ getFeaturedTitle() }}</h2>
       <p class="featured-info">
-        <i class="fas fa-clock"></i> Samedi 26 juillet 2025 · 10h–22h · <i class="fas fa-location-dot"></i> Parc des Gayeulles, Rennes
+        <i class="fas fa-calendar-days"></i> {{ formatDate(featuredEvent.event_date) }}
+        <span *ngIf="featuredEvent.time_start || featuredEvent.time_end"> · <i class="fas fa-clock"></i> {{ formatTimeRange(featuredEvent.time_start, featuredEvent.time_end) }}</span>
+        <span *ngIf="featuredEvent.location"> · <i class="fas fa-location-dot"></i> {{ featuredEvent.location }}</span>
       </p>
-      <a routerLink="/rencontre-annuelle" class="btn btn-accent-light">Voir le programme complet →</a>
+      <a
+        *ngIf="pageContent?.featured?.buttonHref"
+        [routerLink]="pageContent.featured.buttonHref"
+        class="btn btn-accent-light"
+      >
+        {{ pageContent.featured.buttonLabel }}
+      </a>
     </div>
 
-    <div class="s-label">Activités régulières</div>
-    <h2 class="s-title">Nos rendez-vous</h2>
-    
+    <div class="s-label">{{ pageContent?.regular?.label }}</div>
+    <h2 class="s-title">{{ pageContent?.regular?.title }}</h2>
+
     <div class="grid-3" style="margin-top:32px;">
-      <!-- Événements dynamiques -->
-      <div *ngFor="let e of events" class="card fade-up event-card">
-        <div class="event-icon"><i [class]="e.icon"></i></div>
-        <h3 class="event-title">{{ e.title }}</h3>
-        <p class="event-desc">{{ e.description }}</p>
+      <div *ngFor="let event of regularEvents" class="card fade-up event-card">
+        <div class="event-icon"><i class="fas fa-calendar-alt"></i></div>
+        <h3 class="event-title">{{ event.title }}</h3>
+        <p class="event-desc">{{ event.description }}</p>
       </div>
     </div>
 
-    <div class="info-cta fade-up">
-      <h3 class="cta-title">Vous souhaitez être informé des prochains événements ?</h3>
-      <p class="cta-desc">Rejoignez notre réseau et ne ratez aucune de nos activités.</p>
-      <a routerLink="/nous-rejoindre" class="btn btn-primary">Rejoindre le réseau →</a>
+    <div class="info-cta fade-up" *ngIf="pageContent?.cta">
+      <h3 class="cta-title">{{ pageContent.cta.title }}</h3>
+      <p class="cta-desc">{{ pageContent.cta.text }}</p>
+      <a *ngIf="pageContent.cta.href" [routerLink]="pageContent.cta.href" class="btn btn-primary">
+        {{ pageContent.cta.label }}
+      </a>
     </div>
   </div>
 </section>

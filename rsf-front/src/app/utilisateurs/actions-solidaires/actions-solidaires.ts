@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { Observable, catchError, map, of, tap } from 'rxjs';
-import { PublicService } from '../../services/public.service';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 
 type ActionSolidaire = {
   title: string;
@@ -17,42 +15,6 @@ type ActionSolidaire = {
   image?: string | null;
 };
 
-const DEFAULT_ACTIONS_SOLIDAIRES: ActionSolidaire[] = [
-  {
-    title: 'Distribution alimentaire',
-    description: 'Nous organisons des distributions de repas et de denrées pour répondre aux besoins les plus urgents.',
-    tag: 'Aide directe',
-    gradient: 'linear-gradient(135deg, #DCFCE7, #BBF7D0)',
-    icon: 'fas fa-utensils',
-    iconType: 'fa',
-    iconColor: '#166534',
-    tagBg: 'rgba(34, 197, 94, 0.14)',
-    tagColor: '#166534',
-  },
-  {
-    title: 'Accompagnement des familles',
-    description: 'Nos bénévoles orientent, écoutent et accompagnent les personnes dans leurs démarches du quotidien.',
-    tag: 'Soutien',
-    gradient: 'linear-gradient(135deg, #DBEAFE, #BFDBFE)',
-    icon: 'fas fa-hands-helping',
-    iconType: 'fa',
-    iconColor: '#1D4ED8',
-    tagBg: 'rgba(59, 130, 246, 0.14)',
-    tagColor: '#1D4ED8',
-  },
-  {
-    title: 'Collectes solidaires',
-    description: 'Nous mobilisons notre réseau pour collecter vêtements, produits d’hygiène et matériel de première nécessité.',
-    tag: 'Mobilisation',
-    gradient: 'linear-gradient(135deg, #FEF3C7, #FDE68A)',
-    icon: 'fas fa-box-open',
-    iconType: 'fa',
-    iconColor: '#B45309',
-    tagBg: 'rgba(245, 158, 11, 0.16)',
-    tagColor: '#B45309',
-  },
-];
-
 @Component({
   selector: 'app-actions-solidaires',
   standalone: true,
@@ -61,28 +23,22 @@ const DEFAULT_ACTIONS_SOLIDAIRES: ActionSolidaire[] = [
   styleUrl: './actions-solidaires.css',
 })
 export class ActionsSolidaires implements OnInit, OnDestroy {
-  actionsSolidaires$!: Observable<ActionSolidaire[]>;
+  pageContent: any = null;
+  actionsSolidaires: ActionSolidaire[] = [];
   private observer: IntersectionObserver | null = null;
 
   constructor(
     private renderer: Renderer2,
-    private publicService: PublicService,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
-    this.actionsSolidaires$ = this.publicService.getActionsSolidaires().pipe(
-      map((actions) =>
-        actions
-          .filter((action) => action.page_type === 'solidaire')
-          .map((action) => this.mapAction(action))
-      ),
-      map((actions) => actions.length ? actions : DEFAULT_ACTIONS_SOLIDAIRES),
-      tap(() => setTimeout(() => this.setupIntersectionObserver(), 100)),
-      catchError(() => {
-        setTimeout(() => this.setupIntersectionObserver(), 100);
-        return of(DEFAULT_ACTIONS_SOLIDAIRES);
-      })
-    );
+    this.route.data.subscribe((data: any) => {
+      this.pageContent = data.pageContent ?? null;
+      const actions = Array.isArray(data.actions) ? data.actions : [];
+      this.actionsSolidaires = actions.map((action: any) => this.mapAction(action));
+      setTimeout(() => this.setupIntersectionObserver(), 100);
+    });
   }
 
   ngOnDestroy() {
@@ -90,19 +46,19 @@ export class ActionsSolidaires implements OnInit, OnDestroy {
   }
 
   private mapAction(action: any): ActionSolidaire {
-    const rawIcon = action?.icon || 'fas fa-handshake-angle';
+    const rawIcon = action?.icon || '';
     const isFontAwesomeIcon = typeof rawIcon === 'string' && rawIcon.includes('fa-');
 
     return {
-      title: action?.title || 'Action solidaire',
-      description: action?.description || 'Une action concrète menée par notre réseau sur le terrain.',
-      tag: action?.category || 'Action solidaire',
-      gradient: action?.gradient || 'linear-gradient(135deg, #DCFCE7, #BBF7D0)',
+      title: action?.title || '',
+      description: action?.description || '',
+      tag: action?.category || '',
+      gradient: action?.gradient || '',
       icon: rawIcon,
       iconType: isFontAwesomeIcon ? 'fa' : 'emoji',
-      iconColor: action?.icon_color || '#166534',
-      tagBg: action?.tag_bg || 'rgba(34, 197, 94, 0.14)',
-      tagColor: action?.tag_color || '#166534',
+      iconColor: action?.icon_color || '',
+      tagBg: action?.tag_bg || '',
+      tagColor: action?.tag_color || '',
       image: action?.image || null,
     };
   }
@@ -116,7 +72,6 @@ export class ActionsSolidaires implements OnInit, OnDestroy {
     }
 
     this.observer?.disconnect();
-
     this.observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

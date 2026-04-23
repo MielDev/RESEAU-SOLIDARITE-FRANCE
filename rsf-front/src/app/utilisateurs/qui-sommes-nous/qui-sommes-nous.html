@@ -4,13 +4,13 @@
     <div class="breadcrumb">
       <a routerLink="/">Accueil</a>
       <span class="sep">›</span>
-      Qui sommes-nous ?
+      {{ pageContent?.hero?.title || 'Qui sommes-nous ?' }}
     </div>
-    <div class="badge">
-      <i class="fas fa-book-open"></i> Notre histoire
+    <div class="badge" *ngIf="pageContent?.hero?.badge">
+      <i class="fas fa-book-open"></i> {{ pageContent.hero.badge }}
     </div>
-    <h1>Qui sommes-nous ?</h1>
-    <p>RÉSEAU SOLIDARITÉ FRANCE est né de la volonté de citoyens engagés, ayant connu eux-mêmes les difficultés liées à l'intégration en France.</p>
+    <h1>{{ pageContent?.hero?.title }}</h1>
+    <p>{{ pageContent?.hero?.text }}</p>
   </div>
 </header>
 
@@ -18,52 +18,29 @@
   <div class="container">
     <div class="grid-2" style="align-items:start;gap:56px;">
       <div class="fade-up">
-        <div class="s-label">Notre histoire</div>
-        <h2 class="s-title">Une association née de l'engagement</h2>
-        <p class="text-description">Créée à <strong>Rennes</strong>, l'association répond à un besoin simple mais crucial : ne laisser personne seul face à la précarité, à l'isolement ou aux démarches complexes.</p>
-        <p class="text-description">Notre engagement est concret, humain et solidaire. Depuis notre création, nous accompagnons des étudiants, des salariés et des personnes en situation de précarité, dont des sans-abri, pour les aider à mieux vivre en France, à s'insérer et à construire un avenir digne.</p>
-        <p class="text-description">Nous œuvrons chaque jour dans un esprit de solidarité, d'entraide et de responsabilité, en promouvant le respect des lois et des valeurs de la République.</p>
+        <div class="s-label">{{ pageContent?.story?.label }}</div>
+        <h2 class="s-title">{{ pageContent?.story?.title }}</h2>
+        <p class="text-description" *ngFor="let paragraph of pageContent?.story?.paragraphs">
+          {{ paragraph }}
+        </p>
         <div class="btn-group">
-          <a routerLink="/organisation" class="btn btn-primary">Voir l'équipe →</a>
-          <a routerLink="/nous-rejoindre" class="btn btn-outline">Nous rejoindre</a>
+          <a *ngIf="pageContent?.story?.primaryCtaHref" [routerLink]="pageContent.story.primaryCtaHref" class="btn btn-primary">
+            {{ pageContent.story.primaryCtaLabel }}
+          </a>
+          <a *ngIf="pageContent?.story?.secondaryCtaHref" [routerLink]="pageContent.story.secondaryCtaHref" class="btn btn-outline">
+            {{ pageContent.story.secondaryCtaLabel }}
+          </a>
         </div>
       </div>
-      <div class="fade-up">
-        <h3 class="section-subtitle">Nos valeurs</h3>
+
+      <div class="fade-up" *ngIf="pageContent?.values">
+        <h3 class="section-subtitle">{{ pageContent.values.title }}</h3>
         <div class="values-list">
-          <div class="value-item value-solidarity">
-            <i class="fas fa-handshake-angle"></i>
+          <div *ngFor="let value of pageContent.values.items" class="value-item" [ngClass]="value.itemClass">
+            <i [class]="value.icon"></i>
             <div>
-              <strong class="value-title">Solidarité</strong>
-              <span class="value-desc">Personne ne doit être oublié. Nous sommes là pour tous.</span>
-            </div>
-          </div>
-          <div class="value-item value-respect">
-            <i class="fas fa-scale-balanced"></i>
-            <div>
-              <strong class="value-title">Respect</strong>
-              <span class="value-desc">De chacun, de la loi française et des parcours de vie.</span>
-            </div>
-          </div>
-          <div class="value-item value-engagement">
-            <i class="fas fa-hand-fist"></i>
-            <div>
-              <strong class="value-title">Engagement</strong>
-              <span class="value-desc">Dans nos actions, au quotidien, sur le terrain.</span>
-            </div>
-          </div>
-          <div class="value-item value-humanity">
-            <i class="fas fa-heart"></i>
-            <div>
-              <strong class="value-title">Humanité</strong>
-              <span class="value-desc">L'écoute et l'empathie guident tout ce que nous faisons.</span>
-            </div>
-          </div>
-          <div class="value-item value-autonomy">
-            <i class="fas fa-seedling"></i>
-            <div>
-              <strong class="value-title">Autonomie</strong>
-              <span class="value-desc">Nous accompagnons sans assister. Chacun avance à son rythme.</span>
+              <strong class="value-title">{{ value.title }}</strong>
+              <span class="value-desc">{{ value.description }}</span>
             </div>
           </div>
         </div>
@@ -72,45 +49,17 @@
   </div>
 </section>
 
-<section class="section-pad goals-section">
+<section class="section-pad goals-section" *ngIf="pageContent?.goals">
   <div class="container">
-    <div class="s-label">Ce que nous poursuivons</div>
-    <h2 class="s-title">Nos objectifs</h2>
+    <div class="s-label">{{ pageContent.goals.label }}</div>
+    <h2 class="s-title">{{ pageContent.goals.title }}</h2>
     <div class="grid-3" style="margin-top:40px;">
-      <div class="card" style="padding:28px;">
-        <div class="icon-box box-admin">
-          <i class="fas fa-clipboard-list"></i>
+      <div *ngFor="let goal of pageContent.goals.items" class="card" style="padding:28px;">
+        <div class="icon-box" [ngClass]="goal.boxClass">
+          <i [class]="goal.icon"></i>
         </div>
-        <h3 class="goal-title">Démarches administratives</h3>
-        <p class="goal-desc">Faciliter les démarches en préfecture, logement, CAF et toutes les formalités administratives.</p>
-      </div>
-      <div class="card" style="padding:28px;">
-        <div class="icon-box box-edu">
-          <i class="fas fa-graduation-cap"></i>
-        </div>
-        <h3 class="goal-title">Formation & emploi</h3>
-        <p class="goal-desc">Favoriser l'accès à la formation, aux diplômes et à l'emploi pour tous nos bénéficiaires.</p>
-      </div>
-      <div class="card" style="padding:28px;">
-        <div class="icon-box box-housing">
-          <i class="fas fa-house-chimney"></i>
-        </div>
-        <h3 class="goal-title">Lutte contre l'exclusion</h3>
-        <p class="goal-desc">Soutenir les personnes sans abri et lutter contre l'exclusion sociale avec dignité.</p>
-      </div>
-      <div class="card" style="padding:28px;">
-        <div class="icon-box box-citizen">
-          <i class="fas fa-flag"></i>
-        </div>
-        <h3 class="goal-title">Engagement citoyen</h3>
-        <p class="goal-desc">Promouvoir le respect des lois françaises et encourager un engagement citoyen actif.</p>
-      </div>
-      <div class="card" style="padding:28px;">
-        <div class="icon-box box-together">
-          <i class="fas fa-bridge"></i>
-        </div>
-        <h3 class="goal-title">Vivre-ensemble</h3>
-        <p class="goal-desc">Créer des ponts entre les communautés et encourager l'entraide et le vivre-ensemble.</p>
+        <h3 class="goal-title">{{ goal.title }}</h3>
+        <p class="goal-desc">{{ goal.description }}</p>
       </div>
     </div>
   </div>

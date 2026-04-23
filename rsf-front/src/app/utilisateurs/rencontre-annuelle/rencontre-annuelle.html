@@ -3,15 +3,19 @@
     <div class="breadcrumb">
       <a routerLink="/">Accueil</a>
       <span class="sep">›</span>
-      <a routerLink="/evenements">Événements</a>
+      <a routerLink="/evenements">Evenements</a>
       <span class="sep">›</span>
       Rencontre annuelle
     </div>
-    <div class="badge">
-      <i class="fas fa-cake-candles"></i> Édition 2025
+    <div class="badge" *ngIf="annualEvent?.edition">
+      <i class="fas fa-cake-candles"></i> {{ annualEvent.edition }}
     </div>
-    <h1>Rencontre Annuelle 2025</h1>
-    <p>Samedi 26 juillet 2025 · 10h à 22h · Parc des Gayeulles, Rennes</p>
+    <h1>{{ annualEvent?.title }}</h1>
+    <p>
+      {{ formatDate(annualEvent?.event_date) }}
+      <span *ngIf="annualEvent?.time_start || annualEvent?.time_end"> · {{ formatTimeRange(annualEvent?.time_start, annualEvent?.time_end) }}</span>
+      <span *ngIf="annualEvent?.location"> · {{ annualEvent.location }}</span>
+    </p>
   </div>
 </header>
 
@@ -19,83 +23,62 @@
   <div class="container">
     <div class="grid-2" style="gap:48px;align-items:start;">
       <div class="fade-up">
-        <div class="s-label">À propos de l'événement</div>
-        <h2 class="s-title">Une journée inoubliable</h2>
-        <p class="event-description">Nous avons le plaisir de vous partager le programme officiel de notre événement annuel qui se tiendra le <strong>samedi 26 juillet 2025 de 10h à 22h au Parc des Gayeulles à Rennes</strong>.</p>
-        <p class="event-description">Une journée placée sous le signe de la solidarité, de la convivialité et du partage, rythmée par des activités sportives, des temps d'échange, un déjeuner barbecue, des jeux, de la musique et une ambiance festive pour petits et grands !</p>
-        
-        <div class="info-list">
-          <div class="info-item">
+        <div class="s-label">{{ pageContent?.content?.aboutLabel }}</div>
+        <h2 class="s-title">{{ pageContent?.content?.aboutTitle }}</h2>
+        <p class="event-description">{{ pageContent?.content?.aboutIntro }}</p>
+        <p class="event-description">{{ pageContent?.content?.aboutBody }}</p>
+
+        <div class="info-list" *ngIf="annualEvent">
+          <div class="info-item" *ngIf="annualEvent.location">
             <i class="fas fa-location-dot"></i>
-            <span class="info-text">Parc des Gayeulles, Rennes</span>
+            <span class="info-text">{{ annualEvent.location }}</span>
           </div>
-          <div class="info-item">
+          <div class="info-item" *ngIf="annualEvent.event_date">
             <i class="fas fa-calendar-days"></i>
-            <span class="info-text">Samedi 26 juillet 2025</span>
+            <span class="info-text">{{ formatDate(annualEvent.event_date) }}</span>
           </div>
-          <div class="info-item">
+          <div class="info-item" *ngIf="annualEvent.time_start || annualEvent.time_end">
             <i class="fas fa-clock"></i>
-            <span class="info-text">10h00 à 22h00</span>
+            <span class="info-text">{{ formatTimeRange(annualEvent.time_start, annualEvent.time_end) }}</span>
           </div>
         </div>
       </div>
 
       <div class="fade-up">
-        <h3 class="program-subtitle">Programme de la journée</h3>
+        <h3 class="program-subtitle">{{ pageContent?.content?.programTitle }}</h3>
         <div class="program-list">
-          <div class="program-item">
-            <i class="fas fa-bread-slice"></i>
+          <div class="program-item" *ngFor="let item of annualEvent?.program">
+            <i [class]="item.icon"></i>
             <div class="program-content">
-              <strong class="program-title">Petit déjeuner convivial</strong>
-              <span class="program-time">Dès 10h00</span>
-            </div>
-          </div>
-          <div class="program-item">
-            <i class="fas fa-futbol"></i>
-            <div class="program-content">
-              <strong class="program-title">Football & sports collectifs</strong>
-              <span class="program-time">Activités sportives</span>
-            </div>
-          </div>
-          <div class="program-item">
-            <i class="fas fa-bullseye"></i>
-            <div class="program-content">
-              <strong class="program-title">Tir à l'arc, laser game, Action Games</strong>
-              <span class="program-time">Animations et jeux</span>
-            </div>
-          </div>
-          <div class="program-item">
-            <i class="fas fa-dice"></i>
-            <div class="program-content">
-              <strong class="program-title">Puissance 4 géant, jeux de stratégie</strong>
-              <span class="program-time">Concours et défis</span>
-            </div>
-          </div>
-          <div class="program-item">
-            <i class="fas fa-drumstick-bite"></i>
-            <div class="program-content">
-              <strong class="program-title">Pique-nique, barbecue & spécialités maison</strong>
-              <span class="program-time">Déjeuner et après-midi</span>
-            </div>
-          </div>
-          <div class="program-item">
-            <i class="fas fa-microphone-lines"></i>
-            <div class="program-content">
-              <strong class="program-title">Karaoké, musique et soirée festive</strong>
-              <span class="program-time">À partir de 18h</span>
+              <strong class="program-title">{{ item.title }}</strong>
+              <span class="program-time">{{ item.subtitle }}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="cta-banner">
-      <p class="cta-text">Nous comptons sur votre présence, votre bonne humeur et votre esprit d'équipe !</p>
+    <div class="cta-banner" *ngIf="annualEvent">
+      <p class="cta-text">{{ pageContent?.content?.ctaText }}</p>
       <p class="cta-subtext">
-        <i class="fas fa-envelope"></i> contact@reseau-solidarite-france.fr · 
-        <i class="fas fa-globe"></i> www.reseau-solidarite-france.fr
+        <span *ngIf="annualEvent.contact_email"><i class="fas fa-envelope"></i> {{ annualEvent.contact_email }}</span>
+        <span *ngIf="annualEvent.contact_email && annualEvent.contact_website"> · </span>
+        <span *ngIf="annualEvent.contact_website"><i class="fas fa-globe"></i> {{ annualEvent.contact_website }}</span>
       </p>
-      <a routerLink="/nous-rejoindre" class="btn btn-white">Je participe →</a>
+      <a
+        *ngIf="annualEvent.cta_href && isRouterLink(annualEvent.cta_href)"
+        [routerLink]="annualEvent.cta_href"
+        class="btn btn-white"
+      >
+        {{ annualEvent.cta_text }}
+      </a>
+      <a
+        *ngIf="annualEvent.cta_href && !isRouterLink(annualEvent.cta_href)"
+        [href]="annualEvent.cta_href"
+        class="btn btn-white"
+      >
+        {{ annualEvent.cta_text }}
+      </a>
     </div>
   </div>
 </section>

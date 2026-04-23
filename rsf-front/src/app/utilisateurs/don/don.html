@@ -3,93 +3,51 @@
     <div class="breadcrumb">
       <a routerLink="/">Accueil</a>
       <span class="sep">›</span>
-      Faire un don
+      {{ pageContent?.hero?.title || 'Faire un don' }}
     </div>
-    <div class="badge">
-      <i class="fas fa-heart"></i> Nous soutenir
+    <div class="badge" *ngIf="pageContent?.hero?.badge">
+      <i class="fas fa-heart"></i> {{ pageContent.hero.badge }}
     </div>
-    <h1>Faire un don</h1>
-    <p>Chaque don compte et contribue à changer des vies. Merci pour votre générosité.</p>
+    <h1>{{ pageContent?.hero?.title }}</h1>
+    <p>{{ pageContent?.hero?.text }}</p>
   </div>
 </header>
 
 <section class="section-pad">
   <div class="container">
-    <div class="intro-box">
-      <p class="intro-text">
-        Faire un don, c'est nous aider à accompagner les étudiants, les salariés en difficulté, les sans-abri et les personnes isolées.
-        C'est aussi soutenir celles et ceux qui ont besoin d'aide pour s'intégrer, trouver un logement, accéder à l'emploi ou reprendre confiance.
-      </p>
+    <div class="intro-box" *ngIf="pageContent?.intro?.text">
+      <p class="intro-text">{{ pageContent.intro.text }}</p>
     </div>
 
     <div class="grid-2" style="gap:28px;margin-bottom:56px;">
-      <!-- Don ponctuel -->
-      <div class="card fade-up don-card card-primary">
-        <div class="don-icon"><i class="fas fa-credit-card"></i></div>
-        <h3 class="don-title">Don financier ponctuel</h3>
-        <p class="don-desc">
-          Un geste unique qui finance directement nos actions : repas solidaires, vêtements, ateliers d'orientation et aide administrative.
-        </p>
-        <a href="mailto:contact@reseau-solidarite-france.fr?subject=Don ponctuel RSF" class="btn btn-primary btn-sm">Je fais un don ponctuel →</a>
-      </div>
+      <div
+        *ngFor="let mode of donModes; let i = index"
+        class="card fade-up don-card"
+        [ngStyle]="{ 'border-top': '4px solid ' + (mode.border_color || 'var(--primary)') }"
+      >
+        <div class="don-icon"><i [class]="mode.icon"></i></div>
+        <h3 class="don-title">{{ mode.title }}</h3>
+        <p class="don-desc">{{ mode.description }}</p>
 
-      <!-- Don mensuel -->
-      <div class="card fade-up don-card card-secondary">
-        <div class="don-icon"><i class="fas fa-sync-alt"></i></div>
-        <h3 class="don-title">Don mensuel régulier</h3>
-        <p class="don-desc">
-          Un soutien régulier qui nous permet de planifier nos programmes sur le long terme et d'avoir plus d'impact.
-        </p>
-        <a href="mailto:contact@reseau-solidarite-france.fr?subject=Don mensuel RSF" class="btn btn-secondary btn-sm">Je m'engage chaque mois →</a>
-      </div>
-
-      <!-- Don matériel -->
-      <div class="card fade-up don-card card-support">
-        <div class="don-icon"><i class="fas fa-box-open"></i></div>
-        <h3 class="don-title">Don matériel</h3>
-        <p class="don-desc">Nous acceptons les dons en nature :</p>
-        <ul class="don-list">
-          <li><i class="fas fa-arrow-right"></i> Vêtements</li>
-          <li><i class="fas fa-arrow-right"></i> Nourriture</li>
-          <li><i class="fas fa-arrow-right"></i> Fournitures scolaires</li>
-          <li><i class="fas fa-arrow-right"></i> Produits d'hygiène</li>
-        </ul>
-        <a routerLink="/contact" class="btn btn-support btn-sm">Nous contacter →</a>
-      </div>
-
-      <!-- Partenariat -->
-      <div class="card fade-up don-card card-accent">
-        <div class="don-icon"><i class="fas fa-building-user"></i></div>
-        <h3 class="don-title">Devenir partenaire</h3>
-        <p class="don-desc">
-          Entreprises ou particuliers, vous pouvez collaborer avec nous pour soutenir nos projets et contribuer à une solidarité active.
-        </p>
-        <a href="mailto:contact@reseau-solidarite-france.fr?subject=Partenariat RSF" class="btn btn-accent btn-sm">Proposer un partenariat →</a>
+        <a *ngIf="mode.link_href && isRouterLink(mode.link_href)" [routerLink]="mode.link_href" [class]="getButtonClass(i)">
+          {{ mode.btn_text }}
+        </a>
+        <a *ngIf="mode.link_href && !isRouterLink(mode.link_href)" [href]="mode.link_href" [class]="getButtonClass(i)">
+          {{ mode.btn_text }}
+        </a>
       </div>
     </div>
 
-    <div class="impact-box">
-      <h3 class="impact-title">Grâce à votre générosité, nous pouvons :</h3>
+    <div class="impact-box" *ngIf="pageContent?.impact">
+      <h3 class="impact-title">{{ pageContent.impact.title }}</h3>
       <div class="benefit-grid">
-        <div class="benefit-item">
-          <i class="fas fa-utensils"></i>
-          Financer des<br>repas solidaires
-        </div>
-        <div class="benefit-item">
-          <i class="fas fa-tshirt"></i>
-          Offrir vêtements<br>& kits d'hygiène
-        </div>
-        <div class="benefit-item">
-          <i class="fas fa-graduation-cap"></i>
-          Organiser ateliers<br>& formations
-        </div>
-        <div class="benefit-item">
-          <i class="fas fa-house-chimney"></i>
-          Faciliter l'accès<br>au logement
+        <div class="benefit-item" *ngFor="let item of pageContent.impact.items">
+          <i [class]="item.icon"></i>
+          {{ item.title }}<br>{{ item.subtitle }}
         </div>
       </div>
       <p class="impact-quote">
-        Ensemble, construisons une solidarité qui change des vies. <i class="fas fa-heart"></i>
+        {{ pageContent.impact.quote }} <i class="fas fa-heart"></i>
       </p>
     </div>
   </div>

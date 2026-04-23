@@ -1,7 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
-import { PublicService } from '../../services/public.service';
 
 @Component({
   selector: 'app-temoignages',
@@ -11,28 +10,49 @@ import { PublicService } from '../../services/public.service';
   styleUrl: './temoignages.css',
 })
 export class Temoignages implements OnInit {
+  pageContent: any = null;
   testimonials: any[] = [];
 
   constructor(
     private renderer: Renderer2,
-    private publicService: PublicService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.route.data.subscribe((data: any) => {
-      if (data.testimonials) {
-        this.testimonials = data.testimonials;
-        setTimeout(() => this.setupIntersectionObserver(), 100);
-      }
+      this.pageContent = data.pageContent ?? null;
+      this.testimonials = Array.isArray(data.testimonials) ? data.testimonials : [];
+      setTimeout(() => this.setupIntersectionObserver(), 100);
     });
+  }
+
+  getQuoteColor(testimonial: any): string {
+    return testimonial?.color1 || '#2F5DFF';
+  }
+
+  getAvatarBackground(testimonial: any): string {
+    const color1 = testimonial?.color1 || '#2F5DFF';
+    const color2 = testimonial?.color2 || '#1E3A8A';
+    return `linear-gradient(135deg, ${color1}, ${color2})`;
+  }
+
+  getInitials(testimonial: any): string {
+    if (testimonial?.initials) {
+      return testimonial.initials;
+    }
+
+    if (testimonial?.first_name) {
+      return testimonial.first_name.charAt(0).toUpperCase();
+    }
+
+    return '?';
   }
 
   setupIntersectionObserver() {
     const elements = document.querySelectorAll('.fade-up');
-    
+
     if (!('IntersectionObserver' in window)) {
-      elements.forEach(el => this.renderer.addClass(el, 'visible'));
+      elements.forEach((el) => this.renderer.addClass(el, 'visible'));
       return;
     }
 
