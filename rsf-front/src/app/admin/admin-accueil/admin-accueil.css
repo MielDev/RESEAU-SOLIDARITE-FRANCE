@@ -1,0 +1,51 @@
+:host {
+  display: block;
+}
+
+.hero-desc {
+  min-height: 112px;
+}
+
+.form-divider {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid var(--admin-border);
+}
+
+.section-subtitle {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-editor {
+  background: var(--admin-bg);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.card-editor-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--admin-text-light);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.card-editor-grid {
+  display: grid;
+  grid-template-columns: 60px 1fr 2fr;
+  gap: 12px;
+}
+
+@media (max-width: 720px) {
+  .card-editor-grid {
+    grid-template-columns: 1fr;
+  }
+}

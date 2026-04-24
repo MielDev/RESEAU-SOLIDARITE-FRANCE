@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
@@ -21,7 +21,6 @@ type AdminNavSection = {
   imports: [CommonModule, RouterModule, RouterOutlet],
   templateUrl: './admin-layout.html',
   styleUrl: './admin-layout.css',
-  encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class AdminLayout implements OnInit {
   isMobileSidebarOpen = false;
@@ -32,7 +31,12 @@ export class AdminLayout implements OnInit {
     {
       label: 'General',
       items: [
-        { href: '/admin/dashboard', icon: 'fas fa-chart-line', label: 'Tableau de bord', exact: true },
+        {
+          href: '/admin/dashboard',
+          icon: 'fas fa-chart-line',
+          label: 'Tableau de bord',
+          exact: true,
+        },
         { href: '/admin/settings', icon: 'fas fa-gear', label: 'Parametres' },
       ],
     },
@@ -43,7 +47,11 @@ export class AdminLayout implements OnInit {
         { href: '/admin/qui-sommes-nous', icon: 'fas fa-book-open', label: 'Qui sommes-nous' },
         { href: '/admin/organisation', icon: 'fas fa-users', label: 'Organisation' },
         { href: '/admin/missions', icon: 'fas fa-bullseye', label: 'Missions' },
-        { href: '/admin/actions-solidaires', icon: 'fas fa-handshake-angle', label: 'Actions solidaires' },
+        {
+          href: '/admin/actions-solidaires',
+          icon: 'fas fa-handshake-angle',
+          label: 'Actions solidaires',
+        },
         { href: '/admin/soutien', icon: 'fas fa-heart', label: 'Soutien aux membres' },
         { href: '/admin/international', icon: 'fas fa-globe', label: 'International' },
         { href: '/admin/evenements', icon: 'fas fa-calendar-days', label: 'Evenements' },
@@ -52,7 +60,12 @@ export class AdminLayout implements OnInit {
         { href: '/admin/actualites', icon: 'fas fa-newspaper', label: 'Actualites' },
         { href: '/admin/contact', icon: 'fas fa-envelope', label: 'Contact' },
         { href: '/admin/don', icon: 'fas fa-hand-holding-heart', label: 'Don' },
-        { href: '/admin/rejoindre', icon: 'fas fa-user-plus', label: 'Nous rejoindre', badge: 'NEW' },
+        {
+          href: '/admin/rejoindre',
+          icon: 'fas fa-user-plus',
+          label: 'Nous rejoindre',
+          badge: 'NEW',
+        },
       ],
     },
   ];

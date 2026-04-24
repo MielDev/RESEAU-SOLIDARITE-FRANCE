@@ -1,47 +1,18 @@
-@import '../admin-style.css';
-
 :host {
-  --primary: #2F5DFF;
-  --primary-dark: #1E3A8A;
-  --primary-light: #4F7CFF;
-  --secondary: #7C3AED;
-  --accent: #FF8C00;
-  --accent-light: #FDBA74;
-  --support: #22C55E;
-  --danger: #EF4444;
-  --warning: #F59E0B;
-  --white: #FFFFFF;
-  --bg: #F8FAFC;
-  --bg-dark: #0F172A;
-  --sidebar-bg: #0F172A;
-  --sidebar-w: 260px;
-  --topbar-h: 64px;
-  --border: #E2E8F0;
-  --text: #0F172A;
-  --text-mid: #475569;
-  --text-light: #94A3B8;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --shadow: 0 1px 8px rgba(0,0,0,.06);
-  --shadow-md: 0 4px 20px rgba(0,0,0,.10);
   display: block;
   min-height: 100vh;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .admin-shell {
   min-height: 100vh;
   display: flex;
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
+  background: var(--admin-bg);
+  color: var(--admin-text);
 }
 
 .page-meta {
   display: flex;
   flex-direction: column;
   gap: 2px;
-}
-
-.main {
-  min-width: 0;
 }

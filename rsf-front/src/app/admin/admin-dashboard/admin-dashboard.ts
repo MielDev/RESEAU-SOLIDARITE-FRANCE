@@ -10,10 +10,30 @@ import { RouterModule } from '@angular/router';
 })
 export class AdminDashboard {
   readonly stats = [
-    { label: 'Pages admin', value: '14', sub: 'Ecrans relies au layout admin', icon: 'fas fa-layer-group' },
-    { label: 'Pages publiques', value: '13', sub: 'Pages pilotables depuis le back-office', icon: 'fas fa-globe' },
-    { label: 'Sections DB', value: '100%', sub: 'Contenus front relies au backend', icon: 'fas fa-database' },
-    { label: 'Priorite', value: 'UI', sub: 'Structurer les formulaires d edition', icon: 'fas fa-wand-magic-sparkles' },
+    {
+      label: 'Pages admin',
+      value: '14',
+      sub: 'Ecrans relies au layout admin',
+      icon: 'fas fa-layer-group',
+    },
+    {
+      label: 'Pages publiques',
+      value: '13',
+      sub: 'Pages pilotables depuis le back-office',
+      icon: 'fas fa-globe',
+    },
+    {
+      label: 'Sections DB',
+      value: '100%',
+      sub: 'Contenus front relies au backend',
+      icon: 'fas fa-database',
+    },
+    {
+      label: 'Priorite',
+      value: 'UI',
+      sub: 'Structurer les formulaires d edition',
+      icon: 'fas fa-wand-magic-sparkles',
+    },
   ];
 
   readonly quickLinks = [
