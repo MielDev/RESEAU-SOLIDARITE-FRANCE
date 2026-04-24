@@ -1,0 +1,76 @@
+<div class="admin-shell">
+  <aside class="sidebar" [class.open]="isMobileSidebarOpen">
+    <div class="sidebar-brand">
+      <a routerLink="/admin/dashboard" class="brand-logo">
+        <div class="brand-icon">RSF</div>
+        <div>
+          <div class="brand-name">RSF Admin</div>
+          <div class="brand-sub">Administration</div>
+        </div>
+      </a>
+    </div>
+
+    <ng-container *ngFor="let section of navSections">
+      <div class="sidebar-section-label">{{ section.label }}</div>
+      <nav>
+        <a
+          *ngFor="let item of section.items"
+          class="sidebar-link"
+          [routerLink]="item.href"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+          (click)="closeSidebar()"
+        >
+          <span class="si"><i [class]="item.icon"></i></span>
+          <span>{{ item.label }}</span>
+          <span *ngIf="item.badge" class="badge-new">{{ item.badge }}</span>
+        </a>
+      </nav>
+    </ng-container>
+
+    <div class="sidebar-footer">
+      <a href="/" target="_blank" rel="noreferrer">
+        <span class="si"><i class="fas fa-up-right-from-square"></i></span>
+        Voir le site
+      </a>
+      <a routerLink="/admin/login" (click)="closeSidebar()">
+        <span class="si"><i class="fas fa-right-from-bracket"></i></span>
+        Deconnexion
+      </a>
+    </div>
+  </aside>
+
+  <div class="overlay" [class.show]="isMobileSidebarOpen" (click)="closeSidebar()"></div>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="mob-toggle" type="button" (click)="toggleSidebar()" aria-label="Ouvrir le menu admin">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="page-meta">
+          <div class="page-title">{{ currentPageTitle }}</div>
+          <div class="page-breadcrumb">
+            <a routerLink="/admin/dashboard">Admin</a>
+            <span>›</span>
+            <span>{{ currentSectionLabel }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <a class="topbar-btn tb-preview" href="/" target="_blank" rel="noreferrer">
+          <i class="fas fa-eye"></i> Voir le site
+        </a>
+        <a class="topbar-btn tb-save" routerLink="/admin/settings">
+          <i class="fas fa-gear"></i> Parametres
+        </a>
+        <div class="topbar-avatar">AD</div>
+      </div>
+    </header>
+
+    <div class="content">
+      <router-outlet />
+    </div>
+  </div>
+</div>

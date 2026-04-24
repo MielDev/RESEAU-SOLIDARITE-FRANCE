@@ -1,1 +1,394 @@
-<p>admin-accueil works!</p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Page d'accueil · RSF Admin</title>
+  <link rel="stylesheet" href="admin-style.css"/>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <a href="admin-dashboard.html" class="brand-logo">
+      <div class="brand-icon">RSF</div>
+      <div><div class="brand-name">RSF Admin</div></div>
+    </a>
+    <div class="brand-sub">Back-office</div>
+  </div>
+
+  <div class="sidebar-section-label">Tableau de bord</div>
+  <nav>
+    <a href="admin-dashboard.html" class="sidebar-link"><span class="si">🏠</span>Dashboard</a>
+  </nav>
+
+  <div class="sidebar-section-label">Pages du site</div>
+  <nav>
+    <a href="admin-accueil.html" class="sidebar-link active"><span class="si">🏠</span>Accueil</a>
+    <a href="admin-qui-sommes-nous.html" class="sidebar-link"><span class="si">📖</span>Qui sommes-nous ?</a>
+    <a href="admin-organisation.html" class="sidebar-link"><span class="si">👥</span>Organisation</a>
+    <a href="admin-missions.html" class="sidebar-link"><span class="si">🎯</span>Nos missions</a>
+    <a href="admin-actions-solidaires.html" class="sidebar-link"><span class="si">🤝</span>Actions solidaires</a>
+    <a href="admin-soutien.html" class="sidebar-link"><span class="si">💙</span>Soutien aux membres</a>
+    <a href="admin-evenements.html" class="sidebar-link"><span class="si">📅</span>Événements</a>
+    <a href="admin-rencontre.html" class="sidebar-link"><span class="si">🎉</span>Rencontre annuelle</a>
+    <a href="admin-international.html" class="sidebar-link"><span class="si">🌍</span>Actions internationales</a>
+    <a href="admin-temoignages.html" class="sidebar-link"><span class="si">💬</span>Témoignages</a>
+    <a href="admin-rejoindre.html" class="sidebar-link"><span class="si">🙌</span>Nous rejoindre</a>
+    <a href="admin-actualites.html" class="sidebar-link"><span class="si">📰</span>Actualités</a>
+    <a href="admin-don.html" class="sidebar-link"><span class="si">❤️</span>Faire un don</a>
+    <a href="admin-contact.html" class="sidebar-link"><span class="si">✉️</span>Contact</a>
+  </nav>
+
+  <div class="sidebar-section-label">Paramètres</div>
+  <nav>
+    <a href="admin-settings.html" class="sidebar-link"><span class="si">⚙️</span>Paramètres généraux</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="../rsf/index.html" target="_blank">🌐 Voir le site</a>
+    <a href="admin-login.html">🚪 Déconnexion</a>
+  </div>
+</aside>
+<div class="overlay" id="overlay"></div>
+<div id="toast"></div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mob-toggle" id="menuToggle"><span style="font-size:22px;">☰</span></button>
+      <div>
+        <div class="page-title">Page d'accueil</div>
+        <div class="page-breadcrumb"><a href="admin-dashboard.html">Admin</a><span>›</span>Accueil</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="../rsf/index.html" target="_blank" class="topbar-btn tb-preview">👁 Voir la page</a>
+      <button class="topbar-btn tb-save btn-save" data-label="💾 Enregistrer">💾 Enregistrer</button>
+      <div class="topbar-avatar">AT</div>
+    </div>
+  </div>
+  <div class="content">
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🖼️</span>Héros — Section principale</div>
+      <div class="panel-desc">Le grand bandeau visible en premier sur la page d'accueil</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid form-grid-1" style="display:grid;gap:16px;">
+  
+<div class="form-group">
+  <label for="hero_badge">Badge / Étiquette</label>
+  <input class="input" type="text" id="hero_badge" name="hero_badge" value="Association à but non lucratif · Rennes" placeholder=""/>
+  <div class="hint">Petit texte au-dessus du titre principal</div>
+</div>
+  
+<div class="form-group">
+  <label for="hero_title1">Titre principal (ligne 1)</label>
+  <input class="input" type="text" id="hero_title1" name="hero_title1" value="Unis pour aider," placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="hero_title2">Titre principal (ligne 2 — mot mis en valeur)</label>
+  <input class="input" type="text" id="hero_title2" name="hero_title2" value="ensemble" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="hero_title3">Titre principal (ligne 3)</label>
+  <input class="input" type="text" id="hero_title3" name="hero_title3" value="pour avancer" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="hero_desc">Texte de description (sous-titre)</label>
+  <textarea class="textarea" id="hero_desc" name="hero_desc" style="min-height:112px">Nous accompagnons les étudiants, les salariés et les personnes en situation de précarité dans leurs démarches administratives, leur insertion professionnelle et leur vie quotidienne en France.</textarea>
+  
+</div>
+</div>
+<hr style="margin:20px 0;border:none;border-top:1px solid #E2E8F0;"/>
+<h4 style="font-size:13px;font-weight:700;margin-bottom:14px;">Boutons d'action</h4>
+<div class="form-grid form-grid-3" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+  
+<div class="form-group">
+  <label for="btn1_text">Bouton 1 (texte)</label>
+  <input class="input" type="text" id="btn1_text" name="btn1_text" value="Découvrir nos missions →" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="btn1_href">Bouton 1 (lien)</label>
+  <input class="input" type="text" id="btn1_href" name="btn1_href" value="nos-missions.html" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="btn1_style">Bouton 1 (style)</label>
+  <select class="select" id="btn1_style" name="btn1_style"><option selected>Bleu primaire</option><option >Orange accent</option><option >Vert support</option><option >Contour</option></select>
+</div>
+  
+<div class="form-group">
+  <label for="btn2_text">Bouton 2 (texte)</label>
+  <input class="input" type="text" id="btn2_text" name="btn2_text" value="Rejoindre le réseau" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="btn2_href">Bouton 2 (lien)</label>
+  <input class="input" type="text" id="btn2_href" name="btn2_href" value="nous-rejoindre.html" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="btn2_style">Bouton 2 (style)</label>
+  <select class="select" id="btn2_style" name="btn2_style"><option >Bleu primaire</option><option >Orange accent</option><option >Vert support</option><option selected>Contour</option></select>
+</div>
+  
+<div class="form-group">
+  <label for="btn3_text">Bouton 3 (texte)</label>
+  <input class="input" type="text" id="btn3_text" name="btn3_text" value="❤️ Faire un don" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="btn3_href">Bouton 3 (lien)</label>
+  <input class="input" type="text" id="btn3_href" name="btn3_href" value="don.html" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="btn3_style">Bouton 3 (style)</label>
+  <select class="select" id="btn3_style" name="btn3_style"><option >Bleu primaire</option><option selected>Orange accent</option><option >Vert support</option><option >Contour</option></select>
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">📊</span>Statistiques (3 compteurs)</div>
+      <div class="panel-desc">Les 3 chiffres-clés affichés sous les boutons</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid form-grid-3" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+  
+<div class="form-group">
+  <label for="stat1_val">Stat 1 — Chiffre</label>
+  <input class="input" type="text" id="stat1_val" name="stat1_val" value="100+" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="stat1_label">Stat 1 — Label</label>
+  <input class="input" type="text" id="stat1_label" name="stat1_label" value="Membres actifs" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="stat1_color">Stat 1 — Couleur bordure</label>
+  <select class="select" id="stat1_color" name="stat1_color"><option selected>Bleu</option><option >Orange</option><option >Vert</option></select>
+</div>
+  
+<div class="form-group">
+  <label for="stat2_val">Stat 2 — Chiffre</label>
+  <input class="input" type="text" id="stat2_val" name="stat2_val" value="5" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="stat2_label">Stat 2 — Label</label>
+  <input class="input" type="text" id="stat2_label" name="stat2_label" value="Domaines d'action" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="stat2_color">Stat 2 — Couleur bordure</label>
+  <select class="select" id="stat2_color" name="stat2_color"><option >Bleu</option><option selected>Orange</option><option >Vert</option></select>
+</div>
+  
+<div class="form-group">
+  <label for="stat3_val">Stat 3 — Chiffre</label>
+  <input class="input" type="text" id="stat3_val" name="stat3_val" value="∞" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="stat3_label">Stat 3 — Label</label>
+  <input class="input" type="text" id="stat3_label" name="stat3_label" value="Solidarité" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="stat3_color">Stat 3 — Couleur bordure</label>
+  <select class="select" id="stat3_color" name="stat3_color"><option >Bleu</option><option >Orange</option><option selected>Vert</option></select>
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🃏</span>Cartes de présentation (3 services)</div>
+      <div class="panel-desc">Les 3 cartes visibles à droite du héros</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div style="display:flex;flex-direction:column;gap:16px;">
+  <div style="background:#F8FAFC;border-radius:10px;padding:16px;">
+    <div style="font-size:12px;font-weight:700;color:#94A3B8;margin-bottom:10px;text-transform:uppercase;">Carte 1</div>
+    <div class="form-grid form-grid-3" style="display:grid;grid-template-columns:60px 1fr 2fr;gap:12px;">
+      
+<div class="form-group">
+  <label for="c1_icon">Icône</label>
+  <input class="input" type="text" id="c1_icon" name="c1_icon" value="📋" placeholder=""/>
+  
+</div>
+      
+<div class="form-group">
+  <label for="c1_title">Titre</label>
+  <input class="input" type="text" id="c1_title" name="c1_title" value="Aide administrative" placeholder=""/>
+  
+</div>
+      
+<div class="form-group">
+  <label for="c1_desc">Description</label>
+  <input class="input" type="text" id="c1_desc" name="c1_desc" value="CAF, titre de séjour, logement, carte vitale… Nous vous accompagnons." placeholder=""/>
+  
+</div>
+    </div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:16px;">
+    <div style="font-size:12px;font-weight:700;color:#94A3B8;margin-bottom:10px;text-transform:uppercase;">Carte 2</div>
+    <div class="form-grid form-grid-3" style="display:grid;grid-template-columns:60px 1fr 2fr;gap:12px;">
+      
+<div class="form-group">
+  <label for="c2_icon">Icône</label>
+  <input class="input" type="text" id="c2_icon" name="c2_icon" value="💼" placeholder=""/>
+  
+</div>
+      
+<div class="form-group">
+  <label for="c2_title">Titre</label>
+  <input class="input" type="text" id="c2_title" name="c2_title" value="Emploi & Formation" placeholder=""/>
+  
+</div>
+      
+<div class="form-group">
+  <label for="c2_desc">Description</label>
+  <input class="input" type="text" id="c2_desc" name="c2_desc" value="CV, entretiens, alternance, formations certifiantes." placeholder=""/>
+  
+</div>
+    </div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:16px;">
+    <div style="font-size:12px;font-weight:700;color:#94A3B8;margin-bottom:10px;text-transform:uppercase;">Carte 3</div>
+    <div class="form-grid form-grid-3" style="display:grid;grid-template-columns:60px 1fr 2fr;gap:12px;">
+      
+<div class="form-group">
+  <label for="c3_icon">Icône</label>
+  <input class="input" type="text" id="c3_icon" name="c3_icon" value="🤝" placeholder=""/>
+  
+</div>
+      
+<div class="form-group">
+  <label for="c3_title">Titre</label>
+  <input class="input" type="text" id="c3_title" name="c3_title" value="Réseau d'entraide" placeholder=""/>
+  
+</div>
+      
+<div class="form-group">
+  <label for="c3_desc">Description</label>
+  <input class="input" type="text" id="c3_desc" name="c3_desc" value="Une communauté soudée où chacun peut trouver écoute et soutien." placeholder=""/>
+  
+</div>
+    </div>
+  </div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">📣</span>Bannière d'appel à l'action (bas de page)</div>
+      <div class="panel-desc">La bande colorée avec les deux boutons</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid" style="display:grid;gap:16px;">
+  
+<div class="form-group">
+  <label for="cta_title">Titre</label>
+  <input class="input" type="text" id="cta_title" name="cta_title" value="Ensemble, construisons une solidarité qui change des vies." placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="cta_sub">Sous-titre</label>
+  <input class="input" type="text" id="cta_sub" name="cta_sub" value="Rejoignez Réseau Solidarité France — en tant que bénévole, membre ou donateur." placeholder=""/>
+  
+</div>
+</div></div>
+</div>
+
+  </div>
+</div>
+
+<script>
+// Sidebar toggle (mobile)
+const sb=document.getElementById('sidebar');
+const ov=document.getElementById('overlay');
+document.querySelectorAll('.mob-toggle').forEach(b=>b.addEventListener('click',()=>{
+  sb.classList.toggle('open'); ov.classList.toggle('show');
+}));
+if(ov) ov.addEventListener('click',()=>{sb.classList.remove('open');ov.classList.remove('show');});
+
+// Save toast
+function showToast(msg='✅ Modifications enregistrées !'){
+  const t=document.getElementById('toast');
+  t.innerHTML='<span>✅</span> '+msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// All save buttons
+document.querySelectorAll('.tb-save,.btn-save').forEach(b=>{
+  b.addEventListener('click',e=>{
+    e.preventDefault();
+    b.innerHTML='<span>⏳</span> Enregistrement…';
+    setTimeout(()=>{
+      b.innerHTML=b.dataset.label||'💾 Enregistrer';
+      showToast();
+    },800);
+  });
+});
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const group=t.closest('.tabs-wrap');
+    if(!group){
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(x=>x.style.display='none');
+      t.classList.add('active');
+      const target=document.getElementById('panel-'+t.dataset.tab);
+      if(target) target.style.display='block';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

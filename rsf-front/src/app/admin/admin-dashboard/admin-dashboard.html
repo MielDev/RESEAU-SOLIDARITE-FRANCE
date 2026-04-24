@@ -1,1 +1,44 @@
-<p>admin-dashboard works!</p>
+<div class="alert alert-info">
+  <i class="fas fa-circle-info"></i>
+  <div>Le layout admin est maintenant mutualise. Tu peux brancher chaque page de gestion ici sans recopier le header ni la sidebar.</div>
+</div>
+
+<section class="stats-grid">
+  <article class="stat-card" *ngFor="let stat of stats">
+    <div class="sc-icon"><i [class]="stat.icon"></i></div>
+    <div class="sc-label">{{ stat.label }}</div>
+    <div class="sc-val">{{ stat.value }}</div>
+    <div class="sc-sub">{{ stat.sub }}</div>
+  </article>
+</section>
+
+<section class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><i class="pi fas fa-bolt"></i> Raccourcis utiles</div>
+      <div class="panel-desc">Accede rapidement aux ecrans principaux du back-office.</div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="form-grid form-grid-2">
+      <a *ngFor="let link of quickLinks" [routerLink]="link.href" class="btn btn-ghost" style="justify-content:center;padding:14px 18px;">
+        <i [class]="link.icon"></i> {{ link.label }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><i class="pi fas fa-list-check"></i> Prochaine etape</div>
+      <div class="panel-desc">Les ecrans admin existent maintenant dans une structure propre et reutilisable.</div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="alert alert-success">
+      <i class="fas fa-check"></i>
+      <div>La suite logique est de remplacer les placeholders de chaque page admin par les vrais formulaires de gestion relies a l API.</div>
+    </div>
+  </div>
+</section>
