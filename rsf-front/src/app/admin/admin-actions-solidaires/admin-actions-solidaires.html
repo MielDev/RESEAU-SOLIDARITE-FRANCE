@@ -1,1 +1,101 @@
-<p>admin-actions-solidaires works!</p>
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🤝</span>Liste des actions solidaires</div>
+      <div class="panel-desc">Gérez les actions affichées sur la page Actions Solidaires</div>
+    </div>
+    
+  </div>
+  <div class="panel-body"><div style="display:flex;justify-content:flex-end;margin-bottom:16px;"><button class="btn btn-primary">+ Nouvelle action</button></div><div class="table-wrap"><table><thead><tr><th>Icône</th><th>Titre</th><th>Catégorie</th><th>Description</th><th>Statut</th><th>Actions</th></tr></thead><tbody>
+<tr>
+  <td><span style="font-size:22px;">👕</span></td>
+  <td><strong style="font-size:14px;">Distribution au Parc de la Touche</strong></td>
+  <td><span class="badge badge-primary">Distribution vêtements</span></td>
+  <td style="max-width:280px;font-size:13px;color:#475569;">Distribution de vêtements au profit des personnes sans abri installées au parc d…</td>
+  <td><span class="badge badge-success">Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️ Modifier</button>
+      <button class="btn btn-danger btn-sm">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><span style="font-size:22px;">🏠</span></td>
+  <td><strong style="font-size:14px;">Un geste qui change une vie</strong></td>
+  <td><span class="badge badge-primary">Aide au logement</span></td>
+  <td style="max-width:280px;font-size:13px;color:#475569;">Grâce à notre association, la toiture d'une femme vivant dans des conditions pré…</td>
+  <td><span class="badge badge-success">Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️ Modifier</button>
+      <button class="btn btn-danger btn-sm">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><span style="font-size:22px;">💰</span></td>
+  <td><strong style="font-size:14px;">Un petit geste, un grand impact</strong></td>
+  <td><span class="badge badge-primary">Collecte solidaire</span></td>
+  <td style="max-width:280px;font-size:13px;color:#475569;">Grâce à la générosité du groupe, nous avons collecté les fonds nécessaires pour …</td>
+  <td><span class="badge badge-success">Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️ Modifier</button>
+      <button class="btn btn-danger btn-sm">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><span style="font-size:22px;">💝</span></td>
+  <td><strong style="font-size:14px;">Action solidaire individuelle</strong></td>
+  <td><span class="badge badge-primary">Soutien individuel</span></td>
+  <td style="max-width:280px;font-size:13px;color:#475569;">Soutien apporté à l'une de nos sœurs en situation de besoin.…</td>
+  <td><span class="badge badge-success">Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️ Modifier</button>
+      <button class="btn btn-danger btn-sm">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><span style="font-size:22px;">🙏</span></td>
+  <td><strong style="font-size:14px;">Merci pour votre générosité</strong></td>
+  <td><span class="badge badge-primary">Générosité</span></td>
+  <td style="max-width:280px;font-size:13px;color:#475569;">Merci à Mme DOGAN pour son généreux don à notre association.…</td>
+  <td><span class="badge badge-success">Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️ Modifier</button>
+      <button class="btn btn-danger btn-sm">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><span style="font-size:22px;">🤝</span></td>
+  <td><strong style="font-size:14px;">Rencontres & Échanges</strong></td>
+  <td><span class="badge badge-primary">Rencontres</span></td>
+  <td style="max-width:280px;font-size:13px;color:#475569;">Des moments réguliers de rencontre entre membres pour faire connaissance et part…</td>
+  <td><span class="badge badge-success">Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️ Modifier</button>
+      <button class="btn btn-danger btn-sm">🗑️</button>
+    </div>
+  </td>
+</tr></tbody></table></div>
+<div id="action-form" style="display:none;margin-top:20px;background:#F8FAFC;border-radius:10px;padding:20px;border:1px solid #E2E8F0;">
+  <h4 style="font-size:14px;font-weight:700;margin-bottom:14px;">Nouvelle action solidaire</h4>
+  <div style="display:grid;grid-template-columns:60px 1fr 1fr;gap:12px;margin-bottom:12px;">
+    <div class="form-group"><label>Icône</label><input class="input" type="text" placeholder="🤝"/></div>
+    <div class="form-group"><label>Titre</label><input class="input" type="text" placeholder="Titre de l'action"/></div>
+    <div class="form-group"><label>Catégorie</label><input class="input" type="text" placeholder="Distribution vêtements"/></div>
+  </div>
+  <div class="form-group" style="margin-bottom:12px;"><label>Description</label><textarea class="textarea" placeholder="Décrivez l'action solidaire…" style="min-height:80px;"></textarea></div>
+  <div style="display:flex;gap:8px;">
+    <button class="btn btn-primary btn-sm">Enregistrer</button>
+    <button class="btn btn-ghost btn-sm">Annuler</button>
+  </div>
+</div></div>
+</div>

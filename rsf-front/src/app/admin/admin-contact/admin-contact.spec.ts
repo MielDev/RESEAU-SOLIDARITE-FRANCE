@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { AdminContact } from './admin-contact';
 
@@ -9,6 +10,7 @@ describe('AdminContact', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AdminContact],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminContact);

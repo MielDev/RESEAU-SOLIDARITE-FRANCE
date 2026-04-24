@@ -1,1 +1,64 @@
-<p>admin-actualites works!</p>
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">📰</span>Liste des actualités</div>
+      <div class="panel-desc">Gérez les articles publiés sur la page Actualités</div>
+    </div>
+    
+  </div>
+  <div class="panel-body"><div style="display:flex;justify-content:flex-end;margin-bottom:16px;"><button class="btn btn-primary" (click)="showNewActu.set(true)">+ Nouvelle actualité</button></div><div class="table-wrap"><table><thead><tr><th>Icône</th><th>Titre</th><th>Catégorie</th><th>Date</th><th>Statut</th><th>Actions</th></tr></thead><tbody>
+<tr>
+  <td style="font-size:22px;">🎉</td>
+  <td><strong style="font-size:13.5px;">2ᵉ Édition — Journée annuelle au Parc des Gayeulles</strong></td>
+  <td><span class="badge badge-primary">Événement</span></td>
+  <td style="font-size:13px;color:#94A3B8;">Juillet 2025</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️ Modifier</button>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td style="font-size:22px;">🌍</td>
+  <td><strong style="font-size:13.5px;">Distribution de nourriture à l'international</strong></td>
+  <td><span class="badge badge-primary">International</span></td>
+  <td style="font-size:13px;color:#94A3B8;">2025</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️ Modifier</button>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td style="font-size:22px;">👕</td>
+  <td><strong style="font-size:13.5px;">Distribution de vêtements au Parc de la Touche</strong></td>
+  <td><span class="badge badge-primary">Action solidaire</span></td>
+  <td style="font-size:13px;color:#94A3B8;">2025</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm">✏️ Modifier</button>
+      <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+    </div>
+  </td>
+</tr></tbody></table></div>
+<div [style.display]="showNewActu() ? 'block' : 'none'" style="margin-top:20px;background:#F8FAFC;border-radius:10px;padding:20px;border:1px solid #E2E8F0;">
+  <h4 style="font-size:14px;font-weight:700;margin-bottom:14px;">Nouvelle actualité</h4>
+  <div style="display:grid;grid-template-columns:60px 1fr 1fr 140px;gap:12px;margin-bottom:12px;">
+    <div class="form-group"><label>Icône</label><input class="input" type="text" placeholder="📰"/></div>
+    <div class="form-group"><label>Titre</label><input class="input" type="text" placeholder="Titre de l'actualité"/></div>
+    <div class="form-group"><label>Catégorie</label><input class="input" type="text" placeholder="Événement"/></div>
+    <div class="form-group"><label>Date</label><input class="input" type="date"/></div>
+  </div>
+  <div class="form-group" style="margin-bottom:12px;"><label>Description courte</label><textarea class="textarea" placeholder="Résumé de l'actualité…" style="min-height:80px;"></textarea></div>
+  <div class="form-group" style="margin-bottom:12px;"><label>Lien (vers une page)</label><input class="input" type="text" placeholder="rencontre-annuelle.html"/></div>
+  <div style="display:flex;gap:8px;">
+    <button class="btn btn-primary btn-sm">Publier</button>
+    <button class="btn btn-ghost btn-sm" (click)="showNewActu.set(false)">Annuler</button>
+  </div>
+</div></div>
+</div>

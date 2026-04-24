@@ -1,1 +1,17 @@
-<p>admin-login works!</p>
+<div class="login-shell">
+  <div class="login-card">
+    <div class="login-logo">RSF</div>
+    <h1>Back-office RSF</h1>
+    <p>Connectez-vous pour gérer le contenu du site</p>
+    <div class="form-group">
+      <label for="login-email">Adresse e-mail</label>
+      <input id="login-email" type="email" [(ngModel)]="email" name="email" />
+    </div>
+    <div class="form-group">
+      <label for="login-password">Mot de passe</label>
+      <input id="login-password" type="password" [(ngModel)]="password" name="password" />
+    </div>
+    <button class="login-btn" type="button" (click)="login()">Se connecter →</button>
+    <p class="login-footer">Réseau Solidarité France · Administration</p>
+  </div>
+</div>

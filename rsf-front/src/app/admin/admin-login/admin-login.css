@@ -1,0 +1,111 @@
+app-admin-login {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+}
+
+app-admin-login *,
+app-admin-login *::before,
+app-admin-login *::after {
+  box-sizing: border-box;
+}
+
+.login-shell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+  padding: 20px;
+}
+
+.login-card {
+  background: white;
+  border-radius: 20px;
+  padding: 44px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
+}
+
+.login-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #2f5dff, #7c3aed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 900;
+  color: white;
+  margin: 0 auto 20px;
+}
+
+.login-card h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  text-align: center;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.login-card p {
+  font-size: 13.5px;
+  color: #94a3b8;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.login-card .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.login-card .form-group label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.login-card .form-group input {
+  padding: 11px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.login-card .form-group input:focus {
+  border-color: #2f5dff;
+  box-shadow: 0 0 0 3px rgba(47, 93, 255, 0.08);
+}
+
+.login-btn {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, #2f5dff, #4f7cff);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: opacity 0.2s;
+}
+
+.login-btn:hover {
+  opacity: 0.9;
+}
+
+.login-footer {
+  font-size: 12px;
+  color: #cbd5e1;
+  text-align: center;
+  margin-top: 20px;
+}

@@ -1,1 +1,181 @@
-<p>admin-organisation works!</p>
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">👤</span>Président fondateur</div>
+      <div class="panel-desc">Informations sur le président de l'association</div>
+    </div>
+    <div class="panel-actions"><button class="btn btn-ghost btn-sm">+ Ajouter un diplôme</button></div>
+  </div>
+  <div class="panel-body">
+<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+  
+<div class="form-group">
+  <label for="pres_name">Nom complet</label>
+  <input class="input" type="text" id="pres_name" name="pres_name" value="TODEDJRAPOU Aimé" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="pres_role">Titre / Rôle</label>
+  <input class="input" type="text" id="pres_role" name="pres_role" value="Président fondateur" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="pres_initials">Initiales (avatar)</label>
+  <input class="input" type="text" id="pres_initials" name="pres_initials" value="AT" placeholder=""/>
+  <div class="hint">Lettres affichées dans l'avatar rond</div>
+</div>
+</div>
+<div class="form-grid" style="display:grid;gap:14px;margin-top:14px;">
+  
+<div class="form-group">
+  <label for="pres_bio">Biographie / Description</label>
+  <textarea class="textarea" id="pres_bio" name="pres_bio" style="min-height:112px">Titulaire de plusieurs diplômes en communication, relations internationales et management, il met ses compétences au service de l'accompagnement des étudiants et des salariés. À travers RÉSEAU SOLIDARITÉ FRANCE, il œuvre activement pour faciliter les démarches administratives, l'orientation et l'insertion professionnelle en France.</textarea>
+  
+</div>
+</div>
+<hr style="margin:18px 0;border:none;border-top:1px solid #E2E8F0;"/>
+<h4 style="font-size:13px;font-weight:700;margin-bottom:12px;">Diplômes (un par ligne)</h4>
+<div class="form-grid" style="display:grid;gap:10px;">
+  
+<div class="form-group">
+  <label for="dip1">Diplôme 1</label>
+  <input class="input" type="text" id="dip1" name="dip1" value="Licence Communication & Relations Internationales" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="dip2">Diplôme 2</label>
+  <input class="input" type="text" id="dip2" name="dip2" value="Licence Chargé d'affaires" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="dip3">Diplôme 3</label>
+  <input class="input" type="text" id="dip3" name="dip3" value="Master Communication & Marketing International" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="dip4">Diplôme 4</label>
+  <input class="input" type="text" id="dip4" name="dip4" value="Master Management des Affaires" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="dip5">Diplôme 5</label>
+  <input class="input" type="text" id="dip5" name="dip5" value="MBA Expert en Stratégie Digitale" placeholder=""/>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">👥</span>Membres de l'équipe</div>
+      <div class="panel-desc">Gérez les membres affichés sur la page Organisation</div>
+    </div>
+    
+  </div>
+  <div class="panel-body"><div class="alert alert-info" style="margin-bottom:16px;">ℹ️ Faites glisser pour réorganiser les membres dans la liste.</div><div id="team-list">
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">AGBOCOU Belkis</div>
+    <div class="si-sub">Comptable</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" (click)="showMemberForm.set(true)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div>
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">NOUAZE Alexandre</div>
+    <div class="si-sub">Responsable Appui Événements</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" (click)="showMemberForm.set(true)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div>
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">DOSSOU Oluwakèmi</div>
+    <div class="si-sub">Secrétaire Générale</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" (click)="showMemberForm.set(true)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div>
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">AGONDANOU Constant</div>
+    <div class="si-sub">Coordinateur</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" (click)="showMemberForm.set(true)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div>
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">NOUAZE Helticia</div>
+    <div class="si-sub">Responsable Événements</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" (click)="showMemberForm.set(true)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div>
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">SEHLIN Samson</div>
+    <div class="si-sub">Responsable Partenariats</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" (click)="showMemberForm.set(true)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div>
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">BASSALE Abiyé</div>
+    <div class="si-sub">Responsable Accompagnement Administratif</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" (click)="showMemberForm.set(true)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div>
+<div class="sortable-item">
+  <span class="drag-handle">⠿</span>
+  <div class="si-content">
+    <div class="si-title">KOSSOKO Herwick</div>
+    <div class="si-sub">Responsable Solidarité</div>
+  </div>
+  <div class="si-actions">
+    <button class="btn btn-ghost btn-sm btn-icon" (click)="showMemberForm.set(true)" title="Modifier">✏️</button>
+    <button class="btn btn-danger btn-sm btn-icon" title="Supprimer">🗑️</button>
+  </div>
+</div></div><button class="btn btn-primary" style="margin-top:16px;" (click)="showMemberForm.set(true)">+ Ajouter un membre</button>
+<div [style.display]="showMemberForm() ? 'block' : 'none'" style="margin-top:20px;background:#F8FAFC;border-radius:10px;padding:20px;border:1px solid #E2E8F0;">
+  <h4 style="font-size:14px;font-weight:700;margin-bottom:14px;">Nouveau / modifier membre</h4>
+  <div style="display:grid;grid-template-columns:1fr 1fr 80px;gap:12px;">
+    <div class="form-group"><label>Nom complet</label><input class="input" type="text" placeholder="NOM Prénom"/></div>
+    <div class="form-group"><label>Rôle / Poste</label><input class="input" type="text" placeholder="Responsable…"/></div>
+    <div class="form-group"><label>Initiales</label><input class="input" type="text" placeholder="AB" maxlength="2"/></div>
+  </div>
+  <div style="display:flex;gap:8px;margin-top:8px;">
+    <button class="btn btn-primary btn-sm">Enregistrer</button>
+    <button class="btn btn-ghost btn-sm" (click)="showMemberForm.set(false)">Annuler</button>

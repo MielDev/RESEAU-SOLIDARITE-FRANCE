@@ -1,1 +1,248 @@
-<p>admin-don works!</p>
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🖼️</span>En-tête et description générale</div>
+      
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid" style="display:grid;gap:14px;">
+  
+<div class="form-group">
+  <label for="don_title">Titre</label>
+  <input class="input" type="text" id="don_title" name="don_title" value="Faire un don" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="don_desc">Description principale</label>
+  <textarea class="textarea" id="don_desc" name="don_desc" style="min-height:88px">Faire un don, c'est nous aider à accompagner les étudiants, les salariés en difficulté, les sans-abri et les personnes isolées. Chaque don compte et contribue à changer des vies.</textarea>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">💳</span>4 modes de don</div>
+      <div class="panel-desc">Les 4 cartes de don affichées sur la page</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div style="display:flex;flex-direction:column;gap:16px;">
+
+  <div style="background:#F8FAFC;border-radius:10px;padding:16px;border-left:3px solid #2F5DFF;">
+    <div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;margin-bottom:10px;">Don 1</div>
+    <div style="display:grid;grid-template-columns:60px 1fr 2fr;gap:12px;margin-bottom:10px;align-items:end;">
+      
+<div class="form-group">
+  <label for="don1_icon">Icône</label>
+  <input class="input" type="text" id="don1_icon" name="don1_icon" value="💳" placeholder=""/>
+  
+</div>
+      
+<div class="form-group">
+  <label for="don1_title">Titre</label>
+  <input class="input" type="text" id="don1_title" name="don1_title" value="Don financier ponctuel" placeholder=""/>
+  
+</div>
+      
+<div class="form-group">
+  <label for="don1_href">Lien email/contact</label>
+  <input class="input" type="text" id="don1_href" name="don1_href" value="mailto:contact@reseau-solidarite-france.fr?subject=Don ponctuel RSF" placeholder=""/>
+  
+</div>
+    </div>
+    
+<div class="form-group">
+  <label for="don{i}_desc">Description</label>
+  <textarea class="textarea" id="don{i}_desc" name="don{i}_desc" style="min-height:64px">Un geste unique qui finance directement nos actions : repas solidaires, vêtements, ateliers d'orientation.</textarea>
+  
+</div>
+    
+<div class="form-group">
+  <label for="don1_btn">Texte du bouton</label>
+  <input class="input" type="text" id="don1_btn" name="don1_btn" value="Je fais un don ponctuel →" placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:16px;border-left:3px solid #7C3AED;">
+    <div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;margin-bottom:10px;">Don 2</div>
+    <div style="display:grid;grid-template-columns:60px 1fr 2fr;gap:12px;margin-bottom:10px;align-items:end;">
+      
+<div class="form-group">
+  <label for="don2_icon">Icône</label>
+  <input class="input" type="text" id="don2_icon" name="don2_icon" value="🔄" placeholder=""/>
+  
+</div>
+      
+<div class="form-group">
+  <label for="don2_title">Titre</label>
+  <input class="input" type="text" id="don2_title" name="don2_title" value="Don mensuel régulier" placeholder=""/>
+  
+</div>
+      
+<div class="form-group">
+  <label for="don2_href">Lien email/contact</label>
+  <input class="input" type="text" id="don2_href" name="don2_href" value="mailto:contact@reseau-solidarite-france.fr?subject=Don mensuel RSF" placeholder=""/>
+  
+</div>
+    </div>
+    
+<div class="form-group">
+  <label for="don{i}_desc">Description</label>
+  <textarea class="textarea" id="don{i}_desc" name="don{i}_desc" style="min-height:64px">Un soutien régulier qui nous permet de planifier nos programmes sur le long terme et d'avoir plus d'impact.</textarea>
+  
+</div>
+    
+<div class="form-group">
+  <label for="don2_btn">Texte du bouton</label>
+  <input class="input" type="text" id="don2_btn" name="don2_btn" value="Je m'engage chaque mois →" placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:16px;border-left:3px solid #22C55E;">
+    <div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;margin-bottom:10px;">Don 3</div>
+    <div style="display:grid;grid-template-columns:60px 1fr 2fr;gap:12px;margin-bottom:10px;align-items:end;">
+      
+<div class="form-group">
+  <label for="don3_icon">Icône</label>
+  <input class="input" type="text" id="don3_icon" name="don3_icon" value="📦" placeholder=""/>
+  
+</div>
+      
+<div class="form-group">
+  <label for="don3_title">Titre</label>
+  <input class="input" type="text" id="don3_title" name="don3_title" value="Don matériel" placeholder=""/>
+  
+</div>
+      
+<div class="form-group">
+  <label for="don3_href">Lien email/contact</label>
+  <input class="input" type="text" id="don3_href" name="don3_href" value="contact.html" placeholder=""/>
+  
+</div>
+    </div>
+    
+<div class="form-group">
+  <label for="don{i}_desc">Description</label>
+  <textarea class="textarea" id="don{i}_desc" name="don{i}_desc" style="min-height:64px">Nous acceptons les dons en nature : vêtements, nourriture, fournitures scolaires, produits d'hygiène.</textarea>
+  
+</div>
+    
+<div class="form-group">
+  <label for="don3_btn">Texte du bouton</label>
+  <input class="input" type="text" id="don3_btn" name="don3_btn" value="Nous contacter →" placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:10px;padding:16px;border-left:3px solid #FF8C00;">
+    <div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;margin-bottom:10px;">Don 4</div>
+    <div style="display:grid;grid-template-columns:60px 1fr 2fr;gap:12px;margin-bottom:10px;align-items:end;">
+      
+<div class="form-group">
+  <label for="don4_icon">Icône</label>
+  <input class="input" type="text" id="don4_icon" name="don4_icon" value="🏢" placeholder=""/>
+  
+</div>
+      
+<div class="form-group">
+  <label for="don4_title">Titre</label>
+  <input class="input" type="text" id="don4_title" name="don4_title" value="Devenir partenaire" placeholder=""/>
+  
+</div>
+      
+<div class="form-group">
+  <label for="don4_href">Lien email/contact</label>
+  <input class="input" type="text" id="don4_href" name="don4_href" value="mailto:contact@reseau-solidarite-france.fr?subject=Partenariat RSF" placeholder=""/>
+  
+</div>
+    </div>
+    
+<div class="form-group">
+  <label for="don{i}_desc">Description</label>
+  <textarea class="textarea" id="don{i}_desc" name="don{i}_desc" style="min-height:64px">Entreprises ou particuliers, vous pouvez collaborer avec nous pour soutenir nos projets.</textarea>
+  
+</div>
+    
+<div class="form-group">
+  <label for="don4_btn">Texte du bouton</label>
+  <input class="input" type="text" id="don4_btn" name="don4_btn" value="Proposer un partenariat →" placeholder=""/>
+  
+</div>
+  </div></div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">✨</span>Bloc 'Grâce à votre générosité' (4 impacts)</div>
+      <div class="panel-desc">Les 4 cases d'impact en bas de page</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+
+  <div style="background:#F8FAFC;border-radius:8px;padding:14px;text-align:center;">
+    
+<div class="form-group">
+  <label for="imp1_icon">Icône</label>
+  <input class="input" type="text" id="imp1_icon" name="imp1_icon" value="🍽️" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="imp1_text">Texte</label>
+  <input class="input" type="text" id="imp1_text" name="imp1_text" value="Financer des repas solidaires" placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:8px;padding:14px;text-align:center;">
+    
+<div class="form-group">
+  <label for="imp2_icon">Icône</label>
+  <input class="input" type="text" id="imp2_icon" name="imp2_icon" value="👕" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="imp2_text">Texte</label>
+  <input class="input" type="text" id="imp2_text" name="imp2_text" value="Offrir vêtements & kits d'hygiène" placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:8px;padding:14px;text-align:center;">
+    
+<div class="form-group">
+  <label for="imp3_icon">Icône</label>
+  <input class="input" type="text" id="imp3_icon" name="imp3_icon" value="🎓" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="imp3_text">Texte</label>
+  <input class="input" type="text" id="imp3_text" name="imp3_text" value="Organiser ateliers & formations" placeholder=""/>
+  
+</div>
+  </div>
+  <div style="background:#F8FAFC;border-radius:8px;padding:14px;text-align:center;">
+    
+<div class="form-group">
+  <label for="imp4_icon">Icône</label>
+  <input class="input" type="text" id="imp4_icon" name="imp4_icon" value="🏠" placeholder=""/>
+  
+</div>
+    
+<div class="form-group">
+  <label for="imp4_text">Texte</label>
+  <input class="input" type="text" id="imp4_text" name="imp4_text" value="Faciliter l'accès au logement" placeholder=""/>
+  
+</div>
+  </div></div></div>
+</div>

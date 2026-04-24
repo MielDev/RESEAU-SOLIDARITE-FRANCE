@@ -1,1 +1,165 @@
-<p>admin-contact works!</p>
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">📍</span>Coordonnées de l'association</div>
+      <div class="panel-desc">Ces informations sont affichées sur la page Contact et dans le footer</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+  
+<div class="form-group">
+  <label for="addr_street">Adresse (rue)</label>
+  <input class="input" type="text" id="addr_street" name="addr_street" value="7 Rue Maréchal Lyautey" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="addr_city">Code postal et ville</label>
+  <input class="input" type="text" id="addr_city" name="addr_city" value="35000 Rennes" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="addr_country">Pays</label>
+  <input class="input" type="text" id="addr_country" name="addr_country" value="France" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="contact_phone">Téléphone</label>
+  <input class="input" type="tel" id="contact_phone" name="contact_phone" value="+33 6 51 91 07 73" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="contact_hours">Horaires</label>
+  <input class="input" type="text" id="contact_hours" name="contact_hours" value="Du lundi au samedi, de 8h à 18h" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="contact_email">Email</label>
+  <input class="input" type="email" id="contact_email" name="contact_email" value="contact@reseau-solidarite-france.fr" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="contact_delay">Délai de réponse</label>
+  <input class="input" type="text" id="contact_delay" name="contact_delay" value="Réponse sous 48h" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="contact_web">Site web</label>
+  <input class="input" type="url" id="contact_web" name="contact_web" value="www.reseau-solidarite-france.fr" placeholder=""/>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">🖼️</span>En-tête de la page Contact</div>
+      
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid" style="display:grid;gap:12px;">
+  
+<div class="form-group">
+  <label for="c_title">Titre</label>
+  <input class="input" type="text" id="c_title" name="c_title" value="Contactez-nous" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="c_desc">Description</label>
+  <textarea class="textarea" id="c_desc" name="c_desc" style="min-height:64px">Une question ? Besoin d'aide ? Envie de rejoindre le réseau ? Nous sommes à votre écoute !</textarea>
+  
+</div>
+  
+<div class="form-group">
+  <label for="c_engage">Message d'engagement (encart bleu)</label>
+  <textarea class="textarea" id="c_engage" name="c_engage" style="min-height:64px">Toute demande reçoit une réponse personnalisée. Nous traitons chaque situation avec confidentialité, bienveillance et professionnalisme.</textarea>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">📝</span>Formulaire de contact</div>
+      <div class="panel-desc">Configurez les champs et options du formulaire</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px;">
+  
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Champ Nom complet</strong><span>Toujours obligatoire</span></div>
+  <label class="toggle"><input type="checkbox" checked name="f_name"/><span class="toggle-slider"></span></label>
+</div>
+  
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Champ E-mail</strong><span>Toujours obligatoire</span></div>
+  <label class="toggle"><input type="checkbox" checked name="f_email"/><span class="toggle-slider"></span></label>
+</div>
+  
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Menu Objet du message</strong><span>Aide à la catégorisation</span></div>
+  <label class="toggle"><input type="checkbox" checked name="f_objet"/><span class="toggle-slider"></span></label>
+</div>
+  
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Champ Message</strong><span>Zone de texte libre</span></div>
+  <label class="toggle"><input type="checkbox" checked name="f_msg"/><span class="toggle-slider"></span></label>
+</div>
+</div>
+<h4 style="font-size:13px;font-weight:700;margin-bottom:10px;">Options du menu Objet</h4>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+  
+<div class="form-group">
+  <label for="obj1">Option 1</label>
+  <input class="input" type="text" id="obj1" name="obj1" value="Demande d'aide administrative" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="obj2">Option 2</label>
+  <input class="input" type="text" id="obj2" name="obj2" value="Rejoindre l'association" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="obj3">Option 3</label>
+  <input class="input" type="text" id="obj3" name="obj3" value="Faire un don" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="obj4">Option 4</label>
+  <input class="input" type="text" id="obj4" name="obj4" value="Devenir partenaire" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="obj5">Option 5</label>
+  <input class="input" type="text" id="obj5" name="obj5" value="Témoignage" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="obj6">Option 6</label>
+  <input class="input" type="text" id="obj6" name="obj6" value="Autre" placeholder=""/>
+  
+</div>
+</div></div>
+</div>

@@ -1,0 +1,71 @@
+@let info = pageInfo();
+@let toast = ui.toast();
+<div class="admin-shell">
+  <aside class="sidebar" [class.open]="ui.sidebarOpen()">
+    <div class="sidebar-brand">
+      <a routerLink="/admin/dashboard" class="brand-logo" (click)="onSidebarLinkClick()">
+        <div class="brand-icon">RSF</div>
+        <div>
+          <div class="brand-name">RSF Admin</div>
+        </div>
+      </a>
+      <div class="brand-sub">Back-office</div>
+    </div>
+
+    @for (section of sections; track section.label) {
+      <div class="sidebar-section-label">{{ section.label }}</div>
+      <nav>
+        @for (item of section.items; track item.route) {
+          <a
+            [routerLink]="item.route"
+            routerLinkActive="active"
+            class="sidebar-link"
+            (click)="onSidebarLinkClick()"
+          >
+            <span class="si">{{ item.icon }}</span>{{ item.label }}
+          </a>
+        }
+      </nav>
+    }
+
+    <div class="sidebar-footer">
+      <a routerLink="/" target="_blank">🌐 Voir le site</a>
+      <a routerLink="/admin/login">🚪 Déconnexion</a>
+    </div>
+  </aside>
+
+  <div class="overlay" [class.show]="ui.sidebarOpen()" (click)="onOverlayClick()"></div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="mob-toggle" type="button" (click)="ui.toggleSidebar()">
+          <span style="font-size: 22px">☰</span>
+        </button>
+        <div>
+          <div class="page-title">{{ info.title }}</div>
+          <div class="page-breadcrumb">
+            <a routerLink="/admin/dashboard">Admin</a><span>›</span>{{ info.breadcrumb }}
+          </div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        @if (info.preview) {
+          <a [routerLink]="info.preview" target="_blank" class="topbar-btn tb-preview">
+            👁 Voir la page
+          </a>
+        }
+        <div class="topbar-avatar">AT</div>
+      </div>
+    </div>
+    <div class="content">
+      <router-outlet />
+    </div>
+  </div>
+
+  <div id="toast" [class.show]="!!toast">
+    @if (toast) {
+      <span>{{ toast.icon }}</span> {{ toast.text }}
+    }
+  </div>
+</div>

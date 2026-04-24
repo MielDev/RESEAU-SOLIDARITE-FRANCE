@@ -1,1 +1,170 @@
-<p>admin-rencontre works!</p>
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">📋</span>Informations générales de l'événement</div>
+      
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+  
+<div class="form-group">
+  <label for="ra_title">Titre de l'événement</label>
+  <input class="input" type="text" id="ra_title" name="ra_title" value="Rencontre Annuelle 2025" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="ra_edition">Numéro d'édition</label>
+  <input class="input" type="text" id="ra_edition" name="ra_edition" value="2ᵉ Édition" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="ra_date">Date</label>
+  <input class="input" type="date" id="ra_date" name="ra_date" value="2025-07-26" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="ra_start">Heure de début</label>
+  <input class="input" type="time" id="ra_start" name="ra_start" value="10:00" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="ra_end">Heure de fin</label>
+  <input class="input" type="time" id="ra_end" name="ra_end" value="22:00" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="ra_place">Lieu</label>
+  <input class="input" type="text" id="ra_place" name="ra_place" value="Parc des Gayeulles, Rennes" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="ra_email">Email de contact</label>
+  <input class="input" type="email" id="ra_email" name="ra_email" value="contact@reseau-solidarite-france.fr" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="ra_web">Site web</label>
+  <input class="input" type="url" id="ra_web" name="ra_web" value="www.reseau-solidarite-france.fr" placeholder=""/>
+  
+</div>
+</div>
+<div class="form-grid" style="display:grid;gap:14px;margin-top:14px;">
+  
+<div class="form-group">
+  <label for="ra_desc">Description principale</label>
+  <textarea class="textarea" id="ra_desc" name="ra_desc" style="min-height:88px">Nous avons le plaisir de vous partager le programme officiel de notre événement annuel. Une journée placée sous le signe de la solidarité, de la convivialité et du partage.</textarea>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">📝</span>Programme de la journée</div>
+      <div class="panel-desc">Les activités listées dans le programme officiel</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div id="prog-list" style="display:flex;flex-direction:column;gap:8px;">
+
+  <div class="sortable-item">
+    <span class="drag-handle">⠿</span>
+    <div style="font-size:20px;flex-shrink:0;">🥐</div>
+    <div class="si-content">
+      <input class="input" type="text" value="Petit déjeuner convivial" style="margin-bottom:4px;"/>
+      <input class="input" type="text" value="Dès 10h00" style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+  </div>
+  <div class="sortable-item">
+    <span class="drag-handle">⠿</span>
+    <div style="font-size:20px;flex-shrink:0;">⚽</div>
+    <div class="si-content">
+      <input class="input" type="text" value="Football & sports collectifs" style="margin-bottom:4px;"/>
+      <input class="input" type="text" value="Activités sportives" style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+  </div>
+  <div class="sortable-item">
+    <span class="drag-handle">⠿</span>
+    <div style="font-size:20px;flex-shrink:0;">🎯</div>
+    <div class="si-content">
+      <input class="input" type="text" value="Tir à l'arc, laser game, Action Games" style="margin-bottom:4px;"/>
+      <input class="input" type="text" value="Animations et jeux" style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+  </div>
+  <div class="sortable-item">
+    <span class="drag-handle">⠿</span>
+    <div style="font-size:20px;flex-shrink:0;">🎲</div>
+    <div class="si-content">
+      <input class="input" type="text" value="Puissance 4 géant, jeux de stratégie" style="margin-bottom:4px;"/>
+      <input class="input" type="text" value="Concours et défis" style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+  </div>
+  <div class="sortable-item">
+    <span class="drag-handle">⠿</span>
+    <div style="font-size:20px;flex-shrink:0;">🍗</div>
+    <div class="si-content">
+      <input class="input" type="text" value="Pique-nique, barbecue & spécialités maison" style="margin-bottom:4px;"/>
+      <input class="input" type="text" value="Déjeuner et après-midi" style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+  </div>
+  <div class="sortable-item">
+    <span class="drag-handle">⠿</span>
+    <div style="font-size:20px;flex-shrink:0;">🎤</div>
+    <div class="si-content">
+      <input class="input" type="text" value="Karaoké, musique et soirée festive" style="margin-bottom:4px;"/>
+      <input class="input" type="text" value="À partir de 18h" style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon">🗑️</button>
+  </div>
+</div>
+<button class="btn btn-ghost btn-sm" style="margin-top:12px;">+ Ajouter une activité</button></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><span class="pi">📣</span>Bannière de bas de page</div>
+      <div class="panel-desc">Message final et bouton d'invitation</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div class="form-grid" style="display:grid;gap:12px;">
+  
+<div class="form-group">
+  <label for="ra_cta">Texte principal</label>
+  <input class="input" type="text" id="ra_cta" name="ra_cta" value="Nous comptons sur votre présence, votre bonne humeur et votre esprit d'équipe !" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="ra_btn">Texte du bouton</label>
+  <input class="input" type="text" id="ra_btn" name="ra_btn" value="Je participe →" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="ra_href">Lien du bouton</label>
+  <input class="input" type="text" id="ra_href" name="ra_href" value="nous-rejoindre.html" placeholder=""/>
+  
+</div>
+</div></div>
+</div>
