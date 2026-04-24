@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet, ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { filter, map, startWith } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 import { AdminUiService } from '../shared/admin-ui.service';
 
@@ -62,22 +62,27 @@ export class AdminLayout {
     },
   ];
 
+  private readRouteData(): {
+    title: string;
+    breadcrumb: string;
+    preview: string | undefined;
+  } {
+    let route: ActivatedRoute | null = this.route;
+    while (route?.firstChild) route = route.firstChild;
+    const data = route?.snapshot?.data ?? {};
+    return {
+      title: (data['title'] as string) || 'Admin',
+      breadcrumb: (data['breadcrumb'] as string) || 'Admin',
+      preview: data['preview'] as string | undefined,
+    };
+  }
+
   readonly pageInfo = toSignal(
     this.router.events.pipe(
       filter((e) => e instanceof NavigationEnd),
-      startWith(null),
-      map(() => {
-        let route = this.route;
-        while (route.firstChild) route = route.firstChild;
-        const data = route.snapshot.data;
-        return {
-          title: (data['title'] as string) || 'Admin',
-          breadcrumb: (data['breadcrumb'] as string) || 'Admin',
-          preview: data['preview'] as string | undefined,
-        };
-      }),
+      map(() => this.readRouteData()),
     ),
-    { initialValue: { title: 'Admin', breadcrumb: 'Admin', preview: undefined } },
+    { initialValue: this.readRouteData() },
   );
 
   onSidebarLinkClick(): void {
