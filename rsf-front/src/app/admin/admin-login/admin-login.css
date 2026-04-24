@@ -10,8 +10,7 @@
   padding: 32px 16px;
   background:
     radial-gradient(circle at top left, rgba(47, 93, 255, 0.14), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.14), transparent 28%),
-    #f8fafc;
+    radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.14), transparent 28%), #f8fafc;
   font-family: 'DM Sans', sans-serif;
 }
 

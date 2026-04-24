@@ -1,6 +1,9 @@
 <div class="alert alert-info">
   <i class="fas fa-circle-info"></i>
-  <div>Le layout admin est maintenant mutualise. Tu peux brancher chaque page de gestion ici sans recopier le header ni la sidebar.</div>
+  <div>
+    Le layout admin est maintenant mutualise. Tu peux brancher chaque page de gestion ici sans
+    recopier le header ni la sidebar.
+  </div>
 </div>
 
 <section class="stats-grid">
@@ -21,7 +24,12 @@
   </div>
   <div class="panel-body">
     <div class="form-grid form-grid-2">
-      <a *ngFor="let link of quickLinks" [routerLink]="link.href" class="btn btn-ghost" style="justify-content:center;padding:14px 18px;">
+      <a
+        *ngFor="let link of quickLinks"
+        [routerLink]="link.href"
+        class="btn btn-ghost"
+        style="justify-content: center; padding: 14px 18px"
+      >
         <i [class]="link.icon"></i> {{ link.label }}
       </a>
     </div>
@@ -32,13 +40,18 @@
   <div class="panel-header">
     <div>
       <div class="panel-title"><i class="pi fas fa-list-check"></i> Prochaine etape</div>
-      <div class="panel-desc">Les ecrans admin existent maintenant dans une structure propre et reutilisable.</div>
+      <div class="panel-desc">
+        Les ecrans admin existent maintenant dans une structure propre et reutilisable.
+      </div>
     </div>
   </div>
   <div class="panel-body">
     <div class="alert alert-success">
       <i class="fas fa-check"></i>
-      <div>La suite logique est de remplacer les placeholders de chaque page admin par les vrais formulaires de gestion relies a l API.</div>
+      <div>
+        La suite logique est de remplacer les placeholders de chaque page admin par les vrais
+        formulaires de gestion relies a l API.
+      </div>
     </div>
   </div>
 </section>
