@@ -1,0 +1,139 @@
+:host {
+  display: grid;
+  gap: 20px;
+}
+
+.section-stack,
+.item-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.settings-grid.compact {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.setting-card,
+.draft-panel {
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+}
+
+.setting-title,
+.subsection-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.setting-meta {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field-label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+}
+
+.textarea {
+  min-height: 180px;
+  resize: vertical;
+}
+
+.textarea.json {
+  font-family: Consolas, 'Courier New', monospace;
+  font-size: 13px;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(47, 93, 255, 0.1);
+}
+
+.inline-form,
+.card-toolbar,
+.toolbar-actions,
+.footer-actions,
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.inline-form {
+  flex-wrap: wrap;
+}
+
+.inline-form .input {
+  flex: 1 1 220px;
+}
+
+.card-toolbar,
+.footer-actions {
+  justify-content: space-between;
+}
+
+.card-toolbar {
+  margin-bottom: 16px;
+}
+
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.icon-btn.danger {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  color: #fff;
+  border-color: transparent;
+}
+
+.checkbox-row {
+  min-height: 46px;
+  font-weight: 600;
+  color: var(--text-mid);
+}
+
+.btn-tight {
+  min-height: 42px;
+}
+
+@media (max-width: 900px) {
+  .settings-grid,
+  .settings-grid.compact {
+    grid-template-columns: 1fr;
+  }
+}

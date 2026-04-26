@@ -62,6 +62,11 @@ export class RencontreAnnuelle implements OnInit {
       program: Array.isArray(event?.program)
         ? [...event.program].sort((a: any, b: any) => (a?.sort_order ?? 0) - (b?.sort_order ?? 0))
         : [],
+      photos: Array.isArray(event?.photos)
+        ? [...event.photos]
+            .sort((a: any, b: any) => (a?.sort_order ?? 0) - (b?.sort_order ?? 0))
+            .filter((photo: any) => photo?.image_url)
+        : [],
     };
   }
 

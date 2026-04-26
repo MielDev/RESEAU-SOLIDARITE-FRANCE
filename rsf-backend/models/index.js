@@ -12,11 +12,13 @@ const Action       = require('./Action')(sequelize);
 const Testimonial  = require('./Testimonial')(sequelize);
 const Event        = require('./Event')(sequelize);
 const EventProgram = require('./EventProgram')(sequelize);
+const EventPhoto   = require('./EventPhoto')(sequelize);
 const Actuality    = require('./Actuality')(sequelize);
 const DonMode      = require('./DonMode')(sequelize);
 const Setting      = require('./Setting')(sequelize);
 const NavItem        = require('./NavItem')(sequelize);
 const ContactMessage = require('./ContactMessage')(sequelize);
+const JoinRequest   = require('./JoinRequest')(sequelize);
 const Accueil      = require('./Accueil')(sequelize);
 
 // ── Associations (relations) ──────────────────────────────────────────────────
@@ -28,6 +30,10 @@ MissionItem.belongsTo(Mission, { foreignKey: 'mission_id', as: 'mission' });
 // Event 1→N EventProgram (programme de la journée)
 Event.hasMany(EventProgram, { foreignKey: 'event_id', as: 'program', onDelete: 'CASCADE' });
 EventProgram.belongsTo(Event, { foreignKey: 'event_id', as: 'event' });
+
+// Event 1-N EventPhoto (galerie photos)
+Event.hasMany(EventPhoto, { foreignKey: 'event_id', as: 'photos', onDelete: 'CASCADE' });
+EventPhoto.belongsTo(Event, { foreignKey: 'event_id', as: 'event' });
 
 // ── Export ────────────────────────────────────────────────────────────────────
 const db = {
@@ -41,11 +47,13 @@ const db = {
   Testimonial,
   Event,
   EventProgram,
+  EventPhoto,
   Actuality,
   DonMode,
   Setting,
   NavItem,
   ContactMessage,
+  JoinRequest,
   Accueil,
 };
 

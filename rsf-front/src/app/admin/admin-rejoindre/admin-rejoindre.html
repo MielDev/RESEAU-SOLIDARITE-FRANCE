@@ -1,14 +1,229 @@
-<section class="panel">
+<section class="admin-page-toolbar">
+  <div>
+    <p class="admin-eyebrow">Edition de page</p>
+    <h2>Nous rejoindre</h2>
+    <span>Modifie le contenu, les avantages et les options du formulaire.</span>
+  </div>
+  <button type="button" class="btn btn-primary admin-save-btn" (click)="save()" [disabled]="saving">
+    <i class="fas fa-floppy-disk"></i>
+    <span>{{ saving ? 'Enregistrement...' : 'Enregistrer' }}</span>
+  </button>
+</section>
+
+<div class="panel">
   <div class="panel-header">
     <div>
-      <div class="panel-title"><i class="pi fas fa-screwdriver-wrench"></i>Ecran admin pret a brancher</div>
-      <div class="panel-desc">Le header et la sidebar sont maintenant mutualises. Cette page peut recevoir son formulaire, sa table ou ses actions sans recopier le layout.</div>
+      <div class="panel-title"><i class="pi fas fa-image"></i>En-tête et introduction</div>
     </div>
   </div>
   <div class="panel-body">
-    <div class="alert alert-info">
-      <i class="fas fa-circle-info"></i>
-      <div>Tu peux maintenant remplacer ce bloc par le vrai contenu de gestion de cette page.</div>
+<div class="form-grid" style="display:grid;gap:14px;">
+<div class="form-group">
+  <label for="nr_title">Titre</label>
+  <input class="input" type="text" id="nr_title" name="nr_title" [(ngModel)]="data.nr_title" placeholder=""/>
+</div>
+<div class="form-group">
+  <label for="nr_desc">Description</label>
+  <textarea class="textarea" id="nr_desc" name="nr_desc" [(ngModel)]="data.nr_desc" style="min-height:64px"></textarea>
+</div>
+<div class="form-group">
+  <label for="nr_sub">Texte d'accroche</label>
+  <input class="input" type="text" id="nr_sub" name="nr_sub" [(ngModel)]="data.nr_sub" placeholder=""/>
+</div>
+</div></div>
+</div>
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><i class="pi fas fa-inbox"></i>Demandes recues</div>
+      <div class="panel-desc">Les personnes qui ont rempli le formulaire Nous rejoindre sont stockees ici.</div>
+    </div>
+    <button type="button" class="btn btn-ghost btn-sm" (click)="loadJoinRequests()" [disabled]="loadingRequests">
+      <i class="fas fa-rotate-right"></i>
+      {{ loadingRequests ? 'Chargement...' : 'Rafraichir' }}
+    </button>
+  </div>
+  <div class="panel-body">
+    <div class="empty-state" *ngIf="!loadingRequests && joinRequests.length === 0">
+      <i class="fas fa-inbox"></i>
+      <strong>Aucune demande pour le moment</strong>
+      <span>Les prochaines demandes envoyees depuis la page publique apparaitront ici.</span>
+    </div>
+
+    <div class="request-list" *ngIf="joinRequests.length > 0">
+      <article class="request-card" *ngFor="let request of joinRequests">
+        <div class="request-main">
+          <div class="request-topline">
+            <span class="badge" [class.badge-success]="request.is_read" [class.badge-primary]="!request.is_read">
+              {{ request.is_read ? 'Lu' : 'Nouveau' }}
+            </span>
+            <span class="badge badge-gray">{{ statusLabel(request.processing_status) }}</span>
+            <span class="request-date">{{ request.createdAt || request.created_at | date:'dd/MM/yyyy HH:mm' }}</span>
+          </div>
+
+          <h3>{{ fullName(request) || 'Demande sans nom' }}</h3>
+          <div class="request-meta">
+            <span><i class="fas fa-envelope"></i>{{ request.email }}</span>
+            <span *ngIf="request.phone"><i class="fas fa-phone"></i>{{ request.phone }}</span>
+            <span *ngIf="request.city"><i class="fas fa-location-dot"></i>{{ request.city }}</span>
+          </div>
+
+          <div class="request-details">
+            <strong>{{ request.intent }}</strong>
+            <span *ngIf="request.status">{{ request.status }}</span>
+          </div>
+
+          <div class="interest-list" *ngIf="request.interestsList.length > 0">
+            <span *ngFor="let interest of request.interestsList">{{ interest }}</span>
+          </div>
+
+          <p class="request-message">{{ request.message }}</p>
+        </div>
+
+        <div class="request-actions">
+          <label class="field">
+            <span class="field-label">Traitement</span>
+            <select class="select" [(ngModel)]="request.processing_status" [name]="'join-status-' + request.id">
+              <option *ngFor="let status of requestStatusOptions" [value]="status.value">{{ status.label }}</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="field-label">Notes internes</span>
+            <textarea
+              class="textarea"
+              [(ngModel)]="request.admin_notes"
+              [name]="'join-notes-' + request.id"
+              placeholder="Suivi, appel effectue, document demande..."
+            ></textarea>
+          </label>
+
+          <div class="request-buttons">
+            <button type="button" class="btn btn-primary btn-sm" (click)="saveJoinRequest(request)" [disabled]="request.saving">
+              <i class="fas fa-floppy-disk"></i>
+              {{ request.saving ? 'Enregistrement...' : 'Enregistrer' }}
+            </button>
+            <button type="button" class="btn btn-ghost btn-sm" (click)="markJoinRequestAsRead(request)" [disabled]="request.is_read">
+              <i class="fas fa-check"></i>
+              Marquer lu
+            </button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="deleteJoinRequest(request)">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </article>
     </div>
   </div>
-</section>
+</div>
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><i class="pi fas fa-hand-holding-heart"></i>Rôles bénévoles (liste)</div>
+      <div class="panel-desc">Les activités proposées aux bénévoles</div>
+    </div>
+  </div>
+  <div class="panel-body">
+<div id="roles-list" style="display:flex;flex-direction:column;gap:8px;">
+  <div class="sortable-item">
+    <span class="drag-handle"><i class="fas fa-grip-vertical"></i></span>
+    <span class="inline-icon"><i class="fas fa-clipboard-list"></i></span>
+    <div class="si-content">
+      <input class="input" type="text" [(ngModel)]="data.role1_title" style="margin-bottom:4px;"/>
+      <input class="input" type="text" [(ngModel)]="data.role1_desc" style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+  </div>
+  <div class="sortable-item">
+    <span class="drag-handle"><i class="fas fa-grip-vertical"></i></span>
+    <span class="inline-icon"><i class="fas fa-utensils"></i></span>
+    <div class="si-content">
+      <input class="input" type="text" [(ngModel)]="data.role2_title" style="margin-bottom:4px;"/>
+      <input class="input" type="text" [(ngModel)]="data.role2_desc" style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+  </div>
+  <div class="sortable-item">
+    <span class="drag-handle"><i class="fas fa-grip-vertical"></i></span>
+    <span class="inline-icon"><i class="fas fa-cake-candles"></i></span>
+    <div class="si-content">
+      <input class="input" type="text" [(ngModel)]="data.role3_title" style="margin-bottom:4px;"/>
+      <input class="input" type="text" [(ngModel)]="data.role3_desc" style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+  </div>
+  <div class="sortable-item">
+    <span class="drag-handle"><i class="fas fa-grip-vertical"></i></span>
+    <span class="inline-icon"><i class="fas fa-laptop-code"></i></span>
+    <div class="si-content">
+      <input class="input" type="text" [(ngModel)]="data.role4_title" style="margin-bottom:4px;"/>
+      <input class="input" type="text" [(ngModel)]="data.role4_desc" style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+  </div>
+  <div class="sortable-item">
+    <span class="drag-handle"><i class="fas fa-grip-vertical"></i></span>
+    <span class="inline-icon"><i class="fas fa-bullseye"></i></span>
+    <div class="si-content">
+      <input class="input" type="text" [(ngModel)]="data.role5_title" style="margin-bottom:4px;"/>
+      <input class="input" type="text" [(ngModel)]="data.role5_desc" style="font-size:12px;"/>
+    </div>
+    <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+  </div>
+</div>
+<button class="btn btn-ghost btn-sm" style="margin-top:10px;"><i class="fas fa-plus"></i> Ajouter un rôle</button></div>
+</div>
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><i class="pi fas fa-file-lines"></i>Champs du formulaire de contact</div>
+      <div class="panel-desc">Configurez les champs affichés dans le formulaire</div>
+    </div>
+  </div>
+  <div class="panel-body">
+<div style="display:flex;flex-direction:column;gap:6px;">
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Champ Nom complet</strong><span>Affiché en premier</span></div>
+  <label class="toggle"><input type="checkbox" [(ngModel)]="data.field_name"/><span class="toggle-slider"></span></label>
+</div>
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Champ Adresse e-mail</strong><span>Obligatoire</span></div>
+  <label class="toggle"><input type="checkbox" [(ngModel)]="data.field_email"/><span class="toggle-slider"></span></label>
+</div>
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Champ Téléphone</strong><span>Optionnel</span></div>
+  <label class="toggle"><input type="checkbox" [(ngModel)]="data.field_phone"/><span class="toggle-slider"></span></label>
+</div>
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Menu déroulant 'Je souhaite…'</strong><span>Choix du type de demande</span></div>
+  <label class="toggle"><input type="checkbox" [(ngModel)]="data.field_select"/><span class="toggle-slider"></span></label>
+</div>
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Champ Message</strong><span>Zone de texte libre</span></div>
+  <label class="toggle"><input type="checkbox" [(ngModel)]="data.field_message"/><span class="toggle-slider"></span></label>
+</div>
+</div>
+<hr style="margin:16px 0;border:none;border-top:1px solid #E2E8F0;"/>
+<h4 style="font-size:13px;font-weight:700;margin-bottom:10px;">Options du menu déroulant</h4>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="form-group">
+  <label for="opt1">Option 1</label>
+  <input class="input" type="text" id="opt1" name="opt1" [(ngModel)]="data.opt1" placeholder=""/>
+</div>
+<div class="form-group">
+  <label for="opt2">Option 2</label>
+  <input class="input" type="text" id="opt2" name="opt2" [(ngModel)]="data.opt2" placeholder=""/>
+</div>
+<div class="form-group">
+  <label for="opt3">Option 3</label>
+  <input class="input" type="text" id="opt3" name="opt3" [(ngModel)]="data.opt3" placeholder=""/>
+</div>
+<div class="form-group">
+  <label for="opt4">Option 4</label>
+  <input class="input" type="text" id="opt4" name="opt4" [(ngModel)]="data.opt4" placeholder=""/>
+</div>
+</div></div>
+</div>

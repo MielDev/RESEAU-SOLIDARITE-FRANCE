@@ -10,16 +10,72 @@ import { RouterModule } from '@angular/router';
 })
 export class AdminDashboard {
   readonly stats = [
-    { label: 'Pages admin', value: '14', sub: 'Ecrans relies au layout admin', icon: 'fas fa-layer-group' },
-    { label: 'Pages publiques', value: '13', sub: 'Pages pilotables depuis le back-office', icon: 'fas fa-globe' },
-    { label: 'Sections DB', value: '100%', sub: 'Contenus front relies au backend', icon: 'fas fa-database' },
-    { label: 'Priorite', value: 'UI', sub: 'Structurer les formulaires d edition', icon: 'fas fa-wand-magic-sparkles' },
+    { label: 'Pages publiques', value: '14', sub: 'Textes et blocs modifiables', icon: 'fas fa-layer-group' },
+    { label: 'Collections', value: '7', sub: 'Ajout, edition, suppression', icon: 'fas fa-table-list' },
+    { label: 'Navigation', value: 'OK', sub: 'Menu et liens du site', icon: 'fas fa-compass' },
+    { label: 'Messages', value: 'Live', sub: 'Demandes depuis les formulaires', icon: 'fas fa-inbox' },
   ];
 
   readonly quickLinks = [
-    { href: '/admin/accueil', label: 'Modifier la page Accueil', icon: 'fas fa-house' },
-    { href: '/admin/missions', label: 'Gerer les missions', icon: 'fas fa-bullseye' },
-    { href: '/admin/evenements', label: 'Gerer les evenements', icon: 'fas fa-calendar-days' },
-    { href: '/admin/settings', label: 'Regler les parametres du site', icon: 'fas fa-gear' },
+    {
+      href: '/admin/accueil',
+      label: 'Page Accueil',
+      description: 'Hero, boutons, statistiques, navigation et CTA.',
+      icon: 'fas fa-house',
+    },
+    {
+      href: '/admin/missions',
+      label: 'Missions',
+      description: 'Cartes de missions et points associes.',
+      icon: 'fas fa-bullseye',
+    },
+    {
+      href: '/admin/evenements',
+      label: 'Evenements',
+      description: 'Programme, dates, lieux et mise en avant.',
+      icon: 'fas fa-calendar-days',
+    },
+    {
+      href: '/admin/settings',
+      label: 'Parametres',
+      description: 'Identite, coordonnees et navigation.',
+      icon: 'fas fa-gear',
+    },
+  ];
+
+  readonly adminGroups = [
+    {
+      title: 'Association',
+      items: [
+        { href: '/admin/qui-sommes-nous', label: 'Qui sommes-nous', icon: 'fas fa-book-open' },
+        { href: '/admin/organisation', label: 'Organisation', icon: 'fas fa-users' },
+        { href: '/admin/temoignages', label: 'Temoignages', icon: 'fas fa-comments' },
+      ],
+    },
+    {
+      title: 'Actions',
+      items: [
+        { href: '/admin/missions', label: 'Missions', icon: 'fas fa-bullseye' },
+        { href: '/admin/actions-solidaires', label: 'Actions solidaires', icon: 'fas fa-handshake-angle' },
+        { href: '/admin/international', label: 'International', icon: 'fas fa-globe' },
+        { href: '/admin/soutien', label: 'Soutien', icon: 'fas fa-heart' },
+      ],
+    },
+    {
+      title: 'Publication',
+      items: [
+        { href: '/admin/evenements', label: 'Evenements', icon: 'fas fa-calendar-days' },
+        { href: '/admin/rencontre', label: 'Rencontre annuelle', icon: 'fas fa-cake-candles' },
+        { href: '/admin/actualites', label: 'Actualites', icon: 'fas fa-newspaper' },
+      ],
+    },
+    {
+      title: 'Conversion',
+      items: [
+        { href: '/admin/rejoindre', label: 'Nous rejoindre', icon: 'fas fa-user-plus' },
+        { href: '/admin/don', label: 'Don', icon: 'fas fa-hand-holding-heart' },
+        { href: '/admin/contact', label: 'Contact', icon: 'fas fa-envelope' },
+      ],
+    },
   ];
 }

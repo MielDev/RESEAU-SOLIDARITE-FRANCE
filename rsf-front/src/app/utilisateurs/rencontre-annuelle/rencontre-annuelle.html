@@ -2,9 +2,9 @@
   <div class="container">
     <div class="breadcrumb">
       <a routerLink="/">Accueil</a>
-      <span class="sep">›</span>
+      <span class="sep">&rsaquo;</span>
       <a routerLink="/evenements">Evenements</a>
-      <span class="sep">›</span>
+      <span class="sep">&rsaquo;</span>
       Rencontre annuelle
     </div>
     <div class="badge" *ngIf="annualEvent?.edition">
@@ -13,8 +13,8 @@
     <h1>{{ annualEvent?.title }}</h1>
     <p>
       {{ formatDate(annualEvent?.event_date) }}
-      <span *ngIf="annualEvent?.time_start || annualEvent?.time_end"> · {{ formatTimeRange(annualEvent?.time_start, annualEvent?.time_end) }}</span>
-      <span *ngIf="annualEvent?.location"> · {{ annualEvent.location }}</span>
+      <span *ngIf="annualEvent?.time_start || annualEvent?.time_end"> &middot; {{ formatTimeRange(annualEvent?.time_start, annualEvent?.time_end) }}</span>
+      <span *ngIf="annualEvent?.location"> &middot; {{ annualEvent.location }}</span>
     </p>
   </div>
 </header>
@@ -58,11 +58,22 @@
       </div>
     </div>
 
+    <section class="event-gallery fade-up" *ngIf="annualEvent?.photos?.length">
+      <div class="s-label">Photos</div>
+      <h2 class="s-title">La rencontre en images</h2>
+      <div class="gallery-grid">
+        <figure *ngFor="let photo of annualEvent.photos">
+          <img [src]="photo.image_url" [alt]="photo.alt_text || photo.caption || annualEvent.title" />
+          <figcaption *ngIf="photo.caption">{{ photo.caption }}</figcaption>
+        </figure>
+      </div>
+    </section>
+
     <div class="cta-banner" *ngIf="annualEvent">
       <p class="cta-text">{{ pageContent?.content?.ctaText }}</p>
       <p class="cta-subtext">
         <span *ngIf="annualEvent.contact_email"><i class="fas fa-envelope"></i> {{ annualEvent.contact_email }}</span>
-        <span *ngIf="annualEvent.contact_email && annualEvent.contact_website"> · </span>
+        <span *ngIf="annualEvent.contact_email && annualEvent.contact_website"> &middot; </span>
         <span *ngIf="annualEvent.contact_website"><i class="fas fa-globe"></i> {{ annualEvent.contact_website }}</span>
       </p>
       <a

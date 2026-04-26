@@ -1,94 +1,130 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
-import { filter } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
+import { AdminAuthService } from '../admin-auth.service';
 
 type AdminNavItem = {
   href: string;
   icon: string;
   label: string;
-  exact?: boolean;
-  badge?: string;
 };
 
-type AdminNavSection = {
-  label: string;
+type AdminNavGroup = {
+  title: string;
   items: AdminNavItem[];
 };
 
 @Component({
   selector: 'app-admin-layout',
+  standalone: true,
   imports: [CommonModule, RouterModule, RouterOutlet],
   templateUrl: './admin-layout.html',
   styleUrl: './admin-layout.css',
-  encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class AdminLayout implements OnInit {
-  isMobileSidebarOpen = false;
-  currentPageTitle = 'Administration';
-  currentSectionLabel = 'Administration';
+export class AdminLayout implements OnInit, OnDestroy {
+  currentTitle = 'Tableau de bord';
+  currentSection = 'General';
+  isSidebarOpen = false;
 
-  readonly navSections: AdminNavSection[] = [
+  readonly mainLink: AdminNavItem = {
+    href: '/admin/dashboard',
+    label: 'Tableau de bord',
+    icon: 'fas fa-gauge-high',
+  };
+
+  readonly navGroups: AdminNavGroup[] = [
     {
-      label: 'General',
+      title: 'Association',
       items: [
-        { href: '/admin/dashboard', icon: 'fas fa-chart-line', label: 'Tableau de bord', exact: true },
-        { href: '/admin/settings', icon: 'fas fa-gear', label: 'Parametres' },
+        { href: '/admin/accueil', label: 'Accueil', icon: 'fas fa-house' },
+        { href: '/admin/qui-sommes-nous', label: 'Qui sommes-nous', icon: 'fas fa-book-open' },
+        { href: '/admin/organisation', label: 'Organisation', icon: 'fas fa-users' },
+        { href: '/admin/temoignages', label: 'Temoignages', icon: 'fas fa-comments' },
       ],
     },
     {
-      label: 'Pages publiques',
+      title: 'Actions',
       items: [
-        { href: '/admin/accueil', icon: 'fas fa-house', label: 'Accueil' },
-        { href: '/admin/qui-sommes-nous', icon: 'fas fa-book-open', label: 'Qui sommes-nous' },
-        { href: '/admin/organisation', icon: 'fas fa-users', label: 'Organisation' },
-        { href: '/admin/missions', icon: 'fas fa-bullseye', label: 'Missions' },
-        { href: '/admin/actions-solidaires', icon: 'fas fa-handshake-angle', label: 'Actions solidaires' },
-        { href: '/admin/soutien', icon: 'fas fa-heart', label: 'Soutien aux membres' },
-        { href: '/admin/international', icon: 'fas fa-globe', label: 'International' },
-        { href: '/admin/evenements', icon: 'fas fa-calendar-days', label: 'Evenements' },
-        { href: '/admin/rencontre', icon: 'fas fa-cake-candles', label: 'Rencontre annuelle' },
-        { href: '/admin/temoignages', icon: 'fas fa-comments', label: 'Temoignages' },
-        { href: '/admin/actualites', icon: 'fas fa-newspaper', label: 'Actualites' },
-        { href: '/admin/contact', icon: 'fas fa-envelope', label: 'Contact' },
-        { href: '/admin/don', icon: 'fas fa-hand-holding-heart', label: 'Don' },
-        { href: '/admin/rejoindre', icon: 'fas fa-user-plus', label: 'Nous rejoindre', badge: 'NEW' },
+        { href: '/admin/missions', label: 'Missions', icon: 'fas fa-bullseye' },
+        { href: '/admin/actions-solidaires', label: 'Actions solidaires', icon: 'fas fa-handshake-angle' },
+        { href: '/admin/international', label: 'International', icon: 'fas fa-globe' },
+        { href: '/admin/soutien', label: 'Soutien', icon: 'fas fa-heart' },
+      ],
+    },
+    {
+      title: 'Publication',
+      items: [
+        { href: '/admin/evenements', label: 'Evenements', icon: 'fas fa-calendar-days' },
+        { href: '/admin/rencontre', label: 'Rencontre annuelle', icon: 'fas fa-cake-candles' },
+        { href: '/admin/actualites', label: 'Actualites', icon: 'fas fa-newspaper' },
+      ],
+    },
+    {
+      title: 'Conversion',
+      items: [
+        { href: '/admin/rejoindre', label: 'Nous rejoindre', icon: 'fas fa-user-plus' },
+        { href: '/admin/don', label: 'Don', icon: 'fas fa-hand-holding-heart' },
+        { href: '/admin/contact', label: 'Contact', icon: 'fas fa-envelope' },
       ],
     },
   ];
 
+  private routerEvents?: Subscription;
+
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    public readonly auth: AdminAuthService,
+    @Inject(DOCUMENT) private readonly document: Document,
   ) {}
 
   ngOnInit() {
-    this.syncRouteMeta();
-
-    this.router.events
+    this.document.body.classList.add('admin-mode');
+    this.updateRouteContext();
+    this.routerEvents = this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe(() => {
-        this.syncRouteMeta();
         this.closeSidebar();
+        this.updateRouteContext();
       });
   }
 
+  ngOnDestroy() {
+    this.document.body.classList.remove('admin-mode');
+    this.routerEvents?.unsubscribe();
+  }
+
+  get userName() {
+    return this.auth.user()?.name || 'Administrateur';
+  }
+
+  get userInitials() {
+    return this.auth.getUserInitials();
+  }
+
   toggleSidebar() {
-    this.isMobileSidebarOpen = !this.isMobileSidebarOpen;
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
 
   closeSidebar() {
-    this.isMobileSidebarOpen = false;
+    this.isSidebarOpen = false;
   }
 
-  private syncRouteMeta() {
-    let activeRoute = this.route;
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/admin/login']);
+  }
 
-    while (activeRoute.firstChild) {
+  private updateRouteContext() {
+    let activeRoute: ActivatedRoute | null = this.route;
+
+    while (activeRoute?.firstChild) {
       activeRoute = activeRoute.firstChild;
     }
 
-    this.currentPageTitle = activeRoute.snapshot.data['title'] || 'Administration';
-    this.currentSectionLabel = activeRoute.snapshot.data['section'] || this.currentPageTitle;
+    const data = activeRoute?.snapshot.data ?? {};
+    this.currentTitle = data['title'] || 'Back-office';
+    this.currentSection = data['section'] || 'General';
   }
 }

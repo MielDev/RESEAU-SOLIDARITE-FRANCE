@@ -1,14 +1,225 @@
-<section class="panel">
+<section class="admin-page-toolbar">
+  <div>
+    <p class="admin-eyebrow">Edition de page</p>
+    <h2>Temoignages</h2>
+    <span>Modifie le bloc d'appel a l'action affiche sur la page.</span>
+  </div>
+  <button type="button" class="btn btn-primary admin-save-btn" (click)="save()" [disabled]="saving">
+    <i class="fas fa-floppy-disk"></i>
+    <span>{{ saving ? 'Enregistrement...' : 'Enregistrer' }}</span>
+  </button>
+</section>
+
+<div class="panel">
   <div class="panel-header">
     <div>
-      <div class="panel-title"><i class="pi fas fa-screwdriver-wrench"></i>Ecran admin pret a brancher</div>
-      <div class="panel-desc">Le header et la sidebar sont maintenant mutualises. Cette page peut recevoir son formulaire, sa table ou ses actions sans recopier le layout.</div>
+      <div class="panel-title"><i class="pi fas fa-comments"></i>Liste des témoignages</div>
+      <div class="panel-desc">12 témoignages publiés</div>
+    </div>
+  </div>
+  <div class="panel-body"><div style="display:flex;justify-content:flex-end;margin-bottom:16px;"><button class="btn btn-primary" onclick="document.getElementById('new-testi').style.display='block'"><i class="fas fa-plus"></i> Nouveau témoignage</button></div><div class="table-wrap"><table><thead><tr><th>Avatar</th><th>Nom</th><th>Profil</th><th>Témoignage</th><th>Statut</th><th>Actions</th></tr></thead><tbody>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">S</div></td>
+  <td><strong>Sarah</strong></td>
+  <td><span class="badge badge-gray">Étudiante</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"À mon arrivée à Rennes, j'étais perdue. L'association m'a aidée pour l…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-pen"></i></button>
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-eye"></i></button>
+      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">F</div></td>
+  <td><strong>Franck</strong></td>
+  <td><span class="badge badge-gray">Salarié</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"J'ai été orienté par le Réseau vers une formation en alternance, j'ai …"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-pen"></i></button>
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-eye"></i></button>
+      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">L</div></td>
+  <td><strong>Lucie</strong></td>
+  <td><span class="badge badge-gray">Bénévole</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Rejoindre l'association a été l'une de mes meilleures décisions. Donne…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-pen"></i></button>
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-eye"></i></button>
+      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">J</div></td>
+  <td><strong>Judith</strong></td>
+  <td><span class="badge badge-gray">Étudiante</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Grâce à RÉSEAU SOLIDARITÉ FRANCE, j'ai pu renouveler mon titre de séjo…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-pen"></i></button>
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-eye"></i></button>
+      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">H</div></td>
+  <td><strong>Hélène</strong></td>
+  <td><span class="badge badge-gray">Étudiante</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Je traversais une période très difficile. L'association m'a apporté un…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-pen"></i></button>
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-eye"></i></button>
+      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">C</div></td>
+  <td><strong>Capello</strong></td>
+  <td><span class="badge badge-gray">Étudiant</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"J'ai pu améliorer mon CV et me préparer aux entretiens. Quelques semai…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-pen"></i></button>
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-eye"></i></button>
+      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">E</div></td>
+  <td><strong>Erwan</strong></td>
+  <td><span class="badge badge-gray">Étudiant</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"En arrivant en France, je me sentais seul. Grâce aux rencontres organi…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-pen"></i></button>
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-eye"></i></button>
+      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">J</div></td>
+  <td><strong>Josué</strong></td>
+  <td><span class="badge badge-gray">Étudiant</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Ce que j'apprécie le plus, c'est le sérieux et la disponibilité de l'é…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-pen"></i></button>
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-eye"></i></button>
+      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">S</div></td>
+  <td><strong>Sandrîe</strong></td>
+  <td><span class="badge badge-gray">Étudiante</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Grâce à l'accompagnement, j'ai été guidée dans la constitution de mon …"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-pen"></i></button>
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-eye"></i></button>
+      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">T</div></td>
+  <td><strong>Teddy</strong></td>
+  <td><span class="badge badge-gray">Étudiant</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Je ne comprenais rien aux démarches administratives. Grâce à l'associa…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-pen"></i></button>
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-eye"></i></button>
+      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">A</div></td>
+  <td><strong>Ariane</strong></td>
+  <td><span class="badge badge-gray">Étudiante</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Au-delà de l'aide concrète, j'ai trouvé une vraie écoute. Cela m'a per…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-pen"></i></button>
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-eye"></i></button>
+      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2F5DFF,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">P</div></td>
+  <td><strong>Parfait</strong></td>
+  <td><span class="badge badge-gray">Étudiant</span></td>
+  <td style="max-width:260px;font-size:12.5px;color:#475569;font-style:italic;">"Intégrer le groupe m'a permis de rencontrer des personnes formidables.…"</td>
+  <td><span class="badge badge-success">✓ Publié</span></td>
+  <td>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-pen"></i></button>
+      <button class="btn btn-ghost btn-sm"><i class="fas fa-eye"></i></button>
+      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
+    </div>
+  </td>
+</tr></tbody></table></div>
+<div id="new-testi" style="display:none;margin-top:20px;background:#F8FAFC;border-radius:10px;padding:20px;border:1px solid #E2E8F0;">
+  <h4 style="font-size:14px;font-weight:700;margin-bottom:14px;">Nouveau témoignage</h4>
+  <div style="display:grid;grid-template-columns:1fr 1fr 80px;gap:12px;margin-bottom:12px;">
+    <div class="form-group"><label>Prénom</label><input class="input" type="text" [(ngModel)]="data.new_prenom" placeholder="Prénom"/></div>
+    <div class="form-group"><label>Profil</label><select class="select" [(ngModel)]="data.new_profil"><option>étudiant(e)</option><option>salarié(e)</option><option>bénévole</option><option>autre</option></select></div>
+    <div class="form-group"><label>Initiales</label><input class="input" type="text" maxlength="2" [(ngModel)]="data.new_initiales" placeholder="MA"/></div>
+  </div>
+  <div class="form-group" style="margin-bottom:12px;"><label>Témoignage</label><textarea class="textarea" [(ngModel)]="data.new_temoignage" placeholder="Saisissez le témoignage…" style="min-height:100px;"></textarea></div>
+  <div style="display:flex;gap:8px;">
+    <button class="btn btn-primary btn-sm">Publier</button>
+    <button class="btn btn-ghost btn-sm" onclick="document.getElementById('new-testi').style.display='none'">Annuler</button>
+  </div>
+</div></div>
+</div>
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><i class="pi fas fa-bullhorn"></i>Appel à témoignages (bas de page)</div>
     </div>
   </div>
   <div class="panel-body">
-    <div class="alert alert-info">
-      <i class="fas fa-circle-info"></i>
-      <div>Tu peux maintenant remplacer ce bloc par le vrai contenu de gestion de cette page.</div>
-    </div>
-  </div>
-</section>
+<div class="form-grid" style="display:grid;gap:12px;">
+<div class="form-group">
+  <label for="ta_title">Titre</label>
+  <input class="input" type="text" id="ta_title" name="ta_title" [(ngModel)]="data.ta_title" placeholder=""/>
+</div>
+<div class="form-group">
+  <label for="ta_desc">Description</label>
+  <input class="input" type="text" id="ta_desc" name="ta_desc" [(ngModel)]="data.ta_desc" placeholder=""/>
+</div>
+<div class="form-group">
+  <label for="ta_btn">Texte du bouton</label>
+  <input class="input" type="text" id="ta_btn" name="ta_btn" [(ngModel)]="data.ta_btn" placeholder=""/>
+</div>
+</div></div>
+</div>

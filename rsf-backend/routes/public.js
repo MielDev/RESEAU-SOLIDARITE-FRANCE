@@ -7,6 +7,7 @@ const {
   Testimonial,
   Event,
   EventProgram,
+  EventPhoto,
   Actuality,
   Setting,
   NavItem,
@@ -121,8 +122,15 @@ router.get('/events', async (req, res, next) => {
   try {
     const rows = await Event.findAll({
       where: { is_published: true },
-      include: [{ model: EventProgram, as: 'program', order: [['sort_order', 'ASC']] }],
-      order: [['event_date', 'ASC']],
+      include: [
+        { model: EventProgram, as: 'program' },
+        { model: EventPhoto, as: 'photos' },
+      ],
+      order: [
+        ['event_date', 'ASC'],
+        [{ model: EventProgram, as: 'program' }, 'sort_order', 'ASC'],
+        [{ model: EventPhoto, as: 'photos' }, 'sort_order', 'ASC'],
+      ],
     });
     res.json({ success: true, data: rows });
   } catch (err) {

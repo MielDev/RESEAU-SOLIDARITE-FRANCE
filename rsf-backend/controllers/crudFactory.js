@@ -2,6 +2,34 @@
 // ─── Fabrique de contrôleurs CRUD génériques ──────────────────────────────────
 const { createError } = require('../middleware/errorHandler');
 
+const ignoredQueryKeys = new Set(['page', 'limit', 'offset', 'sort', 'order']);
+
+const castQueryValue = (value) => {
+  if (value === 'true') return true;
+  if (value === 'false') return false;
+  if (typeof value === 'string' && value.trim() !== '' && !Number.isNaN(Number(value))) {
+    return Number(value);
+  }
+  return value;
+};
+
+const buildQueryWhere = (Model, query = {}) =>
+  Object.entries(query).reduce((where, [key, value]) => {
+    if (
+      ignoredQueryKeys.has(key) ||
+      value === undefined ||
+      value === null ||
+      value === '' ||
+      Array.isArray(value) ||
+      !Model.rawAttributes?.[key]
+    ) {
+      return where;
+    }
+
+    where[key] = castQueryValue(value);
+    return where;
+  }, {});
+
 /**
  * Génère les 5 opérations CRUD standard pour un modèle Sequelize.
  * @param {Model} Model   - Le modèle Sequelize
@@ -14,7 +42,10 @@ const crudFactory = (Model, label, opts = {}) => {
   return {
     getAll: async (req, res, next) => {
       try {
-        const where = req.user ? {} : publicFilter;
+        const where = {
+          ...(req.user ? {} : publicFilter),
+          ...buildQueryWhere(Model, req.query),
+        };
         const rows = await Model.findAll({ where, order: orderBy, ...findOptions });
         res.json({ success: true, data: rows, total: rows.length });
       } catch (err) { next(err); }

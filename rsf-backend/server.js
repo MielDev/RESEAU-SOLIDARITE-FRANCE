@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 3001;
 // ─── MIDDLEWARES GLOBAUX ──────────────────────────────────────────────────────
 // app.use(helmet());                          // En-têtes sécurité HTTP
 app.use(cors());
-app.use(express.json({ limit: '2mb' }));    // Parse JSON
+app.use(express.json({ limit: '12mb' }));   // Parse JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(logger);                            // Log des requêtes
 app.use(globalLimiter);                     // Rate limiting

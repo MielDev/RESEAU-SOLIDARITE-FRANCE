@@ -1,14 +1,32 @@
-<section class="panel">
+<section class="admin-page-toolbar">
+  <div>
+    <p class="admin-eyebrow">Edition de page</p>
+    <h2>Don</h2>
+    <span>Modifie le titre et le texte d'introduction de la page de don.</span>
+  </div>
+  <button type="button" class="btn btn-primary admin-save-btn" (click)="save()" [disabled]="saving">
+    <i class="fas fa-floppy-disk"></i>
+    <span>{{ saving ? 'Enregistrement...' : 'Enregistrer' }}</span>
+  </button>
+</section>
+
+<div class="panel">
   <div class="panel-header">
     <div>
-      <div class="panel-title"><i class="pi fas fa-screwdriver-wrench"></i>Ecran admin pret a brancher</div>
-      <div class="panel-desc">Le header et la sidebar sont maintenant mutualises. Cette page peut recevoir son formulaire, sa table ou ses actions sans recopier le layout.</div>
+      <div class="panel-title"><i class="pi fas fa-image"></i>En-tête et description générale</div>
     </div>
   </div>
   <div class="panel-body">
-    <div class="alert alert-info">
-      <i class="fas fa-circle-info"></i>
-      <div>Tu peux maintenant remplacer ce bloc par le vrai contenu de gestion de cette page.</div>
-    </div>
-  </div>
-</section>
+<div class="form-grid" style="display:grid;gap:14px;">
+<div class="form-group">
+  <label for="don_title">Titre</label>
+  <input class="input" type="text" id="don_title" name="don_title" [(ngModel)]="data.don_title" placeholder=""/>
+</div>
+<div class="form-group">
+  <label for="don_desc">Description principale</label>
+  <textarea class="textarea" id="don_desc" name="don_desc" [(ngModel)]="data.don_desc" style="min-height:88px"></textarea>
+</div>
+</div></div>
+</div>
+
+<!-- Ajouter d'autres panels si nécessaire -->

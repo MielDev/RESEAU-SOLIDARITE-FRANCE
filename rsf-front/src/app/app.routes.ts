@@ -8,6 +8,7 @@ import { ActionsSolidaires } from './utilisateurs/actions-solidaires/actions-sol
 import { SoutienAuxMembres } from './utilisateurs/soutien-aux-membres/soutien-aux-membres';
 import { ActionsInternationales } from './utilisateurs/actions-internationales/actions-internationales';
 import { Evenements } from './utilisateurs/evenements/evenements';
+import { EvenementDetail } from './utilisateurs/evenement-detail/evenement-detail';
 import { RencontreAnnuelle } from './utilisateurs/rencontre-annuelle/rencontre-annuelle';
 import { Temoignages } from './utilisateurs/temoignages/temoignages';
 import { NousRejoindre } from './utilisateurs/nous-rejoindre/nous-rejoindre';
@@ -15,48 +16,99 @@ import { Actualites } from './utilisateurs/actualites/actualites';
 import { Contact } from './utilisateurs/contact/contact';
 import { Don } from './utilisateurs/don/don';
 import { settingsResolver, listResolver, pageResolver } from './resolvers/data.resolver';
-import { AdminLayout } from './admin/admin-layout/admin-layout';
-import { AdminDashboard } from './admin/admin-dashboard/admin-dashboard';
-import { AdminLogin } from './admin/admin-login/admin-login';
-import { AdminAccueil } from './admin/admin-accueil/admin-accueil';
-import { AdminQuiSommesNous } from './admin/admin-qui-sommes-nous/admin-qui-sommes-nous';
-import { AdminOrganisation } from './admin/admin-organisation/admin-organisation';
-import { AdminMissions } from './admin/admin-missions/admin-missions';
-import { AdminActionsSolidaires } from './admin/admin-actions-solidaires/admin-actions-solidaires';
-import { AdminSoutien } from './admin/admin-soutien/admin-soutien';
-import { AdminInternational } from './admin/admin-international/admin-international';
-import { AdminEvenements } from './admin/admin-evenements/admin-evenements';
-import { AdminRencontre } from './admin/admin-rencontre/admin-rencontre';
-import { AdminTemoignages } from './admin/admin-temoignages/admin-temoignages';
-import { AdminActualites } from './admin/admin-actualites/admin-actualites';
-import { AdminContact } from './admin/admin-contact/admin-contact';
-import { AdminDon } from './admin/admin-don/admin-don';
-import { AdminRejoindre } from './admin/admin-rejoindre/admin-rejoindre';
-import { AdminSettings } from './admin/admin-settings/admin-settings';
+import { adminAuthGuard } from './admin/admin-auth.guard';
 
 export const routes: Routes = [
-  { path: 'admin/login', component: AdminLogin },
+  { path: 'admin/login', loadComponent: () => import('./admin/admin-login/admin-login').then((m) => m.AdminLogin) },
   {
     path: 'admin',
-    component: AdminLayout,
+    loadComponent: () => import('./admin/admin-layout/admin-layout').then((m) => m.AdminLayout),
+    canActivate: [adminAuthGuard],
+    canActivateChild: [adminAuthGuard],
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-      { path: 'dashboard', component: AdminDashboard, data: { title: 'Tableau de bord', section: 'General' } },
-      { path: 'accueil', component: AdminAccueil, data: { title: 'Accueil', section: 'Pages publiques' } },
-      { path: 'qui-sommes-nous', component: AdminQuiSommesNous, data: { title: 'Qui sommes-nous', section: 'Pages publiques' } },
-      { path: 'organisation', component: AdminOrganisation, data: { title: 'Organisation', section: 'Pages publiques' } },
-      { path: 'missions', component: AdminMissions, data: { title: 'Missions', section: 'Pages publiques' } },
-      { path: 'actions-solidaires', component: AdminActionsSolidaires, data: { title: 'Actions solidaires', section: 'Pages publiques' } },
-      { path: 'soutien', component: AdminSoutien, data: { title: 'Soutien aux membres', section: 'Pages publiques' } },
-      { path: 'international', component: AdminInternational, data: { title: 'International', section: 'Pages publiques' } },
-      { path: 'evenements', component: AdminEvenements, data: { title: 'Evenements', section: 'Pages publiques' } },
-      { path: 'rencontre', component: AdminRencontre, data: { title: 'Rencontre annuelle', section: 'Pages publiques' } },
-      { path: 'temoignages', component: AdminTemoignages, data: { title: 'Temoignages', section: 'Pages publiques' } },
-      { path: 'actualites', component: AdminActualites, data: { title: 'Actualites', section: 'Pages publiques' } },
-      { path: 'contact', component: AdminContact, data: { title: 'Contact', section: 'Pages publiques' } },
-      { path: 'don', component: AdminDon, data: { title: 'Don', section: 'Pages publiques' } },
-      { path: 'rejoindre', component: AdminRejoindre, data: { title: 'Nous rejoindre', section: 'Pages publiques' } },
-      { path: 'settings', component: AdminSettings, data: { title: 'Parametres', section: 'General' } },
+      {
+        path: 'dashboard',
+        loadComponent: () => import('./admin/admin-dashboard/admin-dashboard').then((m) => m.AdminDashboard),
+        data: { title: 'Tableau de bord', section: 'General' },
+      },
+      {
+        path: 'accueil',
+        loadComponent: () => import('./admin/admin-accueil/admin-accueil').then((m) => m.AdminAccueil),
+        data: { title: 'Accueil', section: 'Pages publiques' },
+      },
+      {
+        path: 'qui-sommes-nous',
+        loadComponent: () =>
+          import('./admin/admin-qui-sommes-nous/admin-qui-sommes-nous').then((m) => m.AdminQuiSommesNous),
+        data: { title: 'Qui sommes-nous', section: 'Pages publiques' },
+      },
+      {
+        path: 'organisation',
+        loadComponent: () => import('./admin/admin-organisation/admin-organisation').then((m) => m.AdminOrganisation),
+        data: { title: 'Organisation', section: 'Pages publiques' },
+      },
+      {
+        path: 'missions',
+        loadComponent: () => import('./admin/admin-missions/admin-missions').then((m) => m.AdminMissions),
+        data: { title: 'Missions', section: 'Pages publiques' },
+      },
+      {
+        path: 'actions-solidaires',
+        loadComponent: () =>
+          import('./admin/admin-actions-solidaires/admin-actions-solidaires').then((m) => m.AdminActionsSolidaires),
+        data: { title: 'Actions solidaires', section: 'Pages publiques' },
+      },
+      {
+        path: 'soutien',
+        loadComponent: () => import('./admin/admin-soutien/admin-soutien').then((m) => m.AdminSoutien),
+        data: { title: 'Soutien aux membres', section: 'Pages publiques' },
+      },
+      {
+        path: 'international',
+        loadComponent: () => import('./admin/admin-international/admin-international').then((m) => m.AdminInternational),
+        data: { title: 'International', section: 'Pages publiques' },
+      },
+      {
+        path: 'evenements',
+        loadComponent: () => import('./admin/admin-evenements/admin-evenements').then((m) => m.AdminEvenements),
+        data: { title: 'Evenements', section: 'Pages publiques' },
+      },
+      {
+        path: 'rencontre',
+        loadComponent: () => import('./admin/admin-rencontre/admin-rencontre').then((m) => m.AdminRencontre),
+        data: { title: 'Rencontre annuelle', section: 'Pages publiques' },
+      },
+      {
+        path: 'temoignages',
+        loadComponent: () => import('./admin/admin-temoignages/admin-temoignages').then((m) => m.AdminTemoignages),
+        data: { title: 'Temoignages', section: 'Pages publiques' },
+      },
+      {
+        path: 'actualites',
+        loadComponent: () => import('./admin/admin-actualites/admin-actualites').then((m) => m.AdminActualites),
+        data: { title: 'Actualites', section: 'Pages publiques' },
+      },
+      {
+        path: 'contact',
+        loadComponent: () => import('./admin/admin-contact/admin-contact').then((m) => m.AdminContact),
+        data: { title: 'Contact', section: 'Pages publiques' },
+      },
+      {
+        path: 'don',
+        loadComponent: () => import('./admin/admin-don/admin-don').then((m) => m.AdminDon),
+        data: { title: 'Don', section: 'Pages publiques' },
+      },
+      {
+        path: 'rejoindre',
+        loadComponent: () => import('./admin/admin-rejoindre/admin-rejoindre').then((m) => m.AdminRejoindre),
+        data: { title: 'Nous rejoindre', section: 'Pages publiques' },
+      },
+      {
+        path: 'settings',
+        loadComponent: () => import('./admin/admin-settings/admin-settings').then((m) => m.AdminSettings),
+        data: { title: 'Parametres', section: 'General' },
+      },
     ]
   },
   {
@@ -90,6 +142,12 @@ export const routes: Routes = [
       {
         path: 'evenements',
         component: Evenements,
+        resolve: { pageContent: pageResolver, events: listResolver },
+        data: { pageKey: 'evenements', listType: 'events' }
+      },
+      {
+        path: 'evenements/:id',
+        component: EvenementDetail,
         resolve: { pageContent: pageResolver, events: listResolver },
         data: { pageKey: 'evenements', listType: 'events' }
       },

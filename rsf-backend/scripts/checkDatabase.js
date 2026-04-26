@@ -340,11 +340,13 @@ async function main() {
     ['Testimonial',  db.Testimonial],
     ['Event',        db.Event],
     ['EventProgram', db.EventProgram],
+    ['EventPhoto',   db.EventPhoto],
     ['Actuality',    db.Actuality],
     ['DonMode',      db.DonMode],
     ['Setting',      db.Setting],
     ['NavItem',      db.NavItem],
     ['ContactMessage', db.ContactMessage],
+    ['JoinRequest', db.JoinRequest],
   ];
 
   for (const [name, model] of modelsToCheck) {

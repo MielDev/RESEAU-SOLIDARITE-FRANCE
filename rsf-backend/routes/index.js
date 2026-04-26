@@ -9,6 +9,7 @@ router.use('/public',       require('./public'));    // API publique (site front
 router.use('/actions-solidaires', require('./actions-solidaires')); // New route for actions solidaires
 
 router.use('/contact',      require('./contact'));   // public POST + admin GET
+router.use('/join-requests', require('./joinRequests')); // public POST + admin processing
 
 // ── Routes protégées (JWT requis) ─────────────────────────────────────────────
 router.use(authenticate);

@@ -1,134 +1,277 @@
-<div class="alert alert-info">
-  <i class="fas fa-circle-info"></i>
+<section class="admin-page-toolbar">
   <div>
-    Cette page a ete convertie en composant Angular. Le header et la sidebar viennent maintenant du layout admin partage.
+    <p class="admin-eyebrow">Edition de page</p>
+    <h2>Accueil</h2>
+    <span>Modifie le hero, les boutons, les statistiques et l'appel a l'action.</span>
   </div>
-</div>
+  <button type="button" class="btn btn-primary admin-save-btn" (click)="save()" [disabled]="saving">
+    <i class="fas fa-floppy-disk"></i>
+    <span>{{ saving ? 'Enregistrement...' : 'Enregistrer' }}</span>
+  </button>
+</section>
 
-<section class="panel">
+<div class="panel">
   <div class="panel-header">
     <div>
-      <div class="panel-title"><i class="pi fas fa-panorama"></i> Hero de la page d'accueil</div>
-      <div class="panel-desc">Le contenu principal visible des l'arrivee sur la page publique.</div>
-    </div>
-    <div class="panel-actions">
-      <span class="status-chip" [ngClass]="'status-' + saveState">{{ saveLabel }}</span>
-      <button type="button" class="btn" (click)="simulateSave()">Simuler un enregistrement</button>
+      <div class="panel-title"><i class="pi fas fa-image"></i>Heros - Section principale</div>
+      <div class="panel-desc">Le grand bandeau visible en premier sur la page d'accueil</div>
     </div>
   </div>
-  <div class="panel-body section-stack">
-    <div class="form-grid">
-      <label class="field" *ngFor="let field of heroFields">
-        <span class="field-label">{{ field.label }}</span>
-        <textarea
-          *ngIf="field.type === 'textarea'; else textField"
-          class="textarea"
-          [name]="field.id"
-          [(ngModel)]="field.value"
-        ></textarea>
-        <ng-template #textField>
-          <input class="input" type="text" [name]="field.id" [(ngModel)]="field.value" />
-        </ng-template>
-        <span class="field-hint" *ngIf="field.hint">{{ field.hint }}</span>
-      </label>
+  <div class="panel-body">
+    <div class="form-grid form-grid-1">
+      <div class="form-group">
+        <label for="hero_badge">Badge / Etiquette</label>
+        <input class="input" type="text" id="hero_badge" name="hero_badge" [(ngModel)]="data.hero_badge" placeholder="" />
+        <div class="hint">Petit texte au-dessus du titre principal</div>
+      </div>
+
+      <div class="form-group">
+        <label for="hero_title1">Titre principal (ligne 1)</label>
+        <input class="input" type="text" id="hero_title1" name="hero_title1" [(ngModel)]="data.hero_title1" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="hero_title2">Titre principal (ligne 2 - mot mis en valeur)</label>
+        <input class="input" type="text" id="hero_title2" name="hero_title2" [(ngModel)]="data.hero_title2" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="hero_title3">Titre principal (ligne 3)</label>
+        <input class="input" type="text" id="hero_title3" name="hero_title3" [(ngModel)]="data.hero_title3" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="hero_desc">Texte de description (sous-titre)</label>
+        <textarea class="textarea hero-desc-input" id="hero_desc" name="hero_desc" [(ngModel)]="data.hero_desc"></textarea>
+      </div>
     </div>
 
-    <div class="subsection">
-      <div class="subsection-title">Boutons d'action</div>
-      <div class="button-grid">
-        <article class="mini-card" *ngFor="let button of actionButtons; let index = index">
-          <div class="mini-card-title">Bouton {{ index + 1 }}</div>
-          <label class="field">
-            <span class="field-label">Texte</span>
-            <input class="input" type="text" [name]="'button-text-' + index" [(ngModel)]="button.text" />
-          </label>
-          <label class="field">
-            <span class="field-label">Lien</span>
-            <input class="input" type="text" [name]="'button-link-' + index" [(ngModel)]="button.href" />
-          </label>
-          <label class="field">
-            <span class="field-label">Style</span>
-            <select class="select" [name]="'button-style-' + index" [(ngModel)]="button.style">
-              <option *ngFor="let style of buttonStyles" [ngValue]="style">{{ style }}</option>
-            </select>
-          </label>
-        </article>
+    <hr class="section-divider" />
+    <h4 class="section-title">Boutons d'action</h4>
+
+    <div class="form-grid form-grid-3">
+      <div class="form-group">
+        <label for="btn1_text">Bouton 1 (texte)</label>
+        <input class="input" type="text" id="btn1_text" name="btn1_text" [(ngModel)]="data.btn1_text" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="btn1_href">Bouton 1 (lien)</label>
+        <input class="input" type="text" id="btn1_href" name="btn1_href" [(ngModel)]="data.btn1_href" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="btn1_style">Bouton 1 (style)</label>
+        <select class="select" id="btn1_style" name="btn1_style" [(ngModel)]="data.btn1_style">
+          <option selected>Bleu primaire</option>
+          <option>Orange accent</option>
+          <option>Vert support</option>
+          <option>Contour</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="btn2_text">Bouton 2 (texte)</label>
+        <input class="input" type="text" id="btn2_text" name="btn2_text" [(ngModel)]="data.btn2_text" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="btn2_href">Bouton 2 (lien)</label>
+        <input class="input" type="text" id="btn2_href" name="btn2_href" [(ngModel)]="data.btn2_href" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="btn2_style">Bouton 2 (style)</label>
+        <select class="select" id="btn2_style" name="btn2_style" [(ngModel)]="data.btn2_style">
+          <option>Bleu primaire</option>
+          <option>Orange accent</option>
+          <option>Vert support</option>
+          <option selected>Contour</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="btn3_text">Bouton 3 (texte)</label>
+        <input class="input" type="text" id="btn3_text" name="btn3_text" [(ngModel)]="data.btn3_text" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="btn3_href">Bouton 3 (lien)</label>
+        <input class="input" type="text" id="btn3_href" name="btn3_href" [(ngModel)]="data.btn3_href" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="btn3_style">Bouton 3 (style)</label>
+        <select class="select" id="btn3_style" name="btn3_style" [(ngModel)]="data.btn3_style">
+          <option>Bleu primaire</option>
+          <option selected>Orange accent</option>
+          <option>Vert support</option>
+          <option>Contour</option>
+        </select>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<section class="panel">
+<div class="panel">
   <div class="panel-header">
     <div>
-      <div class="panel-title"><i class="pi fas fa-chart-simple"></i> Statistiques</div>
-      <div class="panel-desc">Les chiffres clefs affiches sous le hero sur la page publique.</div>
+      <div class="panel-title"><i class="pi fas fa-chart-column"></i>Statistiques (3 compteurs)</div>
+      <div class="panel-desc">Les 3 chiffres-cles affiches sous les boutons</div>
     </div>
   </div>
   <div class="panel-body">
-    <div class="button-grid">
-      <article class="mini-card" *ngFor="let stat of stats; let index = index">
-        <div class="mini-card-title">Compteur {{ index + 1 }}</div>
-        <label class="field">
-          <span class="field-label">Valeur</span>
-          <input class="input" type="text" [name]="'stat-value-' + index" [(ngModel)]="stat.value" />
-        </label>
-        <label class="field">
-          <span class="field-label">Libelle</span>
-          <input class="input" type="text" [name]="'stat-label-' + index" [(ngModel)]="stat.label" />
-        </label>
-        <label class="field">
-          <span class="field-label">Couleur</span>
-          <select class="select" [name]="'stat-color-' + index" [(ngModel)]="stat.color">
-            <option *ngFor="let color of statColors" [ngValue]="color">{{ color }}</option>
-          </select>
-        </label>
-      </article>
+    <div class="form-grid form-grid-3">
+      <div class="form-group">
+        <label for="stat1_val">Stat 1 - Chiffre</label>
+        <input class="input" type="text" id="stat1_val" name="stat1_val" [(ngModel)]="data.stat1_val" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="stat1_label">Stat 1 - Label</label>
+        <input class="input" type="text" id="stat1_label" name="stat1_label" [(ngModel)]="data.stat1_label" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="stat1_color">Stat 1 - Couleur bordure</label>
+        <select class="select" id="stat1_color" name="stat1_color" [(ngModel)]="data.stat1_color">
+          <option selected>Bleu</option>
+          <option>Orange</option>
+          <option>Vert</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="stat2_val">Stat 2 - Chiffre</label>
+        <input class="input" type="text" id="stat2_val" name="stat2_val" [(ngModel)]="data.stat2_val" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="stat2_label">Stat 2 - Label</label>
+        <input class="input" type="text" id="stat2_label" name="stat2_label" [(ngModel)]="data.stat2_label" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="stat2_color">Stat 2 - Couleur bordure</label>
+        <select class="select" id="stat2_color" name="stat2_color" [(ngModel)]="data.stat2_color">
+          <option>Bleu</option>
+          <option selected>Orange</option>
+          <option>Vert</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="stat3_val">Stat 3 - Chiffre</label>
+        <input class="input" type="text" id="stat3_val" name="stat3_val" [(ngModel)]="data.stat3_val" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="stat3_label">Stat 3 - Label</label>
+        <input class="input" type="text" id="stat3_label" name="stat3_label" [(ngModel)]="data.stat3_label" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="stat3_color">Stat 3 - Couleur bordure</label>
+        <select class="select" id="stat3_color" name="stat3_color" [(ngModel)]="data.stat3_color">
+          <option>Bleu</option>
+          <option>Orange</option>
+          <option selected>Vert</option>
+        </select>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<section class="panel">
+<div class="panel">
   <div class="panel-header">
     <div>
-      <div class="panel-title"><i class="pi fas fa-table-cells-large"></i> Cartes de presentation</div>
-      <div class="panel-desc">Les trois cartes de service qui accompagnent la mise en avant de la page.</div>
+      <div class="panel-title"><i class="pi fas fa-address-card"></i>Cartes de presentation (3 services)</div>
+      <div class="panel-desc">Les 3 cartes visibles a droite du heros</div>
     </div>
   </div>
   <div class="panel-body">
-    <div class="service-grid">
-      <article class="mini-card" *ngFor="let card of serviceCards; let index = index">
-        <div class="mini-card-title">Carte {{ index + 1 }}</div>
-        <label class="field">
-          <span class="field-label">Icone</span>
-          <input class="input" type="text" [name]="'card-icon-' + index" [(ngModel)]="card.icon" />
-        </label>
-        <label class="field">
-          <span class="field-label">Titre</span>
-          <input class="input" type="text" [name]="'card-title-' + index" [(ngModel)]="card.title" />
-        </label>
-        <label class="field">
-          <span class="field-label">Description</span>
-          <textarea class="textarea textarea-sm" [name]="'card-description-' + index" [(ngModel)]="card.description"></textarea>
-        </label>
-      </article>
+    <div class="cards-stack">
+      <div class="service-card">
+        <div class="service-card-title">Carte 1</div>
+        <div class="form-grid service-card-grid">
+          <div class="form-group">
+            <label for="c1_icon">Icone</label>
+            <app-admin-icon-picker [(ngModel)]="data.c1_icon" fallbackIcon="fas fa-file-invoice"></app-admin-icon-picker>
+          </div>
+
+          <div class="form-group">
+            <label for="c1_title">Titre</label>
+            <input class="input" type="text" id="c1_title" name="c1_title" [(ngModel)]="data.c1_title" placeholder="" />
+          </div>
+
+          <div class="form-group">
+            <label for="c1_desc">Description</label>
+            <input class="input" type="text" id="c1_desc" name="c1_desc" [(ngModel)]="data.c1_desc" placeholder="" />
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-card-title">Carte 2</div>
+        <div class="form-grid service-card-grid">
+          <div class="form-group">
+            <label for="c2_icon">Icone</label>
+            <app-admin-icon-picker [(ngModel)]="data.c2_icon" fallbackIcon="fas fa-briefcase"></app-admin-icon-picker>
+          </div>
+
+          <div class="form-group">
+            <label for="c2_title">Titre</label>
+            <input class="input" type="text" id="c2_title" name="c2_title" [(ngModel)]="data.c2_title" placeholder="" />
+          </div>
+
+          <div class="form-group">
+            <label for="c2_desc">Description</label>
+            <input class="input" type="text" id="c2_desc" name="c2_desc" [(ngModel)]="data.c2_desc" placeholder="" />
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-card-title">Carte 3</div>
+        <div class="form-grid service-card-grid">
+          <div class="form-group">
+            <label for="c3_icon">Icone</label>
+            <app-admin-icon-picker [(ngModel)]="data.c3_icon" fallbackIcon="fas fa-hand-holding-heart"></app-admin-icon-picker>
+          </div>
+
+          <div class="form-group">
+            <label for="c3_title">Titre</label>
+            <input class="input" type="text" id="c3_title" name="c3_title" [(ngModel)]="data.c3_title" placeholder="" />
+          </div>
+
+          <div class="form-group">
+            <label for="c3_desc">Description</label>
+            <input class="input" type="text" id="c3_desc" name="c3_desc" [(ngModel)]="data.c3_desc" placeholder="" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<section class="panel">
+<div class="panel">
   <div class="panel-header">
     <div>
-      <div class="panel-title"><i class="pi fas fa-bullhorn"></i> Banniere d'appel a l'action</div>
-      <div class="panel-desc">Le bloc final qui pousse l'utilisateur a passer a l'action.</div>
+      <div class="panel-title"><i class="pi fas fa-bullhorn"></i>Banniere d'appel a l'action (bas de page)</div>
+      <div class="panel-desc">La bande coloree avec les deux boutons</div>
     </div>
   </div>
   <div class="panel-body">
-    <div class="form-grid">
-      <label class="field" *ngFor="let field of ctaFields">
-        <span class="field-label">{{ field.label }}</span>
-        <input class="input" type="text" [name]="field.id" [(ngModel)]="field.value" />
-      </label>
+    <div class="form-grid form-grid-1">
+      <div class="form-group">
+        <label for="cta_title">Titre</label>
+        <input class="input" type="text" id="cta_title" name="cta_title" [(ngModel)]="data.cta_title" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="cta_sub">Sous-titre</label>
+        <input class="input" type="text" id="cta_sub" name="cta_sub" [(ngModel)]="data.cta_sub" placeholder="" />
+      </div>
     </div>
   </div>
-</section>
+</div>

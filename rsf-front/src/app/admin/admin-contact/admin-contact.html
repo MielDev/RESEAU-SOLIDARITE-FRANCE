@@ -1,14 +1,176 @@
-<section class="panel">
+<section class="admin-page-toolbar">
+  <div>
+    <p class="admin-eyebrow">Edition de page</p>
+    <h2>Contact</h2>
+    <span>Modifie les coordonnees, le bandeau et les options du formulaire.</span>
+  </div>
+  <button type="button" class="btn btn-primary admin-save-btn" (click)="save()" [disabled]="saving">
+    <i class="fas fa-floppy-disk"></i>
+    <span>{{ saving ? 'Enregistrement...' : 'Enregistrer' }}</span>
+  </button>
+</section>
+
+<div class="panel">
   <div class="panel-header">
     <div>
-      <div class="panel-title"><i class="pi fas fa-screwdriver-wrench"></i>Ecran admin pret a brancher</div>
-      <div class="panel-desc">Le header et la sidebar sont maintenant mutualises. Cette page peut recevoir son formulaire, sa table ou ses actions sans recopier le layout.</div>
+      <div class="panel-title"><i class="pi fas fa-location-dot"></i>Coordonnées de l'association</div>
+      <div class="panel-desc">Ces informations sont affichées sur la page Contact et dans le footer</div>
     </div>
+    
   </div>
   <div class="panel-body">
-    <div class="alert alert-info">
-      <i class="fas fa-circle-info"></i>
-      <div>Tu peux maintenant remplacer ce bloc par le vrai contenu de gestion de cette page.</div>
+<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+  
+<div class="form-group">
+  <label for="addr_street">Adresse (rue)</label>
+  <input class="input" type="text" id="addr_street" name="addr_street" [(ngModel)]="data.addr_street" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="addr_city">Code postal et ville</label>
+  <input class="input" type="text" id="addr_city" name="addr_city" [(ngModel)]="data.addr_city" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="addr_country">Pays</label>
+  <input class="input" type="text" id="addr_country" name="addr_country" [(ngModel)]="data.addr_country" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="contact_phone">Téléphone</label>
+  <input class="input" type="tel" id="contact_phone" name="contact_phone" [(ngModel)]="data.contact_phone" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="contact_hours">Horaires</label>
+  <input class="input" type="text" id="contact_hours" name="contact_hours" [(ngModel)]="data.contact_hours" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="contact_email">Email</label>
+  <input class="input" type="email" id="contact_email" name="contact_email" [(ngModel)]="data.contact_email" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="contact_delay">Délai de réponse</label>
+  <input class="input" type="text" id="contact_delay" name="contact_delay" [(ngModel)]="data.contact_delay" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="contact_web">Site web</label>
+  <input class="input" type="url" id="contact_web" name="contact_web" [(ngModel)]="data.contact_web" placeholder=""/>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><i class="pi fas fa-image"></i>En-tête de la page Contact</div>
+      
     </div>
+    
   </div>
-</section>
+  <div class="panel-body">
+<div class="form-grid" style="display:grid;gap:12px;">
+  
+<div class="form-group">
+  <label for="c_title">Titre</label>
+  <input class="input" type="text" id="c_title" name="c_title" [(ngModel)]="data.c_title" placeholder=""/>
+</div>
+  
+<div class="form-group">
+  <label for="c_desc">Description</label>
+  <textarea class="textarea" id="c_desc" name="c_desc" [(ngModel)]="data.c_desc" style="min-height:64px"></textarea>
+  
+</div>
+  
+<div class="form-group">
+  <label for="c_engage">Message d'engagement (encart bleu)</label>
+  <textarea class="textarea" id="c_engage" name="c_engage" [(ngModel)]="data.c_engage" style="min-height:64px"></textarea>
+  
+</div>
+</div></div>
+</div>
+
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><i class="pi fas fa-file-lines"></i>Formulaire de contact</div>
+      <div class="panel-desc">Configurez les champs et options du formulaire</div>
+    </div>
+    
+  </div>
+  <div class="panel-body">
+<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px;">
+  
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Champ Nom complet</strong><span>Toujours obligatoire</span></div>
+  <label class="toggle"><input type="checkbox" [(ngModel)]="data.f_name" name="f_name"/><span class="toggle-slider"></span></label>
+</div>
+  
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Champ E-mail</strong><span>Toujours obligatoire</span></div>
+  <label class="toggle"><input type="checkbox" [(ngModel)]="data.f_email" name="f_email"/><span class="toggle-slider"></span></label>
+</div>
+  
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Menu Objet du message</strong><span>Aide à la catégorisation</span></div>
+  <label class="toggle"><input type="checkbox" [(ngModel)]="data.f_objet" name="f_objet"/><span class="toggle-slider"></span></label>
+</div>
+  
+<div class="toggle-wrap">
+  <div class="toggle-info"><strong>Champ Message</strong><span>Zone de texte libre</span></div>
+  <label class="toggle"><input type="checkbox" [(ngModel)]="data.f_msg" name="f_msg"/><span class="toggle-slider"></span></label>
+</div>
+</div>
+<h4 style="font-size:13px;font-weight:700;margin-bottom:10px;">Options du menu Objet</h4>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+  
+<div class="form-group">
+  <label for="obj1">Option 1</label>
+  <input class="input" type="text" id="obj1" name="obj1" [(ngModel)]="data.obj1" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="obj2">Option 2</label>
+  <input class="input" type="text" id="obj2" name="obj2" [(ngModel)]="data.obj2" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="obj3">Option 3</label>
+  <input class="input" type="text" id="obj3" name="obj3" [(ngModel)]="data.obj3" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="obj4">Option 4</label>
+  <input class="input" type="text" id="obj4" name="obj4" [(ngModel)]="data.obj4" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="obj5">Option 5</label>
+  <input class="input" type="text" id="obj5" name="obj5" [(ngModel)]="data.obj5" placeholder=""/>
+  
+</div>
+  
+<div class="form-group">
+  <label for="obj6">Option 6</label>
+  <input class="input" type="text" id="obj6" name="obj6" [(ngModel)]="data.obj6" placeholder=""/>
+  
+</div>
+</div></div>
+</div>

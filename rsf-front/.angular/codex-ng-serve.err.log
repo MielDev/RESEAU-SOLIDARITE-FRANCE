@@ -1,0 +1,208 @@
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'featuredEvent' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:18:47:
+[37m      18 │     <div class="featured-event fade-up" *ngIf="[32mfeaturedEvent[37m">
+         ╵                                                [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'featuredEvent' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:19:42:
+[37m      19 │       <span class="featured-badge" *ngIf="[32mfeaturedEvent[37m.badge_label">
+         ╵                                           [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'featuredEvent' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:20:39:
+[37m      20 │         <i class="fas fa-star"></i> {{ [32mfeaturedEvent[37m.badge_label }}
+         ╵                                        [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'getFeaturedTitle' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:22:36:
+[37m      22 │       <h2 class="featured-title">{{ [32mgetFeaturedTitle[37m() }}</h2>
+         ╵                                     [32m~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'featuredEvent' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:24:59:
+[37m      24 │ ... fa-calendar-days"></i> {{ formatDate([32mfeaturedEvent[37m.event_date) }}
+         ╵                                          [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'featuredEvent' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:25:21:
+[37m      25 │         <span *ngIf="[32mfeaturedEvent[37m.time_start || featuredEvent.tim...
+         ╵                      [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'featuredEvent' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:25:49:
+[37m      25 │ ...turedEvent.time_start || [32mfeaturedEvent[37m.time_end"> &middot; <i c...
+         ╵                             [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'featuredEvent' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:25:131:
+[37m      25 │ ...></i> {{ formatTimeRange([32mfeaturedEvent[37m.time_start, featuredEven...
+         ╵                             [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'featuredEvent' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:25:157:
+[37m      25 │ ...eRange(featuredEvent.time_start, [32mfeaturedEvent[37m.time_end) }}</span>
+         ╵                                     [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'featuredEvent' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:26:21:
+[37m      26 │         <span *ngIf="[32mfeaturedEvent[37m.location"> &middot; <i class="f...
+         ╵                      [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'featuredEvent' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:26:94:
+[37m      26 │ ...ass="fas fa-location-dot"></i> {{ [32mfeaturedEvent[37m.location }}</span>
+         ╵                                      [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'featuredEvent' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:29:55:
+[37m      29 │ ...lery" [class.is-single]="[32mfeaturedEvent[37m.photos.length === 1" *ng...
+         ╵                             [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'featuredEvent' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:29:97:
+[37m      29 │ ...edEvent.photos.length === 1" *ngIf="[32mfeaturedEvent[37m.photos?.length">
+         ╵                                        [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'featuredEvent' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:30:37:
+[37m      30 │         <figure *ngFor="let photo of [32mfeaturedEvent[37m.photos">
+         ╵                                      [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'featuredEvent' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:31:81:
+[37m      31 │ ... [alt]="photo.alt_text || photo.caption || [32mfeaturedEvent[37m.title" />
+         ╵                                               [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'regularEvents' does not exist on type 'Evenements'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/evenements/evenements.html:49:32:
+[37m      49 │ ...div *ngFor="let event of [32mregularEvents[37m" class="card fade-up eve...
+         ╵                             [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component Evenements.
+
+    src/app/utilisateurs/evenements/evenements.ts:9:15:
+[37m      9 │   templateUrl: [32m'./evenements.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m

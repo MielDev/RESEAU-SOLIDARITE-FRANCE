@@ -11,8 +11,7 @@ import { RouterModule, ActivatedRoute } from '@angular/router';
 })
 export class Evenements implements OnInit {
   pageContent: any = null;
-  featuredEvent: any = null;
-  regularEvents: any[] = [];
+  events: any[] = [];
 
   constructor(
     private renderer: Renderer2,
@@ -23,10 +22,7 @@ export class Evenements implements OnInit {
     this.route.data.subscribe((data: any) => {
       this.pageContent = data.pageContent ?? null;
       const events = Array.isArray(data.events) ? data.events.map((event: any) => this.normalizeEvent(event)) : [];
-      this.featuredEvent = events.find((event: any) => event.is_featured) || null;
-      this.regularEvents = this.featuredEvent
-        ? events.filter((event: any) => event.id !== this.featuredEvent.id)
-        : events;
+      this.events = this.sortEvents(events);
 
       setTimeout(() => this.setupIntersectionObserver(), 100);
     });
@@ -57,13 +53,17 @@ export class Evenements implements OnInit {
     return start || end || '';
   }
 
-  getFeaturedTitle(): string {
-    if (!this.featuredEvent) {
-      return '';
-    }
+  getEventTitle(event: any): string {
+    const edition = event?.edition ? `${event.edition} - ` : '';
+    return `${edition}${event?.title || ''}`.trim();
+  }
 
-    const edition = this.featuredEvent.edition ? `${this.featuredEvent.edition} — ` : '';
-    return `${edition}${this.featuredEvent.title || ''}`.trim();
+  getEventUrl(event: any): string {
+    return `/evenements/${event?.id}`;
+  }
+
+  getCoverPhoto(event: any): any | null {
+    return Array.isArray(event?.photos) && event.photos.length ? event.photos[0] : null;
   }
 
   private normalizeEvent(event: any): any {
@@ -72,7 +72,35 @@ export class Evenements implements OnInit {
       program: Array.isArray(event?.program)
         ? [...event.program].sort((a: any, b: any) => (a?.sort_order ?? 0) - (b?.sort_order ?? 0))
         : [],
+      photos: Array.isArray(event?.photos)
+        ? [...event.photos]
+            .sort((a: any, b: any) => (a?.sort_order ?? 0) - (b?.sort_order ?? 0))
+            .filter((photo: any) => photo?.image_url)
+        : [],
     };
+  }
+
+  private sortEvents(events: any[]) {
+    return [...events].sort((a, b) => {
+      const dateA = this.getDateValue(a?.event_date);
+      const dateB = this.getDateValue(b?.event_date);
+
+      if (dateA !== dateB) {
+        return dateB - dateA;
+      }
+
+      return this.getEditionNumber(b?.edition) - this.getEditionNumber(a?.edition);
+    });
+  }
+
+  private getDateValue(date: string) {
+    const parsed = date ? new Date(date).getTime() : 0;
+    return Number.isNaN(parsed) ? 0 : parsed;
+  }
+
+  private getEditionNumber(edition: string) {
+    const match = String(edition || '').match(/\d+/);
+    return match ? Number(match[0]) : 0;
   }
 
   setupIntersectionObserver() {

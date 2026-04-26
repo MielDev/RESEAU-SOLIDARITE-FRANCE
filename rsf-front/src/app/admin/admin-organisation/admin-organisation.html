@@ -1,14 +1,106 @@
-<section class="panel">
+<section class="admin-page-toolbar">
+  <div>
+    <p class="admin-eyebrow">Edition de page</p>
+    <h2>Organisation</h2>
+    <span>Modifie la fiche president, le role, la bio et les diplomes.</span>
+  </div>
+  <button type="button" class="btn btn-primary admin-save-btn" (click)="save()" [disabled]="saving">
+    <i class="fas fa-floppy-disk"></i>
+    <span>{{ saving ? 'Enregistrement...' : 'Enregistrer' }}</span>
+  </button>
+</section>
+
+<div class="panel">
   <div class="panel-header">
     <div>
-      <div class="panel-title"><i class="pi fas fa-screwdriver-wrench"></i>Ecran admin pret a brancher</div>
-      <div class="panel-desc">Le header et la sidebar sont maintenant mutualises. Cette page peut recevoir son formulaire, sa table ou ses actions sans recopier le layout.</div>
+      <div class="panel-title"><i class="pi fas fa-user-tie"></i>President fondateur</div>
+      <div class="panel-desc">Informations sur le president de l'association</div>
+    </div>
+    <div class="panel-actions">
+      <button class="btn btn-ghost btn-sm" type="button"><i class="fas fa-plus"></i> Ajouter un diplome</button>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="form-grid form-grid-2">
+      <div class="form-group">
+        <label for="pres_name">Nom complet</label>
+        <input class="input" type="text" id="pres_name" name="pres_name" [(ngModel)]="data.pres_name" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="pres_role">Titre / Role</label>
+        <input class="input" type="text" id="pres_role" name="pres_role" [(ngModel)]="data.pres_role" placeholder="" />
+      </div>
+
+      <div class="form-group">
+        <label for="pres_initials">Initiales (avatar)</label>
+        <input class="input" type="text" id="pres_initials" name="pres_initials" [(ngModel)]="data.pres_initials" placeholder="" />
+        <div class="hint">Lettres affichees dans l'avatar rond</div>
+      </div>
+    </div>
+
+    <div class="form-grid form-grid-1 top-gap">
+      <div class="form-group">
+        <label for="pres_bio">Biographie / Description</label>
+        <textarea class="textarea bio-input" id="pres_bio" name="pres_bio" [(ngModel)]="data.pres_bio"></textarea>
+      </div>
+    </div>
+
+    <hr class="section-divider" />
+    <h4 class="section-title">Diplomes (un par ligne)</h4>
+
+    <div class="form-grid form-grid-1 compact-grid">
+      <div class="form-group">
+        <label for="dip1">Diplome 1</label>
+        <input class="input" type="text" id="dip1" name="dip1" [(ngModel)]="data.dip1" placeholder="" />
+      </div>
+      <div class="form-group">
+        <label for="dip2">Diplome 2</label>
+        <input class="input" type="text" id="dip2" name="dip2" [(ngModel)]="data.dip2" placeholder="" />
+      </div>
+      <div class="form-group">
+        <label for="dip3">Diplome 3</label>
+        <input class="input" type="text" id="dip3" name="dip3" [(ngModel)]="data.dip3" placeholder="" />
+      </div>
+      <div class="form-group">
+        <label for="dip4">Diplome 4</label>
+        <input class="input" type="text" id="dip4" name="dip4" [(ngModel)]="data.dip4" placeholder="" />
+      </div>
+      <div class="form-group">
+        <label for="dip5">Diplome 5</label>
+        <input class="input" type="text" id="dip5" name="dip5" [(ngModel)]="data.dip5" placeholder="" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><i class="pi fas fa-users"></i>Membres de l'equipe</div>
+      <div class="panel-desc">Gerez les membres affiches sur la page Organisation</div>
     </div>
   </div>
   <div class="panel-body">
     <div class="alert alert-info">
       <i class="fas fa-circle-info"></i>
-      <div>Tu peux maintenant remplacer ce bloc par le vrai contenu de gestion de cette page.</div>
+      <span>Faites glisser pour reorganiser les membres dans la liste.</span>
     </div>
+
+    <div id="team-list">
+      <div class="sortable-item" *ngFor="let member of teamMembers">
+        <span class="drag-handle"><i class="fas fa-grip-vertical"></i></span>
+        <div class="si-content">
+          <div class="si-title">{{ member.name }}</div>
+          <div class="si-sub">{{ member.role }}</div>
+        </div>
+        <div class="si-actions">
+          <button class="btn btn-ghost btn-sm btn-icon" type="button" title="Modifier"><i class="fas fa-pen"></i></button>
+          <button class="btn btn-danger btn-sm btn-icon" type="button" title="Supprimer"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-ghost btn-sm team-add-btn" type="button" (click)="addMember()"><i class="fas fa-plus"></i> Ajouter un membre</button>
   </div>
-</section>
+</div>

@@ -91,20 +91,16 @@ export class NousRejoindre implements OnInit {
 
   onSubmit() {
     this.isSubmitting = true;
-    const message = [
-      `Nom: ${this.joinData.lastName} ${this.joinData.firstName}`,
-      `Ville: ${this.joinData.city}`,
-      `Statut: ${this.joinData.status}`,
-      `Intention: ${this.joinData.intent}`,
-      `Interets: ${this.joinData.interests.join(', ')}`,
-      `Message: ${this.joinData.message}`,
-    ].join('\n');
-
-    this.publicService.sendContactMessage({
-      name: `${this.joinData.lastName} ${this.joinData.firstName}`.trim(),
+    this.publicService.sendJoinRequest({
+      firstName: this.joinData.firstName,
+      lastName: this.joinData.lastName,
       email: this.joinData.email,
-      subject: `Nouvelle demande d'adhesion: ${this.joinData.intent}`,
-      message,
+      phone: this.joinData.phone,
+      city: this.joinData.city,
+      status: this.joinData.status,
+      intent: this.joinData.intent,
+      interests: this.joinData.interests,
+      message: this.joinData.message,
     }).subscribe({
       next: () => {
         alert('Votre demande a ete envoyee avec succes.');

@@ -1,0 +1,126 @@
+<header class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a routerLink="/">Accueil</a>
+      <span class="sep">&rsaquo;</span>
+      <a routerLink="/evenements">Evenements</a>
+      <span class="sep">&rsaquo;</span>
+      {{ event?.edition || event?.title || 'Evenement' }}
+    </div>
+
+    <ng-container *ngIf="event; else eventMissingHeader">
+      <div class="badge" *ngIf="event.edition">
+        <i class="fas fa-calendar-check"></i> {{ event.edition }}
+      </div>
+      <h1>{{ event.title }}</h1>
+      <p>
+        <span *ngIf="event.event_date">{{ formatDate(event.event_date) }}</span>
+        <span *ngIf="event.time_start || event.time_end"> &middot; {{ formatTimeRange(event.time_start, event.time_end) }}</span>
+        <span *ngIf="event.location"> &middot; {{ event.location }}</span>
+      </p>
+    </ng-container>
+
+    <ng-template #eventMissingHeader>
+      <h1>Evenement introuvable</h1>
+      <p>Retourne a la liste des evenements pour choisir une edition disponible.</p>
+    </ng-template>
+  </div>
+</header>
+
+<section class="section-pad" *ngIf="event; else eventMissingBody">
+  <div class="container">
+    <div class="event-layout">
+      <article class="event-main fade-up">
+        <div class="event-description" *ngIf="event.description">
+          <div class="s-label">Presentation</div>
+          <h2 class="s-title">A propos de cette edition</h2>
+          <p>{{ event.description }}</p>
+        </div>
+
+        <section class="event-gallery" *ngIf="event.photos?.length">
+          <div class="s-label">Photos</div>
+          <h2 class="s-title">Galerie de l'evenement</h2>
+          <div class="gallery-grid">
+            <figure *ngFor="let photo of event.photos">
+              <img [src]="photo.image_url" [alt]="photo.alt_text || photo.caption || event.title" />
+              <figcaption *ngIf="photo.caption">{{ photo.caption }}</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="program-block" *ngIf="event.program?.length">
+          <div class="s-label">Programme</div>
+          <h2 class="s-title">Temps forts</h2>
+          <div class="program-list">
+            <div class="program-item" *ngFor="let item of event.program">
+              <i [class]="item.icon || 'fas fa-circle'"></i>
+              <div>
+                <strong>{{ item.title }}</strong>
+                <span>{{ item.subtitle }}</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </article>
+
+      <aside class="event-side fade-up">
+        <div class="side-card">
+          <h3>Informations</h3>
+          <div class="info-list">
+            <div class="info-item" *ngIf="event.event_date">
+              <i class="fas fa-calendar-days"></i>
+              <span>{{ formatDate(event.event_date) }}</span>
+            </div>
+            <div class="info-item" *ngIf="event.time_start || event.time_end">
+              <i class="fas fa-clock"></i>
+              <span>{{ formatTimeRange(event.time_start, event.time_end) }}</span>
+            </div>
+            <div class="info-item" *ngIf="event.location">
+              <i class="fas fa-location-dot"></i>
+              <span>{{ event.location }}</span>
+            </div>
+            <div class="info-item" *ngIf="event.contact_email">
+              <i class="fas fa-envelope"></i>
+              <span>{{ event.contact_email }}</span>
+            </div>
+            <div class="info-item" *ngIf="event.contact_website">
+              <i class="fas fa-globe"></i>
+              <span>{{ event.contact_website }}</span>
+            </div>
+          </div>
+
+          <a
+            *ngIf="event.cta_href && isRouterLink(event.cta_href)"
+            [routerLink]="event.cta_href"
+            class="btn btn-primary"
+          >
+            {{ event.cta_text || 'Participer' }}
+          </a>
+          <a
+            *ngIf="event.cta_href && !isRouterLink(event.cta_href)"
+            [href]="event.cta_href"
+            class="btn btn-primary"
+          >
+            {{ event.cta_text || 'Participer' }}
+          </a>
+        </div>
+
+        <div class="side-card" *ngIf="relatedEvents.length">
+          <h3>Autres editions</h3>
+          <a class="related-link" *ngFor="let related of relatedEvents" [routerLink]="['/evenements', related.id]">
+            <span>{{ related.edition || related.title }}</span>
+            <small>{{ formatDate(related.event_date) }}</small>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<ng-template #eventMissingBody>
+  <section class="section-pad">
+    <div class="container">
+      <a routerLink="/evenements" class="btn btn-primary">Voir les evenements</a>
+    </div>
+  </section>
+</ng-template>

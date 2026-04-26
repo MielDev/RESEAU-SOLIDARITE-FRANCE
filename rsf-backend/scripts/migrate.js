@@ -211,6 +211,260 @@ const MIGRATIONS = [
     },
   },
 
+  {
+    name: '006_create_join_requests_table',
+    description: 'Creation de la table des demandes Nous rejoindre',
+    up: async (q) => {
+      const dialect = sequelize.getDialect();
+      let sql;
+      if (dialect === 'sqlite') {
+        sql = `
+          CREATE TABLE IF NOT EXISTS join_requests (
+            id                INTEGER PRIMARY KEY AUTOINCREMENT,
+            first_name        VARCHAR(100) NOT NULL,
+            last_name         VARCHAR(100) NOT NULL,
+            email             VARCHAR(255) NOT NULL,
+            phone             VARCHAR(50) NULL,
+            city              VARCHAR(150) NULL,
+            status            VARCHAR(100) NULL,
+            intent            VARCHAR(150) NOT NULL,
+            interests         TEXT NULL,
+            message           TEXT NOT NULL,
+            processing_status VARCHAR(40) NOT NULL DEFAULT 'new',
+            admin_notes       TEXT NULL,
+            is_read           TINYINT(1) DEFAULT 0,
+            processed_at      DATETIME NULL,
+            created_at        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+          )
+        `;
+      } else if (dialect === 'mysql' || dialect === 'mariadb') {
+        sql = `
+          CREATE TABLE IF NOT EXISTS join_requests (
+            id                INT AUTO_INCREMENT PRIMARY KEY,
+            first_name        VARCHAR(100) NOT NULL,
+            last_name         VARCHAR(100) NOT NULL,
+            email             VARCHAR(255) NOT NULL,
+            phone             VARCHAR(50) NULL,
+            city              VARCHAR(150) NULL,
+            status            VARCHAR(100) NULL,
+            intent            VARCHAR(150) NOT NULL,
+            interests         JSON NULL,
+            message           TEXT NOT NULL,
+            processing_status VARCHAR(40) NOT NULL DEFAULT 'new',
+            admin_notes       TEXT NULL,
+            is_read           TINYINT(1) DEFAULT 0,
+            processed_at      DATETIME NULL,
+            created_at        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            INDEX idx_join_requests_processing_status (processing_status),
+            INDEX idx_join_requests_is_read (is_read),
+            INDEX idx_join_requests_created_at (created_at)
+          )
+        `;
+      } else if (dialect === 'postgres') {
+        sql = `
+          CREATE TABLE IF NOT EXISTS join_requests (
+            id                SERIAL PRIMARY KEY,
+            first_name        VARCHAR(100) NOT NULL,
+            last_name         VARCHAR(100) NOT NULL,
+            email             VARCHAR(255) NOT NULL,
+            phone             VARCHAR(50) NULL,
+            city              VARCHAR(150) NULL,
+            status            VARCHAR(100) NULL,
+            intent            VARCHAR(150) NOT NULL,
+            interests         JSONB NULL,
+            message           TEXT NOT NULL,
+            processing_status VARCHAR(40) NOT NULL DEFAULT 'new',
+            admin_notes       TEXT NULL,
+            is_read           BOOLEAN DEFAULT FALSE,
+            processed_at      TIMESTAMP NULL,
+            created_at        TIMESTAMP NOT NULL DEFAULT NOW(),
+            updated_at        TIMESTAMP NOT NULL DEFAULT NOW()
+          )
+        `;
+      } else {
+        throw new Error(`Unsupported dialect: ${dialect}`);
+      }
+
+      await q(sql);
+
+      if (dialect === 'sqlite' || dialect === 'postgres') {
+        await q(`CREATE INDEX IF NOT EXISTS idx_join_requests_processing_status ON join_requests (processing_status)`);
+        await q(`CREATE INDEX IF NOT EXISTS idx_join_requests_is_read ON join_requests (is_read)`);
+        await q(`CREATE INDEX IF NOT EXISTS idx_join_requests_created_at ON join_requests (created_at)`);
+      }
+    },
+    down: async (q) => {
+      await q(`DROP TABLE IF EXISTS join_requests`);
+    },
+  },
+
+  {
+    name: '007_fix_nav_icon_length',
+    description: 'Augmente la longueur des icones de navigation et repare les valeurs tronquees',
+    up: async (q) => {
+      const dialect = sequelize.getDialect();
+      const sqls = [];
+
+      if (dialect === 'sqlite') {
+        sqls.push(`ALTER TABLE nav_items ADD COLUMN icon_full VARCHAR(100) NULL`);
+        sqls.push(`UPDATE nav_items SET icon_full = icon`);
+        sqls.push(`ALTER TABLE nav_items DROP COLUMN icon`);
+        sqls.push(`ALTER TABLE nav_items RENAME COLUMN icon_full TO icon`);
+      } else if (dialect === 'mysql' || dialect === 'mariadb') {
+        sqls.push(`ALTER TABLE nav_items MODIFY COLUMN icon VARCHAR(100) NULL`);
+      } else if (dialect === 'postgres') {
+        sqls.push(`ALTER TABLE nav_items ALTER COLUMN icon TYPE VARCHAR(100)`);
+      } else {
+        throw new Error(`Unsupported dialect: ${dialect}`);
+      }
+
+      for (const sql of sqls) {
+        await q(sql);
+      }
+
+      const defaults = [
+        { href: '/', icon: 'fas fa-home', invalid: ['fas fa-hom', 'fas fa-hou'] },
+        { href: '/qui-sommes-nous', icon: 'fas fa-book-open', invalid: ['fas fa-boo'] },
+        { href: '/organisation', icon: 'fas fa-users', invalid: ['fas fa-use'] },
+        { href: '/nos-missions', icon: 'fas fa-bullseye', invalid: ['fas fa-bul'] },
+        { href: '/actions-solidaires', icon: 'fas fa-handshake-angle', invalid: ['fas fa-han'] },
+        { href: '/soutien-aux-membres', icon: 'fas fa-heart', invalid: ['fas fa-hea'] },
+        { href: '/actions-internationales', icon: 'fas fa-globe', invalid: ['fas fa-glo'] },
+        { href: '/evenements', icon: 'fas fa-calendar-alt', invalid: ['fas fa-cal'] },
+        { href: '/temoignages', icon: 'fas fa-comments', invalid: ['fas fa-com'] },
+        { href: '/nous-rejoindre', icon: 'fas fa-hands-holding', invalid: ['fas fa-han'] },
+        { href: '/actualites', icon: 'fas fa-newspaper', invalid: ['fas fa-new'] },
+        { href: '/contact', icon: 'fas fa-envelope', invalid: ['fas fa-env'] },
+        { href: '/don', icon: 'fas fa-heart', invalid: ['fas fa-hea'] },
+      ];
+
+      for (const item of defaults) {
+        const invalidList = item.invalid.map((value) => `'${value.replace(/'/g, "''")}'`).join(', ');
+        await q(`
+          UPDATE nav_items
+          SET icon = '${item.icon.replace(/'/g, "''")}'
+          WHERE href = '${item.href.replace(/'/g, "''")}'
+            AND (icon IS NULL OR icon = '' OR icon IN (${invalidList}))
+        `);
+      }
+    },
+    down: async () => {
+      warn('La reduction de nav_items.icon a 10 caracteres est volontairement ignoree pour eviter de recouper les icones.');
+    },
+  },
+
+  {
+    name: '008_create_event_photos_table',
+    description: 'Creation de la table des photos liees aux evenements',
+    up: async (q) => {
+      const dialect = sequelize.getDialect();
+      let sql;
+
+      if (dialect === 'sqlite') {
+        sql = `
+          CREATE TABLE IF NOT EXISTS event_photos (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            event_id    INTEGER NOT NULL,
+            image_url   VARCHAR(500) NOT NULL,
+            alt_text    VARCHAR(255) NULL,
+            caption     VARCHAR(255) NULL,
+            sort_order  INTEGER DEFAULT 0,
+            created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+          )
+        `;
+      } else if (dialect === 'mysql' || dialect === 'mariadb') {
+        sql = `
+          CREATE TABLE IF NOT EXISTS event_photos (
+            id          INT AUTO_INCREMENT PRIMARY KEY,
+            event_id    INT NOT NULL,
+            image_url   VARCHAR(500) NOT NULL,
+            alt_text    VARCHAR(255) NULL,
+            caption     VARCHAR(255) NULL,
+            sort_order  INT DEFAULT 0,
+            created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            INDEX idx_event_photos_event_id (event_id),
+            INDEX idx_event_photos_sort_order (sort_order)
+          )
+        `;
+      } else if (dialect === 'postgres') {
+        sql = `
+          CREATE TABLE IF NOT EXISTS event_photos (
+            id          SERIAL PRIMARY KEY,
+            event_id    INTEGER NOT NULL,
+            image_url   VARCHAR(500) NOT NULL,
+            alt_text    VARCHAR(255) NULL,
+            caption     VARCHAR(255) NULL,
+            sort_order  INTEGER DEFAULT 0,
+            created_at  TIMESTAMP NOT NULL DEFAULT NOW(),
+            updated_at  TIMESTAMP NOT NULL DEFAULT NOW()
+          )
+        `;
+      } else {
+        throw new Error(`Unsupported dialect: ${dialect}`);
+      }
+
+      await q(sql);
+
+      if (dialect === 'sqlite' || dialect === 'postgres') {
+        await q(`CREATE INDEX IF NOT EXISTS idx_event_photos_event_id ON event_photos (event_id)`);
+        await q(`CREATE INDEX IF NOT EXISTS idx_event_photos_sort_order ON event_photos (sort_order)`);
+      }
+    },
+    down: async (q) => {
+      await q(`DROP TABLE IF EXISTS event_photos`);
+    },
+  },
+
+  {
+    name: '009_fix_event_program_icon_length',
+    description: 'Augmente la longueur des icones de programme evenementiel et repare les valeurs tronquees',
+    up: async (q) => {
+      const dialect = sequelize.getDialect();
+      const sqls = [];
+
+      if (dialect === 'sqlite') {
+        sqls.push(`ALTER TABLE event_programs ADD COLUMN icon_full VARCHAR(100) NULL`);
+        sqls.push(`UPDATE event_programs SET icon_full = icon`);
+        sqls.push(`ALTER TABLE event_programs DROP COLUMN icon`);
+        sqls.push(`ALTER TABLE event_programs RENAME COLUMN icon_full TO icon`);
+      } else if (dialect === 'mysql' || dialect === 'mariadb') {
+        sqls.push(`ALTER TABLE event_programs MODIFY COLUMN icon VARCHAR(100) NULL`);
+      } else if (dialect === 'postgres') {
+        sqls.push(`ALTER TABLE event_programs ALTER COLUMN icon TYPE VARCHAR(100)`);
+      } else {
+        throw new Error(`Unsupported dialect: ${dialect}`);
+      }
+
+      for (const sql of sqls) {
+        await q(sql);
+      }
+
+      const defaults = [
+        { invalid: 'fas fa-cof', icon: 'fas fa-mug-saucer' },
+        { invalid: 'fas fa-fut', icon: 'fas fa-futbol' },
+        { invalid: 'fas fa-bul', icon: 'fas fa-bullseye' },
+        { invalid: 'fas fa-dic', icon: 'fas fa-dice' },
+        { invalid: 'fas fa-ute', icon: 'fas fa-utensils' },
+        { invalid: 'fas fa-mic', icon: 'fas fa-microphone-lines' },
+      ];
+
+      for (const item of defaults) {
+        await q(`
+          UPDATE event_programs
+          SET icon = '${item.icon}'
+          WHERE icon = '${item.invalid}'
+        `);
+      }
+    },
+    down: async () => {
+      warn('La reduction de event_programs.icon a 10 caracteres est ignoree pour eviter de recouper les icones.');
+    },
+  },
+
 ];
 // ═══════════════════════════════════════════════════════════════════════════════
 

@@ -1,7 +1,14 @@
-<div class="alert alert-info">
-  <i class="fas fa-circle-info"></i>
-  <div>Le layout admin est maintenant mutualise. Tu peux brancher chaque page de gestion ici sans recopier le header ni la sidebar.</div>
-</div>
+<section class="dashboard-hero">
+  <div>
+    <div class="eyebrow">Back-office RSF</div>
+    <h1>Console de contenu</h1>
+    <p>Chaque page publique a maintenant ses blocs editoriaux et ses collections administrables.</p>
+  </div>
+  <a routerLink="/admin/accueil" class="btn">
+    <i class="fas fa-pen-to-square"></i>
+    Modifier l'accueil
+  </a>
+</section>
 
 <section class="stats-grid">
   <article class="stat-card" *ngFor="let stat of stats">
@@ -15,14 +22,16 @@
 <section class="panel">
   <div class="panel-header">
     <div>
-      <div class="panel-title"><i class="pi fas fa-bolt"></i> Raccourcis utiles</div>
-      <div class="panel-desc">Accede rapidement aux ecrans principaux du back-office.</div>
+      <div class="panel-title"><i class="pi fas fa-bolt"></i> Raccourcis</div>
+      <div class="panel-desc">Les actions les plus frequentes pour gerer le front-office.</div>
     </div>
   </div>
   <div class="panel-body">
-    <div class="form-grid form-grid-2">
-      <a *ngFor="let link of quickLinks" [routerLink]="link.href" class="btn btn-ghost" style="justify-content:center;padding:14px 18px;">
-        <i [class]="link.icon"></i> {{ link.label }}
+    <div class="quick-grid">
+      <a *ngFor="let link of quickLinks" [routerLink]="link.href" class="quick-card">
+        <span><i [class]="link.icon"></i></span>
+        <strong>{{ link.label }}</strong>
+        <small>{{ link.description }}</small>
       </a>
     </div>
   </div>
@@ -31,14 +40,19 @@
 <section class="panel">
   <div class="panel-header">
     <div>
-      <div class="panel-title"><i class="pi fas fa-list-check"></i> Prochaine etape</div>
-      <div class="panel-desc">Les ecrans admin existent maintenant dans une structure propre et reutilisable.</div>
+      <div class="panel-title"><i class="pi fas fa-layer-group"></i> Zones pilotables</div>
+      <div class="panel-desc">Les rubriques reliees aux donnees publiques du site.</div>
     </div>
   </div>
   <div class="panel-body">
-    <div class="alert alert-success">
-      <i class="fas fa-check"></i>
-      <div>La suite logique est de remplacer les placeholders de chaque page admin par les vrais formulaires de gestion relies a l API.</div>
+    <div class="admin-map">
+      <article *ngFor="let group of adminGroups" class="map-group">
+        <h3>{{ group.title }}</h3>
+        <a *ngFor="let item of group.items" [routerLink]="item.href">
+          <i [class]="item.icon"></i>
+          <span>{{ item.label }}</span>
+        </a>
+      </article>
     </div>
   </div>
 </section>

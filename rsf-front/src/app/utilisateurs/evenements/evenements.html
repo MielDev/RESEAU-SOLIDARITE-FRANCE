@@ -2,7 +2,7 @@
   <div class="container">
     <div class="breadcrumb">
       <a routerLink="/">Accueil</a>
-      <span class="sep">›</span>
+      <span class="sep">&rsaquo;</span>
       {{ pageContent?.hero?.title || 'Evenements' }}
     </div>
     <div class="badge" *ngIf="pageContent?.hero?.badge">
@@ -15,34 +15,54 @@
 
 <section class="section-pad">
   <div class="container">
-    <div class="featured-event fade-up" *ngIf="featuredEvent">
-      <span class="featured-badge" *ngIf="featuredEvent.badge_label">
-        <i class="fas fa-star"></i> {{ featuredEvent.badge_label }}
-      </span>
-      <h2 class="featured-title">{{ getFeaturedTitle() }}</h2>
-      <p class="featured-info">
-        <i class="fas fa-calendar-days"></i> {{ formatDate(featuredEvent.event_date) }}
-        <span *ngIf="featuredEvent.time_start || featuredEvent.time_end"> · <i class="fas fa-clock"></i> {{ formatTimeRange(featuredEvent.time_start, featuredEvent.time_end) }}</span>
-        <span *ngIf="featuredEvent.location"> · <i class="fas fa-location-dot"></i> {{ featuredEvent.location }}</span>
-      </p>
-      <a
-        *ngIf="pageContent?.featured?.buttonHref"
-        [routerLink]="pageContent.featured.buttonHref"
-        class="btn btn-accent-light"
+    <div class="s-label">{{ pageContent?.regular?.label || 'Editions' }}</div>
+    <h2 class="s-title">{{ pageContent?.regular?.title || 'Toutes les editions' }}</h2>
+
+    <div class="event-list">
+      <article
+        *ngFor="let event of events; let eventIndex = index"
+        class="event-card fade-up"
+        [class.is-featured]="event.is_featured"
       >
-        {{ pageContent.featured.buttonLabel }}
-      </a>
-    </div>
+        <a class="event-cover-link" [routerLink]="getEventUrl(event)" [attr.aria-label]="getEventTitle(event)">
+          <ng-container *ngIf="getCoverPhoto(event) as coverPhoto; else eventCoverPlaceholder">
+            <img
+              class="event-cover"
+              [src]="coverPhoto.image_url"
+              [alt]="coverPhoto.alt_text || coverPhoto.caption || event.title"
+            />
+          </ng-container>
+          <ng-template #eventCoverPlaceholder>
+            <div class="event-cover event-cover-placeholder">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+          </ng-template>
+        </a>
 
-    <div class="s-label">{{ pageContent?.regular?.label }}</div>
-    <h2 class="s-title">{{ pageContent?.regular?.title }}</h2>
+        <div class="event-body">
+          <div class="event-meta-row">
+            <span class="edition-badge" *ngIf="event.edition">{{ event.edition }}</span>
+            <span class="featured-badge" *ngIf="event.is_featured">Mis en avant</span>
+            <span class="event-order">#{{ eventIndex + 1 }}</span>
+          </div>
 
-    <div class="grid-3" style="margin-top:32px;">
-      <div *ngFor="let event of regularEvents" class="card fade-up event-card">
-        <div class="event-icon"><i class="fas fa-calendar-alt"></i></div>
-        <h3 class="event-title">{{ event.title }}</h3>
-        <p class="event-desc">{{ event.description }}</p>
-      </div>
+          <h3 class="event-title">
+            <a [routerLink]="getEventUrl(event)">{{ event.title }}</a>
+          </h3>
+
+          <div class="event-info">
+            <span *ngIf="event.event_date"><i class="fas fa-calendar-days"></i> {{ formatDate(event.event_date) }}</span>
+            <span *ngIf="event.time_start || event.time_end"><i class="fas fa-clock"></i> {{ formatTimeRange(event.time_start, event.time_end) }}</span>
+            <span *ngIf="event.location"><i class="fas fa-location-dot"></i> {{ event.location }}</span>
+          </div>
+
+          <p class="event-desc">{{ event.description }}</p>
+
+          <a [routerLink]="getEventUrl(event)" class="event-link">
+            Voir l'evenement <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </article>
     </div>
 
     <div class="info-cta fade-up" *ngIf="pageContent?.cta">

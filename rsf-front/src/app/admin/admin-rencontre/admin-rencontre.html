@@ -1,14 +1,188 @@
-<section class="panel">
+<section class="admin-page-toolbar">
+  <div>
+    <p class="admin-eyebrow">Edition de page</p>
+    <h2>Rencontre annuelle</h2>
+    <span>Modifie les infos principales, les photos, le programme et l'appel a l'action.</span>
+  </div>
+  <button type="button" class="btn btn-primary admin-save-btn" (click)="save()" [disabled]="saving">
+    <i class="fas fa-floppy-disk"></i>
+    <span>{{ saving ? 'Enregistrement...' : 'Enregistrer' }}</span>
+  </button>
+</section>
+
+<div class="panel">
   <div class="panel-header">
     <div>
-      <div class="panel-title"><i class="pi fas fa-screwdriver-wrench"></i>Ecran admin pret a brancher</div>
-      <div class="panel-desc">Le header et la sidebar sont maintenant mutualises. Cette page peut recevoir son formulaire, sa table ou ses actions sans recopier le layout.</div>
+      <div class="panel-title"><i class="pi fas fa-clipboard-list"></i>Informations generales de l'evenement</div>
     </div>
   </div>
   <div class="panel-body">
-    <div class="alert alert-info">
-      <i class="fas fa-circle-info"></i>
-      <div>Tu peux maintenant remplacer ce bloc par le vrai contenu de gestion de cette page.</div>
+    <div class="form-grid form-grid-2">
+      <div class="form-group">
+        <label for="ra_title">Titre de l'evenement</label>
+        <input class="input" type="text" id="ra_title" name="ra_title" [(ngModel)]="data.ra_title" />
+      </div>
+      <div class="form-group">
+        <label for="ra_edition">Numero d'edition</label>
+        <input class="input" type="text" id="ra_edition" name="ra_edition" [(ngModel)]="data.ra_edition" />
+      </div>
+      <div class="form-group">
+        <label for="ra_date">Date</label>
+        <input class="input" type="date" id="ra_date" name="ra_date" [(ngModel)]="data.ra_date" />
+      </div>
+      <div class="form-group">
+        <label for="ra_start">Heure de debut</label>
+        <input class="input" type="time" id="ra_start" name="ra_start" [(ngModel)]="data.ra_start" />
+      </div>
+      <div class="form-group">
+        <label for="ra_end">Heure de fin</label>
+        <input class="input" type="time" id="ra_end" name="ra_end" [(ngModel)]="data.ra_end" />
+      </div>
+      <div class="form-group">
+        <label for="ra_place">Lieu</label>
+        <input class="input" type="text" id="ra_place" name="ra_place" [(ngModel)]="data.ra_place" />
+      </div>
+      <div class="form-group">
+        <label for="ra_email">Email de contact</label>
+        <input class="input" type="email" id="ra_email" name="ra_email" [(ngModel)]="data.ra_email" />
+      </div>
+      <div class="form-group">
+        <label for="ra_web">Site web</label>
+        <input class="input" type="url" id="ra_web" name="ra_web" [(ngModel)]="data.ra_web" />
+      </div>
+    </div>
+
+    <div class="form-group top-gap">
+      <label for="ra_desc">Description principale</label>
+      <textarea class="textarea" id="ra_desc" name="ra_desc" [(ngModel)]="data.ra_desc"></textarea>
     </div>
   </div>
-</section>
+</div>
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><i class="pi fas fa-images"></i>Galerie photos</div>
+      <div class="panel-desc">Photos affichees sur la page publique de la rencontre annuelle.</div>
+    </div>
+    <div class="photo-add-control">
+      <input
+        class="photo-file-input"
+        type="file"
+        id="rencontre-photos-add"
+        name="rencontre-photos-add"
+        [accept]="acceptedPhotoTypes"
+        multiple
+        (change)="onPhotosSelected($event)"
+      />
+      <label class="btn btn-ghost btn-sm photo-file-btn" for="rencontre-photos-add">
+        <i class="fas fa-upload"></i> Ajouter des photos
+      </label>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="photo-empty" *ngIf="!eventPhotos.length">Aucune photo pour le moment.</div>
+
+    <div class="photo-list" *ngIf="eventPhotos.length">
+      <div class="photo-row" *ngFor="let photo of eventPhotos; let photoIndex = index; trackBy: trackByIndex">
+        <div class="photo-preview" [class.is-empty]="!photo.image_url">
+          <img *ngIf="photo.image_url" [src]="photo.image_url" [alt]="photo.alt_text || photo.caption || data.ra_title" />
+          <i *ngIf="!photo.image_url" class="fas fa-image"></i>
+        </div>
+
+        <div class="photo-fields">
+          <div class="form-group">
+            <label [for]="'rencontre-photo-file-' + photoIndex">Photo</label>
+            <div class="photo-file-row">
+              <input
+                class="photo-file-input"
+                type="file"
+                [id]="'rencontre-photo-file-' + photoIndex"
+                [name]="'rencontre-photo-file-' + photoIndex"
+                [accept]="acceptedPhotoTypes"
+                [disabled]="photo.is_uploading"
+                (change)="onPhotoSelected($event, photoIndex)"
+              />
+              <label
+                class="btn btn-ghost btn-sm photo-file-btn"
+                [class.is-disabled]="photo.is_uploading"
+                [for]="'rencontre-photo-file-' + photoIndex"
+              >
+                <i class="fas" [class.fa-spinner]="photo.is_uploading" [class.fa-upload]="!photo.is_uploading"></i>
+                <span>{{ photo.is_uploading ? 'Envoi...' : (photo.image_url ? 'Remplacer' : 'Choisir') }}</span>
+              </label>
+              <a *ngIf="photo.image_url" class="photo-link" [href]="photo.image_url" target="_blank" rel="noopener">Voir</a>
+            </div>
+            <p class="photo-status is-error" *ngIf="photo.upload_error">Envoi echoue. Choisis de nouveau la photo.</p>
+          </div>
+          <div class="form-group">
+            <label>Texte alternatif</label>
+            <input class="input" type="text" [(ngModel)]="photo.alt_text" [name]="'rencontre-photo-alt-' + photoIndex" />
+          </div>
+          <div class="form-group">
+            <label>Legende</label>
+            <input class="input" type="text" [(ngModel)]="photo.caption" [name]="'rencontre-photo-caption-' + photoIndex" />
+          </div>
+        </div>
+
+        <div class="photo-actions">
+          <button class="icon-btn" type="button" (click)="movePhoto(photoIndex, -1)" [disabled]="photo.is_uploading || photoIndex === 0">
+            <i class="fas fa-arrow-up"></i>
+          </button>
+          <button class="icon-btn" type="button" (click)="movePhoto(photoIndex, 1)" [disabled]="photo.is_uploading || photoIndex === eventPhotos.length - 1">
+            <i class="fas fa-arrow-down"></i>
+          </button>
+          <button class="icon-btn danger" type="button" (click)="removePhoto(photoIndex)" [disabled]="photo.is_uploading">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><i class="pi fas fa-file-lines"></i>Programme de la journee</div>
+      <div class="panel-desc">Les activites listees dans le programme officiel.</div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div id="prog-list" class="program-editor">
+      <div class="sortable-item" *ngFor="let index of [1,2,3,4,5,6]">
+        <span class="drag-handle"><i class="fas fa-grip-vertical"></i></span>
+        <div class="inline-icon"><i class="fas fa-calendar-check"></i></div>
+        <div class="si-content">
+          <input class="input" type="text" [(ngModel)]="data['prog' + index + '_title']" [name]="'prog-title-' + index" />
+          <input class="input" type="text" [(ngModel)]="data['prog' + index + '_time']" [name]="'prog-time-' + index" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><i class="pi fas fa-bullhorn"></i>Banniere de bas de page</div>
+      <div class="panel-desc">Message final et bouton d'invitation.</div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="ra_cta">Texte principal</label>
+        <input class="input" type="text" id="ra_cta" name="ra_cta" [(ngModel)]="data.ra_cta" />
+      </div>
+      <div class="form-group">
+        <label for="ra_btn">Texte du bouton</label>
+        <input class="input" type="text" id="ra_btn" name="ra_btn" [(ngModel)]="data.ra_btn" />
+      </div>
+      <div class="form-group">
+        <label for="ra_href">Lien du bouton</label>
+        <input class="input" type="text" id="ra_href" name="ra_href" [(ngModel)]="data.ra_href" />
+      </div>
+    </div>
+  </div>
+</div>

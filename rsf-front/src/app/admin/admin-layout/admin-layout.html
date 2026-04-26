@@ -1,76 +1,109 @@
-<div class="admin-shell">
-  <aside class="sidebar" [class.open]="isMobileSidebarOpen">
-    <div class="sidebar-brand">
-      <a routerLink="/admin/dashboard" class="brand-logo">
-        <div class="brand-icon">RSF</div>
+<div class="admin-shell" [class.sidebar-open]="isSidebarOpen">
+  <header class="admin-header">
+    <button class="header-icon-btn menu-toggle" type="button" (click)="toggleSidebar()" aria-label="Ouvrir la navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <a routerLink="/admin/dashboard" class="admin-brand" (click)="closeSidebar()">
+      <span class="brand-mark">RSF</span>
+      <span>
+        <strong>Back-office</strong>
+        <small>Administration du site</small>
+      </span>
+    </a>
+
+    <div class="header-actions">
+      <a routerLink="/" class="header-link">
+        <i class="fas fa-arrow-up-right-from-square"></i>
+        <span>Voir le site</span>
+      </a>
+      <a routerLink="/admin/settings" class="header-icon-btn" title="Parametres" aria-label="Parametres">
+        <i class="fas fa-gear"></i>
+      </a>
+      <button class="header-user" type="button" (click)="logout()" title="Se deconnecter">
+        <span class="user-avatar">{{ userInitials }}</span>
+        <span class="user-copy">
+          <strong>{{ userName }}</strong>
+          <small>Se deconnecter</small>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <div class="admin-body">
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
         <div>
-          <div class="brand-name">RSF Admin</div>
-          <div class="brand-sub">Administration</div>
+          <strong>Navigation</strong>
+          <small>Interfaces admin</small>
         </div>
-      </a>
-    </div>
-
-    <ng-container *ngFor="let section of navSections">
-      <div class="sidebar-section-label">{{ section.label }}</div>
-      <nav>
-        <a
-          *ngFor="let item of section.items"
-          class="sidebar-link"
-          [routerLink]="item.href"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
-          (click)="closeSidebar()"
-        >
-          <span class="si"><i [class]="item.icon"></i></span>
-          <span>{{ item.label }}</span>
-          <span *ngIf="item.badge" class="badge-new">{{ item.badge }}</span>
-        </a>
-      </nav>
-    </ng-container>
-
-    <div class="sidebar-footer">
-      <a href="/" target="_blank" rel="noreferrer">
-        <span class="si"><i class="fas fa-up-right-from-square"></i></span>
-        Voir le site
-      </a>
-      <a routerLink="/admin/login" (click)="closeSidebar()">
-        <span class="si"><i class="fas fa-right-from-bracket"></i></span>
-        Deconnexion
-      </a>
-    </div>
-  </aside>
-
-  <div class="overlay" [class.show]="isMobileSidebarOpen" (click)="closeSidebar()"></div>
-
-  <div class="main">
-    <header class="topbar">
-      <div class="topbar-left">
-        <button class="mob-toggle" type="button" (click)="toggleSidebar()" aria-label="Ouvrir le menu admin">
-          <i class="fas fa-bars"></i>
+        <button class="header-icon-btn sidebar-close" type="button" (click)="closeSidebar()" aria-label="Fermer la navigation">
+          <i class="fas fa-xmark"></i>
         </button>
-        <div class="page-meta">
-          <div class="page-title">{{ currentPageTitle }}</div>
-          <div class="page-breadcrumb">
-            <a routerLink="/admin/dashboard">Admin</a>
-            <span>›</span>
-            <span>{{ currentSectionLabel }}</span>
+      </div>
+
+      <div class="sidebar-nav" role="navigation" aria-label="Navigation admin">
+        <a
+          [routerLink]="mainLink.href"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="sidebar-link sidebar-link-main"
+        >
+          <i [class]="mainLink.icon"></i>
+          <span>{{ mainLink.label }}</span>
+        </a>
+
+        <section class="nav-section" *ngFor="let group of navGroups">
+          <h2>{{ group.title }}</h2>
+          <a
+            *ngFor="let item of group.items"
+            [routerLink]="item.href"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="sidebar-link"
+          >
+            <i [class]="item.icon"></i>
+            <span>{{ item.label }}</span>
+          </a>
+        </section>
+      </div>
+
+      <div class="sidebar-footer">
+        <a routerLink="/admin/settings" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="sidebar-link">
+          <i class="fas fa-sliders"></i>
+          <span>Parametres</span>
+        </a>
+      </div>
+    </aside>
+
+    <button class="sidebar-overlay" type="button" (click)="closeSidebar()" aria-label="Fermer la navigation"></button>
+
+    <section class="admin-main">
+      <div class="admin-headbar">
+        <div>
+          <div class="headbar-kicker">
+            <span>{{ currentSection }}</span>
+            <i class="fas fa-chevron-right"></i>
+            <span>{{ currentTitle }}</span>
           </div>
+          <h1>{{ currentTitle }}</h1>
+        </div>
+
+        <div class="headbar-actions">
+          <a routerLink="/admin/accueil" class="headbar-button">
+            <i class="fas fa-pen-to-square"></i>
+            <span>Modifier l'accueil</span>
+          </a>
+          <a routerLink="/admin/dashboard" class="headbar-button secondary">
+            <i class="fas fa-gauge-high"></i>
+            <span>Dashboard</span>
+          </a>
         </div>
       </div>
 
-      <div class="topbar-right">
-        <a class="topbar-btn tb-preview" href="/" target="_blank" rel="noreferrer">
-          <i class="fas fa-eye"></i> Voir le site
-        </a>
-        <a class="topbar-btn tb-save" routerLink="/admin/settings">
-          <i class="fas fa-gear"></i> Parametres
-        </a>
-        <div class="topbar-avatar">AD</div>
-      </div>
-    </header>
-
-    <div class="content">
-      <router-outlet />
-    </div>
+      <main class="admin-content">
+        <router-outlet />
+      </main>
+    </section>
   </div>
 </div>
