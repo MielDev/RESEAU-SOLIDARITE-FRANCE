@@ -1,3 +1,15 @@
 :host {
   display: block;
 }
+
+.testimonial-avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2f5dff, #7c3aed);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+}

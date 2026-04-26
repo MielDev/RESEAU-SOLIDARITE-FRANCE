@@ -14,35 +14,90 @@
   <div class="panel-header">
     <div>
       <div class="panel-title"><i class="pi fas fa-handshake-angle"></i>Liste des actions solidaires</div>
-      <div class="panel-desc">Gérez les actions affichées sur la page Actions Solidaires</div>
+      <div class="panel-desc">Gerez les actions affichees sur la page Actions solidaires.</div>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Icone</th>
+            <th>Titre</th>
+            <th>Categorie</th>
+            <th>Description</th>
+            <th>Statut</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let action of actions">
+            <td><span class="table-icon"><i [class]="iconClass(action.icon, 'fas fa-handshake-angle')"></i></span></td>
+            <td><strong style="font-size:14px;">{{ action.title }}</strong></td>
+            <td><span class="badge badge-primary">{{ action.category }}</span></td>
+            <td style="max-width:280px;font-size:13px;color:#475569;">{{ action.description }}</td>
+            <td><span class="badge badge-success">{{ action.status }}</span></td>
+            <td>
+              <div style="display:flex;gap:6px;">
+                <button class="btn btn-ghost btn-sm" type="button" (click)="edit(action)">
+                  <i class="fas fa-pen"></i> Modifier
+                </button>
+                <button class="btn btn-danger btn-sm" type="button" (click)="delete(action)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="admin-modal-backdrop" *ngIf="showForm" (click)="cancel()">
+  <section class="admin-modal admin-modal-lg" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+    <header class="admin-modal-header">
+      <div>
+        <p class="admin-modal-kicker">Action solidaire</p>
+        <h3 class="admin-modal-title">{{ editing ? 'Modifier une action' : 'Nouvelle action' }}</h3>
+        <p class="admin-modal-desc">Renseigne les informations qui apparaitront sur la page publique.</p>
+      </div>
+      <button class="admin-modal-close" type="button" (click)="cancel()" [disabled]="saving" aria-label="Fermer">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </header>
+
+    <div class="admin-modal-body">
+      <div class="admin-modal-form">
+        <div class="form-grid form-grid-3">
+          <div class="form-group">
+            <label>Icone</label>
+            <app-admin-icon-picker [(ngModel)]="currentAction.icon" fallbackIcon="fas fa-handshake-angle"></app-admin-icon-picker>
+          </div>
+          <div class="form-group">
+            <label>Titre</label>
+            <input class="input" type="text" [(ngModel)]="currentAction.title" placeholder="Titre de l'action" />
+          </div>
+          <div class="form-group">
+            <label>Categorie</label>
+            <input class="input" type="text" [(ngModel)]="currentAction.category" placeholder="Distribution vetements" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+          <textarea class="textarea" [(ngModel)]="currentAction.description" placeholder="Decrivez l'action solidaire..."></textarea>
+        </div>
+      </div>
     </div>
 
-  </div>
-  <div class="panel-body"><div style="display:flex;justify-content:flex-end;margin-bottom:16px;"><button class="btn btn-primary" (click)="addNew()"><i class="fas fa-plus"></i> Nouvelle action</button></div><div class="table-wrap"><table><thead><tr><th>Icône</th><th>Titre</th><th>Catégorie</th><th>Description</th><th>Statut</th><th>Actions</th></tr></thead><tbody>
-<tr *ngFor="let action of actions">
-  <td><span class="table-icon"><i [class]="iconClass(action.icon, 'fas fa-handshake-angle')"></i></span></td>
-  <td><strong style="font-size:14px;">{{action.title}}</strong></td>
-  <td><span class="badge badge-primary">{{action.category}}</span></td>
-  <td style="max-width:280px;font-size:13px;color:#475569;">{{action.description}}</td>
-  <td><span class="badge badge-success">{{action.status}}</span></td>
-  <td>
-    <div style="display:flex;gap:6px;">
-      <button class="btn btn-ghost btn-sm" (click)="edit(action)"><i class="fas fa-pen"></i> Modifier</button>
-      <button class="btn btn-danger btn-sm" (click)="delete(action)"><i class="fas fa-trash"></i></button>
-    </div>
-  </td>
-</tr></tbody></table></div>
-<div id="action-form" *ngIf="showForm" style="margin-top:20px;background:#F8FAFC;border-radius:10px;padding:20px;border:1px solid #E2E8F0;">
-  <h4 style="font-size:14px;font-weight:700;margin-bottom:14px;">{{editing ? 'Modifier' : 'Nouvelle'}} action solidaire</h4>
-  <div style="display:grid;grid-template-columns:minmax(260px,1.2fr) minmax(180px,1fr) minmax(180px,1fr);gap:12px;margin-bottom:12px;">
-    <div class="form-group"><label>Icône</label><app-admin-icon-picker [(ngModel)]="currentAction.icon" fallbackIcon="fas fa-handshake-angle"></app-admin-icon-picker></div>
-    <div class="form-group"><label>Titre</label><input class="input" type="text" [(ngModel)]="currentAction.title" placeholder="Titre de l'action"/></div>
-    <div class="form-group"><label>Catégorie</label><input class="input" type="text" [(ngModel)]="currentAction.category" placeholder="Distribution vêtements"/></div>
-  </div>
-  <div class="form-group" style="margin-bottom:12px;"><label>Description</label><textarea class="textarea" [(ngModel)]="currentAction.description" placeholder="Décrivez l'action solidaire…" style="min-height:80px;"></textarea></div>
-  <div style="display:flex;gap:8px;">
-    <button class="btn btn-primary btn-sm" (click)="saveAction()" [disabled]="saving">{{ saving ? 'Enregistrement...' : 'Enregistrer' }}</button>
-    <button class="btn btn-ghost btn-sm" (click)="cancel()">Annuler</button>
-  </div>
-</div></div>
+    <footer class="admin-modal-footer">
+      <button class="btn btn-ghost" type="button" (click)="cancel()" [disabled]="saving">Annuler</button>
+      <button class="btn btn-primary" type="button" (click)="saveAction()" [disabled]="saving">
+        <i class="fas fa-floppy-disk"></i>
+        {{ saving ? 'Enregistrement...' : 'Enregistrer' }}
+      </button>
+    </footer>
+  </section>
 </div>

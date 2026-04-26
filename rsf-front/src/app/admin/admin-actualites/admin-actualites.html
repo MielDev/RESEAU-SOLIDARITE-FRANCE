@@ -13,38 +13,100 @@
 <div class="panel">
   <div class="panel-header">
     <div>
-      <div class="panel-title"><i class="pi fas fa-newspaper"></i>Liste des actualités</div>
-      <div class="panel-desc">Gérez les articles publiés sur la page Actualités</div>
+      <div class="panel-title"><i class="pi fas fa-newspaper"></i>Liste des actualites</div>
+      <div class="panel-desc">Gerez les articles publies sur la page Actualites.</div>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Icone</th>
+            <th>Titre</th>
+            <th>Categorie</th>
+            <th>Date</th>
+            <th>Statut</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let actu of actualites">
+            <td><span class="table-icon"><i [class]="iconClass(actu.icon, 'fas fa-newspaper')"></i></span></td>
+            <td><strong style="font-size:13.5px;">{{ actu.title }}</strong></td>
+            <td><span class="badge badge-primary">{{ actu.category }}</span></td>
+            <td style="font-size:13px;color:#94A3B8;">{{ actu.date }}</td>
+            <td><span class="badge badge-success">{{ actu.status }}</span></td>
+            <td>
+              <div style="display:flex;gap:6px;">
+                <button class="btn btn-ghost btn-sm" type="button" (click)="edit(actu)">
+                  <i class="fas fa-pen"></i> Modifier
+                </button>
+                <button class="btn btn-danger btn-sm" type="button" (click)="delete(actu)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="admin-modal-backdrop" *ngIf="showForm" (click)="cancel()">
+  <section class="admin-modal admin-modal-lg" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+    <header class="admin-modal-header">
+      <div>
+        <p class="admin-modal-kicker">Actualite</p>
+        <h3 class="admin-modal-title">{{ editing ? 'Modifier une actualite' : 'Nouvelle actualite' }}</h3>
+        <p class="admin-modal-desc">Complete les informations de publication de l'article.</p>
+      </div>
+      <button class="admin-modal-close" type="button" (click)="cancel()" [disabled]="saving" aria-label="Fermer">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </header>
+
+    <div class="admin-modal-body">
+      <div class="admin-modal-form">
+        <div class="form-grid form-grid-2">
+          <div class="form-group">
+            <label>Icone</label>
+            <app-admin-icon-picker [(ngModel)]="currentActu.icon" fallbackIcon="fas fa-newspaper"></app-admin-icon-picker>
+          </div>
+          <div class="form-group">
+            <label>Titre</label>
+            <input class="input" type="text" [(ngModel)]="currentActu.title" placeholder="Titre de l'actualite" />
+          </div>
+          <div class="form-group">
+            <label>Categorie</label>
+            <input class="input" type="text" [(ngModel)]="currentActu.category" placeholder="Evenement" />
+          </div>
+          <div class="form-group">
+            <label>Date</label>
+            <input class="input" type="date" [(ngModel)]="currentActu.date" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Description courte</label>
+          <textarea class="textarea" [(ngModel)]="currentActu.description" placeholder="Resume de l'actualite..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Lien</label>
+          <input class="input" type="text" [(ngModel)]="currentActu.link" placeholder="/rencontre-annuelle" />
+        </div>
+      </div>
     </div>
 
-  </div>
-  <div class="panel-body"><div style="display:flex;justify-content:flex-end;margin-bottom:16px;"><button class="btn btn-primary" (click)="addNew()"><i class="fas fa-plus"></i> Nouvelle actualite</button></div><div class="table-wrap"><table><thead><tr><th>Icône</th><th>Titre</th><th>Catégorie</th><th>Date</th><th>Statut</th><th>Actions</th></tr></thead><tbody>
-<tr *ngFor="let actu of actualites">
-  <td><span class="table-icon"><i [class]="iconClass(actu.icon, 'fas fa-newspaper')"></i></span></td>
-  <td><strong style="font-size:13.5px;">{{actu.title}}</strong></td>
-  <td><span class="badge badge-primary">{{actu.category}}</span></td>
-  <td style="font-size:13px;color:#94A3B8;">{{actu.date}}</td>
-  <td><span class="badge badge-success">{{actu.status}}</span></td>
-  <td>
-    <div style="display:flex;gap:6px;">
-      <button class="btn btn-ghost btn-sm" (click)="edit(actu)"><i class="fas fa-pen"></i> Modifier</button>
-      <button class="btn btn-danger btn-sm" (click)="delete(actu)"><i class="fas fa-trash"></i></button>
-    </div>
-  </td>
-</tr></tbody></table></div>
-<div id="new-actu" *ngIf="showForm" style="margin-top:20px;background:#F8FAFC;border-radius:10px;padding:20px;border:1px solid #E2E8F0;">
-  <h4 style="font-size:14px;font-weight:700;margin-bottom:14px;">{{editing ? 'Modifier' : 'Nouvelle'}} actualité</h4>
-  <div style="display:grid;grid-template-columns:minmax(260px,1.2fr) minmax(180px,1fr) minmax(160px,1fr) 140px;gap:12px;margin-bottom:12px;">
-    <div class="form-group"><label>Icône</label><app-admin-icon-picker [(ngModel)]="currentActu.icon" fallbackIcon="fas fa-newspaper"></app-admin-icon-picker></div>
-    <div class="form-group"><label>Titre</label><input class="input" type="text" [(ngModel)]="currentActu.title" placeholder="Titre de l'actualité"/></div>
-    <div class="form-group"><label>Catégorie</label><input class="input" type="text" [(ngModel)]="currentActu.category" placeholder="Événement"/></div>
-    <div class="form-group"><label>Date</label><input class="input" type="date" [(ngModel)]="currentActu.date"/></div>
-  </div>
-  <div class="form-group" style="margin-bottom:12px;"><label>Description courte</label><textarea class="textarea" [(ngModel)]="currentActu.description" placeholder="Résumé de l'actualité…" style="min-height:80px;"></textarea></div>
-  <div class="form-group" style="margin-bottom:12px;"><label>Lien (vers une page)</label><input class="input" type="text" [(ngModel)]="currentActu.link" placeholder="rencontre-annuelle.html"/></div>
-  <div style="display:flex;gap:8px;">
-    <button class="btn btn-primary btn-sm" (click)="saveActu()" [disabled]="saving">{{ saving ? 'Enregistrement...' : 'Publier' }}</button>
-    <button class="btn btn-ghost btn-sm" (click)="cancel()">Annuler</button>
-  </div>
-</div></div>
+    <footer class="admin-modal-footer">
+      <button class="btn btn-ghost" type="button" (click)="cancel()" [disabled]="saving">Annuler</button>
+      <button class="btn btn-primary" type="button" (click)="saveActu()" [disabled]="saving">
+        <i class="fas fa-floppy-disk"></i>
+        {{ saving ? 'Enregistrement...' : 'Publier' }}
+      </button>
+    </footer>
+  </section>
 </div>

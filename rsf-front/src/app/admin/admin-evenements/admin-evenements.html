@@ -19,12 +19,6 @@
   </div>
 
   <div class="panel-body">
-    <div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
-      <button class="btn btn-primary" type="button" (click)="addNew()">
-        <i class="fas fa-plus"></i> Nouvel evenement
-      </button>
-    </div>
-
     <div class="table-wrap">
       <table>
         <thead>
@@ -68,156 +62,178 @@
         </tbody>
       </table>
     </div>
+  </div>
+</div>
 
-    <div id="event-form" *ngIf="showForm" class="event-form">
-      <h4>{{ editing ? 'Modifier' : 'Nouvel' }} evenement</h4>
-
-      <div class="form-grid form-grid-2">
-        <div class="form-group">
-          <label>Titre</label>
-          <input class="input" type="text" [(ngModel)]="currentEvent.title" placeholder="Titre de l'evenement" />
-        </div>
-        <div class="form-group">
-          <label>Edition</label>
-          <input class="input" type="text" [(ngModel)]="currentEvent.edition" placeholder="2e edition" />
-        </div>
-        <div class="form-group">
-          <label>Date</label>
-          <input class="input" type="date" [(ngModel)]="currentEvent.event_date" />
-        </div>
-        <div class="form-group">
-          <label>Heure de debut</label>
-          <input class="input" type="time" [(ngModel)]="currentEvent.time_start" />
-        </div>
-        <div class="form-group">
-          <label>Heure de fin</label>
-          <input class="input" type="time" [(ngModel)]="currentEvent.time_end" />
-        </div>
-        <div class="form-group">
-          <label>Lieu</label>
-          <input class="input" type="text" [(ngModel)]="currentEvent.location" placeholder="Parc des Gayeulles, Rennes" />
-        </div>
-        <div class="form-group">
-          <label>Badge</label>
-          <input class="input" type="text" [(ngModel)]="currentEvent.badge_label" placeholder="Evenement phare" />
-        </div>
-        <div class="form-group">
-          <label>Email de contact</label>
-          <input class="input" type="email" [(ngModel)]="currentEvent.contact_email" />
-        </div>
-        <div class="form-group">
-          <label>Site de contact</label>
-          <input class="input" type="url" [(ngModel)]="currentEvent.contact_website" />
-        </div>
-        <div class="form-group">
-          <label>Texte du bouton</label>
-          <input class="input" type="text" [(ngModel)]="currentEvent.cta_text" placeholder="Je participe" />
-        </div>
-        <div class="form-group">
-          <label>Lien du bouton</label>
-          <input class="input" type="text" [(ngModel)]="currentEvent.cta_href" placeholder="/nous-rejoindre" />
-        </div>
+<div class="admin-modal-backdrop" *ngIf="showForm" (click)="cancel()">
+  <section class="admin-modal admin-modal-xl" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+    <header class="admin-modal-header">
+      <div>
+        <p class="admin-modal-kicker">Evenement</p>
+        <h3 class="admin-modal-title">{{ editing ? 'Modifier un evenement' : 'Nouvel evenement' }}</h3>
+        <p class="admin-modal-desc">Centralise les informations, la galerie et les options de publication.</p>
       </div>
+      <button class="admin-modal-close" type="button" (click)="cancel()" [disabled]="saving" aria-label="Fermer">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </header>
 
-      <div class="form-group">
-        <label>Description</label>
-        <textarea class="textarea" [(ngModel)]="currentEvent.description" placeholder="Decrivez l'evenement..."></textarea>
-      </div>
-
-      <div class="photo-editor">
-        <div class="photo-editor-head">
-          <div>
-            <h5>Galerie photos</h5>
-            <p>Ajoute plusieurs images qui seront affichees sur la page publique de l'evenement.</p>
-          </div>
-          <div class="photo-add-control">
-            <input
-              class="photo-file-input"
-              type="file"
-              id="event-photos-add"
-              name="event-photos-add"
-              [accept]="acceptedPhotoTypes"
-              multiple
-              (change)="onPhotosSelected($event)"
-            />
-            <label class="btn btn-ghost btn-sm photo-file-btn" for="event-photos-add">
-              <i class="fas fa-upload"></i> Ajouter des photos
-            </label>
-          </div>
-        </div>
-
-        <div class="photo-empty" *ngIf="!currentEvent.photos?.length">
-          Aucune photo pour le moment.
-        </div>
-
-        <div class="photo-list" *ngIf="currentEvent.photos?.length">
-          <div class="photo-row" *ngFor="let photo of currentEvent.photos; let photoIndex = index; trackBy: trackByIndex">
-            <div class="photo-preview" [class.is-empty]="!photo.image_url">
-              <img *ngIf="photo.image_url" [src]="photo.image_url" [alt]="photo.alt_text || photo.caption || currentEvent.title" />
-              <i *ngIf="!photo.image_url" class="fas fa-image"></i>
+    <div class="admin-modal-body">
+      <div class="admin-modal-form">
+        <section class="form-section">
+          <h4 class="form-section-title">Informations principales</h4>
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label>Titre</label>
+              <input class="input" type="text" [(ngModel)]="currentEvent.title" placeholder="Titre de l'evenement" />
             </div>
+            <div class="form-group">
+              <label>Edition</label>
+              <input class="input" type="text" [(ngModel)]="currentEvent.edition" placeholder="2e edition" />
+            </div>
+            <div class="form-group">
+              <label>Date</label>
+              <input class="input" type="date" [(ngModel)]="currentEvent.event_date" />
+            </div>
+            <div class="form-group">
+              <label>Lieu</label>
+              <input class="input" type="text" [(ngModel)]="currentEvent.location" placeholder="Parc des Gayeulles, Rennes" />
+            </div>
+            <div class="form-group">
+              <label>Heure de debut</label>
+              <input class="input" type="time" [(ngModel)]="currentEvent.time_start" />
+            </div>
+            <div class="form-group">
+              <label>Heure de fin</label>
+              <input class="input" type="time" [(ngModel)]="currentEvent.time_end" />
+            </div>
+            <div class="form-group">
+              <label>Badge</label>
+              <input class="input" type="text" [(ngModel)]="currentEvent.badge_label" placeholder="Evenement phare" />
+            </div>
+            <div class="form-group">
+              <label>Email de contact</label>
+              <input class="input" type="email" [(ngModel)]="currentEvent.contact_email" />
+            </div>
+            <div class="form-group">
+              <label>Site de contact</label>
+              <input class="input" type="url" [(ngModel)]="currentEvent.contact_website" />
+            </div>
+            <div class="form-group">
+              <label>Texte du bouton</label>
+              <input class="input" type="text" [(ngModel)]="currentEvent.cta_text" placeholder="Je participe" />
+            </div>
+            <div class="form-group">
+              <label>Lien du bouton</label>
+              <input class="input" type="text" [(ngModel)]="currentEvent.cta_href" placeholder="/nous-rejoindre" />
+            </div>
+          </div>
 
-            <div class="photo-fields">
-              <div class="form-group">
-                <label [for]="'event-photo-file-' + photoIndex">Photo</label>
-                <div class="photo-file-row">
-                  <input
-                    class="photo-file-input"
-                    type="file"
-                    [id]="'event-photo-file-' + photoIndex"
-                    [name]="'event-photo-file-' + photoIndex"
-                    [accept]="acceptedPhotoTypes"
-                    [disabled]="photo.is_uploading"
-                    (change)="onPhotoSelected($event, photoIndex)"
-                  />
-                  <label
-                    class="btn btn-ghost btn-sm photo-file-btn"
-                    [class.is-disabled]="photo.is_uploading"
-                    [for]="'event-photo-file-' + photoIndex"
-                  >
-                    <i class="fas" [class.fa-spinner]="photo.is_uploading" [class.fa-upload]="!photo.is_uploading"></i>
-                    <span>{{ photo.is_uploading ? 'Envoi...' : (photo.image_url ? 'Remplacer' : 'Choisir') }}</span>
-                  </label>
-                  <a *ngIf="photo.image_url" class="photo-link" [href]="photo.image_url" target="_blank" rel="noopener">Voir</a>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea class="textarea" [(ngModel)]="currentEvent.description" placeholder="Decrivez l'evenement..."></textarea>
+          </div>
+        </section>
+
+        <section class="photo-editor">
+          <div class="photo-editor-head">
+            <div>
+              <h5>Galerie photos</h5>
+              <p>Ajoute plusieurs images qui seront affichees dans la page detail de l'evenement.</p>
+            </div>
+            <div class="photo-add-control">
+              <input
+                class="photo-file-input"
+                type="file"
+                id="event-photos-add"
+                name="event-photos-add"
+                [accept]="acceptedPhotoTypes"
+                multiple
+                (change)="onPhotosSelected($event)"
+              />
+              <label class="btn btn-ghost btn-sm photo-file-btn" for="event-photos-add">
+                <i class="fas fa-upload"></i> Ajouter des photos
+              </label>
+            </div>
+          </div>
+
+          <div class="photo-empty" *ngIf="!currentEvent.photos?.length">
+            Aucune photo pour le moment.
+          </div>
+
+          <div class="photo-list" *ngIf="currentEvent.photos?.length">
+            <div class="photo-row" *ngFor="let photo of currentEvent.photos; let photoIndex = index; trackBy: trackByIndex">
+              <div class="photo-preview" [class.is-empty]="!photo.image_url">
+                <img *ngIf="photo.image_url" [src]="photo.image_url" [alt]="photo.alt_text || photo.caption || currentEvent.title" />
+                <i *ngIf="!photo.image_url" class="fas fa-image"></i>
+              </div>
+
+              <div class="photo-fields">
+                <div class="form-group">
+                  <label [for]="'event-photo-file-' + photoIndex">Photo</label>
+                  <div class="photo-file-row">
+                    <input
+                      class="photo-file-input"
+                      type="file"
+                      [id]="'event-photo-file-' + photoIndex"
+                      [name]="'event-photo-file-' + photoIndex"
+                      [accept]="acceptedPhotoTypes"
+                      [disabled]="photo.is_uploading"
+                      (change)="onPhotoSelected($event, photoIndex)"
+                    />
+                    <label
+                      class="btn btn-ghost btn-sm photo-file-btn"
+                      [class.is-disabled]="photo.is_uploading"
+                      [for]="'event-photo-file-' + photoIndex"
+                    >
+                      <i class="fas" [class.fa-spinner]="photo.is_uploading" [class.fa-upload]="!photo.is_uploading"></i>
+                      <span>{{ photo.is_uploading ? 'Envoi...' : (photo.image_url ? 'Remplacer' : 'Choisir') }}</span>
+                    </label>
+                    <a *ngIf="photo.image_url" class="photo-link" [href]="photo.image_url" target="_blank" rel="noopener">Voir</a>
+                  </div>
+                  <p class="photo-status is-error" *ngIf="photo.upload_error">Envoi echoue. Choisis de nouveau la photo.</p>
                 </div>
-                <p class="photo-status is-error" *ngIf="photo.upload_error">Envoi echoue. Choisis de nouveau la photo.</p>
+                <div class="form-group">
+                  <label>Texte alternatif</label>
+                  <input class="input" type="text" [(ngModel)]="photo.alt_text" [name]="'event-photo-alt-' + photoIndex" placeholder="Description courte de l'image" />
+                </div>
+                <div class="form-group">
+                  <label>Legende</label>
+                  <input class="input" type="text" [(ngModel)]="photo.caption" [name]="'event-photo-caption-' + photoIndex" placeholder="Legende affichee sous la photo" />
+                </div>
               </div>
-              <div class="form-group">
-                <label>Texte alternatif</label>
-                <input class="input" type="text" [(ngModel)]="photo.alt_text" [name]="'event-photo-alt-' + photoIndex" placeholder="Description courte de l'image" />
-              </div>
-              <div class="form-group">
-                <label>Legende</label>
-                <input class="input" type="text" [(ngModel)]="photo.caption" [name]="'event-photo-caption-' + photoIndex" placeholder="Legende affichee sous la photo" />
-              </div>
-            </div>
 
-            <div class="photo-actions">
-              <button class="icon-btn" type="button" (click)="movePhoto(photoIndex, -1)" [disabled]="photo.is_uploading || photoIndex === 0">
-                <i class="fas fa-arrow-up"></i>
-              </button>
-              <button class="icon-btn" type="button" (click)="movePhoto(photoIndex, 1)" [disabled]="photo.is_uploading || photoIndex === currentEvent.photos.length - 1">
-                <i class="fas fa-arrow-down"></i>
-              </button>
-              <button class="icon-btn danger" type="button" (click)="removePhoto(photoIndex)" [disabled]="photo.is_uploading">
-                <i class="fas fa-trash"></i>
-              </button>
+              <div class="photo-actions">
+                <button class="icon-btn" type="button" (click)="movePhoto(photoIndex, -1)" [disabled]="photo.is_uploading || photoIndex === 0">
+                  <i class="fas fa-arrow-up"></i>
+                </button>
+                <button class="icon-btn" type="button" (click)="movePhoto(photoIndex, 1)" [disabled]="photo.is_uploading || photoIndex === currentEvent.photos.length - 1">
+                  <i class="fas fa-arrow-down"></i>
+                </button>
+                <button class="icon-btn danger" type="button" (click)="removePhoto(photoIndex)" [disabled]="photo.is_uploading">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
 
-      <div class="event-flags">
-        <label><input type="checkbox" [(ngModel)]="currentEvent.is_featured" /> Mis en avant</label>
-        <label><input type="checkbox" [(ngModel)]="currentEvent.is_published" /> Publie</label>
-      </div>
-
-      <div style="display:flex;gap:8px;">
-        <button class="btn btn-primary btn-sm" type="button" (click)="saveEvent()" [disabled]="saving">
-          {{ saving ? 'Enregistrement...' : 'Enregistrer' }}
-        </button>
-        <button class="btn btn-ghost btn-sm" type="button" (click)="cancel()">Annuler</button>
+        <section class="form-section">
+          <h4 class="form-section-title">Publication</h4>
+          <div class="event-flags">
+            <label><input type="checkbox" [(ngModel)]="currentEvent.is_featured" /> Mis en avant</label>
+            <label><input type="checkbox" [(ngModel)]="currentEvent.is_published" /> Publie</label>
+          </div>
+        </section>
       </div>
     </div>
-  </div>
+
+    <footer class="admin-modal-footer">
+      <button class="btn btn-ghost" type="button" (click)="cancel()" [disabled]="saving">Annuler</button>
+      <button class="btn btn-primary" type="button" (click)="saveEvent()" [disabled]="saving">
+        <i class="fas fa-floppy-disk"></i>
+        {{ saving ? 'Enregistrement...' : 'Enregistrer' }}
+      </button>
+    </footer>
+  </section>
 </div>
