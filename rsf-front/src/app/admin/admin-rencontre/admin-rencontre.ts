@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { firstValueFrom, forkJoin } from 'rxjs';
@@ -13,9 +13,13 @@ import { AdminApiService } from '../admin-api.service';
   styleUrl: './admin-rencontre.css',
 })
 export class AdminRencontre implements OnInit {
+  @ViewChild('editionEditor') private editionEditor?: ElementRef<HTMLElement>;
+
   data: any = {};
+  editions: any[] = [];
   eventPhotos: any[] = [];
   saving = false;
+  isCreatingEdition = false;
   readonly acceptedPhotoTypes = 'image/jpeg,image/png,image/webp,image/gif';
   private readonly maxPhotoSize = 8 * 1024 * 1024;
   private pageData: any = {};
@@ -37,32 +41,105 @@ export class AdminRencontre implements OnInit {
       events: this.api.listResource<any>('events'),
     }).subscribe(({ page, events }) => {
       this.pageData = page || {};
-      this.eventData = events.find((event) => event.is_featured) ?? events[0] ?? {};
-      this.data = this.toFormData(this.pageData, this.eventData);
-      this.eventPhotos = this.toPhotoViewModels(this.eventData.photos);
+      this.editions = this.toEditionList(events);
+
+      const selectedEvent = this.editions.find((event) => event.is_featured) ?? this.editions[0] ?? null;
+      if (selectedEvent) {
+        this.selectEdition(selectedEvent);
+      } else {
+        this.createEdition(false);
+      }
     });
   }
 
   save() {
     if (this.saving) return;
+    if (!this.validateEditionForm()) return;
 
     this.saving = true;
-    const pageRequest = this.api.updatePage('rencontre-annuelle', this.toPageData());
     const eventPayload = this.toEventData();
+    const pageRequest = this.api.updatePage('rencontre-annuelle', this.toPageData(eventPayload));
     const eventRequest = eventPayload.id
       ? this.api.updateResource('events', eventPayload.id, eventPayload)
       : this.api.createResource('events', eventPayload);
 
     forkJoin([pageRequest, eventRequest]).subscribe({
-      next: () => {
+      next: ([, savedEvent]) => {
         this.saving = false;
-        void this.alerts.success('Modifications enregistrees', 'La rencontre annuelle a bien ete mise a jour.');
+        const updatedEvent = savedEvent || eventPayload;
+        const updatedEventId = (updatedEvent as any).id;
+        this.upsertEdition(updatedEvent);
+        this.selectEdition(this.editions.find((edition) => edition.id === updatedEventId) || updatedEvent);
+        void this.alerts.success('Modifications enregistrees', 'Cette edition de la rencontre annuelle a bien ete mise a jour.');
       },
       error: () => {
         this.saving = false;
         void this.alerts.error('Enregistrement impossible', 'La rencontre annuelle n a pas pu etre sauvegardee.');
       },
     });
+  }
+
+  selectEdition(event: any, shouldScroll = true) {
+    if (this.saving || !event) return;
+
+    this.isCreatingEdition = false;
+    this.eventData = event;
+    this.data = this.toFormData(this.pageData, this.eventData);
+    this.eventPhotos = this.toPhotoViewModels(this.eventData.photos);
+    if (shouldScroll) {
+      this.scrollToEditionEditor();
+    }
+  }
+
+  createEdition(shouldScroll = true) {
+    if (this.saving) return;
+
+    this.isCreatingEdition = true;
+    this.eventData = {
+      title: '',
+      edition: this.suggestNextEditionLabel(),
+      event_date: this.todayDate(),
+      time_start: '10:00',
+      time_end: '22:00',
+      location: '',
+      description: '',
+      is_featured: this.editions.length === 0,
+      is_published: true,
+      sort_order: this.editions.length,
+      cta_text: 'Je participe',
+      cta_href: '/nous-rejoindre',
+    };
+    this.data = this.toFormData(this.pageData, this.eventData);
+    this.eventPhotos = [];
+    if (shouldScroll) {
+      this.scrollToEditionEditor();
+    }
+  }
+
+  isSelectedEdition(event: any) {
+    return !this.isCreatingEdition && event?.id && event.id === this.eventData?.id;
+  }
+
+  editionCover(event: any) {
+    const photos = Array.isArray(event?.photos) ? event.photos : [];
+    return photos.find((photo: any) => photo?.image_url)?.image_url || '';
+  }
+
+  editionPhotoCount(event: any) {
+    return Array.isArray(event?.photos) ? event.photos.filter((photo: any) => photo?.image_url).length : 0;
+  }
+
+  formatEditionDate(date: string) {
+    if (!date) return 'Date non definie';
+
+    const parsed = new Date(date);
+    if (Number.isNaN(parsed.getTime())) return date;
+
+    return new Intl.DateTimeFormat('fr-FR', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    }).format(parsed);
   }
 
   private toFormData(page: any, event: any) {
@@ -80,6 +157,8 @@ export class AdminRencontre implements OnInit {
       ra_cta: page?.content?.ctaText ?? '',
       ra_btn: event?.cta_text ?? '',
       ra_href: event?.cta_href ?? '',
+      ra_featured: event?.is_featured ?? false,
+      ra_published: event?.is_published ?? true,
     };
 
     for (let index = 1; index <= 6; index += 1) {
@@ -91,15 +170,20 @@ export class AdminRencontre implements OnInit {
     return form;
   }
 
-  private toPageData() {
+  private toPageData(eventPayload: any) {
+    const content = {
+      ...(this.pageData.content ?? {}),
+      ctaText: this.data.ra_cta,
+    };
+
+    if (eventPayload.is_featured) {
+      content.aboutTitle = this.data.ra_title;
+      content.aboutIntro = this.data.ra_desc;
+    }
+
     return {
       ...this.pageData,
-      content: {
-        ...(this.pageData.content ?? {}),
-        aboutTitle: this.data.ra_title,
-        aboutIntro: this.data.ra_desc,
-        ctaText: this.data.ra_cta,
-      },
+      content,
     };
   }
 
@@ -117,8 +201,9 @@ export class AdminRencontre implements OnInit {
       description: this.data.ra_desc,
       cta_text: this.data.ra_btn,
       cta_href: this.data.ra_href,
-      is_featured: this.eventData.is_featured ?? true,
-      is_published: this.eventData.is_published ?? true,
+      is_featured: this.data.ra_featured === true,
+      is_published: this.data.ra_published !== false,
+      sort_order: this.eventData.sort_order ?? this.editions.length,
       photos: this.eventPhotos
         .map((photo, index) => ({
           image_url: String(photo.image_url || '').trim(),
@@ -235,6 +320,56 @@ export class AdminRencontre implements OnInit {
     return index;
   }
 
+  trackByEdition(index: number, edition: any) {
+    return edition?.id ?? index;
+  }
+
+  private toEditionList(events: any[]) {
+    return Array.isArray(events)
+      ? [...events].sort((a, b) => {
+          const dateA = new Date(a?.event_date || 0).getTime();
+          const dateB = new Date(b?.event_date || 0).getTime();
+          if (dateA !== dateB) return dateB - dateA;
+          return Number(a?.sort_order ?? 0) - Number(b?.sort_order ?? 0);
+        })
+      : [];
+  }
+
+  private upsertEdition(event: any) {
+    const normalized = {
+      ...event,
+      photos: this.toSavedPhotos(),
+      program: this.toSavedProgram(),
+    };
+
+    const exists = this.editions.some((edition) => edition.id === normalized.id);
+    this.editions = exists
+      ? this.editions.map((edition) => (edition.id === normalized.id ? normalized : edition))
+      : [normalized, ...this.editions];
+    this.editions = this.toEditionList(this.editions);
+    this.isCreatingEdition = false;
+  }
+
+  private toSavedPhotos() {
+    return this.eventPhotos
+      .map((photo, index) => ({
+        image_url: String(photo.image_url || '').trim(),
+        alt_text: String(photo.alt_text || '').trim(),
+        caption: String(photo.caption || '').trim(),
+        sort_order: index,
+      }))
+      .filter((photo) => photo.image_url);
+  }
+
+  private toSavedProgram() {
+    return [1, 2, 3, 4, 5, 6].map((index) => ({
+      ...(this.eventData.program?.[index - 1] ?? {}),
+      title: this.data[`prog${index}_title`],
+      subtitle: this.data[`prog${index}_time`],
+      sort_order: index - 1,
+    }));
+  }
+
   private toPhotoViewModels(photos: unknown) {
     return Array.isArray(photos)
       ? [...photos]
@@ -294,5 +429,42 @@ export class AdminRencontre implements OnInit {
   private nextPhotoId() {
     this.photoId += 1;
     return `rencontre-photo-${Date.now()}-${this.photoId}`;
+  }
+
+  private todayDate() {
+    return new Date().toISOString().slice(0, 10);
+  }
+
+  private suggestNextEditionLabel() {
+    const nextNumber = this.editions.length + 1;
+    return nextNumber === 1 ? '1ere edition' : `${nextNumber}e edition`;
+  }
+
+  private scrollToEditionEditor() {
+    setTimeout(() => {
+      this.editionEditor?.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    });
+  }
+
+  private validateEditionForm() {
+    if (!String(this.data.ra_title || '').trim()) {
+      void this.alerts.error('Titre obligatoire', "Renseigne le titre de l'edition avant d'enregistrer.");
+      return false;
+    }
+
+    if (!String(this.data.ra_date || '').trim()) {
+      void this.alerts.error('Date obligatoire', "Renseigne la date de l'edition avant d'enregistrer.");
+      return false;
+    }
+
+    if (!String(this.data.ra_place || '').trim()) {
+      void this.alerts.error('Lieu obligatoire', "Renseigne le lieu de l'edition avant d'enregistrer.");
+      return false;
+    }
+
+    return true;
   }
 }

@@ -77,6 +77,13 @@ export class AdminApiService {
     );
   }
 
+  uploadTeamPhoto(payload: { fileName: string; mimeType: string; dataUrl: string }) {
+    return this.http.post<ApiResponse<UploadedImage>>(`${this.apiUrl}/team/photos/upload`, payload).pipe(
+      map((response) => response?.data ?? { image_url: '' }),
+      this.refreshViewAfterResponse(),
+    );
+  }
+
   deleteResource(resource: string, id: string | number) {
     return this.http
       .delete<ApiResponse<unknown>>(`${this.apiUrl}/${resource}/${id}`)

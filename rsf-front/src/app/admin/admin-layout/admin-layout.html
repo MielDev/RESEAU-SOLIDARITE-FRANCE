@@ -79,28 +79,6 @@
     <button class="sidebar-overlay" type="button" (click)="closeSidebar()" aria-label="Fermer la navigation"></button>
 
     <section class="admin-main">
-      <div class="admin-headbar">
-        <div>
-          <div class="headbar-kicker">
-            <span>{{ currentSection }}</span>
-            <i class="fas fa-chevron-right"></i>
-            <span>{{ currentTitle }}</span>
-          </div>
-          <h1>{{ currentTitle }}</h1>
-        </div>
-
-        <div class="headbar-actions">
-          <a routerLink="/admin/accueil" class="headbar-button">
-            <i class="fas fa-pen-to-square"></i>
-            <span>Modifier l'accueil</span>
-          </a>
-          <a routerLink="/admin/dashboard" class="headbar-button secondary">
-            <i class="fas fa-gauge-high"></i>
-            <span>Dashboard</span>
-          </a>
-        </div>
-      </div>
-
       <main class="admin-content">
         <router-outlet />
       </main>

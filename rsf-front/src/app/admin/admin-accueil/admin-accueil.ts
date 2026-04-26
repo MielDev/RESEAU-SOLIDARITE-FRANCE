@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -7,13 +8,28 @@ import { AdminIconPicker } from '../shared/admin-icon-picker/admin-icon-picker';
 
 @Component({
   selector: 'app-admin-accueil',
-  imports: [FormsModule, RouterModule, AdminIconPicker],
+  imports: [CommonModule, FormsModule, RouterModule, AdminIconPicker],
   templateUrl: './admin-accueil.html',
   styleUrl: './admin-accueil.css',
 })
 export class AdminAccueil implements OnInit {
   data: any = {};
   saving = false;
+  readonly actionSlots = [
+    { index: 1, label: 'Bouton principal' },
+    { index: 2, label: 'Bouton secondaire' },
+    { index: 3, label: 'Bouton complementaire' },
+  ];
+  readonly statSlots = [
+    { index: 1, label: 'Statistique 1' },
+    { index: 2, label: 'Statistique 2' },
+    { index: 3, label: 'Statistique 3' },
+  ];
+  readonly featureSlots = [
+    { index: 1, label: 'Carte 1', fallbackIcon: 'fas fa-file-invoice' },
+    { index: 2, label: 'Carte 2', fallbackIcon: 'fas fa-briefcase' },
+    { index: 3, label: 'Carte 3', fallbackIcon: 'fas fa-hand-holding-heart' },
+  ];
   private pageData: any = {};
 
   constructor(
@@ -46,6 +62,37 @@ export class AdminAccueil implements OnInit {
         void this.alerts.error('Enregistrement impossible', 'Une erreur est survenue. Reessaie dans quelques secondes.');
       },
     });
+  }
+
+  heroPreviewTitle() {
+    return [this.data.hero_title1, this.data.hero_title2, this.data.hero_title3]
+      .map((part) => String(part || '').trim())
+      .filter(Boolean)
+      .join(' ');
+  }
+
+  actionPreview(index: number) {
+    return {
+      label: this.data[`btn${index}_text`] || `Bouton ${index}`,
+      href: this.data[`btn${index}_href`] || '#',
+      style: this.data[`btn${index}_style`] || 'Bleu primaire',
+    };
+  }
+
+  statPreview(index: number) {
+    return {
+      value: this.data[`stat${index}_val`] || '-',
+      label: this.data[`stat${index}_label`] || `Statistique ${index}`,
+      color: this.data[`stat${index}_color`] || 'Bleu',
+    };
+  }
+
+  featurePreview(index: number) {
+    return {
+      icon: this.data[`c${index}_icon`] || this.featureSlots[index - 1]?.fallbackIcon || 'fas fa-circle',
+      title: this.data[`c${index}_title`] || `Carte ${index}`,
+      text: this.data[`c${index}_desc`] || '',
+    };
   }
 
   private toFormData(page: any) {

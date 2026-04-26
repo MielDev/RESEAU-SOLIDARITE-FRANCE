@@ -336,7 +336,7 @@
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 30px 24px;
 }
 
 @media (max-width: 1080px) {
@@ -458,6 +458,6 @@
   }
 
   .admin-content {
-    padding: 16px;
+    padding: 22px 16px;
   }
 }

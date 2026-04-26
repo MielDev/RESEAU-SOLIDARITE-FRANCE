@@ -10,37 +10,48 @@ import { RouterModule } from '@angular/router';
 })
 export class AdminDashboard {
   readonly stats = [
-    { label: 'Pages publiques', value: '14', sub: 'Textes et blocs modifiables', icon: 'fas fa-layer-group' },
-    { label: 'Collections', value: '7', sub: 'Ajout, edition, suppression', icon: 'fas fa-table-list' },
-    { label: 'Navigation', value: 'OK', sub: 'Menu et liens du site', icon: 'fas fa-compass' },
-    { label: 'Messages', value: 'Live', sub: 'Demandes depuis les formulaires', icon: 'fas fa-inbox' },
+    { label: 'Pages publiques', value: '14', sub: 'Contenus editoriaux', icon: 'fas fa-layer-group', tone: 'blue' },
+    { label: 'Collections', value: '7', sub: 'Listes administrables', icon: 'fas fa-table-list', tone: 'green' },
+    { label: 'Publication', value: 'OK', sub: 'Evenements et actualites', icon: 'fas fa-newspaper', tone: 'orange' },
+    { label: 'Demandes', value: 'Live', sub: 'Contact, rejoindre, don', icon: 'fas fa-inbox', tone: 'gray' },
   ];
 
-  readonly quickLinks = [
+  readonly primaryActions = [
     {
       href: '/admin/accueil',
-      label: 'Page Accueil',
-      description: 'Hero, boutons, statistiques, navigation et CTA.',
+      label: 'Modifier la page Accueil',
+      description: 'Hero, boutons, statistiques, cartes et CTA principal.',
       icon: 'fas fa-house',
+      tone: 'blue',
     },
     {
-      href: '/admin/missions',
-      label: 'Missions',
-      description: 'Cartes de missions et points associes.',
-      icon: 'fas fa-bullseye',
+      href: '/admin/rencontre',
+      label: 'Gerer la rencontre annuelle',
+      description: 'Editions, programme, galerie photos et publication.',
+      icon: 'fas fa-cake-candles',
+      tone: 'orange',
     },
     {
       href: '/admin/evenements',
-      label: 'Evenements',
-      description: 'Programme, dates, lieux et mise en avant.',
+      label: 'Publier un evenement',
+      description: 'Dates, lieux, photos, programme et ordre d affichage.',
       icon: 'fas fa-calendar-days',
+      tone: 'green',
     },
     {
-      href: '/admin/settings',
-      label: 'Parametres',
-      description: 'Identite, coordonnees et navigation.',
-      icon: 'fas fa-gear',
+      href: '/admin/contact',
+      label: 'Lire les messages',
+      description: 'Suivi des demandes recues depuis le front office.',
+      icon: 'fas fa-envelope-open-text',
+      tone: 'gray',
     },
+  ];
+
+  readonly workflow = [
+    { label: 'Verifier la page Accueil', href: '/admin/accueil', icon: 'fas fa-house' },
+    { label: 'Mettre a jour les actions', href: '/admin/actions-solidaires', icon: 'fas fa-handshake-angle' },
+    { label: 'Publier les evenements', href: '/admin/evenements', icon: 'fas fa-calendar-days' },
+    { label: 'Controler les parametres', href: '/admin/settings', icon: 'fas fa-sliders' },
   ];
 
   readonly adminGroups = [

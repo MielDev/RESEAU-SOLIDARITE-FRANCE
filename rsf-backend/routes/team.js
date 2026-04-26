@@ -3,6 +3,7 @@ const router = require('express').Router();
 const ctrl = require('../controllers/teamController');
 
 router.get('/',          ctrl.getAll);
+router.post('/photos/upload', ctrl.uploadPhoto);
 router.get('/:id',       ctrl.getOne);
 router.post('/',         ctrl.create);
 router.put('/reorder',   ctrl.reorder);

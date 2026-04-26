@@ -1,58 +1,121 @@
-<section class="dashboard-hero">
+<section class="admin-page-toolbar dashboard-toolbar">
   <div>
-    <div class="eyebrow">Back-office RSF</div>
-    <h1>Console de contenu</h1>
-    <p>Chaque page publique a maintenant ses blocs editoriaux et ses collections administrables.</p>
+    <p class="admin-eyebrow">Back-office RSF</p>
+    <h2>Tableau de bord</h2>
+    <span>Point de depart pour gerer les pages, les collections et les demandes du site.</span>
   </div>
-  <a routerLink="/admin/accueil" class="btn">
-    <i class="fas fa-pen-to-square"></i>
-    Modifier l'accueil
-  </a>
+  <div class="toolbar-actions">
+    <a routerLink="/" class="btn btn-ghost">
+      <i class="fas fa-arrow-up-right-from-square"></i>
+      Voir le site
+    </a>
+    <a routerLink="/admin/accueil" class="btn btn-primary">
+      <i class="fas fa-pen-to-square"></i>
+      Modifier l'accueil
+    </a>
+  </div>
 </section>
 
-<section class="stats-grid">
-  <article class="stat-card" *ngFor="let stat of stats">
-    <div class="sc-icon"><i [class]="stat.icon"></i></div>
-    <div class="sc-label">{{ stat.label }}</div>
-    <div class="sc-val">{{ stat.value }}</div>
-    <div class="sc-sub">{{ stat.sub }}</div>
+<section class="metrics-grid" aria-label="Resume du back-office">
+  <article class="metric-card" *ngFor="let stat of stats" [ngClass]="'tone-' + stat.tone">
+    <div class="metric-icon"><i [class]="stat.icon"></i></div>
+    <div>
+      <span>{{ stat.label }}</span>
+      <strong>{{ stat.value }}</strong>
+      <small>{{ stat.sub }}</small>
+    </div>
   </article>
 </section>
 
-<section class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-bolt"></i> Raccourcis</div>
-      <div class="panel-desc">Les actions les plus frequentes pour gerer le front-office.</div>
-    </div>
-  </div>
-  <div class="panel-body">
-    <div class="quick-grid">
-      <a *ngFor="let link of quickLinks" [routerLink]="link.href" class="quick-card">
-        <span><i [class]="link.icon"></i></span>
-        <strong>{{ link.label }}</strong>
-        <small>{{ link.description }}</small>
-      </a>
-    </div>
-  </div>
-</section>
+<div class="dashboard-layout">
+  <main class="dashboard-main">
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-bolt"></i>Actions rapides</div>
+          <div class="panel-desc">Les operations les plus utiles au quotidien.</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="action-grid">
+          <a
+            *ngFor="let action of primaryActions"
+            [routerLink]="action.href"
+            class="action-card"
+            [ngClass]="'tone-' + action.tone"
+          >
+            <span class="action-icon"><i [class]="action.icon"></i></span>
+            <strong>{{ action.label }}</strong>
+            <small>{{ action.description }}</small>
+            <i class="fas fa-arrow-right action-arrow"></i>
+          </a>
+        </div>
+      </div>
+    </section>
 
-<section class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-layer-group"></i> Zones pilotables</div>
-      <div class="panel-desc">Les rubriques reliees aux donnees publiques du site.</div>
-    </div>
-  </div>
-  <div class="panel-body">
-    <div class="admin-map">
-      <article *ngFor="let group of adminGroups" class="map-group">
-        <h3>{{ group.title }}</h3>
-        <a *ngFor="let item of group.items" [routerLink]="item.href">
-          <i [class]="item.icon"></i>
-          <span>{{ item.label }}</span>
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-sitemap"></i>Zones administrables</div>
+          <div class="panel-desc">Acces organise par rubrique du site.</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="admin-map">
+          <article *ngFor="let group of adminGroups" class="map-group">
+            <h3>{{ group.title }}</h3>
+            <div class="map-links">
+              <a *ngFor="let item of group.items" [routerLink]="item.href">
+                <i [class]="item.icon"></i>
+                <span>{{ item.label }}</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="dashboard-side">
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-list-check"></i>Parcours conseille</div>
+          <div class="panel-desc">Un chemin simple pour garder le site coherent.</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="workflow-list">
+          <a *ngFor="let step of workflow; let index = index" [routerLink]="step.href" class="workflow-item">
+            <span class="workflow-index">{{ index + 1 }}</span>
+            <i [class]="step.icon"></i>
+            <strong>{{ step.label }}</strong>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-gear"></i>Configuration</div>
+          <div class="panel-desc">Reglages transversaux du site.</div>
+        </div>
+      </div>
+      <div class="panel-body side-links">
+        <a routerLink="/admin/settings">
+          <i class="fas fa-sliders"></i>
+          Parametres generaux
         </a>
-      </article>
-    </div>
-  </div>
-</section>
+        <a routerLink="/admin/contact">
+          <i class="fas fa-envelope"></i>
+          Messages de contact
+        </a>
+        <a routerLink="/admin/rejoindre">
+          <i class="fas fa-user-plus"></i>
+          Demandes d'adhesion
+        </a>
+      </div>
+    </section>
+  </aside>
+</div>

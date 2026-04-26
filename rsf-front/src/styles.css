@@ -15,7 +15,7 @@ body.admin-mode {
 
 body.admin-mode .admin-content {
   display: grid;
-  gap: 18px;
+  gap: 26px;
 }
 
 body.admin-mode .admin-page-toolbar {
@@ -23,6 +23,7 @@ body.admin-mode .admin-page-toolbar {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  margin-bottom: 4px;
   padding: 18px;
   border: 1px solid #d9e2f2;
   border-radius: 8px;

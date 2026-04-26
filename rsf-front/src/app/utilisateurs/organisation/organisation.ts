@@ -25,10 +25,11 @@ export class Organisation implements OnInit {
       this.pageContent = data.pageContent ?? null;
 
       const members = Array.isArray(data.team) ? data.team : [];
+      const activeMembers = members.filter((member: any) => member?.is_active !== false);
       const bgClasses = ['bg-blue', 'bg-purple', 'bg-orange', 'bg-green', 'bg-indigo', 'bg-darkblue', 'bg-mix', 'bg-lightgreen'];
-      const presidentCandidate = members.find((member: any) => member.is_president) || null;
+      const presidentCandidate = activeMembers.find((member: any) => member.is_president) || null;
 
-      this.team = members
+      this.team = activeMembers
         .filter((member: any) => !member.is_president)
         .map((member: any, index: number) => ({
           ...member,

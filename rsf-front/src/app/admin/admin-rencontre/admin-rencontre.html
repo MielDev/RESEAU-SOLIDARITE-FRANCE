@@ -2,187 +2,337 @@
   <div>
     <p class="admin-eyebrow">Edition de page</p>
     <h2>Rencontre annuelle</h2>
-    <span>Modifie les infos principales, les photos, le programme et l'appel a l'action.</span>
+    <span>Selectionne une edition, modifie son contenu, puis enregistre uniquement cette fiche.</span>
   </div>
   <button type="button" class="btn btn-primary admin-save-btn" (click)="save()" [disabled]="saving">
     <i class="fas fa-floppy-disk"></i>
-    <span>{{ saving ? 'Enregistrement...' : 'Enregistrer' }}</span>
+    <span>{{ saving ? 'Enregistrement...' : 'Enregistrer l edition' }}</span>
   </button>
 </section>
 
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-clipboard-list"></i>Informations generales de l'evenement</div>
-    </div>
-  </div>
-  <div class="panel-body">
-    <div class="form-grid form-grid-2">
-      <div class="form-group">
-        <label for="ra_title">Titre de l'evenement</label>
-        <input class="input" type="text" id="ra_title" name="ra_title" [(ngModel)]="data.ra_title" />
+<div class="rencontre-workspace">
+  <aside class="edition-sidebar">
+    <div class="panel edition-panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-layer-group"></i>Toutes les editions</div>
+          <div class="panel-desc">Choisis la rencontre que tu veux modifier.</div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="ra_edition">Numero d'edition</label>
-        <input class="input" type="text" id="ra_edition" name="ra_edition" [(ngModel)]="data.ra_edition" />
-      </div>
-      <div class="form-group">
-        <label for="ra_date">Date</label>
-        <input class="input" type="date" id="ra_date" name="ra_date" [(ngModel)]="data.ra_date" />
-      </div>
-      <div class="form-group">
-        <label for="ra_start">Heure de debut</label>
-        <input class="input" type="time" id="ra_start" name="ra_start" [(ngModel)]="data.ra_start" />
-      </div>
-      <div class="form-group">
-        <label for="ra_end">Heure de fin</label>
-        <input class="input" type="time" id="ra_end" name="ra_end" [(ngModel)]="data.ra_end" />
-      </div>
-      <div class="form-group">
-        <label for="ra_place">Lieu</label>
-        <input class="input" type="text" id="ra_place" name="ra_place" [(ngModel)]="data.ra_place" />
-      </div>
-      <div class="form-group">
-        <label for="ra_email">Email de contact</label>
-        <input class="input" type="email" id="ra_email" name="ra_email" [(ngModel)]="data.ra_email" />
-      </div>
-      <div class="form-group">
-        <label for="ra_web">Site web</label>
-        <input class="input" type="url" id="ra_web" name="ra_web" [(ngModel)]="data.ra_web" />
-      </div>
-    </div>
 
-    <div class="form-group top-gap">
-      <label for="ra_desc">Description principale</label>
-      <textarea class="textarea" id="ra_desc" name="ra_desc" [(ngModel)]="data.ra_desc"></textarea>
-    </div>
-  </div>
-</div>
+      <div class="panel-body edition-panel-body">
+        <button type="button" class="edition-new-card" [class.is-active]="isCreatingEdition" (click)="createEdition()">
+          <i class="fas fa-plus"></i>
+          <span>Nouvelle edition</span>
+        </button>
 
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-images"></i>Galerie photos</div>
-      <div class="panel-desc">Photos affichees sur la page publique de la rencontre annuelle.</div>
-    </div>
-    <div class="photo-add-control">
-      <input
-        class="photo-file-input"
-        type="file"
-        id="rencontre-photos-add"
-        name="rencontre-photos-add"
-        [accept]="acceptedPhotoTypes"
-        multiple
-        (change)="onPhotosSelected($event)"
-      />
-      <label class="btn btn-ghost btn-sm photo-file-btn" for="rencontre-photos-add">
-        <i class="fas fa-upload"></i> Ajouter des photos
-      </label>
-    </div>
-  </div>
-  <div class="panel-body">
-    <div class="photo-empty" *ngIf="!eventPhotos.length">Aucune photo pour le moment.</div>
+        <div class="edition-list" *ngIf="editions.length; else noEditions">
+          <button
+            type="button"
+            class="edition-card"
+            *ngFor="let edition of editions; trackBy: trackByEdition"
+            [class.is-active]="isSelectedEdition(edition)"
+            (click)="selectEdition(edition)"
+          >
+            <div class="edition-cover" [class.is-empty]="!editionCover(edition)">
+              <img *ngIf="editionCover(edition)" [src]="editionCover(edition)" [alt]="edition.title || edition.edition || 'Rencontre annuelle'" />
+              <i *ngIf="!editionCover(edition)" class="fas fa-calendar-days"></i>
+            </div>
 
-    <div class="photo-list" *ngIf="eventPhotos.length">
-      <div class="photo-row" *ngFor="let photo of eventPhotos; let photoIndex = index; trackBy: trackByIndex">
-        <div class="photo-preview" [class.is-empty]="!photo.image_url">
-          <img *ngIf="photo.image_url" [src]="photo.image_url" [alt]="photo.alt_text || photo.caption || data.ra_title" />
-          <i *ngIf="!photo.image_url" class="fas fa-image"></i>
+            <div class="edition-card-content">
+              <strong>{{ edition.edition || 'Edition sans numero' }}</strong>
+              <span>{{ edition.title || 'Rencontre annuelle' }}</span>
+              <small><i class="fas fa-calendar-day"></i>{{ formatEditionDate(edition.event_date) }}</small>
+              <small *ngIf="edition.location"><i class="fas fa-location-dot"></i>{{ edition.location }}</small>
+
+              <div class="edition-tags">
+                <span *ngIf="edition.is_featured" class="edition-tag is-featured">En avant</span>
+                <span class="edition-tag" [class.is-muted]="edition.is_published === false">
+                  {{ edition.is_published === false ? 'Masquee' : 'Publiee' }}
+                </span>
+                <span class="edition-tag">{{ editionPhotoCount(edition) }} photo{{ editionPhotoCount(edition) > 1 ? 's' : '' }}</span>
+              </div>
+            </div>
+          </button>
         </div>
 
-        <div class="photo-fields">
-          <div class="form-group">
-            <label [for]="'rencontre-photo-file-' + photoIndex">Photo</label>
-            <div class="photo-file-row">
+        <ng-template #noEditions>
+          <div class="edition-empty">
+            <i class="fas fa-circle-info"></i>
+            <span>Aucune edition enregistree pour le moment.</span>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </aside>
+
+  <section class="edition-editor" #editionEditor>
+    <div class="draft-banner" *ngIf="isCreatingEdition">
+      <div>
+        <i class="fas fa-pen-to-square"></i>
+        <span>
+          <strong>Nouvelle edition en preparation</strong>
+          <small>Remplis les informations ci-dessous, ajoute les photos, puis clique sur Enregistrer l edition.</small>
+        </span>
+      </div>
+      <span class="draft-pill">Brouillon non enregistre</span>
+    </div>
+
+    <section class="rencontre-summary" aria-label="Resume de l'edition selectionnee">
+      <article class="summary-card">
+        <i class="fas fa-hashtag"></i>
+        <div>
+          <span>Edition selectionnee</span>
+          <strong>{{ isCreatingEdition ? 'Nouvelle edition' : (data.ra_edition || 'Non definie') }}</strong>
+        </div>
+      </article>
+      <article class="summary-card">
+        <i class="fas fa-calendar-day"></i>
+        <div>
+          <span>Date</span>
+          <strong>{{ data.ra_date || 'Non definie' }}</strong>
+        </div>
+      </article>
+      <article class="summary-card">
+        <i class="fas fa-location-dot"></i>
+        <div>
+          <span>Lieu</span>
+          <strong>{{ data.ra_place || 'A renseigner' }}</strong>
+        </div>
+      </article>
+      <article class="summary-card">
+        <i class="fas fa-images"></i>
+        <div>
+          <span>Photos</span>
+          <strong>{{ eventPhotos.length }} image{{ eventPhotos.length > 1 ? 's' : '' }}</strong>
+        </div>
+      </article>
+    </section>
+
+    <div class="rencontre-layout">
+      <main class="rencontre-main">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">
+                <i class="pi fas fa-clipboard-list"></i>
+                {{ isCreatingEdition ? 'Identite de la nouvelle edition' : 'Identite de l edition' }}
+              </div>
+              <div class="panel-desc">
+                {{ isCreatingEdition ? 'Cette fiche sera ajoutee a la liste apres enregistrement.' : 'Titre, edition, date et lieu de la rencontre selectionnee.' }}
+              </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="form-grid form-grid-2">
+              <div class="form-group span-2">
+                <label for="ra_title">Titre de l'evenement</label>
+                <input class="input" type="text" id="ra_title" name="ra_title" [(ngModel)]="data.ra_title" />
+              </div>
+
+              <div class="form-group">
+                <label for="ra_edition">Numero d'edition</label>
+                <input class="input" type="text" id="ra_edition" name="ra_edition" [(ngModel)]="data.ra_edition" />
+              </div>
+
+              <div class="form-group">
+                <label for="ra_date">Date</label>
+                <input class="input" type="date" id="ra_date" name="ra_date" [(ngModel)]="data.ra_date" />
+              </div>
+
+              <div class="form-group">
+                <label for="ra_start">Heure de debut</label>
+                <input class="input" type="time" id="ra_start" name="ra_start" [(ngModel)]="data.ra_start" />
+              </div>
+
+              <div class="form-group">
+                <label for="ra_end">Heure de fin</label>
+                <input class="input" type="time" id="ra_end" name="ra_end" [(ngModel)]="data.ra_end" />
+              </div>
+
+              <div class="form-group span-2">
+                <label for="ra_place">Lieu</label>
+                <input class="input" type="text" id="ra_place" name="ra_place" [(ngModel)]="data.ra_place" />
+              </div>
+            </div>
+
+            <div class="form-group top-gap">
+              <label for="ra_desc">Description principale</label>
+              <textarea class="textarea rencontre-description" id="ra_desc" name="ra_desc" [(ngModel)]="data.ra_desc"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title"><i class="pi fas fa-images"></i>Galerie photos</div>
+              <div class="panel-desc">Ajoute plusieurs images locales pour cette edition uniquement.</div>
+            </div>
+            <div class="photo-add-control">
               <input
                 class="photo-file-input"
                 type="file"
-                [id]="'rencontre-photo-file-' + photoIndex"
-                [name]="'rencontre-photo-file-' + photoIndex"
+                id="rencontre-photos-add"
+                name="rencontre-photos-add"
                 [accept]="acceptedPhotoTypes"
-                [disabled]="photo.is_uploading"
-                (change)="onPhotoSelected($event, photoIndex)"
+                multiple
+                (change)="onPhotosSelected($event)"
               />
-              <label
-                class="btn btn-ghost btn-sm photo-file-btn"
-                [class.is-disabled]="photo.is_uploading"
-                [for]="'rencontre-photo-file-' + photoIndex"
-              >
-                <i class="fas" [class.fa-spinner]="photo.is_uploading" [class.fa-upload]="!photo.is_uploading"></i>
-                <span>{{ photo.is_uploading ? 'Envoi...' : (photo.image_url ? 'Remplacer' : 'Choisir') }}</span>
+              <label class="btn btn-ghost btn-sm photo-file-btn" for="rencontre-photos-add">
+                <i class="fas fa-upload"></i> Ajouter des photos
               </label>
-              <a *ngIf="photo.image_url" class="photo-link" [href]="photo.image_url" target="_blank" rel="noopener">Voir</a>
             </div>
-            <p class="photo-status is-error" *ngIf="photo.upload_error">Envoi echoue. Choisis de nouveau la photo.</p>
           </div>
-          <div class="form-group">
-            <label>Texte alternatif</label>
-            <input class="input" type="text" [(ngModel)]="photo.alt_text" [name]="'rencontre-photo-alt-' + photoIndex" />
-          </div>
-          <div class="form-group">
-            <label>Legende</label>
-            <input class="input" type="text" [(ngModel)]="photo.caption" [name]="'rencontre-photo-caption-' + photoIndex" />
+          <div class="panel-body">
+            <div class="photo-empty" *ngIf="!eventPhotos.length">
+              <i class="fas fa-image"></i>
+              <span>Aucune photo pour cette edition.</span>
+            </div>
+
+            <div class="photo-list" *ngIf="eventPhotos.length">
+              <div class="photo-row" *ngFor="let photo of eventPhotos; let photoIndex = index; trackBy: trackByIndex">
+                <div class="photo-preview" [class.is-empty]="!photo.image_url">
+                  <img *ngIf="photo.image_url" [src]="photo.image_url" [alt]="photo.alt_text || photo.caption || data.ra_title" />
+                  <i *ngIf="!photo.image_url" class="fas fa-image"></i>
+                </div>
+
+                <div class="photo-fields">
+                  <div class="form-group">
+                    <label [for]="'rencontre-photo-file-' + photoIndex">Photo</label>
+                    <div class="photo-file-row">
+                      <input
+                        class="photo-file-input"
+                        type="file"
+                        [id]="'rencontre-photo-file-' + photoIndex"
+                        [name]="'rencontre-photo-file-' + photoIndex"
+                        [accept]="acceptedPhotoTypes"
+                        [disabled]="photo.is_uploading"
+                        (change)="onPhotoSelected($event, photoIndex)"
+                      />
+                      <label
+                        class="btn btn-ghost btn-sm photo-file-btn"
+                        [class.is-disabled]="photo.is_uploading"
+                        [for]="'rencontre-photo-file-' + photoIndex"
+                      >
+                        <i class="fas" [class.fa-spinner]="photo.is_uploading" [class.fa-upload]="!photo.is_uploading"></i>
+                        <span>{{ photo.is_uploading ? 'Envoi...' : (photo.image_url ? 'Remplacer' : 'Choisir') }}</span>
+                      </label>
+                      <a *ngIf="photo.image_url" class="photo-link" [href]="photo.image_url" target="_blank" rel="noopener">Voir</a>
+                    </div>
+                    <p class="photo-status is-error" *ngIf="photo.upload_error">Envoi echoue. Choisis de nouveau la photo.</p>
+                  </div>
+                  <div class="form-group">
+                    <label>Texte alternatif</label>
+                    <input class="input" type="text" [(ngModel)]="photo.alt_text" [name]="'rencontre-photo-alt-' + photoIndex" />
+                  </div>
+                  <div class="form-group">
+                    <label>Legende</label>
+                    <input class="input" type="text" [(ngModel)]="photo.caption" [name]="'rencontre-photo-caption-' + photoIndex" />
+                  </div>
+                </div>
+
+                <div class="photo-actions">
+                  <button class="icon-btn" type="button" (click)="movePhoto(photoIndex, -1)" [disabled]="photo.is_uploading || photoIndex === 0" title="Monter">
+                    <i class="fas fa-arrow-up"></i>
+                  </button>
+                  <button class="icon-btn" type="button" (click)="movePhoto(photoIndex, 1)" [disabled]="photo.is_uploading || photoIndex === eventPhotos.length - 1" title="Descendre">
+                    <i class="fas fa-arrow-down"></i>
+                  </button>
+                  <button class="icon-btn danger" type="button" (click)="removePhoto(photoIndex)" [disabled]="photo.is_uploading" title="Supprimer">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="photo-actions">
-          <button class="icon-btn" type="button" (click)="movePhoto(photoIndex, -1)" [disabled]="photo.is_uploading || photoIndex === 0">
-            <i class="fas fa-arrow-up"></i>
-          </button>
-          <button class="icon-btn" type="button" (click)="movePhoto(photoIndex, 1)" [disabled]="photo.is_uploading || photoIndex === eventPhotos.length - 1">
-            <i class="fas fa-arrow-down"></i>
-          </button>
-          <button class="icon-btn danger" type="button" (click)="removePhoto(photoIndex)" [disabled]="photo.is_uploading">
-            <i class="fas fa-trash"></i>
-          </button>
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title"><i class="pi fas fa-file-lines"></i>Programme de la journee</div>
+              <div class="panel-desc">Organise les temps forts de l'edition selectionnee.</div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div id="prog-list" class="program-editor">
+              <div class="program-row" *ngFor="let index of [1,2,3,4,5,6]">
+                <div class="program-index">{{ index }}</div>
+                <div class="form-grid form-grid-2">
+                  <div class="form-group">
+                    <label [for]="'prog-title-' + index">Titre</label>
+                    <input class="input" type="text" [id]="'prog-title-' + index" [(ngModel)]="data['prog' + index + '_title']" [name]="'prog-title-' + index" />
+                  </div>
+                  <div class="form-group">
+                    <label [for]="'prog-time-' + index">Horaire / detail</label>
+                    <input class="input" type="text" [id]="'prog-time-' + index" [(ngModel)]="data['prog' + index + '_time']" [name]="'prog-time-' + index" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+      </main>
 
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-file-lines"></i>Programme de la journee</div>
-      <div class="panel-desc">Les activites listees dans le programme officiel.</div>
-    </div>
-  </div>
-  <div class="panel-body">
-    <div id="prog-list" class="program-editor">
-      <div class="sortable-item" *ngFor="let index of [1,2,3,4,5,6]">
-        <span class="drag-handle"><i class="fas fa-grip-vertical"></i></span>
-        <div class="inline-icon"><i class="fas fa-calendar-check"></i></div>
-        <div class="si-content">
-          <input class="input" type="text" [(ngModel)]="data['prog' + index + '_title']" [name]="'prog-title-' + index" />
-          <input class="input" type="text" [(ngModel)]="data['prog' + index + '_time']" [name]="'prog-time-' + index" />
+      <aside class="rencontre-side">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title"><i class="pi fas fa-address-card"></i>Publication et contact</div>
+              <div class="panel-desc">Controle l'affichage public et les informations pratiques.</div>
+            </div>
+          </div>
+          <div class="panel-body side-form">
+            <div class="visibility-stack">
+              <label class="toggle-card">
+                <span>
+                  <strong>Publier cette edition</strong>
+                  <small>Visible sur le front office.</small>
+                </span>
+                <input type="checkbox" name="ra_published" [(ngModel)]="data.ra_published" />
+              </label>
+
+              <label class="toggle-card">
+                <span>
+                  <strong>Mettre en avant</strong>
+                  <small>Edition principale de la page Rencontre annuelle.</small>
+                </span>
+                <input type="checkbox" name="ra_featured" [(ngModel)]="data.ra_featured" />
+              </label>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="form-group">
+              <label for="ra_email">Email de contact</label>
+              <input class="input" type="email" id="ra_email" name="ra_email" [(ngModel)]="data.ra_email" />
+            </div>
+
+            <div class="form-group">
+              <label for="ra_web">Site web</label>
+              <input class="input" type="url" id="ra_web" name="ra_web" [(ngModel)]="data.ra_web" />
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="form-group">
+              <label for="ra_cta">Texte principal</label>
+              <input class="input" type="text" id="ra_cta" name="ra_cta" [(ngModel)]="data.ra_cta" />
+            </div>
+
+            <div class="form-group">
+              <label for="ra_btn">Texte du bouton</label>
+              <input class="input" type="text" id="ra_btn" name="ra_btn" [(ngModel)]="data.ra_btn" />
+            </div>
+
+            <div class="form-group">
+              <label for="ra_href">Lien du bouton</label>
+              <input class="input" type="text" id="ra_href" name="ra_href" [(ngModel)]="data.ra_href" />
+            </div>
+          </div>
         </div>
-      </div>
+      </aside>
     </div>
-  </div>
-</div>
-
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-bullhorn"></i>Banniere de bas de page</div>
-      <div class="panel-desc">Message final et bouton d'invitation.</div>
-    </div>
-  </div>
-  <div class="panel-body">
-    <div class="form-grid">
-      <div class="form-group">
-        <label for="ra_cta">Texte principal</label>
-        <input class="input" type="text" id="ra_cta" name="ra_cta" [(ngModel)]="data.ra_cta" />
-      </div>
-      <div class="form-group">
-        <label for="ra_btn">Texte du bouton</label>
-        <input class="input" type="text" id="ra_btn" name="ra_btn" [(ngModel)]="data.ra_btn" />
-      </div>
-      <div class="form-group">
-        <label for="ra_href">Lien du bouton</label>
-        <input class="input" type="text" id="ra_href" name="ra_href" [(ngModel)]="data.ra_href" />
-      </div>
-    </div>
-  </div>
+  </section>
 </div>
