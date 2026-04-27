@@ -11,36 +11,6 @@
 </section>
 
 <div class="missions-editor">
-  <aside class="missions-sidebar">
-    <section class="panel">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title"><i class="pi fas fa-eye"></i>Apercu des missions</div>
-          <div class="panel-desc">Resume des cartes publiques.</div>
-        </div>
-      </div>
-      <div class="panel-body sidebar-body">
-        <div class="mission-overview">
-          <a
-            *ngFor="let slot of missionSlots"
-            routerLink="/nos-missions"
-            class="overview-card"
-            [class.is-orange]="missionPreview(slot.index).color === 'Orange'"
-            [class.is-green]="missionPreview(slot.index).color === 'Vert'"
-            [class.is-violet]="missionPreview(slot.index).color === 'Violet'"
-            [class.is-gray]="missionPreview(slot.index).color === 'Gris'"
-          >
-            <i [class]="missionPreview(slot.index).icon"></i>
-            <span>
-              <strong>{{ missionPreview(slot.index).title }}</strong>
-              <small>{{ missionPreview(slot.index).points.length }} point{{ missionPreview(slot.index).points.length > 1 ? 's' : '' }}</small>
-            </span>
-          </a>
-        </div>
-      </div>
-    </section>
-  </aside>
-
   <main class="missions-main">
     <section class="mission-card panel" *ngFor="let slot of missionSlots" [id]="'mission-' + slot.index">
       <div class="panel-header">

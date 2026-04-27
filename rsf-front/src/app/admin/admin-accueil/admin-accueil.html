@@ -11,54 +11,6 @@
 </section>
 
 <div class="home-editor">
-  <aside class="home-sidebar">
-    <section class="panel preview-panel">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title"><i class="pi fas fa-eye"></i>Apercu rapide</div>
-          <div class="panel-desc">Vue compacte du contenu principal.</div>
-        </div>
-      </div>
-      <div class="panel-body preview-body">
-        <div class="home-preview">
-          <span class="preview-badge">{{ data.hero_badge || 'Badge' }}</span>
-          <h3>{{ heroPreviewTitle() || 'Titre de la page accueil' }}</h3>
-          <p>{{ data.hero_desc || 'Texte de presentation visible dans le hero.' }}</p>
-
-          <div class="preview-actions">
-            <span
-              *ngFor="let slot of actionSlots"
-              class="preview-button"
-              [class.is-outline]="actionPreview(slot.index).style === 'Contour'"
-              [class.is-accent]="actionPreview(slot.index).style === 'Orange accent'"
-              [class.is-support]="actionPreview(slot.index).style === 'Vert support'"
-            >
-              {{ actionPreview(slot.index).label }}
-            </span>
-          </div>
-        </div>
-
-        <div class="preview-stats">
-          <article
-            *ngFor="let slot of statSlots"
-            [class.is-accent]="statPreview(slot.index).color === 'Orange'"
-            [class.is-support]="statPreview(slot.index).color === 'Vert'"
-          >
-            <strong>{{ statPreview(slot.index).value }}</strong>
-            <span>{{ statPreview(slot.index).label }}</span>
-          </article>
-        </div>
-
-        <nav class="section-jump" aria-label="Liens publics de la page accueil">
-          <a routerLink="/accueil"><i class="fas fa-arrow-up-right-from-square"></i>Voir l'accueil public</a>
-          <a routerLink="/qui-sommes-nous"><i class="fas fa-users"></i>Qui sommes-nous</a>
-          <a routerLink="/nos-missions"><i class="fas fa-bullseye"></i>Nos missions</a>
-          <a routerLink="/soutien-aux-membres"><i class="fas fa-hand-holding-heart"></i>Soutien</a>
-        </nav>
-      </div>
-    </section>
-  </aside>
-
   <main class="home-main">
     <section class="panel" id="home-hero">
       <div class="panel-header">
