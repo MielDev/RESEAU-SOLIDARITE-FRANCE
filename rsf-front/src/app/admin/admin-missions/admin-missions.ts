@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -8,13 +9,21 @@ import { AdminIconPicker } from '../shared/admin-icon-picker/admin-icon-picker';
 
 @Component({
   selector: 'app-admin-missions',
-  imports: [FormsModule, RouterModule, AdminIconPicker],
+  imports: [CommonModule, FormsModule, RouterModule, AdminIconPicker],
   templateUrl: './admin-missions.html',
   styleUrl: './admin-missions.css',
 })
 export class AdminMissions implements OnInit {
   data: any = {};
   saving = false;
+  readonly missionSlots = [
+    { index: 1, fallbackIcon: 'fas fa-file-invoice' },
+    { index: 2, fallbackIcon: 'fas fa-graduation-cap' },
+    { index: 3, fallbackIcon: 'fas fa-house' },
+    { index: 4, fallbackIcon: 'fas fa-hand-holding-heart' },
+    { index: 5, fallbackIcon: 'fas fa-scale-balanced' },
+  ];
+  readonly pointSlots = [1, 2, 3, 4, 5];
   private missions: any[] = [];
 
   constructor(
@@ -53,6 +62,21 @@ export class AdminMissions implements OnInit {
         void this.alerts.error('Enregistrement impossible', 'Les missions n ont pas pu etre sauvegardees.');
       },
     });
+  }
+
+  missionPreview(index: number) {
+    return {
+      icon: this.data[`m${index}_icon`] || this.missionSlots[index - 1]?.fallbackIcon || 'fas fa-bullseye',
+      title: this.data[`m${index}_title`] || `Mission ${index}`,
+      color: this.data[`m${index}_color`] || 'Bleu',
+      points: this.pointSlots
+        .map((pointIndex) => this.data[`m${index}_p${pointIndex}`])
+        .filter(Boolean),
+    };
+  }
+
+  clearPoint(missionIndex: number, pointIndex: number) {
+    this.data[`m${missionIndex}_p${pointIndex}`] = '';
   }
 
   private toFormData(missions: any[]) {

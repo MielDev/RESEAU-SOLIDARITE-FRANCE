@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -7,13 +8,20 @@ import { AdminIconPicker } from '../shared/admin-icon-picker/admin-icon-picker';
 
 @Component({
   selector: 'app-admin-soutien',
-  imports: [FormsModule, RouterModule, AdminIconPicker],
+  imports: [CommonModule, FormsModule, RouterModule, AdminIconPicker],
   templateUrl: './admin-soutien.html',
   styleUrl: './admin-soutien.css',
 })
 export class AdminSoutien implements OnInit {
   data: any = {};
   saving = false;
+  readonly serviceSlots = [
+    { index: 1, label: 'Service 1', fallbackIcon: 'fas fa-heart' },
+    { index: 2, label: 'Service 2', fallbackIcon: 'fas fa-file-lines' },
+    { index: 3, label: 'Service 3', fallbackIcon: 'fas fa-briefcase' },
+    { index: 4, label: 'Service 4', fallbackIcon: 'fas fa-house-chimney' },
+    { index: 5, label: 'Service 5', fallbackIcon: 'fas fa-users' },
+  ];
   private pageData: any = {};
 
   constructor(
@@ -46,6 +54,14 @@ export class AdminSoutien implements OnInit {
         void this.alerts.error('Enregistrement impossible', 'La page Soutien aux membres n a pas pu etre sauvegardee.');
       },
     });
+  }
+
+  servicePreview(index: number) {
+    return {
+      icon: this.data[`srv${index}_icon`] || this.serviceSlots[index - 1]?.fallbackIcon || 'fas fa-heart',
+      title: this.data[`srv${index}_title`] || `Service ${index}`,
+      description: this.data[`srv${index}_desc`] || '',
+    };
   }
 
   private toFormData(page: any) {

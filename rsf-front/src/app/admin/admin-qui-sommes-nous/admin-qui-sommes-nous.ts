@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -7,13 +8,28 @@ import { AdminIconPicker } from '../shared/admin-icon-picker/admin-icon-picker';
 
 @Component({
   selector: 'app-admin-qui-sommes-nous',
-  imports: [FormsModule, RouterModule, AdminIconPicker],
+  imports: [CommonModule, FormsModule, RouterModule, AdminIconPicker],
   templateUrl: './admin-qui-sommes-nous.html',
   styleUrl: './admin-qui-sommes-nous.css',
 })
 export class AdminQuiSommesNous implements OnInit {
   data: any = {};
   saving = false;
+  readonly storySlots = [1, 2, 3];
+  readonly valueSlots = [
+    { index: 1, label: 'Valeur 1', fallbackIcon: 'fas fa-handshake-angle' },
+    { index: 2, label: 'Valeur 2', fallbackIcon: 'fas fa-scale-balanced' },
+    { index: 3, label: 'Valeur 3', fallbackIcon: 'fas fa-hand-fist' },
+    { index: 4, label: 'Valeur 4', fallbackIcon: 'fas fa-heart' },
+    { index: 5, label: 'Valeur 5', fallbackIcon: 'fas fa-users' },
+  ];
+  readonly goalSlots = [
+    { index: 1, label: 'Objectif 1', fallbackIcon: 'fas fa-bullseye' },
+    { index: 2, label: 'Objectif 2', fallbackIcon: 'fas fa-hand-holding-heart' },
+    { index: 3, label: 'Objectif 3', fallbackIcon: 'fas fa-briefcase' },
+    { index: 4, label: 'Objectif 4', fallbackIcon: 'fas fa-house-chimney' },
+    { index: 5, label: 'Objectif 5', fallbackIcon: 'fas fa-graduation-cap' },
+  ];
   private pageData: any = {};
 
   constructor(
@@ -46,6 +62,22 @@ export class AdminQuiSommesNous implements OnInit {
         void this.alerts.error('Enregistrement impossible', 'Les donnees de la page n ont pas pu etre sauvegardees.');
       },
     });
+  }
+
+  valuePreview(index: number) {
+    return {
+      icon: this.data[`val${index}_icon`] || this.valueSlots[index - 1]?.fallbackIcon || 'fas fa-gem',
+      title: this.data[`val${index}_title`] || `Valeur ${index}`,
+      description: this.data[`val${index}_desc`] || '',
+    };
+  }
+
+  goalPreview(index: number) {
+    return {
+      icon: this.data[`obj${index}_icon`] || this.goalSlots[index - 1]?.fallbackIcon || 'fas fa-bullseye',
+      title: this.data[`obj${index}_title`] || `Objectif ${index}`,
+      description: this.data[`obj${index}_desc`] || '',
+    };
   }
 
   private toFormData(page: any) {

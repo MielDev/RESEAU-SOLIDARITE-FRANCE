@@ -1,10 +1,8 @@
-<div class="alert alert-info"><i class="fas fa-circle-info"></i> Chaque mission correspond à une carte sur la page publique <strong>Nos missions</strong>.</div>
-
 <section class="admin-page-toolbar">
   <div>
     <p class="admin-eyebrow">Edition de page</p>
     <h2>Missions</h2>
-    <span>Modifie les domaines d'action et les points affiches sur la page.</span>
+    <span>Configure les domaines d'action et les points affiches dans chaque carte.</span>
   </div>
   <button type="button" class="btn btn-primary admin-save-btn" (click)="save()" [disabled]="saving">
     <i class="fas fa-floppy-disk"></i>
@@ -12,251 +10,95 @@
   </button>
 </section>
 
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-clipboard-list"></i>Mission 1 — Aide aux démarches administratives</div>
-      
-    </div>
-    
-  </div>
-  <div class="panel-body">
-<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:minmax(240px,1.2fr) minmax(180px,1fr) 140px;gap:12px;margin-bottom:16px;">
-  
-<div class="form-group">
-  <label for="m1_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.m1_icon" fallbackIcon="fas fa-file-invoice"></app-admin-icon-picker>
-  
-</div>
-  
-<div class="form-group">
-  <label for="m1_title">Titre</label>
-  <input class="input" type="text" id="m1_title" name="m1_title" [(ngModel)]="data.m1_title" placeholder=""/>
-  
-</div>
-  
-<div class="form-group">
-  <label for="m1_color">Couleur</label>
-  <select class="select" id="m1_color" name="m1_color" [(ngModel)]="data.m1_color"><option >Bleu</option><option >Violet</option><option >Orange</option><option >Vert</option><option >Gris</option></select>
-</div>
-</div>
-<h4 style="font-size:12.5px;font-weight:700;margin-bottom:10px;color:#475569;">Points de la liste</h4>
+<div class="missions-editor">
+  <aside class="missions-sidebar">
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-eye"></i>Apercu des missions</div>
+          <div class="panel-desc">Resume des cartes publiques.</div>
+        </div>
+      </div>
+      <div class="panel-body sidebar-body">
+        <div class="mission-overview">
+          <a
+            *ngFor="let slot of missionSlots"
+            routerLink="/nos-missions"
+            class="overview-card"
+            [class.is-orange]="missionPreview(slot.index).color === 'Orange'"
+            [class.is-green]="missionPreview(slot.index).color === 'Vert'"
+            [class.is-violet]="missionPreview(slot.index).color === 'Violet'"
+            [class.is-gray]="missionPreview(slot.index).color === 'Gris'"
+          >
+            <i [class]="missionPreview(slot.index).icon"></i>
+            <span>
+              <strong>{{ missionPreview(slot.index).title }}</strong>
+              <small>{{ missionPreview(slot.index).points.length }} point{{ missionPreview(slot.index).points.length > 1 ? 's' : '' }}</small>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </aside>
 
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m1_p1" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m1_p2" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m1_p3" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m1_p4" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m1_p5" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-<button class="btn btn-ghost btn-sm" style="margin-top:8px;"><i class="fas fa-plus"></i> Ajouter un point</button></div>
-</div>
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-graduation-cap"></i>Mission 2 — Accompagnement formation & emploi</div>
-      
-    </div>
-    
-  </div>
-  <div class="panel-body">
-<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:minmax(240px,1.2fr) minmax(180px,1fr) 140px;gap:12px;margin-bottom:16px;">
-  
-<div class="form-group">
-  <label for="m2_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.m2_icon" fallbackIcon="fas fa-graduation-cap"></app-admin-icon-picker>
-  
-</div>
-  
-<div class="form-group">
-  <label for="m2_title">Titre</label>
-  <input class="input" type="text" id="m2_title" name="m2_title" [(ngModel)]="data.m2_title" placeholder=""/>
-  
-</div>
-  
-<div class="form-group">
-  <label for="m2_color">Couleur</label>
-  <select class="select" id="m2_color" name="m2_color" [(ngModel)]="data.m2_color"><option >Bleu</option><option >Violet</option><option >Orange</option><option >Vert</option><option >Gris</option></select>
-</div>
-</div>
-<h4 style="font-size:12.5px;font-weight:700;margin-bottom:10px;color:#475569;">Points de la liste</h4>
+  <main class="missions-main">
+    <section class="mission-card panel" *ngFor="let slot of missionSlots" [id]="'mission-' + slot.index">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">
+            <i class="pi" [class]="missionPreview(slot.index).icon"></i>
+            Mission {{ slot.index }}
+          </div>
+          <div class="panel-desc">{{ missionPreview(slot.index).title }}</div>
+        </div>
+      </div>
 
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m2_p1" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m2_p2" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m2_p3" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m2_p4" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m2_p5" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-<button class="btn btn-ghost btn-sm" style="margin-top:8px;"><i class="fas fa-plus"></i> Ajouter un point</button></div>
-</div>
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-house"></i>Mission 3 — Soutien aux personnes sans-abri</div>
-      
-    </div>
-    
-  </div>
-  <div class="panel-body">
-<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:minmax(240px,1.2fr) minmax(180px,1fr) 140px;gap:12px;margin-bottom:16px;">
-  
-<div class="form-group">
-  <label for="m3_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.m3_icon" fallbackIcon="fas fa-house"></app-admin-icon-picker>
-  
-</div>
-  
-<div class="form-group">
-  <label for="m3_title">Titre</label>
-  <input class="input" type="text" id="m3_title" name="m3_title" [(ngModel)]="data.m3_title" placeholder=""/>
-  
-</div>
-  
-<div class="form-group">
-  <label for="m3_color">Couleur</label>
-  <select class="select" id="m3_color" name="m3_color" [(ngModel)]="data.m3_color"><option >Bleu</option><option >Violet</option><option >Orange</option><option >Vert</option><option >Gris</option></select>
-</div>
-</div>
-<h4 style="font-size:12.5px;font-weight:700;margin-bottom:10px;color:#475569;">Points de la liste</h4>
+      <div class="panel-body">
+        <div class="mission-top-grid">
+          <div class="form-group">
+            <label [for]="'m' + slot.index + '_icon'">Icone</label>
+            <app-admin-icon-picker [(ngModel)]="data['m' + slot.index + '_icon']" [fallbackIcon]="slot.fallbackIcon"></app-admin-icon-picker>
+          </div>
 
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m3_p1" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m3_p2" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m3_p3" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m3_p4" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-<button class="btn btn-ghost btn-sm" style="margin-top:8px;"><i class="fas fa-plus"></i> Ajouter un point</button></div>
-</div>
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-handshake-angle"></i>Mission 4 — Entraide communautaire</div>
-      
-    </div>
-    
-  </div>
-  <div class="panel-body">
-<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:minmax(240px,1.2fr) minmax(180px,1fr) 140px;gap:12px;margin-bottom:16px;">
-  
-<div class="form-group">
-  <label for="m4_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.m4_icon" fallbackIcon="fas fa-hand-holding-heart"></app-admin-icon-picker>
-  
-</div>
-  
-<div class="form-group">
-  <label for="m4_title">Titre</label>
-  <input class="input" type="text" id="m4_title" name="m4_title" [(ngModel)]="data.m4_title" placeholder=""/>
-  
-</div>
-  
-<div class="form-group">
-  <label for="m4_color">Couleur</label>
-  <select class="select" id="m4_color" name="m4_color" [(ngModel)]="data.m4_color"><option >Bleu</option><option >Violet</option><option >Orange</option><option >Vert</option><option >Gris</option></select>
-</div>
-</div>
-<h4 style="font-size:12.5px;font-weight:700;margin-bottom:10px;color:#475569;">Points de la liste</h4>
+          <div class="form-group">
+            <label [for]="'m' + slot.index + '_title'">Titre</label>
+            <input class="input" type="text" [id]="'m' + slot.index + '_title'" [name]="'m' + slot.index + '_title'" [(ngModel)]="data['m' + slot.index + '_title']" />
+          </div>
 
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m4_p1" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m4_p2" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m4_p3" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m4_p4" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-<button class="btn btn-ghost btn-sm" style="margin-top:8px;"><i class="fas fa-plus"></i> Ajouter un point</button></div>
-</div>
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-bullhorn"></i>Mission 5 — Sensibilisation citoyenne</div>
-      
-    </div>
-    
-  </div>
-  <div class="panel-body">
-<div class="form-grid form-grid-2" style="display:grid;grid-template-columns:minmax(240px,1.2fr) minmax(180px,1fr) 140px;gap:12px;margin-bottom:16px;">
-  
-<div class="form-group">
-  <label for="m5_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.m5_icon" fallbackIcon="fas fa-scale-balanced"></app-admin-icon-picker>
-  
-</div>
-  
-<div class="form-group">
-  <label for="m5_title">Titre</label>
-  <input class="input" type="text" id="m5_title" name="m5_title" [(ngModel)]="data.m5_title" placeholder=""/>
-  
-</div>
-  
-<div class="form-group">
-  <label for="m5_color">Couleur</label>
-  <select class="select" id="m5_color" name="m5_color" [(ngModel)]="data.m5_color"><option >Bleu</option><option >Violet</option><option >Orange</option><option >Vert</option><option >Gris</option></select>
-</div>
-</div>
-<h4 style="font-size:12.5px;font-weight:700;margin-bottom:10px;color:#475569;">Points de la liste</h4>
+          <div class="form-group">
+            <label [for]="'m' + slot.index + '_color'">Couleur</label>
+            <select class="select" [id]="'m' + slot.index + '_color'" [name]="'m' + slot.index + '_color'" [(ngModel)]="data['m' + slot.index + '_color']">
+              <option>Bleu</option>
+              <option>Violet</option>
+              <option>Orange</option>
+              <option>Vert</option>
+              <option>Gris</option>
+            </select>
+          </div>
+        </div>
 
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m5_p1" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m5_p2" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m5_p3" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-      <input class="input" type="text" [(ngModel)]="data.m5_p4" style="flex:1;"/>
-      <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-    </div>
-<button class="btn btn-ghost btn-sm" style="margin-top:8px;"><i class="fas fa-plus"></i> Ajouter un point</button></div>
+        <div class="points-section">
+          <div class="section-heading">
+            <h4>Points de la liste</h4>
+            <span>Maximum 5 points</span>
+          </div>
+
+          <div class="points-list">
+            <div class="point-row" *ngFor="let pointIndex of pointSlots">
+              <span class="point-index">{{ pointIndex }}</span>
+              <input
+                class="input"
+                type="text"
+                [name]="'m' + slot.index + '_p' + pointIndex"
+                [(ngModel)]="data['m' + slot.index + '_p' + pointIndex]"
+              />
+              <button class="btn btn-ghost btn-sm btn-icon" type="button" title="Vider ce point" (click)="clearPoint(slot.index, pointIndex)">
+                <i class="fas fa-xmark"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </div>

@@ -2,7 +2,7 @@
   <div>
     <p class="admin-eyebrow">Edition de page</p>
     <h2>Soutien aux membres</h2>
-    <span>Modifie l'en-tete, les services et le bloc d'aide.</span>
+    <span>Structure l'introduction, les services proposes et l'appel a l'action.</span>
   </div>
   <button type="button" class="btn btn-primary admin-save-btn" (click)="save()" [disabled]="saving">
     <i class="fas fa-floppy-disk"></i>
@@ -10,132 +10,126 @@
   </button>
 </section>
 
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-image"></i>En-tête & introduction</div>
-    </div>
-  </div>
-  <div class="panel-body">
-<div class="form-grid" style="display:grid;gap:14px;">
-<div class="form-group">
-  <label for="s_title">Titre de la page</label>
-  <input class="input" type="text" id="s_title" name="s_title" [(ngModel)]="data.s_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="s_desc">Description</label>
-  <textarea class="textarea" id="s_desc" name="s_desc" [(ngModel)]="data.s_desc" style="min-height:64px"></textarea>
-</div>
-</div></div>
-</div>
+<div class="support-editor">
+  <aside class="support-sidebar">
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-eye"></i>Apercu rapide</div>
+          <div class="panel-desc">Resume de la page Soutien.</div>
+        </div>
+      </div>
+      <div class="panel-body sidebar-body">
+        <article class="support-preview">
+          <span>Soutien</span>
+          <h3>{{ data.s_title || 'Soutien aux membres' }}</h3>
+          <p>{{ data.s_desc || 'Description courte de la page.' }}</p>
+        </article>
 
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-heart"></i>Services proposés aux membres</div>
-      <div class="panel-desc">Liste des services affichés en cartes</div>
-    </div>
-  </div>
-  <div class="panel-body">
-<div style="display:flex;flex-direction:column;gap:12px;">
-  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
-<div class="form-group">
-  <label for="srv1_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.srv1_icon" fallbackIcon="fas fa-heart"></app-admin-icon-picker>
-</div>
-<div class="form-group">
-  <label for="srv1_title">Titre</label>
-  <input class="input" type="text" id="srv1_title" name="srv1_title" [(ngModel)]="data.srv1_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="srv1_desc">Description</label>
-  <input class="input" type="text" id="srv1_desc" name="srv1_desc" [(ngModel)]="data.srv1_desc" placeholder=""/>
-</div>
-  </div>
-  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
-<div class="form-group">
-  <label for="srv2_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.srv2_icon" fallbackIcon="fas fa-file-lines"></app-admin-icon-picker>
-</div>
-<div class="form-group">
-  <label for="srv2_title">Titre</label>
-  <input class="input" type="text" id="srv2_title" name="srv2_title" [(ngModel)]="data.srv2_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="srv2_desc">Description</label>
-  <input class="input" type="text" id="srv2_desc" name="srv2_desc" [(ngModel)]="data.srv2_desc" placeholder=""/>
-</div>
-  </div>
-  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
-<div class="form-group">
-  <label for="srv3_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.srv3_icon" fallbackIcon="fas fa-briefcase"></app-admin-icon-picker>
-</div>
-<div class="form-group">
-  <label for="srv3_title">Titre</label>
-  <input class="input" type="text" id="srv3_title" name="srv3_title" [(ngModel)]="data.srv3_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="srv3_desc">Description</label>
-  <input class="input" type="text" id="srv3_desc" name="srv3_desc" [(ngModel)]="data.srv3_desc" placeholder=""/>
-</div>
-  </div>
-  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
-<div class="form-group">
-  <label for="srv4_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.srv4_icon" fallbackIcon="fas fa-house-chimney"></app-admin-icon-picker>
-</div>
-<div class="form-group">
-  <label for="srv4_title">Titre</label>
-  <input class="input" type="text" id="srv4_title" name="srv4_title" [(ngModel)]="data.srv4_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="srv4_desc">Description</label>
-  <input class="input" type="text" id="srv4_desc" name="srv4_desc" [(ngModel)]="data.srv4_desc" placeholder=""/>
-</div>
-  </div>
-  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
-<div class="form-group">
-  <label for="srv5_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.srv5_icon" fallbackIcon="fas fa-users"></app-admin-icon-picker>
-</div>
-<div class="form-group">
-  <label for="srv5_title">Titre</label>
-  <input class="input" type="text" id="srv5_title" name="srv5_title" [(ngModel)]="data.srv5_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="srv5_desc">Description</label>
-  <input class="input" type="text" id="srv5_desc" name="srv5_desc" [(ngModel)]="data.srv5_desc" placeholder=""/>
-</div>
-  </div>
-  <button class="btn btn-ghost btn-sm" style="margin-top:4px;"><i class="fas fa-plus"></i> Ajouter un service</button>
-</div></div>
-</div>
+        <div class="service-mini-list">
+          <a *ngFor="let slot of serviceSlots" routerLink="/soutien-aux-membres">
+            <i [class]="servicePreview(slot.index).icon"></i>
+            <span>{{ servicePreview(slot.index).title }}</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </aside>
 
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-bullhorn"></i>Encart d'appel à l'action</div>
-      <div class="panel-desc">Bloc coloré qui invite à contacter l'association</div>
-    </div>
-  </div>
-  <div class="panel-body">
-<div class="form-grid" style="display:grid;gap:12px;">
-<div class="form-group">
-  <label for="cta_title">Titre</label>
-  <input class="input" type="text" id="cta_title" name="cta_title" [(ngModel)]="data.cta_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="cta_body">Texte</label>
-  <textarea class="textarea" id="cta_body" name="cta_body" [(ngModel)]="data.cta_body" style="min-height:64px"></textarea>
-</div>
-<div class="form-group">
-  <label for="cta_btn">Texte du bouton</label>
-  <input class="input" type="text" id="cta_btn" name="cta_btn" [(ngModel)]="data.cta_btn" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="cta_href">Lien du bouton</label>
-  <input class="input" type="text" id="cta_href" name="cta_href" [(ngModel)]="data.cta_href" placeholder=""/>
-</div>
-</div></div>
+  <main class="support-main">
+    <section class="panel" id="support-intro">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-image"></i>En-tete et introduction</div>
+          <div class="panel-desc">Titre et texte d'ouverture de la page.</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="form-grid form-grid-1">
+          <div class="form-group">
+            <label for="s_title">Titre de la page</label>
+            <input class="input" type="text" id="s_title" name="s_title" [(ngModel)]="data.s_title" />
+          </div>
+          <div class="form-group">
+            <label for="s_desc">Description</label>
+            <textarea class="textarea intro-textarea" id="s_desc" name="s_desc" [(ngModel)]="data.s_desc"></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-heart"></i>Services proposes</div>
+          <div class="panel-desc">Les cartes de services visibles sur la page publique.</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="service-list">
+          <article class="service-editor" *ngFor="let slot of serviceSlots" [id]="'support-service-' + slot.index">
+            <div class="service-icon">
+              <i [class]="servicePreview(slot.index).icon"></i>
+            </div>
+            <div class="service-fields">
+              <header>{{ slot.label }}</header>
+              <div class="form-grid service-grid">
+                <div class="form-group">
+                  <label [for]="'srv' + slot.index + '_icon'">Icone</label>
+                  <app-admin-icon-picker [(ngModel)]="data['srv' + slot.index + '_icon']" [fallbackIcon]="slot.fallbackIcon"></app-admin-icon-picker>
+                </div>
+                <div class="form-group">
+                  <label [for]="'srv' + slot.index + '_title'">Titre</label>
+                  <input class="input" type="text" [id]="'srv' + slot.index + '_title'" [name]="'srv' + slot.index + '_title'" [(ngModel)]="data['srv' + slot.index + '_title']" />
+                </div>
+                <div class="form-group">
+                  <label [for]="'srv' + slot.index + '_desc'">Description</label>
+                  <input class="input" type="text" [id]="'srv' + slot.index + '_desc'" [name]="'srv' + slot.index + '_desc'" [(ngModel)]="data['srv' + slot.index + '_desc']" />
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="support-cta">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-bullhorn"></i>Encart d'appel a l'action</div>
+          <div class="panel-desc">Bloc qui invite a contacter l'association.</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="cta-editor">
+          <div class="cta-preview">
+            <strong>{{ data.cta_title || 'Titre du bloc' }}</strong>
+            <span>{{ data.cta_body || 'Texte du bloc d aide.' }}</span>
+            <em>{{ data.cta_btn || 'Texte du bouton' }}</em>
+          </div>
+
+          <div class="form-grid form-grid-1">
+            <div class="form-group">
+              <label for="cta_title">Titre</label>
+              <input class="input" type="text" id="cta_title" name="cta_title" [(ngModel)]="data.cta_title" />
+            </div>
+            <div class="form-group">
+              <label for="cta_body">Texte</label>
+              <textarea class="textarea cta-textarea" id="cta_body" name="cta_body" [(ngModel)]="data.cta_body"></textarea>
+            </div>
+            <div class="form-grid form-grid-2">
+              <div class="form-group">
+                <label for="cta_btn">Texte du bouton</label>
+                <input class="input" type="text" id="cta_btn" name="cta_btn" [(ngModel)]="data.cta_btn" />
+              </div>
+              <div class="form-group">
+                <label for="cta_href">Lien du bouton</label>
+                <input class="input" type="text" id="cta_href" name="cta_href" [(ngModel)]="data.cta_href" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </div>

@@ -74,7 +74,7 @@ export class AdminAccueil implements OnInit {
   actionPreview(index: number) {
     return {
       label: this.data[`btn${index}_text`] || `Bouton ${index}`,
-      href: this.data[`btn${index}_href`] || '#',
+      href: this.data[`btn${index}_href`] || '/accueil',
       style: this.data[`btn${index}_style`] || 'Bleu primaire',
     };
   }

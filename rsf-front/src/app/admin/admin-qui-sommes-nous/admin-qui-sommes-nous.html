@@ -2,7 +2,7 @@
   <div>
     <p class="admin-eyebrow">Edition de page</p>
     <h2>Qui sommes-nous</h2>
-    <span>Modifie l'en-tete, l'histoire, les valeurs et les objectifs.</span>
+    <span>Structure l'en-tete, l'histoire, les valeurs et les objectifs de l'association.</span>
   </div>
   <button type="button" class="btn btn-primary admin-save-btn" (click)="save()" [disabled]="saving">
     <i class="fas fa-floppy-disk"></i>
@@ -10,212 +10,151 @@
   </button>
 </section>
 
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-image"></i>En-tête de la page</div>
-      <div class="panel-desc">Bandeau coloré en haut de la page</div>
-    </div>
-  </div>
-  <div class="panel-body">
-<div class="form-grid" style="display:grid;gap:14px;">
-<div class="form-group">
-  <label for="ph_title">Titre de la page</label>
-  <input class="input" type="text" id="ph_title" name="ph_title" [(ngModel)]="data.ph_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="ph_desc">Description (sous-titre)</label>
-  <textarea class="textarea" id="ph_desc" name="ph_desc" [(ngModel)]="data.ph_desc" style="min-height:112px"></textarea>
-</div>
-</div></div>
-</div>
+<div class="about-editor">
+  <aside class="about-sidebar">
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-eye"></i>Apercu rapide</div>
+          <div class="panel-desc">Les blocs principaux de la page publique.</div>
+        </div>
+      </div>
+      <div class="panel-body sidebar-body">
+        <article class="about-preview">
+          <span>Page publique</span>
+          <h3>{{ data.ph_title || 'Qui sommes-nous' }}</h3>
+          <p>{{ data.ph_desc || 'Description courte de la page.' }}</p>
+        </article>
 
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-book-open"></i>Section — Notre histoire</div>
-      <div class="panel-desc">Texte principal présentant l'histoire de l'association</div>
-    </div>
-  </div>
-  <div class="panel-body">
-<div class="form-grid" style="display:grid;gap:14px;">
-<div class="form-group">
-  <label for="hist_title">Titre de section</label>
-  <input class="input" type="text" id="hist_title" name="hist_title" [(ngModel)]="data.hist_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="hist_p1">Paragraphe 1</label>
-  <textarea class="textarea" id="hist_p1" name="hist_p1" [(ngModel)]="data.hist_p1" style="min-height:88px"></textarea>
-</div>
-<div class="form-group">
-  <label for="hist_p2">Paragraphe 2</label>
-  <textarea class="textarea" id="hist_p2" name="hist_p2" [(ngModel)]="data.hist_p2" style="min-height:112px"></textarea>
-</div>
-<div class="form-group">
-  <label for="hist_p3">Paragraphe 3</label>
-  <textarea class="textarea" id="hist_p3" name="hist_p3" [(ngModel)]="data.hist_p3" style="min-height:88px"></textarea>
-</div>
-</div></div>
-</div>
+        <div class="section-jump" aria-label="Liens publics de la page Qui sommes-nous">
+          <a routerLink="/qui-sommes-nous"><i class="fas fa-arrow-up-right-from-square"></i>Voir la page publique</a>
+          <a routerLink="/organisation"><i class="fas fa-sitemap"></i>Organisation</a>
+          <a routerLink="/temoignages"><i class="fas fa-comment-dots"></i>Temoignages</a>
+          <a routerLink="/nous-rejoindre"><i class="fas fa-user-plus"></i>Nous rejoindre</a>
+        </div>
+      </div>
+    </section>
+  </aside>
 
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-gem"></i>Nos valeurs (5 valeurs)</div>
-      <div class="panel-desc">Les cartes de valeurs affichées à droite</div>
-    </div>
-  </div>
-  <div class="panel-body">
-<div style="display:flex;flex-direction:column;gap:12px;">
-  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
-<div class="form-group">
-  <label for="val1_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.val1_icon" fallbackIcon="fas fa-handshake-angle"></app-admin-icon-picker>
-</div>
-<div class="form-group">
-  <label for="val1_title">Titre</label>
-  <input class="input" type="text" id="val1_title" name="val1_title" [(ngModel)]="data.val1_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="val1_desc">Description</label>
-  <input class="input" type="text" id="val1_desc" name="val1_desc" [(ngModel)]="data.val1_desc" placeholder=""/>
-</div>
-  </div>
-  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
-<div class="form-group">
-  <label for="val2_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.val2_icon" fallbackIcon="fas fa-scale-balanced"></app-admin-icon-picker>
-</div>
-<div class="form-group">
-  <label for="val2_title">Titre</label>
-  <input class="input" type="text" id="val2_title" name="val2_title" [(ngModel)]="data.val2_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="val2_desc">Description</label>
-  <input class="input" type="text" id="val2_desc" name="val2_desc" [(ngModel)]="data.val2_desc" placeholder=""/>
-</div>
-  </div>
-  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
-<div class="form-group">
-  <label for="val3_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.val3_icon" fallbackIcon="fas fa-hand-fist"></app-admin-icon-picker>
-</div>
-<div class="form-group">
-  <label for="val3_title">Titre</label>
-  <input class="input" type="text" id="val3_title" name="val3_title" [(ngModel)]="data.val3_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="val3_desc">Description</label>
-  <input class="input" type="text" id="val3_desc" name="val3_desc" [(ngModel)]="data.val3_desc" placeholder=""/>
-</div>
-  </div>
-  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
-<div class="form-group">
-  <label for="val4_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.val4_icon" fallbackIcon="fas fa-heart"></app-admin-icon-picker>
-</div>
-<div class="form-group">
-  <label for="val4_title">Titre</label>
-  <input class="input" type="text" id="val4_title" name="val4_title" [(ngModel)]="data.val4_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="val4_desc">Description</label>
-  <input class="input" type="text" id="val4_desc" name="val4_desc" [(ngModel)]="data.val4_desc" placeholder=""/>
-</div>
-  </div>
-  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
-<div class="form-group">
-  <label for="val5_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.val5_icon" fallbackIcon="fas fa-users"></app-admin-icon-picker>
-</div>
-<div class="form-group">
-  <label for="val5_title">Titre</label>
-  <input class="input" type="text" id="val5_title" name="val5_title" [(ngModel)]="data.val5_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="val5_desc">Description</label>
-  <input class="input" type="text" id="val5_desc" name="val5_desc" [(ngModel)]="data.val5_desc" placeholder=""/>
-</div>
-  </div></div></div>
-</div>
+  <main class="about-main">
+    <section class="panel" id="about-hero">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-image"></i>En-tete de page</div>
+          <div class="panel-desc">Titre et introduction du haut de page.</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="form-grid form-grid-1">
+          <div class="form-group">
+            <label for="ph_title">Titre de la page</label>
+            <input class="input" type="text" id="ph_title" name="ph_title" [(ngModel)]="data.ph_title" />
+          </div>
+          <div class="form-group">
+            <label for="ph_desc">Description</label>
+            <textarea class="textarea intro-textarea" id="ph_desc" name="ph_desc" [(ngModel)]="data.ph_desc"></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-bullseye"></i>Nos objectifs (5 cartes)</div>
-      <div class="panel-desc">Les cartes d'objectifs en bas de page</div>
-    </div>
-  </div>
-  <div class="panel-body">
-<div style="display:flex;flex-direction:column;gap:12px;">
-  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
-<div class="form-group">
-  <label for="obj1_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.obj1_icon" fallbackIcon="fas fa-bullseye"></app-admin-icon-picker>
-</div>
-<div class="form-group">
-  <label for="obj1_title">Titre</label>
-  <input class="input" type="text" id="obj1_title" name="obj1_title" [(ngModel)]="data.obj1_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="obj1_desc">Description</label>
-  <input class="input" type="text" id="obj1_desc" name="obj1_desc" [(ngModel)]="data.obj1_desc" placeholder=""/>
-</div>
-  </div>
-  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
-<div class="form-group">
-  <label for="obj2_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.obj2_icon" fallbackIcon="fas fa-hand-holding-heart"></app-admin-icon-picker>
-</div>
-<div class="form-group">
-  <label for="obj2_title">Titre</label>
-  <input class="input" type="text" id="obj2_title" name="obj2_title" [(ngModel)]="data.obj2_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="obj2_desc">Description</label>
-  <input class="input" type="text" id="obj2_desc" name="obj2_desc" [(ngModel)]="data.obj2_desc" placeholder=""/>
-</div>
-  </div>
-  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
-<div class="form-group">
-  <label for="obj3_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.obj3_icon" fallbackIcon="fas fa-briefcase"></app-admin-icon-picker>
-</div>
-<div class="form-group">
-  <label for="obj3_title">Titre</label>
-  <input class="input" type="text" id="obj3_title" name="obj3_title" [(ngModel)]="data.obj3_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="obj3_desc">Description</label>
-  <input class="input" type="text" id="obj3_desc" name="obj3_desc" [(ngModel)]="data.obj3_desc" placeholder=""/>
-</div>
-  </div>
-  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
-<div class="form-group">
-  <label for="obj4_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.obj4_icon" fallbackIcon="fas fa-house-chimney"></app-admin-icon-picker>
-</div>
-<div class="form-group">
-  <label for="obj4_title">Titre</label>
-  <input class="input" type="text" id="obj4_title" name="obj4_title" [(ngModel)]="data.obj4_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="obj4_desc">Description</label>
-  <input class="input" type="text" id="obj4_desc" name="obj4_desc" [(ngModel)]="data.obj4_desc" placeholder=""/>
-</div>
-  </div>
-  <div style="background:#F8FAFC;border-radius:10px;padding:14px;display:grid;grid-template-columns:50px 1fr 2fr;gap:12px;align-items:center;">
-<div class="form-group">
-  <label for="obj5_icon">Icône</label>
-  <app-admin-icon-picker [(ngModel)]="data.obj5_icon" fallbackIcon="fas fa-graduation-cap"></app-admin-icon-picker>
-</div>
-<div class="form-group">
-  <label for="obj5_title">Titre</label>
-  <input class="input" type="text" id="obj5_title" name="obj5_title" [(ngModel)]="data.obj5_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="obj5_desc">Description</label>
-  <input class="input" type="text" id="obj5_desc" name="obj5_desc" [(ngModel)]="data.obj5_desc" placeholder=""/>
-</div>
-  </div></div></div>
+    <section class="panel" id="about-story">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-book-open"></i>Notre histoire</div>
+          <div class="panel-desc">Texte principal de presentation de l'association.</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="form-grid form-grid-1">
+          <div class="form-group">
+            <label for="hist_title">Titre de section</label>
+            <input class="input" type="text" id="hist_title" name="hist_title" [(ngModel)]="data.hist_title" />
+          </div>
+
+          <div class="story-grid">
+            <article class="story-card" *ngFor="let index of storySlots">
+              <header>Paragraphe {{ index }}</header>
+              <textarea
+                class="textarea story-textarea"
+                [id]="'hist_p' + index"
+                [name]="'hist_p' + index"
+                [(ngModel)]="data['hist_p' + index]"
+              ></textarea>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="about-values">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-gem"></i>Nos valeurs</div>
+          <div class="panel-desc">Les cinq cartes de valeurs affichees sur la page.</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="item-list">
+          <article class="editable-item" *ngFor="let slot of valueSlots">
+            <div class="item-icon">
+              <i [class]="valuePreview(slot.index).icon"></i>
+            </div>
+            <div class="item-fields">
+              <header>{{ slot.label }}</header>
+              <div class="form-grid item-grid">
+                <div class="form-group">
+                  <label [for]="'val' + slot.index + '_icon'">Icone</label>
+                  <app-admin-icon-picker [(ngModel)]="data['val' + slot.index + '_icon']" [fallbackIcon]="slot.fallbackIcon"></app-admin-icon-picker>
+                </div>
+                <div class="form-group">
+                  <label [for]="'val' + slot.index + '_title'">Titre</label>
+                  <input class="input" type="text" [id]="'val' + slot.index + '_title'" [name]="'val' + slot.index + '_title'" [(ngModel)]="data['val' + slot.index + '_title']" />
+                </div>
+                <div class="form-group">
+                  <label [for]="'val' + slot.index + '_desc'">Description</label>
+                  <input class="input" type="text" [id]="'val' + slot.index + '_desc'" [name]="'val' + slot.index + '_desc'" [(ngModel)]="data['val' + slot.index + '_desc']" />
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="about-goals">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-bullseye"></i>Nos objectifs</div>
+          <div class="panel-desc">Les cinq cartes d'objectifs de bas de page.</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="item-list">
+          <article class="editable-item" *ngFor="let slot of goalSlots">
+            <div class="item-icon goal-icon">
+              <i [class]="goalPreview(slot.index).icon"></i>
+            </div>
+            <div class="item-fields">
+              <header>{{ slot.label }}</header>
+              <div class="form-grid item-grid">
+                <div class="form-group">
+                  <label [for]="'obj' + slot.index + '_icon'">Icone</label>
+                  <app-admin-icon-picker [(ngModel)]="data['obj' + slot.index + '_icon']" [fallbackIcon]="slot.fallbackIcon"></app-admin-icon-picker>
+                </div>
+                <div class="form-group">
+                  <label [for]="'obj' + slot.index + '_title'">Titre</label>
+                  <input class="input" type="text" [id]="'obj' + slot.index + '_title'" [name]="'obj' + slot.index + '_title'" [(ngModel)]="data['obj' + slot.index + '_title']" />
+                </div>
+                <div class="form-group">
+                  <label [for]="'obj' + slot.index + '_desc'">Description</label>
+                  <input class="input" type="text" [id]="'obj' + slot.index + '_desc'" [name]="'obj' + slot.index + '_desc'" [(ngModel)]="data['obj' + slot.index + '_desc']" />
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
 </div>
