@@ -96,6 +96,11 @@
               <textarea name="message" [(ngModel)]="joinData.message" placeholder="Parlez-nous de vous, de votre motivation ou de votre situation..." style="min-height:100px;" required></textarea>
             </div>
 
+            <p class="form-privacy-note">
+              Ces informations servent uniquement a traiter votre demande de contact ou d'adhesion. Consultez notre
+              <a routerLink="/politique-confidentialite">politique de confidentialite</a>.
+            </p>
+
             <button type="submit" class="form-submit" [disabled]="isSubmitting">
               {{ isSubmitting ? pageContent?.form?.submitPending : pageContent?.form?.submitIdle }}
               <i class="fas fa-paper-plane" *ngIf="!isSubmitting"></i>

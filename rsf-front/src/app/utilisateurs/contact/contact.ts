@@ -1,9 +1,10 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { PublicService } from '../../services/public.service';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { CookieConsentService } from '../../services/cookie-consent.service';
 
 @Component({
   selector: 'app-contact',
@@ -23,6 +24,7 @@ export class Contact implements OnInit {
     message: ''
   };
   isSubmitting = false;
+  mapConsentAllowed = false;
   mapEmbedUrl: SafeResourceUrl | null = null;
   mapExternalUrl = '';
 
@@ -30,8 +32,21 @@ export class Contact implements OnInit {
     private renderer: Renderer2,
     private publicService: PublicService,
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
-  ) {}
+    private sanitizer: DomSanitizer,
+    private cookieConsent: CookieConsentService
+  ) {
+    effect(() => {
+      this.mapConsentAllowed = this.cookieConsent.externalServicesAllowed();
+
+      if (this.mapConsentAllowed) {
+        this.updateMapLinks();
+        return;
+      }
+
+      this.mapEmbedUrl = null;
+      this.mapExternalUrl = '';
+    });
+  }
 
   ngOnInit() {
     this.settings = this.route.parent?.snapshot.data['data']?.settings ?? null;
@@ -79,9 +94,19 @@ export class Contact implements OnInit {
   }
 
   private updateMapLinks() {
+    if (!this.mapConsentAllowed) {
+      this.mapEmbedUrl = null;
+      this.mapExternalUrl = '';
+      return;
+    }
+
     const query = encodeURIComponent(this.getMapQuery());
     this.mapEmbedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.google.com/maps?q=${query}&output=embed`);
     this.mapExternalUrl = `https://www.google.com/maps/search/?api=1&query=${query}`;
+  }
+
+  openCookiePreferences() {
+    this.cookieConsent.openPreferences();
   }
 
   setupIntersectionObserver() {

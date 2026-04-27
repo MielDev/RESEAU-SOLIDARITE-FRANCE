@@ -1,0 +1,179 @@
+<header class="legal-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a routerLink="/">Accueil</a>
+      <span class="sep">›</span>
+      {{ pageTitle }}
+    </div>
+
+    <div class="legal-badge">
+      <i [class]="pageIcon"></i>
+      Informations legales
+    </div>
+    <h1>{{ pageTitle }}</h1>
+    <p>{{ pageIntro }}</p>
+  </div>
+</header>
+
+<section class="legal-section">
+  <div class="container legal-layout">
+    <aside class="legal-summary" aria-label="Resume">
+      <span>Site concerne</span>
+      <strong>{{ siteName }}</strong>
+      <p>Derniere mise a jour : {{ lastUpdated }}</p>
+
+      <nav aria-label="Navigation juridique">
+        <a routerLink="/mentions-legales" routerLinkActive="active">Mentions legales</a>
+        <a routerLink="/politique-confidentialite" routerLinkActive="active">Confidentialite</a>
+        <a routerLink="/cookies" routerLinkActive="active">Cookies</a>
+      </nav>
+    </aside>
+
+    <article class="legal-content" [ngSwitch]="pageKey">
+      <ng-container *ngSwitchCase="'privacy'">
+        <section>
+          <h2>Responsable du traitement</h2>
+          <p>
+            Les donnees collectees via ce site sont traitees par {{ associationName }}.
+            <span *ngIf="addressLines.length">Adresse : <ng-container *ngFor="let line of addressLines; let last = last">{{ line }}<span *ngIf="!last">, </span></ng-container>.</span>
+          </p>
+          <p *ngIf="contactEmail">
+            Pour toute question relative aux donnees personnelles, vous pouvez ecrire a
+            <a [href]="mailto(contactEmail)">{{ contactEmail }}</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2>Donnees collectees</h2>
+          <p>Selon les formulaires utilises, le site peut collecter votre nom, prenom, adresse e-mail, telephone, ville, statut, centres d'interet, objet de demande et contenu du message.</p>
+          <p>Des donnees techniques strictement necessaires au fonctionnement et a la securite du site peuvent aussi etre traitees, notamment les journaux techniques du serveur.</p>
+        </section>
+
+        <section>
+          <h2>Finalites et bases legales</h2>
+          <ul>
+            <li>Repondre aux messages envoyes via le formulaire de contact.</li>
+            <li>Traiter les demandes d'adhesion, de benevolat ou de prise de contact avec l'association.</li>
+            <li>Assurer la securite, la maintenance et l'administration du site.</li>
+            <li>Afficher, si vous les acceptez, des services externes comme la carte Google Maps.</li>
+          </ul>
+          <p>Ces traitements reposent sur l'interet legitime de l'association, sur l'execution de mesures precontractuelles lorsque vous sollicitez une adhesion ou une participation, ou sur votre consentement pour les cookies et services non essentiels.</p>
+        </section>
+
+        <section>
+          <h2>Destinataires et duree de conservation</h2>
+          <p>Les donnees sont accessibles uniquement aux personnes habilitees de l'association et, si necessaire, aux prestataires techniques qui assurent l'hebergement, la maintenance ou la securite du site.</p>
+          <p>Les messages et demandes sont conserves le temps necessaire a leur traitement, puis archives ou supprimes selon les besoins administratifs de l'association. A titre indicatif, les demandes de contact peuvent etre conservees jusqu'a trois ans apres le dernier echange, sauf obligation legale contraire.</p>
+        </section>
+
+        <section>
+          <h2>Vos droits</h2>
+          <p>Vous pouvez demander l'acces, la rectification, l'effacement, la limitation ou l'opposition au traitement de vos donnees. Lorsque le traitement repose sur le consentement, vous pouvez le retirer a tout moment.</p>
+          <p *ngIf="contactEmail">Pour exercer vos droits, contactez <a [href]="mailto(contactEmail)">{{ contactEmail }}</a>.</p>
+          <p>Vous pouvez aussi introduire une reclamation aupres de la CNIL : <a href="https://www.cnil.fr/" target="_blank" rel="noreferrer">cnil.fr</a>.</p>
+        </section>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'cookies'">
+        <section>
+          <h2>Gestion du consentement</h2>
+          <p>Lors de votre premiere visite, un bandeau vous permet d'accepter, de refuser ou de personnaliser les cookies et services non essentiels. Votre choix est conserve pendant six mois, puis il vous sera redemande.</p>
+          <button type="button" class="legal-action" (click)="openCookiePreferences()">
+            <i class="fas fa-sliders"></i>
+            Modifier mes choix
+          </button>
+        </section>
+
+        <section>
+          <h2>Categories utilisees</h2>
+          <div class="cookie-table" role="table" aria-label="Categories de cookies">
+            <div role="row">
+              <strong role="cell">Necessaires</strong>
+              <span role="cell">Fonctionnement du site, memorisation de votre choix cookies, securite et administration.</span>
+              <em role="cell">Toujours actifs</em>
+            </div>
+            <div role="row">
+              <strong role="cell">Mesure d'audience</strong>
+              <span role="cell">Statistiques anonymisees ou outils d'analyse, uniquement si un outil est active et accepte.</span>
+              <em role="cell">Sur consentement</em>
+            </div>
+            <div role="row">
+              <strong role="cell">Services externes</strong>
+              <span role="cell">Affichage de contenus tiers comme Google Maps sur la page Contact.</span>
+              <em role="cell">Sur consentement</em>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Refus des cookies</h2>
+          <p>Le refus des cookies non essentiels n'empeche pas la navigation sur le site. Certains contenus externes, comme la carte, peuvent rester masques tant que les services externes ne sont pas autorises.</p>
+        </section>
+      </ng-container>
+
+      <ng-container *ngSwitchDefault>
+        <section>
+          <h2>Editeur du site</h2>
+          <dl>
+            <div>
+              <dt>Nom</dt>
+              <dd>{{ associationName }}</dd>
+            </div>
+            <div>
+              <dt>Identifiant association</dt>
+              <dd>{{ display(legalIdentifier) }}</dd>
+            </div>
+            <div *ngIf="addressLines.length">
+              <dt>Adresse</dt>
+              <dd>
+                <span *ngFor="let line of addressLines">{{ line }}</span>
+              </dd>
+            </div>
+            <div *ngIf="contactEmail">
+              <dt>Email</dt>
+              <dd><a [href]="mailto(contactEmail)">{{ contactEmail }}</a></dd>
+            </div>
+            <div *ngIf="contactPhone">
+              <dt>Telephone</dt>
+              <dd>{{ contactPhone }}</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section>
+          <h2>Direction de publication</h2>
+          <p>{{ display(legalDirector) }}</p>
+        </section>
+
+        <section>
+          <h2>Hebergement</h2>
+          <dl>
+            <div>
+              <dt>Hebergeur</dt>
+              <dd>{{ display(hostName) }}</dd>
+            </div>
+            <div>
+              <dt>Adresse</dt>
+              <dd>{{ display(hostAddress) }}</dd>
+            </div>
+            <div>
+              <dt>Telephone</dt>
+              <dd>{{ display(hostPhone) }}</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section>
+          <h2>Propriete intellectuelle</h2>
+          <p>Les contenus, textes, visuels, logos et elements graphiques presentes sur ce site appartiennent a {{ associationName }} ou sont utilises avec autorisation. Toute reproduction ou reutilisation non autorisee est interdite.</p>
+        </section>
+
+        <section>
+          <h2>Donnees personnelles et cookies</h2>
+          <p>Le site contient des formulaires qui permettent de transmettre des donnees personnelles a l'association. Les modalites de traitement sont detaillees dans la <a routerLink="/politique-confidentialite">politique de confidentialite</a>.</p>
+          <p>La gestion des traceurs et services externes est detaillee dans la <a routerLink="/cookies">politique relative aux cookies</a>.</p>
+        </section>
+      </ng-container>
+    </article>
+  </div>
+</section>

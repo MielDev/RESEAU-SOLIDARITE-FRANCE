@@ -206,3 +206,816 @@
         ╵                [32m~~~~~~~~~~~~~~~~~~~[0m
 
 [39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'id' comes from an index signature, so it must be accessed with ['id'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rencontre/admin-rencontre.ts:69:87:
+[37m      69 │ ...ind((edition) => edition.id === updatedEvent.[32mid[37m) || updatedEvent);
+         ╵                                                 [32m~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'quickLinks' does not exist on type 'AdminDashboard'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-dashboard/admin-dashboard.html:31:29:
+[37m      31 │       <a *ngFor="let link of [32mquickLinks[37m" [routerLink]="link.href" ...
+         ╵                              [32m~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminDashboard.
+
+    src/app/admin/admin-dashboard/admin-dashboard.ts:8:15:
+[37m      8 │   templateUrl: [32m'./admin-dashboard.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'openCreateRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:12:57:
+[37m      12 │ ...type="button" class="btn btn-ghost" (click)="[32mopenCreateRequest[37m()">
+         ╵                                                 [32m~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'totalRequests' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:41:23:
+[37m      41 │             <strong>{{ [32mtotalRequests[37m }}</strong>
+         ╵                        [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'unreadRequests' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:45:23:
+[37m      45 │             <strong>{{ [32munreadRequests[37m }}</strong>
+         ╵                        [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'activeRequests' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:49:23:
+[37m      49 │             <strong>{{ [32mactiveRequests[37m }}</strong>
+         ╵                        [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'closedRequests' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:53:23:
+[37m      53 │             <strong>{{ [32mclosedRequests[37m }}</strong>
+         ╵                        [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'trackByRequestId' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:77:64:
+[37m      77 │ ... joinRequests; trackBy: [32mtrackByRequestId[37m" [class.is-unread]="!r...
+         ╵                            [32m~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'statusBadgeClass' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:80:51:
+[37m      80 │ ...lass="badge" [ngClass]="[32mstatusBadgeClass[37m(request.processing_sta...
+         ╵                            [32m~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'initials' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:88:44:
+[37m      88 │ ...               <span class="avatar">{{ [32minitials[37m(request) }}</span>
+         ╵                                           [32m~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'shortText' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:110:30:
+[37m      110 │                     <small>{{ [32mshortText[37m(request.message, 90) }}</...
+          ╵                               [32m~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'requestDate' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:117:23:
+[37m      117 │                 <td>{{ [32mrequestDate[37m(request) | date:'dd/MM/yyyy HH...
+          ╵                        [32m~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'openEditRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:120:80:
+[37m      120 │ ...n-ghost btn-sm" type="button" (click)="[32mopenEditRequest[37m(request)">
+          ╵                                           [32m~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'roleSlots' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:175:60:
+[37m      175 │ ...    <article class="role-editor" *ngFor="let index of [32mroleSlots[37m">
+          ╵                                                          [32m~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'optionSlots' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:197:54:
+[37m      197 │ ...put" *ngFor="let index of [32moptionSlots[37m" type="text" [name]="'op...
+          ╵                              [32m~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'statusSlots' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:201:54:
+[37m      201 │ ...put" *ngFor="let index of [32mstatusSlots[37m" type="text" [name]="'st...
+          ╵                              [32m~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'interestSlots' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:205:54:
+[37m      205 │ ...ut" *ngFor="let index of [32minterestSlots[37m" type="text" [name]="'i...
+          ╵                             [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'showRequestModal' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:213:41:
+[37m      213 │ ...modal-backdrop" *ngIf="[32mshowRequestModal[37m" (click)="closeRequest...
+          ╵                           [32m~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'closeRequestModal' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:213:68:
+[37m      213 │ ...backdrop" *ngIf="showRequestModal" (click)="[32mcloseRequestModal[37m()">
+          ╵                                                [32m~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'editingRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:218:66:
+[37m      218 │ ...request-modal-title">{{ [32meditingRequest[37m ? 'Modifier une personn...
+          ╵                            [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'closeRequestModal' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:221:63:
+[37m      221 │ ...type="button" (click)="[32mcloseRequestModal[37m()" [disabled]="saving...
+          ╵                           [32m~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'savingRequest' does not exist on type 'AdminRejoindre'. Did you mean 'saveJoinRequest'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:221:96:
+[37m      221 │ ...seRequestModal()" [disabled]="[32msavingRequest[37m" aria-label="Fermer">
+          ╵                                  [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:233:86:
+[37m      233 │ ...e="request_first_name" [(ngModel)]="[32mcurrentRequest[37m.first_name" />
+          ╵                                        [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:233:86:
+[37m      233 │ ...e="request_first_name" [(ngModel)]="[32mcurrentRequest[37m.first_name" />
+          ╵                                        [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:237:85:
+[37m      237 │ ...ame="request_last_name" [(ngModel)]="[32mcurrentRequest[37m.last_name" />
+          ╵                                         [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:237:85:
+[37m      237 │ ...ame="request_last_name" [(ngModel)]="[32mcurrentRequest[37m.last_name" />
+          ╵                                         [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:241:82:
+[37m      241 │ ...email" name="request_email" [(ngModel)]="[32mcurrentRequest[37m.email" />
+          ╵                                             [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:241:82:
+[37m      241 │ ...email" name="request_email" [(ngModel)]="[32mcurrentRequest[37m.email" />
+          ╵                                             [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:245:80:
+[37m      245 │ ...="tel" name="request_phone" [(ngModel)]="[32mcurrentRequest[37m.phone" />
+          ╵                                             [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:245:80:
+[37m      245 │ ...="tel" name="request_phone" [(ngModel)]="[32mcurrentRequest[37m.phone" />
+          ╵                                             [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:249:80:
+[37m      249 │ ...e="text" name="request_city" [(ngModel)]="[32mcurrentRequest[37m.city" />
+          ╵                                              [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:249:80:
+[37m      249 │ ...e="text" name="request_city" [(ngModel)]="[32mcurrentRequest[37m.city" />
+          ╵                                              [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:253:82:
+[37m      253 │ ...ext" name="request_status" [(ngModel)]="[32mcurrentRequest[37m.status" />
+          ╵                                            [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:253:82:
+[37m      253 │ ...ext" name="request_status" [(ngModel)]="[32mcurrentRequest[37m.status" />
+          ╵                                            [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'configuredIntentOptions' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:263:44:
+[37m      263 │ ...ass="select" *ngIf="[32mconfiguredIntentOptions[37m.length > 0" name="...
+          ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:263:122:
+[37m      263 │ ...name="request_intent_select" [(ngModel)]="[32mcurrentRequest[37m.intent">
+          ╵                                              [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:263:122:
+[37m      263 │ ...name="request_intent_select" [(ngModel)]="[32mcurrentRequest[37m.intent">
+          ╵                                              [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:264:31:
+[37m      264 │ ...         <option *ngIf="[32mcurrentRequest[37m.intent && !configuredIn...
+          ╵                            [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'configuredIntentOptions' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:264:57:
+[37m      264 │ ...tRequest.intent && ![32mconfiguredIntentOptions[37m.includes(currentRe...
+          ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:264:90:
+[37m      264 │ ...dIntentOptions.includes([32mcurrentRequest[37m.intent)" [value]="curre...
+          ╵                            [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:264:123:
+[37m      264 │ ...quest.intent)" [value]="[32mcurrentRequest[37m.intent">{{ currentReque...
+          ╵                            [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:264:123:
+[37m      264 │ ...quest.intent)" [value]="[32mcurrentRequest[37m.intent">{{ currentReque...
+          ╵                            [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:264:149:
+[37m      264 │ ...lue]="currentRequest.intent">{{ [32mcurrentRequest[37m.intent }}</option>
+          ╵                                    [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'configuredIntentOptions' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:265:46:
+[37m      265 │ ...gFor="let option of [32mconfiguredIntentOptions[37m" [value]="option">...
+          ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'configuredIntentOptions' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:267:42:
+[37m      267 │ ...lass="input" *ngIf="[32mconfiguredIntentOptions[37m.length === 0" type...
+          ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:267:127:
+[37m      267 │ ...ext" name="request_intent" [(ngModel)]="[32mcurrentRequest[37m.intent" />
+          ╵                                            [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:267:127:
+[37m      267 │ ...ext" name="request_intent" [(ngModel)]="[32mcurrentRequest[37m.intent" />
+          ╵                                            [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:271:85:
+[37m      271 │ ...interests" [(ngModel)]="[32mcurrentRequest[37m.interestsText" placehol...
+          ╵                            [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:271:85:
+[37m      271 │ ...interests" [(ngModel)]="[32mcurrentRequest[37m.interestsText" placehol...
+          ╵                            [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:275:89:
+[37m      275 │ ...request_message" [(ngModel)]="[32mcurrentRequest[37m.message"></textarea>
+          ╵                                  [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:275:89:
+[37m      275 │ ...request_message" [(ngModel)]="[32mcurrentRequest[37m.message"></textarea>
+          ╵                                  [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:285:83:
+[37m      285 │ ...rocessing_status" [(ngModel)]="[32mcurrentRequest[37m.processing_status">
+          ╵                                   [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:285:83:
+[37m      285 │ ...rocessing_status" [(ngModel)]="[32mcurrentRequest[37m.processing_status">
+          ╵                                   [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:294:73:
+[37m      294 │ ...x" name="request_is_read" [(ngModel)]="[32mcurrentRequest[37m.is_read" />
+          ╵                                           [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:294:73:
+[37m      294 │ ...x" name="request_is_read" [(ngModel)]="[32mcurrentRequest[37m.is_read" />
+          ╵                                           [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:298:81:
+[37m      298 │ ...min_notes" [(ngModel)]="[32mcurrentRequest[37m.admin_notes" placeholde...
+          ╵                            [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentRequest' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:298:81:
+[37m      298 │ ...min_notes" [(ngModel)]="[32mcurrentRequest[37m.admin_notes" placeholde...
+          ╵                            [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'closeRequestModal' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:306:59:
+[37m      306 │ ...type="button" (click)="[32mcloseRequestModal[37m()" [disabled]="saving...
+          ╵                           [32m~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'savingRequest' does not exist on type 'AdminRejoindre'. Did you mean 'saveJoinRequest'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:306:92:
+[37m      306 │ ..."closeRequestModal()" [disabled]="[32msavingRequest[37m">Annuler</button>
+          ╵                                      [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'saveRequestFromModal' does not exist on type 'AdminRejoindre'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:307:61:
+[37m      307 │ ...pe="button" (click)="[32msaveRequestFromModal[37m()" [disabled]="savin...
+          ╵                         [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'savingRequest' does not exist on type 'AdminRejoindre'. Did you mean 'saveJoinRequest'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:307:97:
+[37m      307 │ ...ton" (click)="saveRequestFromModal()" [disabled]="[32msavingRequest[37m">
+          ╵                                                      [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'savingRequest' does not exist on type 'AdminRejoindre'. Did you mean 'saveJoinRequest'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.html:309:11:
+[37m      309 │         {{ [32msavingRequest[37m ? 'Enregistrement...' : 'Enregistrer' }}
+          ╵            [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminRejoindre.
+
+    src/app/admin/admin-rejoindre/admin-rejoindre.ts:11:15:
+[37m      11 │   templateUrl: [32m'./admin-rejoindre.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'closeCookiePreferences' does not exist on type 'UserLayout'. Did you mean 'cookiePreferences'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/utilisateurs/user-layout/user-layout.html:134:58:
+[37m      134 │ ...kie-close" (click)="[32mcloseCookiePreferences[37m()" aria-label="Ferm...
+          ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component UserLayout.
+
+    src/app/utilisateurs/user-layout/user-layout.ts:27:15:
+[37m      27 │   templateUrl: [32m'./user-layout.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m

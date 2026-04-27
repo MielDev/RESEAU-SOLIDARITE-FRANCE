@@ -172,6 +172,21 @@ export const routes: Routes = [
       },
       { path: 'contact', component: Contact, resolve: { pageContent: pageResolver }, data: { pageKey: 'contact' } },
       {
+        path: 'mentions-legales',
+        loadComponent: () => import('./utilisateurs/legal/legal').then((m) => m.Legal),
+        data: { legalPage: 'mentions' },
+      },
+      {
+        path: 'politique-confidentialite',
+        loadComponent: () => import('./utilisateurs/legal/legal').then((m) => m.Legal),
+        data: { legalPage: 'privacy' },
+      },
+      {
+        path: 'cookies',
+        loadComponent: () => import('./utilisateurs/legal/legal').then((m) => m.Legal),
+        data: { legalPage: 'cookies' },
+      },
+      {
         path: 'don',
         component: Don,
         resolve: { pageContent: pageResolver, donModes: listResolver },

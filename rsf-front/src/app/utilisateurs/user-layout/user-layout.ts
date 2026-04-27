@@ -1,6 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet, ActivatedRoute } from '@angular/router';
+import { CookieConsentPreferences, CookieConsentService } from '../../services/cookie-consent.service';
 
 type NavItem = {
   href: string;
@@ -26,18 +27,35 @@ type FooterGroup = {
   templateUrl: './user-layout.html',
   styleUrl: './user-layout.css',
 })
-export class UserLayout implements OnInit {
+export class UserLayout implements OnInit, OnDestroy {
   isScrolled = false;
   showScrollTop = false;
   isMobileNavOpen = false;
+  isCookieBannerVisible = false;
+  isCookiePreferencesOpen = false;
+  cookiePreferences: CookieConsentPreferences = {
+    necessary: true,
+    audience: false,
+    externalServices: false,
+  };
   settings: any = null;
   homeItem: NavItem | null = null;
   navGroups: NavGroup[] = [];
   navSingleItems: NavItem[] = [];
   navCtaItem: NavItem | null = null;
   footerGroups: FooterGroup[] = [];
+  readonly legalLinks: NavItem[] = [
+    { href: '/mentions-legales', label: 'Mentions legales' },
+    { href: '/politique-confidentialite', label: 'Confidentialite' },
+    { href: '/cookies', label: 'Cookies' },
+  ];
 
-  constructor(private route: ActivatedRoute) {}
+  private readonly openCookiePreferencesHandler = () => this.openCookiePreferences();
+
+  constructor(
+    private route: ActivatedRoute,
+    private cookieConsent: CookieConsentService,
+  ) {}
 
   ngOnInit() {
     this.route.data.subscribe((data: any) => {
@@ -45,6 +63,19 @@ export class UserLayout implements OnInit {
       this.settings = layoutData.settings ?? null;
       this.buildNavigation(Array.isArray(layoutData.nav) ? layoutData.nav : []);
     });
+
+    this.isCookieBannerVisible = !this.cookieConsent.hasChoice();
+    this.cookiePreferences = this.cookieConsent.getPreferences();
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('rsf-cookie-preferences-open', this.openCookiePreferencesHandler);
+    }
+  }
+
+  ngOnDestroy() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('rsf-cookie-preferences-open', this.openCookiePreferencesHandler);
+    }
   }
 
   @HostListener('window:scroll', [])
@@ -67,6 +98,46 @@ export class UserLayout implements OnInit {
 
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  acceptCookies() {
+    this.cookieConsent.acceptAll();
+    this.closeCookiePanels();
+  }
+
+  rejectCookies() {
+    this.cookieConsent.rejectAll();
+    this.closeCookiePanels();
+  }
+
+  openCookiePreferences() {
+    this.cookiePreferences = this.cookieConsent.getPreferences();
+    this.isCookiePreferencesOpen = true;
+    this.isCookieBannerVisible = false;
+  }
+
+  saveCookiePreferences() {
+    this.cookieConsent.savePreferences(this.cookiePreferences);
+    this.closeCookiePanels();
+  }
+
+  closeCookiePreferences() {
+    this.isCookiePreferencesOpen = false;
+    this.isCookieBannerVisible = !this.cookieConsent.hasChoice();
+  }
+
+  setCookiePreference(key: 'audience' | 'externalServices', event: Event) {
+    const target = event.target as HTMLInputElement | null;
+    this.cookiePreferences = {
+      ...this.cookiePreferences,
+      necessary: true,
+      [key]: Boolean(target?.checked),
+    };
+  }
+
+  private closeCookiePanels() {
+    this.isCookieBannerVisible = false;
+    this.isCookiePreferencesOpen = false;
   }
 
   private buildNavigation(rawItems: NavItem[]) {
@@ -117,6 +188,10 @@ export class UserLayout implements OnInit {
       {
         title: 'Nous rejoindre',
         items: regularItems.filter((item) => ['/nous-rejoindre', '/don', '/evenements', '/contact'].includes(item.href)),
+      },
+      {
+        title: 'Informations legales',
+        items: this.legalLinks,
       },
     ].filter((group) => group.items.length > 0);
   }

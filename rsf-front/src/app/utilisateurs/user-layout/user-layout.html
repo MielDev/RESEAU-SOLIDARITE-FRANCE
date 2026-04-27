@@ -96,10 +96,84 @@
 
   <div class="footer-bottom">
     <p>{{ settings?.footer_copy }}</p>
-    <p>{{ settings?.footer_signature }}</p>
+    <div class="footer-bottom-links">
+      <button type="button" (click)="openCookiePreferences()">Gerer mes cookies</button>
+      <p>{{ settings?.footer_signature }}</p>
+    </div>
   </div>
 </footer>
 
 <button id="scrollTop" [class.show]="showScrollTop" (click)="scrollToTop()" title="Retour en haut">
   <i class="fas fa-arrow-up"></i>
 </button>
+
+<section class="cookie-banner" *ngIf="isCookieBannerVisible" aria-label="Gestion des cookies">
+  <div class="cookie-copy">
+    <strong>Gestion des cookies</strong>
+    <p>
+      Nous utilisons des elements necessaires au fonctionnement du site. Avec votre accord, nous pouvons aussi activer
+      des services externes comme la carte Google Maps.
+    </p>
+    <a routerLink="/cookies">En savoir plus</a>
+  </div>
+
+  <div class="cookie-actions">
+    <button type="button" class="cookie-btn cookie-btn-ghost" (click)="rejectCookies()">Tout refuser</button>
+    <button type="button" class="cookie-btn cookie-btn-ghost" (click)="openCookiePreferences()">Personnaliser</button>
+    <button type="button" class="cookie-btn cookie-btn-primary" (click)="acceptCookies()">Tout accepter</button>
+  </div>
+</section>
+
+<div class="cookie-modal-backdrop" *ngIf="isCookiePreferencesOpen" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">
+  <section class="cookie-modal">
+    <header>
+      <div>
+        <span>Preferences</span>
+        <h2 id="cookie-modal-title">Choix des cookies</h2>
+      </div>
+      <button type="button" class="cookie-close" (click)="closeCookiePreferences()" aria-label="Fermer">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </header>
+
+    <div class="cookie-modal-body">
+      <label class="cookie-toggle is-disabled">
+        <span>
+          <strong>Cookies necessaires</strong>
+          <small>Indispensables au fonctionnement du site et a la memorisation de vos choix.</small>
+        </span>
+        <input type="checkbox" checked disabled />
+      </label>
+
+      <label class="cookie-toggle">
+        <span>
+          <strong>Mesure d'audience</strong>
+          <small>Autorise de futures statistiques de frequentation si un outil est active.</small>
+        </span>
+        <input
+          type="checkbox"
+          [checked]="cookiePreferences.audience"
+          (change)="setCookiePreference('audience', $event)"
+        />
+      </label>
+
+      <label class="cookie-toggle">
+        <span>
+          <strong>Services externes</strong>
+          <small>Autorise les contenus tiers comme la carte Google Maps sur la page Contact.</small>
+        </span>
+        <input
+          type="checkbox"
+          [checked]="cookiePreferences.externalServices"
+          (change)="setCookiePreference('externalServices', $event)"
+        />
+      </label>
+    </div>
+
+    <div class="cookie-modal-actions">
+      <button type="button" class="cookie-btn cookie-btn-ghost" (click)="rejectCookies()">Tout refuser</button>
+      <button type="button" class="cookie-btn cookie-btn-primary" (click)="saveCookiePreferences()">Enregistrer mes choix</button>
+      <button type="button" class="cookie-btn cookie-btn-ghost" (click)="acceptCookies()">Tout accepter</button>
+    </div>
+  </section>
+</div>
