@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { finalize } from 'rxjs';
 import { AdminApiService } from '../admin-api.service';
 import { AdminAlertService } from '../admin-alert.service';
@@ -25,9 +26,17 @@ type NavItemEditor = {
   isNew: boolean;
 };
 
+type SettingGroupView = {
+  key: string;
+  title: string;
+  description: string;
+  icon: string;
+  rows: SettingRow[];
+};
+
 @Component({
   selector: 'app-admin-settings',
-  imports: [CommonModule, FormsModule, AdminIconPicker],
+  imports: [CommonModule, FormsModule, RouterModule, AdminIconPicker],
   templateUrl: './admin-settings.html',
   styleUrl: './admin-settings.css',
 })
@@ -65,8 +74,29 @@ export class AdminSettings implements OnInit {
     this.loadNav();
   }
 
+  get groupedSettings(): SettingGroupView[] {
+    const groups = new Map<string, SettingRow[]>();
+
+    this.settingsRows.forEach((row) => {
+      const groupKey = row.group || 'general';
+      groups.set(groupKey, [...(groups.get(groupKey) ?? []), row]);
+    });
+
+    return Array.from(groups.entries())
+      .map(([key, rows]) => ({ ...this.groupMeta(key), key, rows }))
+      .sort((a, b) => this.groupOrder(a.key) - this.groupOrder(b.key) || a.title.localeCompare(b.title));
+  }
+
   get hasUnsavedNavItems() {
     return this.navItems.some((item) => item.isNew);
+  }
+
+  get visibleNavItemsCount() {
+    return this.navItems.filter((item) => item.is_visible).length;
+  }
+
+  get ctaNavItemsCount() {
+    return this.navItems.filter((item) => item.is_cta).length;
   }
 
   addSettingRow() {
@@ -273,7 +303,26 @@ export class AdminSettings implements OnInit {
   }
 
   trackBySetting = (_index: number, row: SettingRow) => row.key;
+  trackBySettingGroup = (_index: number, group: SettingGroupView) => group.key;
   trackByNav = (_index: number, item: NavItemEditor) => item.id ?? `nav-${_index}`;
+
+  settingTypeLabel(type: SettingRow['type']) {
+    switch (type) {
+      case 'boolean':
+        return 'Oui / Non';
+      case 'number':
+        return 'Nombre';
+      case 'json':
+        return 'JSON';
+      default:
+        return 'Texte';
+    }
+  }
+
+  navStateLabel(item: NavItemEditor) {
+    if (!item.is_visible) return 'Masque';
+    return item.is_cta ? 'Visible - CTA' : 'Visible';
+  }
 
   private loadSettings() {
     this.loadingSettings = true;
@@ -385,5 +434,52 @@ export class AdminSettings implements OnInit {
       .replace(/\s+/g, ' ')
       .trim()
       .replace(/^\w/, (letter) => letter.toUpperCase());
+  }
+
+  private groupOrder(group: string) {
+    const order = ['general', 'appearance', 'contact', 'footer', 'nav'];
+    const index = order.indexOf(group);
+    return index === -1 ? order.length + 1 : index;
+  }
+
+  private groupMeta(group: string) {
+    switch (group) {
+      case 'appearance':
+        return {
+          title: 'Apparence',
+          description: 'Identite visuelle et affichage global du site.',
+          icon: 'fas fa-palette',
+        };
+      case 'contact':
+        return {
+          title: 'Coordonnees',
+          description: 'Adresse, email, telephone et informations de contact.',
+          icon: 'fas fa-address-card',
+        };
+      case 'footer':
+        return {
+          title: 'Pied de page',
+          description: 'Informations affichees en bas du site public.',
+          icon: 'fas fa-window-minimize',
+        };
+      case 'nav':
+        return {
+          title: 'Navigation',
+          description: 'Parametres relies au menu public.',
+          icon: 'fas fa-compass',
+        };
+      case 'general':
+        return {
+          title: 'General',
+          description: 'Parametres principaux de l association et du site.',
+          icon: 'fas fa-sliders',
+        };
+      default:
+        return {
+          title: this.toHumanLabel(group),
+          description: 'Autres parametres disponibles dans le backend.',
+          icon: 'fas fa-gear',
+        };
+    }
   }
 }

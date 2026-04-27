@@ -1,185 +1,282 @@
-<section class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-sliders"></i> Parametres globaux</div>
-      <div class="panel-desc">Ces valeurs viennent directement du backend et pilotent le site public.</div>
-    </div>
-    <button class="btn" type="button" (click)="saveSettings()" [disabled]="savingSettings">
+<section class="admin-page-toolbar settings-toolbar">
+  <div>
+    <p class="admin-eyebrow">Configuration</p>
+    <h2>Parametres</h2>
+    <span>Centralise les coordonnees, la navigation publique et la securite du back-office.</span>
+  </div>
+  <div class="toolbar-actions">
+    <button class="btn btn-ghost" type="button" routerLink="/">
+      <i class="fas fa-arrow-up-right-from-square"></i>
+      <span>Voir le site</span>
+    </button>
+    <button class="btn btn-primary admin-save-btn" type="button" (click)="saveSettings()" [disabled]="savingSettings">
       <i class="fas fa-floppy-disk"></i>
-      {{ savingSettings ? 'Enregistrement...' : 'Enregistrer les parametres' }}
+      <span>{{ savingSettings ? 'Enregistrement...' : 'Enregistrer les parametres' }}</span>
     </button>
   </div>
+</section>
 
-  <div class="panel-body section-stack">
-    <div class="alert alert-success" *ngIf="settingsNotice">
-      <i class="fas fa-check"></i>
-      <div>{{ settingsNotice }}</div>
-    </div>
+<div class="settings-overview">
+  <article>
+    <span>Parametres</span>
+    <strong>{{ settingsRows.length }}</strong>
+    <small>{{ groupedSettings.length }} groupe{{ groupedSettings.length > 1 ? 's' : '' }}</small>
+  </article>
+  <article>
+    <span>Navigation</span>
+    <strong>{{ navItems.length }}</strong>
+    <small>{{ visibleNavItemsCount }} visible{{ visibleNavItemsCount > 1 ? 's' : '' }}</small>
+  </article>
+  <article>
+    <span>CTA menu</span>
+    <strong>{{ ctaNavItemsCount }}</strong>
+    <small>Lien{{ ctaNavItemsCount > 1 ? 's' : '' }} mis en avant</small>
+  </article>
+  <article>
+    <span>Securite</span>
+    <strong><i class="fas fa-shield-halved"></i></strong>
+    <small>Mot de passe administrateur</small>
+  </article>
+</div>
 
-    <div class="alert alert-info" *ngIf="settingsError">
-      <i class="fas fa-circle-exclamation"></i>
-      <div>{{ settingsError }}</div>
-    </div>
+<div class="settings-layout">
+  <main class="settings-main">
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-sliders"></i>Parametres globaux</div>
+          <div class="panel-desc">Ces valeurs viennent du backend et pilotent le site public.</div>
+        </div>
+        <span class="loading-pill" *ngIf="loadingSettings">
+          <i class="fas fa-circle-notch fa-spin"></i>
+          Chargement
+        </span>
+      </div>
 
-    <div class="settings-grid">
-      <article class="setting-card" *ngFor="let row of settingsRows; trackBy: trackBySetting">
-        <div class="setting-title">{{ row.label }}</div>
-        <div class="setting-meta">{{ row.key }} · {{ row.group }}</div>
+      <div class="panel-body section-stack">
+        <div class="alert alert-success" *ngIf="settingsNotice">
+          <i class="fas fa-check"></i>
+          <div>{{ settingsNotice }}</div>
+        </div>
 
-        <ng-container [ngSwitch]="row.type">
-          <label class="checkbox-row" *ngSwitchCase="'boolean'">
-            <input type="checkbox" [(ngModel)]="row.value" [name]="'setting-' + row.key" />
-            <span>Actif</span>
-          </label>
+        <div class="alert alert-info" *ngIf="settingsError">
+          <i class="fas fa-circle-exclamation"></i>
+          <div>{{ settingsError }}</div>
+        </div>
 
-          <input *ngSwitchCase="'number'" class="input" type="number" [(ngModel)]="row.value" [name]="'setting-' + row.key" />
+        <div class="empty-state" *ngIf="!loadingSettings && settingsRows.length === 0">
+          <i class="fas fa-sliders"></i>
+          <strong>Aucun parametre charge</strong>
+          <span>Verifie que le backend repond bien sur la route des parametres.</span>
+        </div>
 
-          <textarea *ngSwitchCase="'json'" class="textarea json" [(ngModel)]="row.value" [name]="'setting-' + row.key"></textarea>
+        <div class="settings-groups" *ngIf="settingsRows.length > 0">
+          <section class="settings-group" *ngFor="let group of groupedSettings; trackBy: trackBySettingGroup">
+            <header class="settings-group-header">
+              <span class="group-icon"><i [class]="group.icon"></i></span>
+              <div>
+                <h3>{{ group.title }}</h3>
+                <p>{{ group.description }}</p>
+              </div>
+              <small>{{ group.rows.length }} champ{{ group.rows.length > 1 ? 's' : '' }}</small>
+            </header>
 
-          <input *ngSwitchDefault class="input" type="text" [(ngModel)]="row.value" [name]="'setting-' + row.key" />
-        </ng-container>
-      </article>
-    </div>
+            <div class="settings-fields">
+              <article class="setting-field" *ngFor="let row of group.rows; trackBy: trackBySetting">
+                <div class="setting-field-head">
+                  <div>
+                    <label [for]="'setting-' + row.key">{{ row.label }}</label>
+                    <span>{{ row.key }}</span>
+                  </div>
+                  <em>{{ settingTypeLabel(row.type) }}</em>
+                </div>
 
-    <section class="draft-panel">
-      <div class="subsection-title">Ajouter un parametre</div>
-      <div class="inline-form">
-        <input class="input" type="text" [(ngModel)]="newSettingKey" name="newSettingKey" placeholder="ex: footer_phone" />
-        <select class="input" [(ngModel)]="newSettingType" name="newSettingType">
-          <option value="text">text</option>
-          <option value="number">number</option>
-          <option value="boolean">boolean</option>
-          <option value="json">json</option>
-        </select>
-        <button class="btn btn-tight" type="button" (click)="addSettingRow()">Ajouter</button>
+                <ng-container [ngSwitch]="row.type">
+                  <label class="checkbox-row setting-toggle" *ngSwitchCase="'boolean'">
+                    <span>Actif</span>
+                    <input type="checkbox" [(ngModel)]="row.value" [name]="'setting-' + row.key" />
+                  </label>
+
+                  <input *ngSwitchCase="'number'" class="input" type="number" [(ngModel)]="row.value" [id]="'setting-' + row.key" [name]="'setting-' + row.key" />
+
+                  <textarea *ngSwitchCase="'json'" class="textarea json" [(ngModel)]="row.value" [id]="'setting-' + row.key" [name]="'setting-' + row.key"></textarea>
+
+                  <input *ngSwitchDefault class="input" type="text" [(ngModel)]="row.value" [id]="'setting-' + row.key" [name]="'setting-' + row.key" />
+                </ng-container>
+              </article>
+            </div>
+          </section>
+        </div>
       </div>
     </section>
-  </div>
-</section>
 
-<section class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-compass"></i> Navigation du site</div>
-      <div class="panel-desc">Les liens du menu public sont maintenant modifiables depuis ce back-office.</div>
-    </div>
-    <button class="btn" type="button" (click)="addNavItem()">
-      <i class="fas fa-plus"></i>
-      Ajouter un lien
-    </button>
-  </div>
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-compass"></i>Navigation du site</div>
+          <div class="panel-desc">Controle les liens visibles dans le menu public.</div>
+        </div>
+        <button class="btn btn-ghost btn-sm" type="button" (click)="addNavItem()">
+          <i class="fas fa-plus"></i>
+          Ajouter un lien
+        </button>
+      </div>
 
-  <div class="panel-body section-stack">
-    <div class="alert alert-success" *ngIf="navNotice">
-      <i class="fas fa-check"></i>
-      <div>{{ navNotice }}</div>
-    </div>
-
-    <div class="alert alert-info" *ngIf="navError">
-      <i class="fas fa-circle-exclamation"></i>
-      <div>{{ navError }}</div>
-    </div>
-
-    <div class="item-stack">
-      <article class="setting-card" *ngFor="let item of navItems; let index = index; trackBy: trackByNav">
-        <div class="card-toolbar">
-          <div>
-            <div class="setting-title">{{ item.label || (item.isNew ? 'Nouveau lien' : 'Lien sans libelle') }}</div>
-            <div class="setting-meta">{{ item.id ? ('ID ' + item.id) : 'Brouillon non enregistre' }}</div>
-          </div>
-
-          <div class="toolbar-actions">
-            <button class="icon-btn" type="button" (click)="moveNavItem(index, -1)" [disabled]="index === 0 || item.isNew || hasUnsavedNavItems">
-              <i class="fas fa-arrow-up"></i>
-            </button>
-            <button class="icon-btn" type="button" (click)="moveNavItem(index, 1)" [disabled]="index === navItems.length - 1 || item.isNew || hasUnsavedNavItems">
-              <i class="fas fa-arrow-down"></i>
-            </button>
-            <button class="icon-btn danger" type="button" (click)="deleteNavItem(item)">
-              <i class="fas fa-trash"></i>
-            </button>
-          </div>
+      <div class="panel-body section-stack">
+        <div class="alert alert-success" *ngIf="navNotice">
+          <i class="fas fa-check"></i>
+          <div>{{ navNotice }}</div>
         </div>
 
-        <div class="settings-grid compact">
-          <label class="field">
-            <span class="field-label">Libelle</span>
-            <input class="input" type="text" [(ngModel)]="item.label" [name]="'nav-label-' + index" />
-          </label>
-
-          <label class="field">
-            <span class="field-label">Lien</span>
-            <input class="input" type="text" [(ngModel)]="item.href" [name]="'nav-href-' + index" />
-          </label>
-
-          <label class="field">
-            <span class="field-label">Icone</span>
-            <app-admin-icon-picker [(ngModel)]="item.icon" fallbackIcon="fas fa-link"></app-admin-icon-picker>
-          </label>
-
-          <label class="checkbox-row">
-            <input type="checkbox" [(ngModel)]="item.is_visible" [name]="'nav-visible-' + index" />
-            <span>Visible</span>
-          </label>
-
-          <label class="checkbox-row">
-            <input type="checkbox" [(ngModel)]="item.is_cta" [name]="'nav-cta-' + index" />
-            <span>Bouton mis en avant</span>
-          </label>
+        <div class="alert alert-info" *ngIf="navError">
+          <i class="fas fa-circle-exclamation"></i>
+          <div>{{ navError }}</div>
         </div>
 
-        <div class="footer-actions">
-          <button class="btn btn-tight" type="button" (click)="saveNavItem(item, index)">
-            <i class="fas fa-floppy-disk"></i>
-            {{ item.isNew ? 'Creer le lien' : 'Enregistrer le lien' }}
+        <div class="empty-state" *ngIf="!loadingNav && navItems.length === 0">
+          <i class="fas fa-compass"></i>
+          <strong>Aucun lien de navigation</strong>
+          <span>Ajoute un premier lien pour construire le menu public.</span>
+        </div>
+
+        <div class="table-wrap nav-table-wrap" *ngIf="navItems.length > 0">
+          <table class="nav-table">
+            <thead>
+              <tr>
+                <th>Lien</th>
+                <th>Chemin</th>
+                <th>Icone</th>
+                <th>Etat</th>
+                <th>Ordre</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of navItems; let index = index; trackBy: trackByNav" [class.is-draft]="item.isNew">
+                <td>
+                  <input class="input table-input" type="text" [(ngModel)]="item.label" [name]="'nav-label-' + index" placeholder="Libelle" />
+                  <small>{{ item.id ? ('ID ' + item.id) : 'Brouillon non enregistre' }}</small>
+                </td>
+                <td>
+                  <input class="input table-input" type="text" [(ngModel)]="item.href" [name]="'nav-href-' + index" placeholder="/contact" />
+                </td>
+                <td class="nav-icon-cell">
+                  <app-admin-icon-picker [(ngModel)]="item.icon" fallbackIcon="fas fa-link"></app-admin-icon-picker>
+                </td>
+                <td>
+                  <div class="nav-state">
+                    <span class="badge" [class.badge-success]="item.is_visible" [class.badge-gray]="!item.is_visible">
+                      {{ navStateLabel(item) }}
+                    </span>
+                    <label class="mini-check">
+                      <input type="checkbox" [(ngModel)]="item.is_visible" [name]="'nav-visible-' + index" />
+                      Visible
+                    </label>
+                    <label class="mini-check">
+                      <input type="checkbox" [(ngModel)]="item.is_cta" [name]="'nav-cta-' + index" />
+                      CTA
+                    </label>
+                  </div>
+                </td>
+                <td>
+                  <div class="order-actions">
+                    <button class="icon-btn" type="button" (click)="moveNavItem(index, -1)" [disabled]="index === 0 || item.isNew || hasUnsavedNavItems" title="Monter">
+                      <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <button class="icon-btn" type="button" (click)="moveNavItem(index, 1)" [disabled]="index === navItems.length - 1 || item.isNew || hasUnsavedNavItems" title="Descendre">
+                      <i class="fas fa-arrow-down"></i>
+                    </button>
+                  </div>
+                </td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn-primary btn-sm" type="button" (click)="saveNavItem(item, index)">
+                      <i class="fas fa-floppy-disk"></i>
+                      {{ item.isNew ? 'Creer' : 'Enregistrer' }}
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-icon" type="button" (click)="deleteNavItem(item)" title="Supprimer">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="settings-side">
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-plus"></i>Ajouter un parametre</div>
+          <div class="panel-desc">Cree une nouvelle cle simple dans les parametres globaux.</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="draft-form">
+          <label class="field">
+            <span class="field-label">Cle technique</span>
+            <input class="input" type="text" [(ngModel)]="newSettingKey" name="newSettingKey" placeholder="ex: footer_phone" />
+          </label>
+          <label class="field">
+            <span class="field-label">Type de valeur</span>
+            <select class="input" [(ngModel)]="newSettingType" name="newSettingType">
+              <option value="text">Texte</option>
+              <option value="number">Nombre</option>
+              <option value="boolean">Oui / Non</option>
+              <option value="json">JSON</option>
+            </select>
+          </label>
+          <button class="btn btn-ghost" type="button" (click)="addSettingRow()">
+            <i class="fas fa-plus"></i>
+            Ajouter a la liste
           </button>
         </div>
-      </article>
-    </div>
-  </div>
-</section>
+      </div>
+    </section>
 
-<section class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-key"></i> Securite</div>
-      <div class="panel-desc">Tu peux changer ici le mot de passe du compte connecte.</div>
-    </div>
-  </div>
+    <section class="panel security-panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-key"></i>Securite</div>
+          <div class="panel-desc">Change le mot de passe du compte connecte.</div>
+        </div>
+      </div>
 
-  <div class="panel-body section-stack">
-    <div class="alert alert-success" *ngIf="passwordNotice">
-      <i class="fas fa-check"></i>
-      <div>{{ passwordNotice }}</div>
-    </div>
+      <div class="panel-body section-stack">
+        <div class="alert alert-success" *ngIf="passwordNotice">
+          <i class="fas fa-check"></i>
+          <div>{{ passwordNotice }}</div>
+        </div>
 
-    <div class="alert alert-info" *ngIf="passwordError">
-      <i class="fas fa-circle-exclamation"></i>
-      <div>{{ passwordError }}</div>
-    </div>
+        <div class="alert alert-info" *ngIf="passwordError">
+          <i class="fas fa-circle-exclamation"></i>
+          <div>{{ passwordError }}</div>
+        </div>
 
-    <div class="settings-grid compact">
-      <label class="field">
-        <span class="field-label">Mot de passe actuel</span>
-        <input class="input" type="password" [(ngModel)]="currentPassword" name="currentPassword" />
-      </label>
+        <label class="field">
+          <span class="field-label">Mot de passe actuel</span>
+          <input class="input" type="password" [(ngModel)]="currentPassword" name="currentPassword" />
+        </label>
 
-      <label class="field">
-        <span class="field-label">Nouveau mot de passe</span>
-        <input class="input" type="password" [(ngModel)]="newPassword" name="newPassword" />
-      </label>
+        <label class="field">
+          <span class="field-label">Nouveau mot de passe</span>
+          <input class="input" type="password" [(ngModel)]="newPassword" name="newPassword" />
+        </label>
 
-      <label class="field">
-        <span class="field-label">Confirmation</span>
-        <input class="input" type="password" [(ngModel)]="confirmPassword" name="confirmPassword" />
-      </label>
-    </div>
+        <label class="field">
+          <span class="field-label">Confirmation</span>
+          <input class="input" type="password" [(ngModel)]="confirmPassword" name="confirmPassword" />
+        </label>
 
-    <div class="footer-actions">
-      <button class="btn btn-tight" type="button" (click)="changePassword()" [disabled]="passwordSaving">
-        <i class="fas fa-lock"></i>
-        {{ passwordSaving ? 'Mise a jour...' : 'Mettre a jour le mot de passe' }}
-      </button>
-    </div>
-  </div>
-</section>
+        <button class="btn btn-primary" type="button" (click)="changePassword()" [disabled]="passwordSaving">
+          <i class="fas fa-lock"></i>
+          {{ passwordSaving ? 'Mise a jour...' : 'Mettre a jour' }}
+        </button>
+      </div>
+    </section>
+  </aside>
+</div>

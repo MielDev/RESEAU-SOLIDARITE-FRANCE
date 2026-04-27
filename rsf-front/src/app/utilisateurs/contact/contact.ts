@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { PublicService } from '../../services/public.service';
 import { FormsModule } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contact',
@@ -22,11 +23,14 @@ export class Contact implements OnInit {
     message: ''
   };
   isSubmitting = false;
+  mapEmbedUrl: SafeResourceUrl | null = null;
+  mapExternalUrl = '';
 
   constructor(
     private renderer: Renderer2,
     private publicService: PublicService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
@@ -42,6 +46,7 @@ export class Contact implements OnInit {
         this.contactData.subject = this.subjectOptions[0];
       }
 
+      this.updateMapLinks();
       setTimeout(() => this.setupIntersectionObserver(), 100);
     });
   }
@@ -62,6 +67,21 @@ export class Contact implements OnInit {
   getWebsiteLabel(): string {
     const website = this.settings?.contact_web || '';
     return website.replace(/^https?:\/\//i, '').replace(/\/$/, '');
+  }
+
+  getMapAddressLabel(): string {
+    return this.getMapQuery();
+  }
+
+  private getMapQuery(): string {
+    const address = this.getAddressLines().join(', ').trim();
+    return address || 'Reseau Solidarite France, Rennes, France';
+  }
+
+  private updateMapLinks() {
+    const query = encodeURIComponent(this.getMapQuery());
+    this.mapEmbedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.google.com/maps?q=${query}&output=embed`);
+    this.mapExternalUrl = `https://www.google.com/maps/search/?api=1&query=${query}`;
   }
 
   setupIntersectionObserver() {

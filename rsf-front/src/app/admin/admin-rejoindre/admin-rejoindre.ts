@@ -14,9 +14,17 @@ import { AdminApiService } from '../admin-api.service';
 export class AdminRejoindre implements OnInit {
   data: any = {};
   joinRequests: any[] = [];
+  currentRequest: any = {};
   loadingRequests = false;
   saving = false;
-  private pageData: any = {};
+  savingRequest = false;
+  showRequestModal = false;
+  editingRequest = false;
+
+  readonly roleSlots = [1, 2, 3, 4, 5];
+  readonly optionSlots = [1, 2, 3, 4];
+  readonly statusSlots = [1, 2, 3, 4];
+  readonly interestSlots = [1, 2, 3, 4, 5, 6];
   readonly requestStatusOptions = [
     { value: 'new', label: 'Nouvelle' },
     { value: 'in_progress', label: 'En traitement' },
@@ -26,6 +34,8 @@ export class AdminRejoindre implements OnInit {
     { value: 'done', label: 'Traite' },
   ];
 
+  private pageData: any = {};
+
   constructor(
     private api: AdminApiService,
     private alerts: AdminAlertService
@@ -34,6 +44,26 @@ export class AdminRejoindre implements OnInit {
   ngOnInit() {
     this.loadData();
     this.loadJoinRequests();
+  }
+
+  get configuredIntentOptions() {
+    return this.optionSlots.map((index) => this.data[`opt${index}`]).filter(Boolean);
+  }
+
+  get totalRequests() {
+    return this.joinRequests.length;
+  }
+
+  get unreadRequests() {
+    return this.joinRequests.filter((request) => !request.is_read).length;
+  }
+
+  get activeRequests() {
+    return this.joinRequests.filter((request) => ['new', 'in_progress', 'contacted'].includes(request.processing_status)).length;
+  }
+
+  get closedRequests() {
+    return this.joinRequests.filter((request) => ['accepted', 'refused', 'done'].includes(request.processing_status)).length;
   }
 
   loadData() {
@@ -70,6 +100,58 @@ export class AdminRejoindre implements OnInit {
         this.saving = false;
         void this.alerts.error('Enregistrement impossible', 'La page Nous rejoindre n a pas pu etre sauvegardee.');
       },
+    });
+  }
+
+  openCreateRequest() {
+    this.currentRequest = this.createEmptyRequest();
+    this.editingRequest = false;
+    this.showRequestModal = true;
+  }
+
+  openEditRequest(request: any) {
+    this.currentRequest = this.toJoinRequestView(request);
+    this.editingRequest = true;
+    this.showRequestModal = true;
+  }
+
+  closeRequestModal() {
+    if (this.savingRequest) return;
+    this.showRequestModal = false;
+  }
+
+  saveRequestFromModal() {
+    if (this.savingRequest || !this.validateRequest(this.currentRequest)) return;
+
+    const payload = this.toJoinRequestPayload(this.currentRequest);
+    this.savingRequest = true;
+
+    if (this.editingRequest) {
+      this.api.updateResource('join-requests', this.currentRequest.id, payload).subscribe({
+        next: () => this.finishRequestSave('Demande mise a jour', 'Les informations de cette personne ont ete enregistrees.'),
+        error: () => this.failRequestSave('Cette demande n a pas pu etre mise a jour.'),
+      });
+      return;
+    }
+
+    this.api.createResource<any>('join-requests', payload).subscribe({
+      next: (created) => {
+        const id = created?.id;
+        if (!id) {
+          this.finishRequestSave('Demande ajoutee', 'La nouvelle personne a ete ajoutee a la liste.');
+          return;
+        }
+
+        this.api.updateResource('join-requests', id, {
+          processing_status: payload.processing_status,
+          admin_notes: payload.admin_notes,
+          is_read: payload.is_read,
+        }).subscribe({
+          next: () => this.finishRequestSave('Demande ajoutee', 'La nouvelle personne a ete ajoutee a la liste.'),
+          error: () => this.finishRequestSave('Demande ajoutee', 'La personne a ete ajoutee. Le suivi interne pourra etre modifie ensuite.'),
+        });
+      },
+      error: () => this.failRequestSave('Cette demande n a pas pu etre creee.'),
     });
   }
 
@@ -126,16 +208,78 @@ export class AdminRejoindre implements OnInit {
     return this.requestStatusOptions.find((status) => status.value === value)?.label ?? value;
   }
 
+  statusBadgeClass(value: string) {
+    if (['accepted', 'done'].includes(value)) return 'badge-success';
+    if (value === 'refused') return 'badge-danger';
+    if (['in_progress', 'contacted'].includes(value)) return 'badge-primary';
+    return 'badge-gray';
+  }
+
   fullName(request: any) {
     return [request.first_name, request.last_name].filter(Boolean).join(' ');
   }
 
+  initials(request: any) {
+    const letters = [request.first_name, request.last_name]
+      .filter(Boolean)
+      .map((value: string) => value.trim().charAt(0).toUpperCase())
+      .join('');
+
+    return letters || 'NR';
+  }
+
+  requestDate(request: any) {
+    return request.createdAt || request.created_at || null;
+  }
+
+  shortText(value: unknown, maxLength = 80) {
+    const text = String(value ?? '').trim();
+    if (text.length <= maxLength) return text || '-';
+    return `${text.slice(0, maxLength).trim()}...`;
+  }
+
+  trackByRequestId(_index: number, request: any) {
+    return request.id;
+  }
+
+  private createEmptyRequest() {
+    return {
+      first_name: '',
+      last_name: '',
+      email: '',
+      phone: '',
+      city: '',
+      status: '',
+      intent: this.configuredIntentOptions[0] || '',
+      interests: [],
+      interestsList: [],
+      interestsText: '',
+      message: '',
+      processing_status: 'new',
+      admin_notes: '',
+      is_read: true,
+      saving: false,
+    };
+  }
+
   private toJoinRequestView(request: any) {
+    const interestsList = this.toInterestsList(request?.interests ?? request?.interestsList ?? request?.interestsText);
+
     return {
       ...request,
-      processing_status: request.processing_status ?? 'new',
-      interestsList: this.toInterestsList(request.interests),
-      admin_notes: request.admin_notes ?? '',
+      first_name: request?.first_name ?? request?.firstName ?? '',
+      last_name: request?.last_name ?? request?.lastName ?? '',
+      email: request?.email ?? '',
+      phone: request?.phone ?? '',
+      city: request?.city ?? '',
+      status: request?.status ?? '',
+      intent: request?.intent ?? '',
+      message: request?.message ?? '',
+      processing_status: request?.processing_status ?? 'new',
+      interestsList,
+      interestsText: interestsList.join(', '),
+      admin_notes: request?.admin_notes ?? '',
+      is_read: Boolean(request?.is_read),
       saving: false,
     };
   }
@@ -153,29 +297,78 @@ export class AdminRejoindre implements OnInit {
     return [];
   }
 
+  private toJoinRequestPayload(request: any) {
+    return {
+      first_name: String(request.first_name ?? '').trim(),
+      last_name: String(request.last_name ?? '').trim(),
+      email: String(request.email ?? '').trim(),
+      phone: String(request.phone ?? '').trim(),
+      city: String(request.city ?? '').trim(),
+      status: String(request.status ?? '').trim(),
+      intent: String(request.intent ?? '').trim(),
+      interests: this.toInterestsList(request.interestsText ?? request.interests),
+      message: String(request.message ?? '').trim(),
+      processing_status: request.processing_status || 'new',
+      admin_notes: String(request.admin_notes ?? '').trim(),
+      is_read: Boolean(request.is_read),
+    };
+  }
+
+  private validateRequest(request: any) {
+    const payload = this.toJoinRequestPayload(request);
+    if (!payload.first_name || !payload.last_name || !payload.email || !payload.intent || !payload.message) {
+      void this.alerts.error('Informations manquantes', 'Prenom, nom, email, intention et message sont obligatoires.');
+      return false;
+    }
+
+    if (payload.message.length < 10) {
+      void this.alerts.error('Message trop court', 'Le message doit contenir au moins 10 caracteres.');
+      return false;
+    }
+
+    return true;
+  }
+
+  private finishRequestSave(title: string, text: string) {
+    this.savingRequest = false;
+    this.showRequestModal = false;
+    this.loadJoinRequests();
+    void this.alerts.success(title, text);
+  }
+
+  private failRequestSave(text: string) {
+    this.savingRequest = false;
+    void this.alerts.error('Enregistrement impossible', text);
+  }
+
   private toFormData(page: any) {
     const benefits = Array.isArray(page?.volunteer?.benefits) ? page.volunteer.benefits : [];
     const options = Array.isArray(page?.form?.intentOptions) ? page.form.intentOptions : [];
+    const statuses = Array.isArray(page?.form?.statusOptions) ? page.form.statusOptions : [];
+    const interests = Array.isArray(page?.form?.interestOptions) ? page.form.interestOptions : [];
     const form: any = {
       nr_title: page?.hero?.title ?? page?.volunteer?.title ?? '',
       nr_desc: page?.hero?.text ?? page?.volunteer?.description ?? '',
       nr_sub: page?.volunteer?.label ?? '',
-      field_name: true,
-      field_email: true,
-      field_phone: true,
-      field_select: true,
-      field_message: true,
-      opt1: options[0] ?? '',
-      opt2: options[1] ?? '',
-      opt3: options[2] ?? '',
-      opt4: options[3] ?? '',
     };
 
-    for (let index = 1; index <= 5; index += 1) {
+    this.optionSlots.forEach((index) => {
+      form[`opt${index}`] = options[index - 1] ?? '';
+    });
+
+    this.statusSlots.forEach((index) => {
+      form[`status${index}`] = statuses[index - 1] ?? '';
+    });
+
+    this.interestSlots.forEach((index) => {
+      form[`interest${index}`] = interests[index - 1] ?? '';
+    });
+
+    this.roleSlots.forEach((index) => {
       const benefit = benefits[index - 1] ?? {};
       form[`role${index}_title`] = benefit.title ?? '';
       form[`role${index}_desc`] = benefit.description ?? '';
-    }
+    });
 
     return form;
   }
@@ -193,7 +386,7 @@ export class AdminRejoindre implements OnInit {
         label: this.data.nr_sub,
         title: this.data.nr_title,
         description: this.data.nr_desc,
-        benefits: [1, 2, 3, 4, 5].map((index) => ({
+        benefits: this.roleSlots.map((index) => ({
           ...(this.pageData.volunteer?.benefits?.[index - 1] ?? {}),
           title: this.data[`role${index}_title`],
           description: this.data[`role${index}_desc`],
@@ -201,7 +394,9 @@ export class AdminRejoindre implements OnInit {
       },
       form: {
         ...(this.pageData.form ?? {}),
-        intentOptions: [this.data.opt1, this.data.opt2, this.data.opt3, this.data.opt4].filter(Boolean),
+        intentOptions: this.optionSlots.map((index) => this.data[`opt${index}`]).filter(Boolean),
+        statusOptions: this.statusSlots.map((index) => this.data[`status${index}`]).filter(Boolean),
+        interestOptions: this.interestSlots.map((index) => this.data[`interest${index}`]).filter(Boolean),
       },
     };
   }

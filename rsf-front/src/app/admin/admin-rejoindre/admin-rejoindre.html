@@ -1,229 +1,313 @@
 <section class="admin-page-toolbar">
   <div>
-    <p class="admin-eyebrow">Edition de page</p>
+    <p class="admin-eyebrow">Page publique et demandes</p>
     <h2>Nous rejoindre</h2>
-    <span>Modifie le contenu, les avantages et les options du formulaire.</span>
+    <span>Gere le contenu de la page et les personnes qui ont rempli le formulaire.</span>
   </div>
-  <button type="button" class="btn btn-primary admin-save-btn" (click)="save()" [disabled]="saving">
-    <i class="fas fa-floppy-disk"></i>
-    <span>{{ saving ? 'Enregistrement...' : 'Enregistrer' }}</span>
-  </button>
-</section>
-
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-image"></i>En-tête et introduction</div>
-    </div>
-  </div>
-  <div class="panel-body">
-<div class="form-grid" style="display:grid;gap:14px;">
-<div class="form-group">
-  <label for="nr_title">Titre</label>
-  <input class="input" type="text" id="nr_title" name="nr_title" [(ngModel)]="data.nr_title" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="nr_desc">Description</label>
-  <textarea class="textarea" id="nr_desc" name="nr_desc" [(ngModel)]="data.nr_desc" style="min-height:64px"></textarea>
-</div>
-<div class="form-group">
-  <label for="nr_sub">Texte d'accroche</label>
-  <input class="input" type="text" id="nr_sub" name="nr_sub" [(ngModel)]="data.nr_sub" placeholder=""/>
-</div>
-</div></div>
-</div>
-
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-inbox"></i>Demandes recues</div>
-      <div class="panel-desc">Les personnes qui ont rempli le formulaire Nous rejoindre sont stockees ici.</div>
-    </div>
-    <button type="button" class="btn btn-ghost btn-sm" (click)="loadJoinRequests()" [disabled]="loadingRequests">
-      <i class="fas fa-rotate-right"></i>
-      {{ loadingRequests ? 'Chargement...' : 'Rafraichir' }}
+  <div class="toolbar-actions">
+    <button type="button" class="btn btn-ghost" routerLink="/nous-rejoindre">
+      <i class="fas fa-arrow-up-right-from-square"></i>
+      <span>Voir la page</span>
+    </button>
+    <button type="button" class="btn btn-ghost" (click)="openCreateRequest()">
+      <i class="fas fa-user-plus"></i>
+      <span>Ajouter une personne</span>
+    </button>
+    <button type="button" class="btn btn-primary admin-save-btn" (click)="save()" [disabled]="saving">
+      <i class="fas fa-floppy-disk"></i>
+      <span>{{ saving ? 'Enregistrement...' : 'Enregistrer le contenu' }}</span>
     </button>
   </div>
-  <div class="panel-body">
-    <div class="empty-state" *ngIf="!loadingRequests && joinRequests.length === 0">
-      <i class="fas fa-inbox"></i>
-      <strong>Aucune demande pour le moment</strong>
-      <span>Les prochaines demandes envoyees depuis la page publique apparaitront ici.</span>
-    </div>
+</section>
 
-    <div class="request-list" *ngIf="joinRequests.length > 0">
-      <article class="request-card" *ngFor="let request of joinRequests">
-        <div class="request-main">
-          <div class="request-topline">
-            <span class="badge" [class.badge-success]="request.is_read" [class.badge-primary]="!request.is_read">
-              {{ request.is_read ? 'Lu' : 'Nouveau' }}
-            </span>
-            <span class="badge badge-gray">{{ statusLabel(request.processing_status) }}</span>
-            <span class="request-date">{{ request.createdAt || request.created_at | date:'dd/MM/yyyy HH:mm' }}</span>
-          </div>
+<div class="join-admin-layout">
+  <main class="join-admin-main">
+    <section class="panel requests-panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-inbox"></i>Demandes recues</div>
+          <div class="panel-desc">Liste connectee a la ressource backend join-requests.</div>
+        </div>
+        <button type="button" class="btn btn-ghost btn-sm" (click)="loadJoinRequests()" [disabled]="loadingRequests">
+          <i class="fas fa-rotate-right"></i>
+          {{ loadingRequests ? 'Chargement...' : 'Rafraichir' }}
+        </button>
+      </div>
 
-          <h3>{{ fullName(request) || 'Demande sans nom' }}</h3>
-          <div class="request-meta">
-            <span><i class="fas fa-envelope"></i>{{ request.email }}</span>
-            <span *ngIf="request.phone"><i class="fas fa-phone"></i>{{ request.phone }}</span>
-            <span *ngIf="request.city"><i class="fas fa-location-dot"></i>{{ request.city }}</span>
-          </div>
-
-          <div class="request-details">
-            <strong>{{ request.intent }}</strong>
-            <span *ngIf="request.status">{{ request.status }}</span>
-          </div>
-
-          <div class="interest-list" *ngIf="request.interestsList.length > 0">
-            <span *ngFor="let interest of request.interestsList">{{ interest }}</span>
-          </div>
-
-          <p class="request-message">{{ request.message }}</p>
+      <div class="panel-body">
+        <div class="request-stats">
+          <article>
+            <span>Total</span>
+            <strong>{{ totalRequests }}</strong>
+          </article>
+          <article>
+            <span>Nouvelles</span>
+            <strong>{{ unreadRequests }}</strong>
+          </article>
+          <article>
+            <span>En traitement</span>
+            <strong>{{ activeRequests }}</strong>
+          </article>
+          <article>
+            <span>Finalisees</span>
+            <strong>{{ closedRequests }}</strong>
+          </article>
         </div>
 
-        <div class="request-actions">
-          <label class="field">
-            <span class="field-label">Traitement</span>
-            <select class="select" [(ngModel)]="request.processing_status" [name]="'join-status-' + request.id">
-              <option *ngFor="let status of requestStatusOptions" [value]="status.value">{{ status.label }}</option>
-            </select>
-          </label>
+        <div class="empty-state" *ngIf="!loadingRequests && joinRequests.length === 0">
+          <i class="fas fa-inbox"></i>
+          <strong>Aucune demande pour le moment</strong>
+          <span>Les prochaines demandes envoyees depuis la page publique apparaitront ici.</span>
+        </div>
 
-          <label class="field">
-            <span class="field-label">Notes internes</span>
-            <textarea
-              class="textarea"
-              [(ngModel)]="request.admin_notes"
-              [name]="'join-notes-' + request.id"
-              placeholder="Suivi, appel effectue, document demande..."
-            ></textarea>
-          </label>
+        <div class="table-wrap requests-table-wrap" *ngIf="joinRequests.length > 0">
+          <table class="requests-table">
+            <thead>
+              <tr>
+                <th>Suivi</th>
+                <th>Personne</th>
+                <th>Contact</th>
+                <th>Ville / statut</th>
+                <th>Demande</th>
+                <th>Reception</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let request of joinRequests; trackBy: trackByRequestId" [class.is-unread]="!request.is_read">
+                <td>
+                  <div class="status-cell">
+                    <span class="badge" [ngClass]="statusBadgeClass(request.processing_status)">
+                      {{ statusLabel(request.processing_status) }}
+                    </span>
+                    <small>{{ request.is_read ? 'Lu' : 'Nouveau' }}</small>
+                  </div>
+                </td>
+                <td>
+                  <div class="person-cell">
+                    <span class="avatar">{{ initials(request) }}</span>
+                    <span>
+                      <strong>{{ fullName(request) || 'Sans nom' }}</strong>
+                      <small>#{{ request.id }}</small>
+                    </span>
+                  </div>
+                </td>
+                <td>
+                  <div class="contact-cell">
+                    <a *ngIf="request.email" [href]="'mailto:' + request.email">{{ request.email }}</a>
+                    <span *ngIf="request.phone">{{ request.phone }}</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="compact-cell">
+                    <strong>{{ request.city || '-' }}</strong>
+                    <small>{{ request.status || 'Statut non precise' }}</small>
+                  </div>
+                </td>
+                <td>
+                  <div class="request-summary-cell">
+                    <strong>{{ request.intent || 'Demande non precisee' }}</strong>
+                    <small>{{ shortText(request.message, 90) }}</small>
+                    <div class="interest-list" *ngIf="request.interestsList.length > 0">
+                      <span *ngFor="let interest of request.interestsList.slice(0, 3)">{{ interest }}</span>
+                      <span *ngIf="request.interestsList.length > 3">+{{ request.interestsList.length - 3 }}</span>
+                    </div>
+                  </div>
+                </td>
+                <td>{{ requestDate(request) | date:'dd/MM/yyyy HH:mm' }}</td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn-ghost btn-sm" type="button" (click)="openEditRequest(request)">
+                      <i class="fas fa-pen"></i>
+                      Modifier
+                    </button>
+                    <button class="btn btn-ghost btn-sm btn-icon" type="button" (click)="markJoinRequestAsRead(request)" [disabled]="request.is_read" title="Marquer comme lu">
+                      <i class="fas fa-check"></i>
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-icon" type="button" (click)="deleteJoinRequest(request)" title="Supprimer">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
 
-          <div class="request-buttons">
-            <button type="button" class="btn btn-primary btn-sm" (click)="saveJoinRequest(request)" [disabled]="request.saving">
-              <i class="fas fa-floppy-disk"></i>
-              {{ request.saving ? 'Enregistrement...' : 'Enregistrer' }}
-            </button>
-            <button type="button" class="btn btn-ghost btn-sm" (click)="markJoinRequestAsRead(request)" [disabled]="request.is_read">
-              <i class="fas fa-check"></i>
-              Marquer lu
-            </button>
-            <button type="button" class="btn btn-danger btn-sm" (click)="deleteJoinRequest(request)">
-              <i class="fas fa-trash"></i>
-            </button>
+  <aside class="join-admin-side">
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-image"></i>Introduction</div>
+          <div class="panel-desc">Texte visible en haut de la page publique.</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="form-grid form-grid-1">
+          <div class="form-group">
+            <label for="nr_title">Titre</label>
+            <input class="input" type="text" id="nr_title" name="nr_title" [(ngModel)]="data.nr_title" />
+          </div>
+          <div class="form-group">
+            <label for="nr_desc">Description</label>
+            <textarea class="textarea" id="nr_desc" name="nr_desc" [(ngModel)]="data.nr_desc"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="nr_sub">Texte d'accroche</label>
+            <input class="input" type="text" id="nr_sub" name="nr_sub" [(ngModel)]="data.nr_sub" />
           </div>
         </div>
-      </article>
-    </div>
-  </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-hand-holding-heart"></i>Roles benevoles</div>
+          <div class="panel-desc">Les cartes affichees a gauche du formulaire public.</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="role-editor-list">
+          <article class="role-editor" *ngFor="let index of roleSlots">
+            <span class="role-index">{{ index }}</span>
+            <div class="role-fields">
+              <input class="input" type="text" [name]="'role' + index + '_title'" [(ngModel)]="data['role' + index + '_title']" placeholder="Titre du role" />
+              <textarea class="textarea role-textarea" [name]="'role' + index + '_desc'" [(ngModel)]="data['role' + index + '_desc']" placeholder="Description"></textarea>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title"><i class="pi fas fa-list-check"></i>Options du formulaire</div>
+          <div class="panel-desc">Valeurs proposees dans les menus et cases de la page publique.</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="options-grid">
+          <div>
+            <h4>Je souhaite</h4>
+            <input class="input" *ngFor="let index of optionSlots" type="text" [name]="'opt' + index" [(ngModel)]="data['opt' + index]" />
+          </div>
+          <div>
+            <h4>Statuts</h4>
+            <input class="input" *ngFor="let index of statusSlots" type="text" [name]="'status' + index" [(ngModel)]="data['status' + index]" />
+          </div>
+          <div>
+            <h4>Centres d'interet</h4>
+            <input class="input" *ngFor="let index of interestSlots" type="text" [name]="'interest' + index" [(ngModel)]="data['interest' + index]" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </aside>
 </div>
 
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-hand-holding-heart"></i>Rôles bénévoles (liste)</div>
-      <div class="panel-desc">Les activités proposées aux bénévoles</div>
-    </div>
-  </div>
-  <div class="panel-body">
-<div id="roles-list" style="display:flex;flex-direction:column;gap:8px;">
-  <div class="sortable-item">
-    <span class="drag-handle"><i class="fas fa-grip-vertical"></i></span>
-    <span class="inline-icon"><i class="fas fa-clipboard-list"></i></span>
-    <div class="si-content">
-      <input class="input" type="text" [(ngModel)]="data.role1_title" style="margin-bottom:4px;"/>
-      <input class="input" type="text" [(ngModel)]="data.role1_desc" style="font-size:12px;"/>
-    </div>
-    <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-  </div>
-  <div class="sortable-item">
-    <span class="drag-handle"><i class="fas fa-grip-vertical"></i></span>
-    <span class="inline-icon"><i class="fas fa-utensils"></i></span>
-    <div class="si-content">
-      <input class="input" type="text" [(ngModel)]="data.role2_title" style="margin-bottom:4px;"/>
-      <input class="input" type="text" [(ngModel)]="data.role2_desc" style="font-size:12px;"/>
-    </div>
-    <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-  </div>
-  <div class="sortable-item">
-    <span class="drag-handle"><i class="fas fa-grip-vertical"></i></span>
-    <span class="inline-icon"><i class="fas fa-cake-candles"></i></span>
-    <div class="si-content">
-      <input class="input" type="text" [(ngModel)]="data.role3_title" style="margin-bottom:4px;"/>
-      <input class="input" type="text" [(ngModel)]="data.role3_desc" style="font-size:12px;"/>
-    </div>
-    <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-  </div>
-  <div class="sortable-item">
-    <span class="drag-handle"><i class="fas fa-grip-vertical"></i></span>
-    <span class="inline-icon"><i class="fas fa-laptop-code"></i></span>
-    <div class="si-content">
-      <input class="input" type="text" [(ngModel)]="data.role4_title" style="margin-bottom:4px;"/>
-      <input class="input" type="text" [(ngModel)]="data.role4_desc" style="font-size:12px;"/>
-    </div>
-    <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-  </div>
-  <div class="sortable-item">
-    <span class="drag-handle"><i class="fas fa-grip-vertical"></i></span>
-    <span class="inline-icon"><i class="fas fa-bullseye"></i></span>
-    <div class="si-content">
-      <input class="input" type="text" [(ngModel)]="data.role5_title" style="margin-bottom:4px;"/>
-      <input class="input" type="text" [(ngModel)]="data.role5_desc" style="font-size:12px;"/>
-    </div>
-    <button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-trash"></i></button>
-  </div>
-</div>
-<button class="btn btn-ghost btn-sm" style="margin-top:10px;"><i class="fas fa-plus"></i> Ajouter un rôle</button></div>
-</div>
+<div class="admin-modal-backdrop" *ngIf="showRequestModal" (click)="closeRequestModal()">
+  <section class="admin-modal admin-modal-lg join-request-modal" role="dialog" aria-modal="true" aria-labelledby="request-modal-title" (click)="$event.stopPropagation()">
+    <header class="admin-modal-header">
+      <div>
+        <p class="admin-modal-kicker">Demande Nous rejoindre</p>
+        <h3 class="admin-modal-title" id="request-modal-title">{{ editingRequest ? 'Modifier une personne' : 'Ajouter une personne' }}</h3>
+        <p class="admin-modal-desc">Ces informations sont enregistrees dans la table join_requests via l'API.</p>
+      </div>
+      <button class="admin-modal-close" type="button" (click)="closeRequestModal()" [disabled]="savingRequest" aria-label="Fermer">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </header>
 
-<div class="panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title"><i class="pi fas fa-file-lines"></i>Champs du formulaire de contact</div>
-      <div class="panel-desc">Configurez les champs affichés dans le formulaire</div>
+    <div class="admin-modal-body">
+      <div class="admin-modal-form">
+        <section class="form-section">
+          <h4 class="form-section-title">Identite et contact</h4>
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label>Prenom *</label>
+              <input class="input" type="text" name="request_first_name" [(ngModel)]="currentRequest.first_name" />
+            </div>
+            <div class="form-group">
+              <label>Nom *</label>
+              <input class="input" type="text" name="request_last_name" [(ngModel)]="currentRequest.last_name" />
+            </div>
+            <div class="form-group">
+              <label>Email *</label>
+              <input class="input" type="email" name="request_email" [(ngModel)]="currentRequest.email" />
+            </div>
+            <div class="form-group">
+              <label>Telephone</label>
+              <input class="input" type="tel" name="request_phone" [(ngModel)]="currentRequest.phone" />
+            </div>
+            <div class="form-group">
+              <label>Ville</label>
+              <input class="input" type="text" name="request_city" [(ngModel)]="currentRequest.city" />
+            </div>
+            <div class="form-group">
+              <label>Statut</label>
+              <input class="input" type="text" name="request_status" [(ngModel)]="currentRequest.status" />
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <h4 class="form-section-title">Demande</h4>
+          <div class="form-grid form-grid-1">
+            <div class="form-group">
+              <label>Je souhaite *</label>
+              <select class="select" *ngIf="configuredIntentOptions.length > 0" name="request_intent_select" [(ngModel)]="currentRequest.intent">
+                <option *ngIf="currentRequest.intent && !configuredIntentOptions.includes(currentRequest.intent)" [value]="currentRequest.intent">{{ currentRequest.intent }}</option>
+                <option *ngFor="let option of configuredIntentOptions" [value]="option">{{ option }}</option>
+              </select>
+              <input class="input" *ngIf="configuredIntentOptions.length === 0" type="text" name="request_intent" [(ngModel)]="currentRequest.intent" />
+            </div>
+            <div class="form-group">
+              <label>Centres d'interet</label>
+              <input class="input" type="text" name="request_interests" [(ngModel)]="currentRequest.interestsText" placeholder="Separés par des virgules" />
+            </div>
+            <div class="form-group">
+              <label>Message *</label>
+              <textarea class="textarea textarea-lg" name="request_message" [(ngModel)]="currentRequest.message"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <h4 class="form-section-title">Suivi interne</h4>
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label>Traitement</label>
+              <select class="select" name="request_processing_status" [(ngModel)]="currentRequest.processing_status">
+                <option *ngFor="let status of requestStatusOptions" [value]="status.value">{{ status.label }}</option>
+              </select>
+            </div>
+            <label class="checkbox-row read-row">
+              <span>
+                <strong>Marquer comme lu</strong>
+                <small>La demande ne sera plus signalee comme nouvelle.</small>
+              </span>
+              <input type="checkbox" name="request_is_read" [(ngModel)]="currentRequest.is_read" />
+            </label>
+            <div class="form-group span-2">
+              <label>Notes internes</label>
+              <textarea class="textarea" name="request_admin_notes" [(ngModel)]="currentRequest.admin_notes" placeholder="Suivi, appel effectue, document demande..."></textarea>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
-  </div>
-  <div class="panel-body">
-<div style="display:flex;flex-direction:column;gap:6px;">
-<div class="toggle-wrap">
-  <div class="toggle-info"><strong>Champ Nom complet</strong><span>Affiché en premier</span></div>
-  <label class="toggle"><input type="checkbox" [(ngModel)]="data.field_name"/><span class="toggle-slider"></span></label>
-</div>
-<div class="toggle-wrap">
-  <div class="toggle-info"><strong>Champ Adresse e-mail</strong><span>Obligatoire</span></div>
-  <label class="toggle"><input type="checkbox" [(ngModel)]="data.field_email"/><span class="toggle-slider"></span></label>
-</div>
-<div class="toggle-wrap">
-  <div class="toggle-info"><strong>Champ Téléphone</strong><span>Optionnel</span></div>
-  <label class="toggle"><input type="checkbox" [(ngModel)]="data.field_phone"/><span class="toggle-slider"></span></label>
-</div>
-<div class="toggle-wrap">
-  <div class="toggle-info"><strong>Menu déroulant 'Je souhaite…'</strong><span>Choix du type de demande</span></div>
-  <label class="toggle"><input type="checkbox" [(ngModel)]="data.field_select"/><span class="toggle-slider"></span></label>
-</div>
-<div class="toggle-wrap">
-  <div class="toggle-info"><strong>Champ Message</strong><span>Zone de texte libre</span></div>
-  <label class="toggle"><input type="checkbox" [(ngModel)]="data.field_message"/><span class="toggle-slider"></span></label>
-</div>
-</div>
-<hr style="margin:16px 0;border:none;border-top:1px solid #E2E8F0;"/>
-<h4 style="font-size:13px;font-weight:700;margin-bottom:10px;">Options du menu déroulant</h4>
-<div style="display:flex;flex-direction:column;gap:8px;">
-<div class="form-group">
-  <label for="opt1">Option 1</label>
-  <input class="input" type="text" id="opt1" name="opt1" [(ngModel)]="data.opt1" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="opt2">Option 2</label>
-  <input class="input" type="text" id="opt2" name="opt2" [(ngModel)]="data.opt2" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="opt3">Option 3</label>
-  <input class="input" type="text" id="opt3" name="opt3" [(ngModel)]="data.opt3" placeholder=""/>
-</div>
-<div class="form-group">
-  <label for="opt4">Option 4</label>
-  <input class="input" type="text" id="opt4" name="opt4" [(ngModel)]="data.opt4" placeholder=""/>
-</div>
-</div></div>
+
+    <footer class="admin-modal-footer">
+      <button class="btn btn-ghost" type="button" (click)="closeRequestModal()" [disabled]="savingRequest">Annuler</button>
+      <button class="btn btn-primary" type="button" (click)="saveRequestFromModal()" [disabled]="savingRequest">
+        <i class="fas fa-floppy-disk"></i>
+        {{ savingRequest ? 'Enregistrement...' : 'Enregistrer' }}
+      </button>
+    </footer>
+  </section>
 </div>
