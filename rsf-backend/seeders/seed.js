@@ -29,6 +29,7 @@ const run = async () => {
   await db.MissionItem.destroy({ where: {} });
   await db.Mission.destroy({ where: {} });
   await db.EventProgram.destroy({ where: {} });
+  await db.EventPhoto.destroy({ where: {} });
   await db.Event.destroy({ where: {} });
 
   await db.Setting.destroy({ where: {} });

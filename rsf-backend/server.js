@@ -14,9 +14,10 @@ const { globalLimiter } = require('./middleware/rateLimiter');
 const { errorHandler } = require('./middleware/errorHandler');
 const sequelize = require('./config/database');
 const db        = require('./models');
+const { ensureDatabase } = require('./scripts/ensureDatabase');
 
 const app  = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3229;
 
 // ─── MIDDLEWARES GLOBAUX ──────────────────────────────────────────────────────
 // app.use(helmet());                          // En-têtes sécurité HTTP
@@ -58,10 +59,19 @@ async function start() {
     await sequelize.authenticate();
     console.log('\x1b[32m✅ Base de données connectée.\x1b[0m');
 
-    // 2. Vérification automatique des tables au démarrage
-    //    alter:true = ajoute les colonnes manquantes SANS supprimer les données
-    // await sequelize.sync({ alter: true });
-    console.log('\x1b[32m✅ Schéma base de données synchronisé.\x1b[0m');
+    // 2. Verification automatique des tables au demarrage
+    const schemaReport = await ensureDatabase();
+    console.log(
+      '\x1b[32m✅ Schéma base de données vérifié.\x1b[0m',
+      `Tables créées: ${schemaReport.tablesCreated}, colonnes ajoutées: ${schemaReport.columnsAdded}.`
+    );
+
+    if (schemaReport.columnsSkipped.length > 0) {
+      console.warn('\x1b[33m⚠️ Certaines colonnes n ont pas pu etre ajoutees automatiquement :\x1b[0m');
+      schemaReport.columnsSkipped.forEach((item) => {
+        console.warn(`  - ${item.table}.${item.column}: ${item.reason}`);
+      });
+    }
 
     // 3. Démarrage du serveur
     app.listen(PORT, () => {

@@ -254,6 +254,18 @@ async function resetDatabase() {
 }
 
 // ─── RAPPORT FINAL ────────────────────────────────────────────────────────────
+async function runSeed() {
+  head('5. DONNEES PAR DEFAUT (--seed)');
+  try {
+    await require('../seeders/seed').run();
+    ok('Seed termine.');
+  } catch (e) {
+    err(`Seed : ${e.message}`);
+    report.errors.push({ step: 'seed', message: e.message });
+    throw e;
+  }
+}
+
 function printReport() {
   const elapsed = ((Date.now() - report.start) / 1000).toFixed(2);
   sep();
@@ -312,8 +324,7 @@ async function main() {
     await resetDatabase();
     await ensureAdminUser();
     if (isSeed) {
-      info('--seed : lancement du seeder...');
-      require('./seed');
+      await runSeed();
     }
     printReport();
     await sequelize.close();
@@ -347,6 +358,7 @@ async function main() {
     ['NavItem',      db.NavItem],
     ['ContactMessage', db.ContactMessage],
     ['JoinRequest', db.JoinRequest],
+    ['Accueil', db.Accueil],
   ];
 
   for (const [name, model] of modelsToCheck) {
@@ -361,12 +373,11 @@ async function main() {
 
   // ── Seed si demandé ─────────────────────────────────────────────────────────
   if (isSeed) {
-    head('5. DONNÉES PAR DÉFAUT (--seed)');
     try {
-      await require('../seeders/seed').run();
-      ok('Données par défaut insérées.');
+      await runSeed();
     } catch (e) {
       warn(`Seed : ${e.message}`);
+      throw e;
     }
   }
 

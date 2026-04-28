@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3001/api'
+  apiUrl: 'http://api.reseau-solidarite-france.fr:3229/api'
 };
