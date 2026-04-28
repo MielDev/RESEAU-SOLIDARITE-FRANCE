@@ -1,6 +1,18 @@
-require('dotenv').config();
+const path = require('path');
+
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 const db = require('../models');
 const { pageContents } = require('./page-contents.data');
+
+const getDatabaseLabel = () => {
+  const dialect = process.env.DB_DIALECT || 'sqlite';
+
+  if (dialect === 'mysql' || dialect === 'mariadb') {
+    return `${dialect}://${process.env.DB_USER || '?'}@${process.env.DB_HOST || 'localhost'}:${process.env.DB_PORT || 3306}/${process.env.DB_NAME || '?'}`;
+  }
+
+  return dialect;
+};
 
 const serializeValue = (value) => (
   value !== null && typeof value === 'object'
@@ -475,14 +487,18 @@ const run = async () => {
 };
 
 if (require.main === module) {
-  require('../config/database');
-  const db2 = require('../models');
-  db2.sequelize
-    .sync({ force: false })
+  const { ensureDatabase } = require('../scripts/ensureDatabase');
+
+  Promise.resolve()
+    .then(() => console.log(`Base cible : ${getDatabaseLabel()}`))
+    .then(() => db.sequelize.authenticate())
+    .then(() => ensureDatabase())
     .then(() => run())
+    .then(() => db.sequelize.close())
     .then(() => process.exit(0))
-    .catch((error) => {
+    .catch(async (error) => {
       console.error(error);
+      await db.sequelize.close().catch(() => {});
       process.exit(1);
     });
 }

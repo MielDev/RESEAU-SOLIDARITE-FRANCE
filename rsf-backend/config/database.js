@@ -4,7 +4,7 @@ const { Sequelize } = require('sequelize');
 const path = require('path');
 const fs = require('fs');
 
-require('dotenv').config();
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
 const dialect = process.env.DB_DIALECT || 'sqlite';
 
@@ -35,6 +35,10 @@ if (dialect === 'sqlite') {
 
 // ─── MySQL / MariaDB ─────────────────────────────────────────────────────────
 } else if (dialect === 'mysql' || dialect === 'mariadb') {
+  if (!process.env.DB_NAME || !process.env.DB_USER) {
+    throw new Error('Configuration MySQL incomplete : DB_NAME et DB_USER sont obligatoires.');
+  }
+
   sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,
