@@ -19,6 +19,10 @@ const { ensureDatabase } = require('./scripts/ensureDatabase');
 const app  = express();
 const PORT = process.env.PORT || 3229;
 
+// Si l'API est derrière un proxy/équilibreur de charge (nginx, Cloudflare, etc.)
+// Express doit faire confiance au proxy pour utiliser correctement X-Forwarded-For.
+app.set('trust proxy', 1);
+
 // ─── MIDDLEWARES GLOBAUX ──────────────────────────────────────────────────────
 // app.use(helmet());                          // En-têtes sécurité HTTP
 app.use(cors());

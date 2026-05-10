@@ -2,7 +2,8 @@ const path = require('path');
 
 require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 const db = require('../models');
-const { pageContents } = require('./page-contents.data');
+const { pageDefaults } = require('./page-defaults.data');
+const pageStore = require('../services/pageTableStore');
 
 const getDatabaseLabel = () => {
   const dialect = process.env.DB_DIALECT || 'sqlite';
@@ -14,24 +15,9 @@ const getDatabaseLabel = () => {
   return dialect;
 };
 
-const serializeValue = (value) => (
-  value !== null && typeof value === 'object'
-    ? JSON.stringify(value)
-    : value
-);
-
-const createPageContents = async () => {
-  let sortOrder = 0;
-
-  for (const [pageKey, fields] of Object.entries(pageContents)) {
-    for (const [fieldKey, value] of Object.entries(fields)) {
-      await db.PageContent.create({
-        page_key: pageKey,
-        field_key: fieldKey,
-        value: serializeValue(value),
-        sort_order: sortOrder++,
-      });
-    }
+const createPageDefaults = async () => {
+  for (const [pageKey, fields] of Object.entries(pageDefaults)) {
+    await pageStore.updatePageData(pageKey, fields);
   }
 };
 
@@ -52,7 +38,7 @@ const run = async () => {
   await db.Accueil.destroy({ where: {} });
   await db.DonMode.destroy({ where: {} });
   await db.Action.destroy({ where: {} });
-  await db.PageContent.destroy({ where: {} });
+  await pageStore.clearPageTables();
 
   console.log('  Insertion des donnees par defaut...');
 
@@ -435,7 +421,7 @@ const run = async () => {
     stats_domains: '5',
   });
 
-  await createPageContents();
+  await createPageDefaults();
 
   const donModes = [
     {

@@ -1,6 +1,6 @@
 const router = require('express').Router();
+const pageStore = require('../services/pageTableStore');
 const {
-  PageContent,
   TeamMember,
   Mission,
   MissionItem,
@@ -36,45 +36,14 @@ const parseStoredValue = (value) => {
   return value;
 };
 
-const buildPageData = (fields) => {
-  const data = {};
-  fields.forEach((field) => {
-    data[field.field_key] = parseStoredValue(field.value);
-  });
-  return data;
-};
-
 router.get('/pages/:pageKey', async (req, res, next) => {
   try {
     const { pageKey } = req.params;
-    const fields = await PageContent.findAll({
-      where: { page_key: pageKey },
-      order: [['sort_order', 'ASC']],
-    });
-    const data = buildPageData(fields);
-
-    if (pageKey === 'accueil') {
-      const { Accueil } = require('../models');
-      const accueilData = await Accueil.findOne({ where: { id: 1 } });
-
-      if (accueilData) {
-        data.hero = {
-          ...(data.hero || {}),
-          badge: accueilData.hero_badge,
-          title: accueilData.hero_title,
-          text: accueilData.hero_text,
-          features: accueilData.hero_features,
-        };
-        data.stats = {
-          ...(data.stats || {}),
-          members: accueilData.stats_members,
-          domains: accueilData.stats_domains,
-        };
-      }
-
-      return res.json({ success: true, data });
+    if (!pageStore.isValidPage(pageKey)) {
+      return res.status(404).json({ success: false, message: 'Page introuvable.' });
     }
 
+    const data = await pageStore.getPageData(pageKey);
     res.json({ success: true, data });
   } catch (err) {
     next(err);

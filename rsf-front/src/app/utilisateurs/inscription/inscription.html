@@ -1,0 +1,111 @@
+<section class="auth-page">
+  <div class="auth-copy fade-up">
+    <a routerLink="/contact" class="back-link">
+      <i class="fas fa-arrow-left"></i>
+      Contact
+    </a>
+    <span class="auth-kicker">Demande d'aide</span>
+    <h1>Creer votre espace d'accompagnement</h1>
+    <p>
+      Une fois inscrit, vous pourrez choisir un creneau de rendez-vous disponible avec l'equipe RSF.
+    </p>
+    <div class="auth-steps" aria-label="Etapes">
+      <span><i class="fas fa-user-check"></i> Profil</span>
+      <span><i class="fas fa-shield-halved"></i> Connexion</span>
+      <span><i class="fas fa-calendar-check"></i> Rendez-vous</span>
+    </div>
+  </div>
+
+  <div class="auth-card fade-up">
+    <div class="auth-card-header">
+      <span>Inscription</span>
+      <h2>Vos informations</h2>
+    </div>
+
+    <form (submit)="submit(); $event.preventDefault()" class="auth-form">
+      <div class="form-grid-two">
+        <div class="form-group">
+          <label for="lastName">Nom *</label>
+          <input id="lastName" name="lastName" type="text" [(ngModel)]="form.lastName" autocomplete="family-name" required />
+        </div>
+        <div class="form-group">
+          <label for="firstName">Prenom *</label>
+          <input id="firstName" name="firstName" type="text" [(ngModel)]="form.firstName" autocomplete="given-name" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Adresse mail *</label>
+        <input id="email" name="email" type="email" [(ngModel)]="form.email" autocomplete="email" required />
+      </div>
+
+      <div class="form-grid-two">
+        <div class="form-group">
+          <label for="password">Mot de passe *</label>
+          <input id="password" name="password" type="password" [(ngModel)]="form.password" autocomplete="new-password" required />
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirmation *</label>
+          <input
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            [(ngModel)]="form.confirmPassword"
+            autocomplete="new-password"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-grid-two">
+        <div class="form-group">
+          <label for="phone">Telephone *</label>
+          <input id="phone" name="phone" type="tel" [(ngModel)]="form.phone" autocomplete="tel" required />
+        </div>
+        <div class="form-group">
+          <label for="birthDate">Date de naissance *</label>
+          <input id="birthDate" name="birthDate" type="date" [(ngModel)]="form.birthDate" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="nationality">Nationalite *</label>
+        <select id="nationality" name="nationality" [(ngModel)]="form.nationality" required>
+          <option value="" disabled>{{ isLoadingCountries ? 'Chargement...' : 'Selectionner une nationalite' }}</option>
+          <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+        </select>
+      </div>
+
+      <div class="form-grid-two">
+        <div class="form-group">
+          <label for="school">Ecole ou universite *</label>
+          <input id="school" name="school" type="text" [(ngModel)]="form.school" required />
+        </div>
+        <div class="form-group">
+          <label for="program">Formation *</label>
+          <input id="program" name="program" type="text" [(ngModel)]="form.program" required />
+        </div>
+      </div>
+
+      <label class="terms-row">
+        <input type="checkbox" name="acceptedTerms" [(ngModel)]="form.acceptedTerms" />
+        <span>
+          J'accepte les <a routerLink="/mentions-legales">conditions d'utilisation</a> et la
+          <a routerLink="/politique-confidentialite">politique de confidentialite</a>.
+        </span>
+      </label>
+
+      <p class="auth-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button class="auth-submit" type="submit" [disabled]="isSubmitting">
+        <i class="fas fa-user-plus"></i>
+        {{ isSubmitting ? 'Creation du compte...' : 'Creer mon compte' }}
+      </button>
+    </form>
+
+    <div class="auth-links">
+      <a routerLink="/connexion">J'ai deja un compte</a>
+      <a routerLink="/mot-de-passe-oublie">Mot de passe oublie</a>
+    </div>
+  </div>
+</section>

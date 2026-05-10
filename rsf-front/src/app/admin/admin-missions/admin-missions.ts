@@ -5,11 +5,12 @@ import { RouterModule } from '@angular/router';
 import { forkJoin, of } from 'rxjs';
 import { AdminAlertService } from '../admin-alert.service';
 import { AdminApiService } from '../admin-api.service';
+import { AdminPageDetailsEditor } from '../shared/admin-page-details-editor/admin-page-details-editor';
 import { AdminIconPicker } from '../shared/admin-icon-picker/admin-icon-picker';
 
 @Component({
   selector: 'app-admin-missions',
-  imports: [CommonModule, FormsModule, RouterModule, AdminIconPicker],
+  imports: [CommonModule, FormsModule, RouterModule, AdminIconPicker, AdminPageDetailsEditor],
   templateUrl: './admin-missions.html',
   styleUrl: './admin-missions.css',
 })

@@ -19,9 +19,10 @@
     <h2 class="s-title">{{ pageContent?.leadership?.title }}</h2>
     <div class="grid-2" style="margin-top:40px;gap:48px;align-items:start;">
       <div class="president-card fade-up" *ngIf="president">
-        <div class="president-avatar" [style.background-image]="president.photo_url ? 'url(' + president.photo_url + ')' : null" [class.has-photo]="president.photo_url">
-          <span *ngIf="!president.photo_url">{{ president.initials }}</span>
-        </div>
+        <div class="president-avatar" [class.has-photo]="president.photo_url">
+  <img *ngIf="president.photo_url" [src]="president.photo_url" [alt]="president.name" class="avatar-img" />
+  <span *ngIf="!president.photo_url">{{ president.initials }}</span>
+</div>
         <h2 class="president-name">{{ president.name }}</h2>
         <span class="president-badge">{{ president.role }}</span>
       </div>
@@ -46,9 +47,10 @@
 
     <div class="grid-auto" style="margin-top:40px;">
       <div *ngFor="let member of team" class="card fade-up team-member-card">
-        <div class="team-member-header" [ngClass]="member.bgClass" [style.background-image]="member.photo_url ? 'url(' + member.photo_url + ')' : null" [class.has-photo]="member.photo_url">
-          <div class="team-member-avatar" *ngIf="!member.photo_url">{{ member.initials }}</div>
-        </div>
+        <div class="team-member-header" [ngClass]="member.bgClass">
+  <img *ngIf="member.photo_url" [src]="member.photo_url" [alt]="member.name" class="member-photo" />
+  <div class="team-member-avatar" *ngIf="!member.photo_url">{{ member.initials }}</div>
+</div>
         <div class="team-member-body">
           <h3 class="member-name">{{ member.name }}</h3>
           <span class="member-role">{{ member.role }}</span>

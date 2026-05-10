@@ -4,11 +4,12 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AdminAlertService } from '../admin-alert.service';
 import { AdminApiService } from '../admin-api.service';
+import { AdminPageDetailsEditor } from '../shared/admin-page-details-editor/admin-page-details-editor';
 import { AdminIconPicker } from '../shared/admin-icon-picker/admin-icon-picker';
 
 @Component({
   selector: 'app-admin-actualites',
-  imports: [FormsModule, RouterModule, CommonModule, AdminIconPicker],
+  imports: [FormsModule, RouterModule, CommonModule, AdminIconPicker, AdminPageDetailsEditor],
   templateUrl: './admin-actualites.html',
   styleUrl: './admin-actualites.css',
 })

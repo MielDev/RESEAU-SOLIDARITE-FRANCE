@@ -1,0 +1,69 @@
+<section class="booking-page">
+  <header class="booking-hero">
+    <div>
+      <span class="booking-kicker">Rendez-vous</span>
+      <h1>Choisissez un creneau d'accompagnement</h1>
+      <p>Les disponibilites sont gerees par l'equipe RSF. Un creneau reserve n'est plus selectionnable.</p>
+    </div>
+
+    <div class="user-chip" *ngIf="user() as currentUser">
+      <span>{{ currentUser.firstName.charAt(0) }}{{ currentUser.lastName.charAt(0) }}</span>
+      <div>
+        <strong>{{ currentUser.firstName }} {{ currentUser.lastName }}</strong>
+        <button type="button" (click)="logout()">Se deconnecter</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="booking-alert" *ngIf="!user()">
+    <i class="fas fa-lock"></i>
+    <div>
+      <strong>Connexion requise</strong>
+      <p>Connectez-vous ou creez votre compte pour reserver un rendez-vous.</p>
+    </div>
+    <a routerLink="/connexion" [queryParams]="{ returnUrl: '/rendez-vous' }">Se connecter</a>
+  </div>
+
+  <section class="booking-summary" *ngIf="userBooking() as booking">
+    <div class="summary-icon">
+      <i class="fas fa-circle-check"></i>
+    </div>
+    <div>
+      <span>Rendez-vous confirme</span>
+      <h2>{{ booking.slot ? booking.slot.label : 'Creneau reserve' }}</h2>
+      <p *ngIf="booking.slot">
+        {{ formatDate(booking.slot.date) }} de {{ booking.slot.startTime }} a {{ booking.slot.endTime }}
+        <span *ngIf="booking.slot.location">- {{ booking.slot.location }}</span>
+      </p>
+    </div>
+  </section>
+
+  <p class="feedback success" *ngIf="feedbackMessage">{{ feedbackMessage }}</p>
+  <p class="feedback error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <section class="slot-grid" *ngIf="!userBooking() && slots().length > 0">
+    <article class="slot-card" *ngFor="let slot of slots()" [class.is-booked]="isSlotBooked(slot)">
+      <div class="slot-date">
+        <i class="fas fa-calendar-day"></i>
+        <span>{{ formatDate(slot.date) }}</span>
+      </div>
+      <h2>{{ slot.label }}</h2>
+      <p class="slot-time">{{ slot.startTime }} - {{ slot.endTime }}</p>
+      <p class="slot-location" *ngIf="slot.location">
+        <i class="fas fa-location-dot"></i>
+        {{ slot.location }}
+      </p>
+      <p class="slot-notes" *ngIf="slot.notes">{{ slot.notes }}</p>
+      <button type="button" (click)="book(slot)" [disabled]="isSlotBooked(slot) || !user()">
+        <i class="fas" [ngClass]="isSlotBooked(slot) ? 'fa-lock' : 'fa-calendar-check'"></i>
+        {{ isSlotBooked(slot) ? 'Deja pris' : 'Choisir ce creneau' }}
+      </button>
+    </article>
+  </section>
+
+  <section class="empty-state" *ngIf="slots().length === 0">
+    <i class="fas fa-calendar-plus"></i>
+    <h2>Aucun creneau disponible</h2>
+    <p>L'equipe RSF ajoutera bientot de nouvelles disponibilites depuis l'espace administrateur.</p>
+  </section>
+</section>

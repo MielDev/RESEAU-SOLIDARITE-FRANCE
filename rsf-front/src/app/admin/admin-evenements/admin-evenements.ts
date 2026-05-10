@@ -5,10 +5,11 @@ import { RouterModule } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { AdminAlertService } from '../admin-alert.service';
 import { AdminApiService } from '../admin-api.service';
+import { AdminPageDetailsEditor } from '../shared/admin-page-details-editor/admin-page-details-editor';
 
 @Component({
   selector: 'app-admin-evenements',
-  imports: [FormsModule, RouterModule, CommonModule],
+  imports: [FormsModule, RouterModule, CommonModule, AdminPageDetailsEditor],
   templateUrl: './admin-evenements.html',
   styleUrl: './admin-evenements.css',
 })

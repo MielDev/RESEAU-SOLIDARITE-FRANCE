@@ -55,8 +55,8 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  border: 3px solid rgba(255, 255, 255, 0.4);
+  overflow: hidden;
+  border: 4px solid rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,8 +65,14 @@
   font-weight: 900;
   color: white;
   margin: 0 auto 20px;
-  background-size: cover;
-  background-position: center;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center; /* garde le visage en haut */
 }
 
 .president-avatar.has-photo {
@@ -80,12 +86,41 @@
   align-items: center;
   justify-content: center;
   background-size: cover;
-  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
-.team-member-header.has-photo {
-  background-color: #f3f4f6;
+.team-member-header {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4; /* ratio portrait naturel */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.member-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.4s ease;
+}
+
+/* Légère animation au survol */
+.team-member-card:hover .member-photo {
+  transform: scale(1.04);
+}
+
+
+.team-member-header.has-photo {
+  background-size: contain; /* ← pas de recadrage */
+  background-color: #f8f9fa; /* fond neutre autour de l'image */
+}
+
 
 .president-badge {
   background: rgba(255, 255, 255, 0.15);
@@ -140,14 +175,8 @@
   flex-direction: column;
 }
 
-.team-member-header {
-  min-height: 260px;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
+
 
 .team-member-avatar {
   width: 150px;
@@ -206,8 +235,9 @@
     min-height: 220px;
   }
 
-  .president-avatar {
-    width: 170px;
-    height: 170px;
+   .president-avatar {
+    width: 160px;
+    height: 160px;
+    font-size: 32px;
   }
 }

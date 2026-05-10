@@ -14,7 +14,7 @@ rsf-backend/
 ├── models/
 │   ├── index.js             ← Registre + associations entre modèles
 │   ├── User.js              ← Utilisateurs admin (bcrypt, JWT)
-│   ├── PageContent.js       ← Contenu éditable par page (clé/valeur)
+│   ├── PageModels.js        ← Tables éditoriales explicites par page
 │   ├── TeamMember.js        ← Membres de l'équipe
 │   ├── Mission.js           ← Missions de l'association
 │   ├── MissionItem.js       ← Points de liste liés à une mission

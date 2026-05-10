@@ -1,0 +1,161 @@
+.reset-page {
+  display: grid;
+  place-items: center;
+  min-height: calc(100vh - var(--nav-h));
+  padding: clamp(28px, 6vw, 82px) clamp(16px, 5vw, 80px);
+  background:
+    linear-gradient(135deg, rgba(255, 140, 0, 0.11), rgba(47, 93, 255, 0.12)),
+    #f8fafc;
+}
+
+.reset-card {
+  display: grid;
+  gap: 22px;
+  width: min(680px, 100%);
+  padding: clamp(22px, 4vw, 36px);
+  border: 1px solid #dbeafe;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 22px 70px rgba(30, 58, 138, 0.14);
+  animation: reset-in 0.52s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-self: start;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+header span {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+header h1 {
+  color: var(--primary-dark);
+  font-size: clamp(34px, 5vw, 50px);
+  line-height: 1.06;
+}
+
+header p {
+  max-width: 520px;
+  margin-top: 10px;
+  color: var(--text-mid);
+  line-height: 1.7;
+}
+
+.reset-form {
+  display: grid;
+  gap: 16px;
+}
+
+.reset-form .form-group {
+  margin: 0;
+}
+
+.form-grid-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.reset-code {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  background: #f0fdf4;
+}
+
+.reset-code span {
+  color: #15803d;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.reset-code strong {
+  color: #14532d;
+  font-size: 26px;
+  letter-spacing: 0.08em;
+}
+
+.reset-info,
+.reset-error {
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.reset-info {
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.reset-error {
+  border: 1px solid #fecaca;
+  background: #fff1f2;
+  color: #be123c;
+}
+
+.reset-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  background: var(--primary);
+  color: white;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.reset-button.ghost {
+  background: white;
+  color: var(--primary);
+}
+
+.reset-button:hover {
+  transform: translateY(-2px);
+  background: var(--primary-dark);
+  color: white;
+}
+
+.reset-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+  transform: none;
+}
+
+@keyframes reset-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 680px) {
+  .form-grid-two {
+    grid-template-columns: 1fr;
+  }
+}

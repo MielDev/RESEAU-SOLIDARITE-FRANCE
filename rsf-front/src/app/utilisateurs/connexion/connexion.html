@@ -1,0 +1,54 @@
+<section class="login-page">
+  <div class="login-panel fade-in">
+    <a routerLink="/" class="back-link">
+      <i class="fas fa-arrow-left"></i>
+      Accueil
+    </a>
+
+    <div class="login-title">
+      <span>Espace aide</span>
+      <h1>Connexion</h1>
+      <p>Retrouvez votre espace et choisissez votre rendez-vous d'accompagnement.</p>
+    </div>
+
+    <form (submit)="submit(); $event.preventDefault()" class="login-form">
+      <div class="form-group">
+        <label for="email">Adresse mail</label>
+        <input id="email" name="email" type="email" [(ngModel)]="form.email" autocomplete="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input id="password" name="password" type="password" [(ngModel)]="form.password" autocomplete="current-password" required />
+      </div>
+
+      <div class="login-row">
+        <label class="remember-row">
+          <input type="checkbox" />
+          <span>Rester connecte</span>
+        </label>
+        <a routerLink="/mot-de-passe-oublie">Mot de passe oublie ?</a>
+      </div>
+
+      <p class="login-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button type="submit" class="login-submit" [disabled]="isSubmitting">
+        <i class="fas fa-right-to-bracket"></i>
+        {{ isSubmitting ? 'Connexion...' : 'Se connecter' }}
+      </button>
+    </form>
+
+    <p class="signup-link">
+      Pas encore de compte ?
+      <a routerLink="/inscription">Creer un compte</a>
+    </p>
+  </div>
+
+  <aside class="login-visual fade-in">
+    <div class="visual-mark">
+      <i class="fas fa-calendar-check"></i>
+    </div>
+    <strong>Votre rendez-vous RSF</strong>
+    <span>Les creneaux deja pris disparaissent automatiquement du choix disponible.</span>
+  </aside>
+</section>

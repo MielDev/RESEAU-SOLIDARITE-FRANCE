@@ -1,7 +1,9 @@
 <nav id="mainNav" [class.scrolled]="isScrolled">
   <div class="nav-inner">
     <a routerLink="/" class="nav-brand">
-      <div class="nav-logo">{{ settings?.assoc_short }}</div>
+      <div class="nav-logo">
+        <img src="/rsf.png" alt="Logo Reseau Solidarite France" />
+      </div>
       <div>
         <div class="nav-title">{{ settings?.siteName || settings?.assoc_name }}</div>
         <div class="nav-sub">{{ settings?.assoc_slogan  }}</div>

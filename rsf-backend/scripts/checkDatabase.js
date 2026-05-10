@@ -343,7 +343,6 @@ async function main() {
   // Modèles à vérifier dans l'ordre (respecter les FK)
   const modelsToCheck = [
     ['User',         db.User],
-    ['PageContent',  db.PageContent],
     ['TeamMember',   db.TeamMember],
     ['Mission',      db.Mission],
     ['MissionItem',  db.MissionItem],
@@ -359,6 +358,7 @@ async function main() {
     ['ContactMessage', db.ContactMessage],
     ['JoinRequest', db.JoinRequest],
     ['Accueil', db.Accueil],
+    ...Object.entries(db.PageTableModels || {}),
   ];
 
   for (const [name, model] of modelsToCheck) {

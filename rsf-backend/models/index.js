@@ -4,7 +4,6 @@ const sequelize = require('../config/database');
 
 // ── Import de tous les modèles ────────────────────────────────────────────────
 const User         = require('./User')(sequelize);
-const PageContent  = require('./PageContent')(sequelize);
 const TeamMember   = require('./TeamMember')(sequelize);
 const Mission      = require('./Mission')(sequelize);
 const MissionItem  = require('./MissionItem')(sequelize);
@@ -20,6 +19,8 @@ const NavItem        = require('./NavItem')(sequelize);
 const ContactMessage = require('./ContactMessage')(sequelize);
 const JoinRequest   = require('./JoinRequest')(sequelize);
 const Accueil      = require('./Accueil')(sequelize);
+const { definePageModels } = require('./PageModels');
+const PageTableModels = definePageModels(sequelize);
 
 // ── Associations (relations) ──────────────────────────────────────────────────
 
@@ -39,7 +40,6 @@ EventPhoto.belongsTo(Event, { foreignKey: 'event_id', as: 'event' });
 const db = {
   sequelize,
   User,
-  PageContent,
   TeamMember,
   Mission,
   MissionItem,
@@ -55,6 +55,8 @@ const db = {
   ContactMessage,
   JoinRequest,
   Accueil,
+  PageTableModels,
+  ...PageTableModels,
 };
 
 module.exports = db;

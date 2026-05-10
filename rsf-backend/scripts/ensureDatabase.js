@@ -2,9 +2,10 @@ const { QueryTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const db = require('../models');
 
+const pageModelsToCheck = Object.entries(db.PageTableModels || {});
+
 const modelsToCheck = [
   ['User', db.User],
-  ['PageContent', db.PageContent],
   ['TeamMember', db.TeamMember],
   ['Mission', db.Mission],
   ['MissionItem', db.MissionItem],
@@ -20,6 +21,7 @@ const modelsToCheck = [
   ['ContactMessage', db.ContactMessage],
   ['JoinRequest', db.JoinRequest],
   ['Accueil', db.Accueil],
+  ...pageModelsToCheck,
 ];
 
 const quoteIdentifier = (dialect, value) => {

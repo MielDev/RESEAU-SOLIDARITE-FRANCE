@@ -1095,3 +1095,63 @@ Application bundle generation complete. [0.311 seconds] - 2026-04-28T20:07:02.75
 
 Application bundle generation complete. [0.334 seconds] - 2026-04-28T20:07:05.725Z
 
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                   [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                    [2m | [22m[36m471.44 kB[39m[2m | [22m
+[32mchunk-4QPUH2AZ.js[39m  [2m | [22m[2m-[22m                       [2m | [22m  [36m3.14 kB[39m[2m | [22m
+[32mchunk-2NASZJ35.js[39m  [2m | [22m[2m-[22m                       [2m | [22m[36m210 bytes[39m[2m | [22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                   [2m | [22m [1mRaw size[22m
+[32mchunk-4D5H22GJ.js[39m  [2m | [22m[2madmin-rencontre[22m         [2m | [22m [36m91.83 kB[39m[2m | [22m
+[32mchunk-CZLOPOWT.js[39m  [2m | [22m[2madmin-rejoindre[22m         [2m | [22m [36m83.69 kB[39m[2m | [22m
+[32mchunk-KR5CDKEA.js[39m  [2m | [22m[2madmin-settings[22m          [2m | [22m [36m76.03 kB[39m[2m | [22m
+[32mchunk-NNJXBJNR.js[39m  [2m | [22m[2madmin-organisation[22m      [2m | [22m [36m66.94 kB[39m[2m | [22m
+[32mchunk-GNUKF5JA.js[39m  [2m | [22m[2madmin-evenements[22m        [2m | [22m [36m66.81 kB[39m[2m | [22m
+[32mchunk-BYOBV37O.js[39m  [2m | [22m[2madmin-accueil[22m           [2m | [22m [36m52.61 kB[39m[2m | [22m
+[32mchunk-UN6EAK7L.js[39m  [2m | [22m[2madmin-contact[22m           [2m | [22m [36m38.29 kB[39m[2m | [22m
+[32mchunk-DBN7WAT4.js[39m  [2m | [22m[2madmin-qui-sommes-nous[22m   [2m | [22m [36m35.98 kB[39m[2m | [22m
+[32mchunk-APGCPLFK.js[39m  [2m | [22m[2madmin-layout[22m            [2m | [22m [36m34.84 kB[39m[2m | [22m
+[32mchunk-ZHOGJXYC.js[39m  [2m | [22m[2madmin-soutien[22m           [2m | [22m [36m34.57 kB[39m[2m | [22m
+[32mchunk-TEWXICN5.js[39m  [2m | [22m[2madmin-actions-solidaires[22m[2m | [22m [36m29.18 kB[39m[2m | [22m
+[32mchunk-K6UK2T4U.js[39m  [2m | [22m[2madmin-temoignages[22m       [2m | [22m [36m29.05 kB[39m[2m | [22m
+[32mchunk-VCR4OD3V.js[39m  [2m | [22m[2madmin-missions[22m          [2m | [22m [36m26.40 kB[39m[2m | [22m
+[32mchunk-4AXM25QU.js[39m  [2m | [22m[2madmin-actualites[22m        [2m | [22m [36m25.25 kB[39m[2m | [22m
+[32mchunk-3BHV64GB.js[39m  [2m | [22m[2madmin-international[22m     [2m | [22m [36m24.59 kB[39m[2m | [22m
+[2m...and 3 more lazy chunks files. Use "--verbose" to show all the files.[22m
+
+Application bundle generation complete. [0.818 seconds] - 2026-04-28T21:50:40.337Z
+
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m                   [2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                    [2m | [22m[36m471.44 kB[39m[2m | [22m
+[32mstyles.css[39m         [2m | [22m[2mstyles[22m                  [2m | [22m [36m62.80 kB[39m[2m | [22m
+[32mchunk-7UX3GLBW.js[39m  [2m | [22m[2m-[22m                       [2m | [22m  [36m4.04 kB[39m[2m | [22m
+[32mchunk-4QPUH2AZ.js[39m  [2m | [22m[2m-[22m                       [2m | [22m  [36m3.14 kB[39m[2m | [22m
+[32mchunk-CZJLB7T5.js[39m  [2m | [22m[2m-[22m                       [2m | [22m  [36m1.08 kB[39m[2m | [22m
+[32mchunk-2NASZJ35.js[39m  [2m | [22m[2m-[22m                       [2m | [22m[36m210 bytes[39m[2m | [22m
+
+[1m [22m                  [2m | [22m[1mInitial total[22m           [2m | [22m[1m542.70 kB[22m
+
+[1mLazy chunk files[22m   [2m | [22m[1mNames[22m                   [2m | [22m [1mRaw size[22m
+[32mchunk-4D5H22GJ.js[39m  [2m | [22m[2madmin-rencontre[22m         [2m | [22m [36m91.83 kB[39m[2m | [22m
+[32mchunk-CZLOPOWT.js[39m  [2m | [22m[2madmin-rejoindre[22m         [2m | [22m [36m83.69 kB[39m[2m | [22m
+[32mchunk-KR5CDKEA.js[39m  [2m | [22m[2madmin-settings[22m          [2m | [22m [36m76.03 kB[39m[2m | [22m
+[32mchunk-NNJXBJNR.js[39m  [2m | [22m[2madmin-organisation[22m      [2m | [22m [36m66.94 kB[39m[2m | [22m
+[32mchunk-GNUKF5JA.js[39m  [2m | [22m[2madmin-evenements[22m        [2m | [22m [36m66.81 kB[39m[2m | [22m
+[32mchunk-BYOBV37O.js[39m  [2m | [22m[2madmin-accueil[22m           [2m | [22m [36m52.61 kB[39m[2m | [22m
+[32mchunk-SDJKJZGE.js[39m  [2m | [22m[2mlegal[22m                   [2m | [22m [36m44.78 kB[39m[2m | [22m
+[32mchunk-UN6EAK7L.js[39m  [2m | [22m[2madmin-contact[22m           [2m | [22m [36m38.29 kB[39m[2m | [22m
+[32mchunk-DBN7WAT4.js[39m  [2m | [22m[2madmin-qui-sommes-nous[22m   [2m | [22m [36m35.98 kB[39m[2m | [22m
+[32mchunk-APGCPLFK.js[39m  [2m | [22m[2madmin-layout[22m            [2m | [22m [36m34.84 kB[39m[2m | [22m
+[32mchunk-ZHOGJXYC.js[39m  [2m | [22m[2madmin-soutien[22m           [2m | [22m [36m34.57 kB[39m[2m | [22m
+[32mchunk-O2JHXCFO.js[39m  [2m | [22m[2madmin-dashboard[22m         [2m | [22m [36m31.21 kB[39m[2m | [22m
+[32mchunk-TEWXICN5.js[39m  [2m | [22m[2madmin-actions-solidaires[22m[2m | [22m [36m29.18 kB[39m[2m | [22m
+[32mchunk-K6UK2T4U.js[39m  [2m | [22m[2madmin-temoignages[22m       [2m | [22m [36m29.05 kB[39m[2m | [22m
+[32mchunk-VCR4OD3V.js[39m  [2m | [22m[2madmin-missions[22m          [2m | [22m [36m26.40 kB[39m[2m | [22m
+[2m...and 7 more lazy chunks files. Use "--verbose" to show all the files.[22m
+
+Application bundle generation complete. [0.322 seconds] - 2026-04-28T21:50:43.106Z
+

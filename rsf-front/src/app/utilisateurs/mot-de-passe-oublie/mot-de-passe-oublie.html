@@ -1,0 +1,63 @@
+<section class="reset-page">
+  <div class="reset-card">
+    <a routerLink="/connexion" class="back-link">
+      <i class="fas fa-arrow-left"></i>
+      Connexion
+    </a>
+
+    <header>
+      <span>Securite</span>
+      <h1>Mot de passe oublie</h1>
+      <p>Generez un code de verification puis choisissez un nouveau mot de passe.</p>
+    </header>
+
+    <form (submit)="requestReset(); $event.preventDefault()" class="reset-form">
+      <div class="form-group">
+        <label for="email">Adresse mail du compte</label>
+        <input id="email" name="email" type="email" [(ngModel)]="form.email" autocomplete="email" required />
+      </div>
+      <button type="submit" class="reset-button ghost" [disabled]="isRequesting">
+        <i class="fas fa-key"></i>
+        {{ isRequesting ? 'Generation...' : 'Generer un code' }}
+      </button>
+    </form>
+
+    <div class="reset-code" *ngIf="resetCode">
+      <span>Code</span>
+      <strong>{{ resetCode }}</strong>
+    </div>
+
+    <form (submit)="resetPassword(); $event.preventDefault()" class="reset-form">
+      <div class="form-group">
+        <label for="token">Code de verification</label>
+        <input id="token" name="token" type="text" [(ngModel)]="form.token" inputmode="numeric" required />
+      </div>
+
+      <div class="form-grid-two">
+        <div class="form-group">
+          <label for="password">Nouveau mot de passe</label>
+          <input id="password" name="password" type="password" [(ngModel)]="form.password" autocomplete="new-password" required />
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirmation</label>
+          <input
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            [(ngModel)]="form.confirmPassword"
+            autocomplete="new-password"
+            required
+          />
+        </div>
+      </div>
+
+      <p class="reset-info" *ngIf="infoMessage">{{ infoMessage }}</p>
+      <p class="reset-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button type="submit" class="reset-button" [disabled]="isResetting">
+        <i class="fas fa-shield-check"></i>
+        {{ isResetting ? 'Mise a jour...' : 'Changer le mot de passe' }}
+      </button>
+    </form>
+  </div>
+</section>

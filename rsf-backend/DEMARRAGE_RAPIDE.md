@@ -100,7 +100,7 @@ Utilisez le fichier `api-tests.http` avec l'extension **REST Client** de VSCode 
 | Table | Description |
 |-------|-------------|
 | `users` | Administrateurs du back-office |
-| `page_contents` | Contenus éditables par page |
+| `page_*` | Contenus éditoriaux explicites par page |
 | `team_members` | Membres de l'équipe |
 | `missions` | Missions de l'association |
 | `mission_items` | Points de liste liés aux missions |

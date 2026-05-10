@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { firstValueFrom, forkJoin } from 'rxjs';
 import { AdminAlertService } from '../admin-alert.service';
 import { AdminApiService } from '../admin-api.service';
+import { AdminPageDetailsEditor } from '../shared/admin-page-details-editor/admin-page-details-editor';
 
 type TeamMemberRecord = {
   id?: number | string;
@@ -22,7 +23,7 @@ type TeamMemberRecord = {
 
 @Component({
   selector: 'app-admin-organisation',
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, AdminPageDetailsEditor],
   templateUrl: './admin-organisation.html',
   styleUrl: './admin-organisation.css',
 })
