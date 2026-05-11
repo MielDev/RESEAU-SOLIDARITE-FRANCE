@@ -1,0 +1,128 @@
+<section class="admin-page-toolbar">
+  <div>
+    <p class="admin-eyebrow">Accompagnement</p>
+    <h2>Creneaux de rendez-vous</h2>
+    <span>Definis les disponibilites visibles par les utilisateurs connectes.</span>
+  </div>
+  <button type="button" class="btn btn-primary admin-save-btn" (click)="saveSlot()">
+    <i class="fas fa-floppy-disk"></i>
+    <span>{{ editingSlotId ? 'Mettre a jour' : 'Ajouter le creneau' }}</span>
+  </button>
+</section>
+
+<section class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><i class="pi fas fa-calendar-plus"></i>{{ editingSlotId ? 'Modifier un creneau' : 'Nouveau creneau' }}</div>
+      <div class="panel-desc">Un creneau reserve devient automatiquement indisponible cote utilisateur.</div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <form (submit)="saveSlot(); $event.preventDefault()" class="slot-form">
+      <div class="form-grid form-grid-2">
+        <div class="form-group">
+          <label for="label">Titre du creneau</label>
+          <input id="label" name="label" class="input" type="text" [(ngModel)]="slotForm.label" placeholder="Ex: Entretien d'aide sociale" />
+        </div>
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input id="date" name="date" class="input" type="date" [(ngModel)]="slotForm.date" [min]="minDate" />
+        </div>
+      </div>
+
+      <div class="form-grid form-grid-3">
+        <div class="form-group">
+          <label for="startTime">Debut</label>
+          <input id="startTime" name="startTime" class="input" type="time" [(ngModel)]="slotForm.startTime" />
+        </div>
+        <div class="form-group">
+          <label for="endTime">Fin</label>
+          <input id="endTime" name="endTime" class="input" type="time" [(ngModel)]="slotForm.endTime" />
+        </div>
+        <div class="form-group">
+          <label for="location">Lieu</label>
+          <input id="location" name="location" class="input" type="text" [(ngModel)]="slotForm.location" placeholder="Bureau, visio..." />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="notes">Notes internes</label>
+        <textarea id="notes" name="notes" class="textarea" [(ngModel)]="slotForm.notes"></textarea>
+      </div>
+
+      <p class="form-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" *ngIf="editingSlotId" (click)="cancelEdit()">
+          <i class="fas fa-xmark"></i>
+          Annuler
+        </button>
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-calendar-plus"></i>
+          {{ editingSlotId ? 'Enregistrer les changements' : 'Ajouter' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><i class="pi fas fa-list"></i>Disponibilites publiees</div>
+      <div class="panel-desc">{{ slots().length }} creneau(x) enregistre(s).</div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="table-wrap" *ngIf="slots().length > 0; else emptySlots">
+      <table>
+        <thead>
+          <tr>
+            <th>Creneau</th>
+            <th>Date</th>
+            <th>Horaires</th>
+            <th>Lieu</th>
+            <th>Etat</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let slot of slots()">
+            <td>
+              <strong>{{ slot.label }}</strong>
+              <small *ngIf="slot.notes">{{ slot.notes }}</small>
+            </td>
+            <td>{{ formatDate(slot.date) }}</td>
+            <td>{{ slot.startTime }} - {{ slot.endTime }}</td>
+            <td>{{ slot.location || 'Non precise' }}</td>
+            <td>
+              <span class="badge" [ngClass]="isBooked(slot) ? 'badge-success' : 'badge-primary'">
+                {{ isBooked(slot) ? 'Reserve' : 'Disponible' }}
+              </span>
+            </td>
+            <td>
+              <div class="table-actions">
+                <button type="button" class="btn btn-sm" (click)="editSlot(slot)">
+                  <i class="fas fa-pen"></i>
+                  Modifier
+                </button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="deleteSlot(slot)" [disabled]="isBooked(slot)">
+                  <i class="fas fa-trash"></i>
+                  Supprimer
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #emptySlots>
+      <div class="empty-admin">
+        <i class="fas fa-calendar-plus"></i>
+        <strong>Aucun creneau</strong>
+        <span>Ajoutez une disponibilite pour ouvrir les prises de rendez-vous.</span>
+      </div>
+    </ng-template>
+  </div>
+</section>

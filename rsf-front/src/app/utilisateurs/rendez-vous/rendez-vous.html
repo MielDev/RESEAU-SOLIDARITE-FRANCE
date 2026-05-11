@@ -36,12 +36,31 @@
         <span *ngIf="booking.slot.location">- {{ booking.slot.location }}</span>
       </p>
     </div>
+    <div class="summary-actions">
+      <button type="button" class="summary-btn" (click)="startChange()" [disabled]="isSubmitting || isChangingBooking">
+        <i class="fas fa-calendar-days"></i>
+        Changer
+      </button>
+      <button type="button" class="summary-btn danger" (click)="cancelBooking()" [disabled]="isSubmitting">
+        <i class="fas fa-calendar-xmark"></i>
+        Annuler
+      </button>
+    </div>
+  </section>
+
+  <section class="booking-alert change-alert" *ngIf="userBooking() && isChangingBooking">
+    <i class="fas fa-calendar-days"></i>
+    <div>
+      <strong>Modification du rendez-vous</strong>
+      <p>Choisissez un nouveau creneau disponible. Votre ancien creneau sera libere automatiquement.</p>
+    </div>
+    <button type="button" (click)="stopChange()" [disabled]="isSubmitting">Garder l'actuel</button>
   </section>
 
   <p class="feedback success" *ngIf="feedbackMessage">{{ feedbackMessage }}</p>
   <p class="feedback error" *ngIf="errorMessage">{{ errorMessage }}</p>
 
-  <section class="slot-grid" *ngIf="!userBooking() && slots().length > 0">
+  <section class="slot-grid" *ngIf="(!userBooking() || isChangingBooking) && slots().length > 0">
     <article class="slot-card" *ngFor="let slot of slots()" [class.is-booked]="isSlotBooked(slot)">
       <div class="slot-date">
         <i class="fas fa-calendar-day"></i>
@@ -54,16 +73,16 @@
         {{ slot.location }}
       </p>
       <p class="slot-notes" *ngIf="slot.notes">{{ slot.notes }}</p>
-      <button type="button" (click)="book(slot)" [disabled]="isSlotBooked(slot) || !user()">
+      <button type="button" (click)="book(slot)" [disabled]="isSlotBooked(slot) || !user() || isSubmitting">
         <i class="fas" [ngClass]="isSlotBooked(slot) ? 'fa-lock' : 'fa-calendar-check'"></i>
-        {{ isSlotBooked(slot) ? 'Deja pris' : 'Choisir ce creneau' }}
+        {{ isSlotBooked(slot) ? 'Deja pris' : (isChangingBooking ? 'Remplacer par ce creneau' : 'Choisir ce creneau') }}
       </button>
     </article>
   </section>
 
-  <section class="empty-state" *ngIf="slots().length === 0">
+  <section class="empty-state" *ngIf="(!userBooking() || isChangingBooking) && slots().length === 0">
     <i class="fas fa-calendar-plus"></i>
-    <h2>Aucun creneau disponible</h2>
+    <h2>{{ isChangingBooking ? 'Aucun autre creneau disponible' : 'Aucun creneau disponible' }}</h2>
     <p>L'equipe RSF ajoutera bientot de nouvelles disponibilites depuis l'espace administrateur.</p>
   </section>
 </section>

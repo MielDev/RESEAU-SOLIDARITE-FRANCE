@@ -32,6 +32,13 @@
         </a>
       </li>
 
+      <li>
+        <a [routerLink]="auth.currentUser() ? '/rendez-vous' : '/connexion'" routerLinkActive="active">
+          <i class="fas" [ngClass]="auth.currentUser() ? 'fa-calendar-check' : 'fa-right-to-bracket'"></i>
+          {{ auth.currentUser() ? 'Mon rendez-vous' : 'Connexion' }}
+        </a>
+      </li>
+
       <li *ngIf="navCtaItem">
         <a [routerLink]="navCtaItem.href" class="nav-cta">
           <i *ngIf="navCtaItem.icon" [class]="navCtaItem.icon"></i> {{ navCtaItem.label }}
@@ -59,6 +66,11 @@
 
   <a *ngFor="let item of navSingleItems" [routerLink]="item.href" class="mob-item" (click)="closeMobileNav()">
     <i *ngIf="item.icon" [class]="item.icon"></i> {{ item.label }}
+  </a>
+
+  <a [routerLink]="auth.currentUser() ? '/rendez-vous' : '/connexion'" class="mob-item" (click)="closeMobileNav()">
+    <i class="fas" [ngClass]="auth.currentUser() ? 'fa-calendar-check' : 'fa-right-to-bracket'"></i>
+    {{ auth.currentUser() ? 'Mon rendez-vous' : 'Connexion' }}
   </a>
 
   <a *ngIf="navCtaItem" [routerLink]="navCtaItem.href" class="mob-item mob-cta" (click)="closeMobileNav()">

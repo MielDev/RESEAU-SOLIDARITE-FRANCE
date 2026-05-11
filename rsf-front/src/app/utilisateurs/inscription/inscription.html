@@ -76,15 +76,12 @@
         </select>
       </div>
 
-      <div class="form-grid-two">
-        <div class="form-group">
-          <label for="school">Ecole ou universite *</label>
-          <input id="school" name="school" type="text" [(ngModel)]="form.school" required />
-        </div>
-        <div class="form-group">
-          <label for="program">Formation *</label>
-          <input id="program" name="program" type="text" [(ngModel)]="form.program" required />
-        </div>
+      <div class="form-group">
+        <label for="status">Statut *</label>
+        <select id="status" name="status" [(ngModel)]="form.status" required>
+          <option value="" disabled>Selectionner votre statut</option>
+          <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+        </select>
       </div>
 
       <label class="terms-row">

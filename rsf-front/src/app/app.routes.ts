@@ -95,6 +95,16 @@ export const routes: Routes = [
         data: { title: 'Contact', section: 'Pages publiques' },
       },
       {
+        path: 'creneaux',
+        loadComponent: () => import('./admin/admin-creneaux/admin-creneaux').then((m) => m.AdminCreneaux),
+        data: { title: 'Creneaux', section: 'Accompagnement' },
+      },
+      {
+        path: 'rendez-vous',
+        loadComponent: () => import('./admin/admin-rendez-vous/admin-rendez-vous').then((m) => m.AdminRendezVous),
+        data: { title: 'Rendez-vous', section: 'Accompagnement' },
+      },
+      {
         path: 'don',
         loadComponent: () => import('./admin/admin-don/admin-don').then((m) => m.AdminDon),
         data: { title: 'Don', section: 'Pages publiques' },
@@ -171,6 +181,23 @@ export const routes: Routes = [
         data: { pageKey: 'actualites', listType: 'actualities' }
       },
       { path: 'contact', component: Contact, resolve: { pageContent: pageResolver }, data: { pageKey: 'contact' } },
+      {
+        path: 'inscription',
+        loadComponent: () => import('./utilisateurs/inscription/inscription').then((m) => m.Inscription),
+      },
+      {
+        path: 'connexion',
+        loadComponent: () => import('./utilisateurs/connexion/connexion').then((m) => m.Connexion),
+      },
+      {
+        path: 'mot-de-passe-oublie',
+        loadComponent: () =>
+          import('./utilisateurs/mot-de-passe-oublie/mot-de-passe-oublie').then((m) => m.MotDePasseOublie),
+      },
+      {
+        path: 'rendez-vous',
+        loadComponent: () => import('./utilisateurs/rendez-vous/rendez-vous').then((m) => m.RendezVous),
+      },
       {
         path: 'mentions-legales',
         loadComponent: () => import('./utilisateurs/legal/legal').then((m) => m.Legal),

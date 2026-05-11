@@ -49,6 +49,14 @@ export class Inscription implements OnInit {
     'Togolaise',
     'Tunisienne',
   ];
+  readonly statusOptions = [
+    'Etudiant',
+    "Demandeur d'emploi",
+    'Travailleur salarie',
+    'Travailleur independant',
+    'Sans activite',
+    'Autre',
+  ];
 
   countries: string[] = [...this.fallbackNationalities].sort((left, right) => left.localeCompare(right, 'fr'));
   isLoadingCountries = false;
@@ -64,8 +72,7 @@ export class Inscription implements OnInit {
     phone: '',
     birthDate: '',
     nationality: '',
-    school: '',
-    program: '',
+    status: '',
     acceptedTerms: false,
   };
 
@@ -97,8 +104,7 @@ export class Inscription implements OnInit {
         phone: this.form.phone,
         birthDate: this.form.birthDate,
         nationality: this.form.nationality,
-        school: this.form.school,
-        program: this.form.program,
+        status: this.form.status,
       });
 
       await this.router.navigate(['/rendez-vous']);
@@ -141,8 +147,7 @@ export class Inscription implements OnInit {
       this.form.phone,
       this.form.birthDate,
       this.form.nationality,
-      this.form.school,
-      this.form.program,
+      this.form.status,
     ];
 
     if (requiredValues.some((value) => !value.trim()) || !this.form.acceptedTerms) {

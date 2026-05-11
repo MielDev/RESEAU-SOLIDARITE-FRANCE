@@ -1,0 +1,82 @@
+.slot-form {
+  display: grid;
+  gap: 16px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.form-error {
+  padding: 12px;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  background: #fff1f2;
+  color: #be123c;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+td strong,
+td small {
+  display: block;
+}
+
+td strong {
+  color: #172033;
+  font-size: 13px;
+}
+
+td small {
+  margin-top: 3px;
+  color: #7b8798;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.table-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.empty-admin {
+  display: grid;
+  gap: 8px;
+  place-items: center;
+  min-height: 220px;
+  padding: 24px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  background: #f8fbff;
+  text-align: center;
+}
+
+.empty-admin i {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 8px;
+  background: #eaf1ff;
+  color: #2563eb;
+}
+
+.empty-admin strong {
+  color: #172033;
+}
+
+.empty-admin span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+@media (max-width: 720px) {
+  .form-actions,
+  .form-actions .btn {
+    width: 100%;
+  }
+}

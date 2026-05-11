@@ -2,6 +2,7 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { CookieConsentPreferences, CookieConsentService } from '../../services/cookie-consent.service';
+import { UserAuthService } from '../../services/user-auth.service';
 
 type NavItem = {
   href: string;
@@ -55,6 +56,7 @@ export class UserLayout implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private cookieConsent: CookieConsentService,
+    public readonly auth: UserAuthService,
   ) {}
 
   ngOnInit() {

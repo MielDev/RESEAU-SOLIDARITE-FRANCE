@@ -7,7 +7,7 @@ import { AdminAuthService } from './admin-auth.service';
 export const adminAuthInterceptor: HttpInterceptorFn = (req, next) => {
   const auth = inject(AdminAuthService);
   const token = auth.getToken();
-  const shouldAttachToken = token && req.url.startsWith(environment.apiUrl);
+  const shouldAttachToken = token && req.url.startsWith(environment.apiUrl) && !req.headers.has('Authorization');
 
   const nextRequest = shouldAttachToken
     ? req.clone({

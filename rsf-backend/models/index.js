@@ -18,6 +18,10 @@ const Setting      = require('./Setting')(sequelize);
 const NavItem        = require('./NavItem')(sequelize);
 const ContactMessage = require('./ContactMessage')(sequelize);
 const JoinRequest   = require('./JoinRequest')(sequelize);
+const HelpUser      = require('./HelpUser')(sequelize);
+const HelpPasswordReset = require('./HelpPasswordReset')(sequelize);
+const AppointmentSlot = require('./AppointmentSlot')(sequelize);
+const AppointmentBooking = require('./AppointmentBooking')(sequelize);
 const Accueil      = require('./Accueil')(sequelize);
 const { definePageModels } = require('./PageModels');
 const PageTableModels = definePageModels(sequelize);
@@ -35,6 +39,15 @@ EventProgram.belongsTo(Event, { foreignKey: 'event_id', as: 'event' });
 // Event 1-N EventPhoto (galerie photos)
 Event.hasMany(EventPhoto, { foreignKey: 'event_id', as: 'photos', onDelete: 'CASCADE' });
 EventPhoto.belongsTo(Event, { foreignKey: 'event_id', as: 'event' });
+
+HelpUser.hasMany(HelpPasswordReset, { foreignKey: 'help_user_id', as: 'password_resets', onDelete: 'CASCADE' });
+HelpPasswordReset.belongsTo(HelpUser, { foreignKey: 'help_user_id', as: 'help_user' });
+
+HelpUser.hasMany(AppointmentBooking, { foreignKey: 'help_user_id', as: 'appointment_bookings', onDelete: 'CASCADE' });
+AppointmentBooking.belongsTo(HelpUser, { foreignKey: 'help_user_id', as: 'help_user' });
+
+AppointmentSlot.hasOne(AppointmentBooking, { foreignKey: 'appointment_slot_id', as: 'booking', onDelete: 'CASCADE' });
+AppointmentBooking.belongsTo(AppointmentSlot, { foreignKey: 'appointment_slot_id', as: 'slot' });
 
 // ── Export ────────────────────────────────────────────────────────────────────
 const db = {
@@ -54,6 +67,10 @@ const db = {
   NavItem,
   ContactMessage,
   JoinRequest,
+  HelpUser,
+  HelpPasswordReset,
+  AppointmentSlot,
+  AppointmentBooking,
   Accueil,
   PageTableModels,
   ...PageTableModels,

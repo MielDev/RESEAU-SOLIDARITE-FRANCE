@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, ActivatedRoute } from '@angular/router';
+import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { PublicService } from '../../services/public.service';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -32,6 +32,7 @@ export class Contact implements OnInit {
     private renderer: Renderer2,
     private publicService: PublicService,
     private route: ActivatedRoute,
+    private router: Router,
     private sanitizer: DomSanitizer,
     private cookieConsent: CookieConsentService
   ) {
@@ -56,6 +57,7 @@ export class Contact implements OnInit {
       this.subjectOptions = Array.isArray(this.pageContent?.details?.subjectOptions)
         ? this.pageContent.details.subjectOptions
         : [];
+      this.ensureHelpRequestOption();
 
       if (!this.contactData.subject && this.subjectOptions.length > 0) {
         this.contactData.subject = this.subjectOptions[0];
@@ -133,7 +135,13 @@ export class Contact implements OnInit {
   }
 
   onSubmit() {
+    if (this.isHelpRequest()) {
+      void this.router.navigate(['/inscription'], { queryParams: { source: 'demande-aide' } });
+      return;
+    }
+
     this.isSubmitting = true;
+
     this.publicService.sendContactMessage(this.contactData).subscribe({
       next: () => {
         alert('Votre message a ete envoye avec succes.');
@@ -150,5 +158,28 @@ export class Contact implements OnInit {
         this.isSubmitting = false;
       }
     });
+  }
+
+  private ensureHelpRequestOption() {
+    const helpOption = "Demande d'aide";
+    const hasHelpOption = this.subjectOptions.some((option) => this.normalizeSubject(option) === this.normalizeSubject(helpOption));
+
+    if (!hasHelpOption) {
+      this.subjectOptions = [...this.subjectOptions, helpOption];
+    }
+  }
+
+  private isHelpRequest(): boolean {
+    return this.normalizeSubject(this.contactData.subject).includes('demande d aide');
+  }
+
+  private normalizeSubject(value: string): string {
+    return value
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[\u2019']/g, ' ')
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
   }
 }

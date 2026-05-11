@@ -20,6 +20,10 @@ const modelsToCheck = [
   ['NavItem', db.NavItem],
   ['ContactMessage', db.ContactMessage],
   ['JoinRequest', db.JoinRequest],
+  ['HelpUser', db.HelpUser],
+  ['HelpPasswordReset', db.HelpPasswordReset],
+  ['AppointmentSlot', db.AppointmentSlot],
+  ['AppointmentBooking', db.AppointmentBooking],
   ['Accueil', db.Accueil],
   ...pageModelsToCheck,
 ];

@@ -1,5 +1,8 @@
 import { Injectable, signal } from '@angular/core';
-import { UserSession } from './user-auth.service';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { UserAuthService } from './user-auth.service';
 
 export type AppointmentSlot = {
   id: string;
@@ -9,6 +12,8 @@ export type AppointmentSlot = {
   endTime: string;
   location: string;
   notes: string;
+  isActive?: boolean;
+  isBooked?: boolean;
   createdAt: string;
 };
 
@@ -20,106 +25,115 @@ export type AppointmentBooking = {
   email: string;
   phone: string;
   bookedAt: string;
+  status?: string;
 };
 
 export type AppointmentWithSlot = AppointmentBooking & {
   slot: AppointmentSlot | null;
 };
 
+type ApiResponse<T> = {
+  success: boolean;
+  message?: string;
+  data?: T;
+  total?: number;
+};
+
 @Injectable({
   providedIn: 'root',
 })
 export class AppointmentService {
-  private readonly slotsKey = 'rsf-help-appointment-slots';
-  private readonly bookingsKey = 'rsf-help-appointment-bookings';
+  private readonly apiUrl = `${environment.apiUrl}/appointments`;
 
-  readonly slots = signal<AppointmentSlot[]>(this.sortSlots(this.loadSlots()));
-  readonly bookings = signal<AppointmentBooking[]>(this.sortBookings(this.loadBookings()));
+  readonly slots = signal<AppointmentSlot[]>([]);
+  readonly bookings = signal<AppointmentBooking[]>([]);
 
-  createSlot(payload: Omit<AppointmentSlot, 'id' | 'createdAt'>): AppointmentSlot {
-    const slot: AppointmentSlot = {
-      ...payload,
-      id: this.createId('slot'),
-      createdAt: new Date().toISOString(),
-    };
+  constructor(
+    private readonly http: HttpClient,
+    private readonly auth: UserAuthService,
+  ) {
+    void this.refreshPublicSlots();
+  }
 
-    const slots = this.sortSlots([...this.slots(), slot]);
-    this.saveSlots(slots);
+  async refreshPublicSlots(): Promise<AppointmentSlot[]> {
+    const response = await firstValueFrom(this.http.get<ApiResponse<AppointmentSlot[]>>(`${this.apiUrl}/slots`));
+    const slots = this.sortSlots((response.data ?? []).map((slot) => this.normalizeSlot(slot)));
     this.slots.set(slots);
-
-    return slot;
+    return slots;
   }
 
-  updateSlot(id: string, payload: Omit<AppointmentSlot, 'id' | 'createdAt'>): AppointmentSlot {
-    const slots = this.slots();
-    const existing = slots.find((slot) => slot.id === id);
-
-    if (!existing) {
-      throw new Error('Creneau introuvable.');
-    }
-
-    const nextSlot: AppointmentSlot = {
-      ...existing,
-      ...payload,
-    };
-
-    const nextSlots = this.sortSlots(slots.map((slot) => (slot.id === id ? nextSlot : slot)));
-    this.saveSlots(nextSlots);
-    this.slots.set(nextSlots);
-
-    return nextSlot;
-  }
-
-  deleteSlot(id: string) {
-    if (this.bookings().some((booking) => booking.slotId === id)) {
-      throw new Error('Ce creneau a deja un rendez-vous. Supprimez le rendez-vous avant de retirer le creneau.');
-    }
-
-    const slots = this.slots().filter((slot) => slot.id !== id);
-    this.saveSlots(slots);
+  async refreshAdminSlots(): Promise<AppointmentSlot[]> {
+    const response = await firstValueFrom(this.http.get<ApiResponse<AppointmentSlot[]>>(`${this.apiUrl}/admin/slots`));
+    const slots = this.sortSlots((response.data ?? []).map((slot) => this.normalizeSlot(slot)));
     this.slots.set(slots);
+    return slots;
   }
 
-  bookSlot(slotId: string, user: UserSession): AppointmentBooking {
-    const slot = this.slots().find((item) => item.id === slotId);
-
-    if (!slot) {
-      throw new Error('Creneau introuvable.');
-    }
-
-    if (this.isSlotBooked(slotId)) {
-      throw new Error('Ce creneau vient deja d etre reserve.');
-    }
-
-    const booking: AppointmentBooking = {
-      id: this.createId('booking'),
-      slotId,
-      userId: user.id,
-      userName: `${user.firstName} ${user.lastName}`.trim(),
-      email: user.email,
-      phone: user.phone,
-      bookedAt: new Date().toISOString(),
-    };
-
-    const bookings = this.sortBookings([...this.bookings(), booking]);
-    this.saveBookings(bookings);
+  async refreshBookings(): Promise<AppointmentBooking[]> {
+    const response = await firstValueFrom(this.http.get<ApiResponse<AppointmentBooking[]>>(`${this.apiUrl}/admin/bookings`));
+    const bookings = this.sortBookings((response.data ?? []).map((booking) => this.normalizeBooking(booking)));
     this.bookings.set(bookings);
-
-    return booking;
+    return bookings;
   }
 
-  deleteBooking(id: string) {
-    const bookings = this.bookings().filter((booking) => booking.id !== id);
-    this.saveBookings(bookings);
-    this.bookings.set(bookings);
+  async refreshMyBooking(): Promise<AppointmentWithSlot | null> {
+    const response = await firstValueFrom(this.http.get<ApiResponse<AppointmentWithSlot | null>>(
+      `${this.apiUrl}/bookings/me`,
+      { headers: this.auth.getAuthHeaders() }
+    ));
+    return response.data ? this.normalizeBooking(response.data) as AppointmentWithSlot : null;
+  }
+
+  async createSlot(payload: Omit<AppointmentSlot, 'id' | 'createdAt'>): Promise<AppointmentSlot> {
+    const response = await firstValueFrom(this.http.post<ApiResponse<AppointmentSlot>>(`${this.apiUrl}/admin/slots`, payload));
+    await this.refreshAdminSlots();
+    return this.normalizeSlot(response.data as AppointmentSlot);
+  }
+
+  async updateSlot(id: string, payload: Omit<AppointmentSlot, 'id' | 'createdAt'>): Promise<AppointmentSlot> {
+    const response = await firstValueFrom(this.http.put<ApiResponse<AppointmentSlot>>(`${this.apiUrl}/admin/slots/${id}`, payload));
+    await this.refreshAdminSlots();
+    return this.normalizeSlot(response.data as AppointmentSlot);
+  }
+
+  async deleteSlot(id: string): Promise<void> {
+    await firstValueFrom(this.http.delete(`${this.apiUrl}/admin/slots/${id}`));
+    await this.refreshAdminSlots();
+  }
+
+  async bookSlot(slotId: string): Promise<AppointmentBooking> {
+    const response = await firstValueFrom(this.http.post<ApiResponse<AppointmentBooking>>(
+      `${this.apiUrl}/bookings`,
+      { slotId },
+      { headers: this.auth.getAuthHeaders() }
+    ));
+    await this.refreshPublicSlots();
+    return this.normalizeBooking(response.data as AppointmentBooking);
+  }
+
+  async rescheduleMyBooking(slotId: string): Promise<AppointmentBooking> {
+    const response = await firstValueFrom(this.http.put<ApiResponse<AppointmentBooking>>(
+      `${this.apiUrl}/bookings/me`,
+      { slotId },
+      { headers: this.auth.getAuthHeaders() }
+    ));
+    await this.refreshPublicSlots();
+    return this.normalizeBooking(response.data as AppointmentBooking);
+  }
+
+  async cancelMyBooking(): Promise<void> {
+    await firstValueFrom(this.http.delete(`${this.apiUrl}/bookings/me`, { headers: this.auth.getAuthHeaders() }));
+    await this.refreshPublicSlots();
+  }
+
+  async deleteBooking(id: string): Promise<void> {
+    await firstValueFrom(this.http.delete(`${this.apiUrl}/admin/bookings/${id}`));
+    await this.refreshBookings();
+    await this.refreshAdminSlots();
   }
 
   getBookingsWithSlots(): AppointmentWithSlot[] {
-    const slotMap = new Map(this.slots().map((slot) => [slot.id, slot]));
-    return this.bookings().map((booking) => ({
-      ...booking,
-      slot: slotMap.get(booking.slotId) ?? null,
-    }));
+    return this.bookings().map((booking) => this.normalizeBooking(booking) as AppointmentWithSlot);
   }
 
   getBookingForUser(userId: string): AppointmentWithSlot | null {
@@ -127,23 +141,8 @@ export class AppointmentService {
   }
 
   isSlotBooked(slotId: string): boolean {
-    return this.bookings().some((booking) => booking.slotId === slotId);
-  }
-
-  private loadSlots(): AppointmentSlot[] {
-    return this.parseJson<AppointmentSlot[]>(this.getItem(this.slotsKey), []);
-  }
-
-  private saveSlots(slots: AppointmentSlot[]) {
-    this.setItem(this.slotsKey, JSON.stringify(slots));
-  }
-
-  private loadBookings(): AppointmentBooking[] {
-    return this.parseJson<AppointmentBooking[]>(this.getItem(this.bookingsKey), []);
-  }
-
-  private saveBookings(bookings: AppointmentBooking[]) {
-    this.setItem(this.bookingsKey, JSON.stringify(bookings));
+    const slot = this.slots().find((item) => item.id === slotId);
+    return Boolean(slot?.isBooked) || this.bookings().some((booking) => booking.slotId === slotId);
   }
 
   private sortSlots(slots: AppointmentSlot[]): AppointmentSlot[] {
@@ -158,37 +157,25 @@ export class AppointmentService {
     return [...bookings].sort((left, right) => right.bookedAt.localeCompare(left.bookedAt));
   }
 
-  private createId(prefix: string): string {
-    if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
-      return `${prefix}-${crypto.randomUUID()}`;
-    }
-
-    return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  private normalizeSlot(slot: AppointmentSlot): AppointmentSlot {
+    return {
+      ...slot,
+      id: String(slot.id),
+      location: slot.location || '',
+      notes: slot.notes || '',
+      createdAt: slot.createdAt || '',
+    };
   }
 
-  private getItem(key: string): string | null {
-    if (typeof localStorage === 'undefined') {
-      return null;
-    }
+  private normalizeBooking(booking: AppointmentBooking | AppointmentWithSlot): AppointmentBooking | AppointmentWithSlot {
+    const normalized = {
+      ...booking,
+      id: String(booking.id),
+      slotId: String(booking.slotId),
+      userId: String(booking.userId),
+      slot: 'slot' in booking && booking.slot ? this.normalizeSlot(booking.slot) : null,
+    };
 
-    return localStorage.getItem(key);
-  }
-
-  private setItem(key: string, value: string) {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem(key, value);
-    }
-  }
-
-  private parseJson<T>(raw: string | null, fallback: T): T {
-    if (!raw) {
-      return fallback;
-    }
-
-    try {
-      return JSON.parse(raw) as T;
-    } catch {
-      return fallback;
-    }
+    return normalized;
   }
 }

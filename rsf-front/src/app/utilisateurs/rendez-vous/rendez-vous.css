@@ -146,7 +146,7 @@
 
 .booking-summary {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 16px;
   align-items: center;
   padding: 18px;
@@ -181,6 +181,75 @@
 .booking-summary p {
   color: #166534;
   font-size: 14px;
+}
+
+.summary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.summary-btn,
+.change-alert button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 13px;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  background: white;
+  color: var(--primary);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.summary-btn:hover,
+.change-alert button:hover {
+  border-color: rgba(47, 93, 255, 0.45);
+  background: #eff6ff;
+  transform: translateY(-1px);
+}
+
+.summary-btn.danger {
+  border-color: #fecaca;
+  color: #be123c;
+}
+
+.summary-btn.danger:hover {
+  background: #fff1f2;
+  border-color: #fda4af;
+}
+
+.summary-btn:disabled,
+.change-alert button:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+  transform: none;
+}
+
+.change-alert {
+  border-color: #fed7aa;
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.change-alert > i {
+  color: #c2410c;
+}
+
+.change-alert p {
+  color: #7c2d12;
+}
+
+.change-alert button {
+  border-color: #fed7aa;
+  color: #c2410c;
 }
 
 .feedback {
@@ -341,11 +410,16 @@
 
 @media (max-width: 760px) {
   .booking-hero,
-  .booking-alert {
+  .booking-alert,
+  .booking-summary {
     grid-template-columns: 1fr;
   }
 
-  .booking-alert a {
+  .booking-alert a,
+  .change-alert button,
+  .summary-actions,
+  .summary-btn {
     justify-content: center;
+    width: 100%;
   }
 }

@@ -68,6 +68,13 @@ export class AdminLayout implements OnInit, OnDestroy {
         { href: '/admin/contact', label: 'Contact', icon: 'fas fa-envelope' },
       ],
     },
+    {
+      title: 'Accompagnement',
+      items: [
+        { href: '/admin/creneaux', label: 'Creneaux', icon: 'fas fa-calendar-plus' },
+        { href: '/admin/rendez-vous', label: 'Rendez-vous', icon: 'fas fa-calendar-check' },
+      ],
+    },
   ];
 
   private routerEvents?: Subscription;

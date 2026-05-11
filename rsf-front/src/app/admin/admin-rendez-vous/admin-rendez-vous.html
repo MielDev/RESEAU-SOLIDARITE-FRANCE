@@ -1,0 +1,95 @@
+<section class="admin-page-toolbar">
+  <div>
+    <p class="admin-eyebrow">Accompagnement</p>
+    <h2>Rendez-vous pris</h2>
+    <span>Consulte les reservations effectuees par les utilisateurs.</span>
+  </div>
+  <a routerLink="/admin/creneaux" class="btn btn-primary admin-save-btn">
+    <i class="fas fa-calendar-plus"></i>
+    Gerer les creneaux
+  </a>
+</section>
+
+<section class="appointments-metrics">
+  <article>
+    <i class="fas fa-calendar-check"></i>
+    <div>
+      <span>Total</span>
+      <strong>{{ appointmentsList().length }}</strong>
+    </div>
+  </article>
+  <article>
+    <i class="fas fa-user-clock"></i>
+    <div>
+      <span>A venir</span>
+      <strong>{{ appointmentsList().length }}</strong>
+    </div>
+  </article>
+</section>
+
+<section class="panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title"><i class="pi fas fa-list-check"></i>Liste des rendez-vous</div>
+      <div class="panel-desc">Chaque ligne correspond a un creneau bloque cote utilisateur.</div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="table-wrap" *ngIf="appointmentsList().length > 0; else emptyBookings">
+      <table>
+        <thead>
+          <tr>
+            <th>Utilisateur</th>
+            <th>Contact</th>
+            <th>Creneau</th>
+            <th>Date</th>
+            <th>Reserve le</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of appointmentsList()">
+            <td>
+              <div class="person-cell">
+                <span>{{ booking.userName.charAt(0) }}</span>
+                <strong>{{ booking.userName }}</strong>
+              </div>
+            </td>
+            <td>
+              <a [href]="'mailto:' + booking.email">{{ booking.email }}</a>
+              <small>{{ booking.phone }}</small>
+            </td>
+            <td>
+              <strong>{{ booking.slot?.label || 'Creneau supprime' }}</strong>
+              <small *ngIf="booking.slot?.location">{{ booking.slot?.location }}</small>
+            </td>
+            <td>
+              <ng-container *ngIf="booking.slot; else missingSlot">
+                {{ formatDate(booking.slot.date) }}
+                <small>{{ booking.slot.startTime }} - {{ booking.slot.endTime }}</small>
+              </ng-container>
+              <ng-template #missingSlot>
+                <span class="badge badge-gray">Indisponible</span>
+              </ng-template>
+            </td>
+            <td>{{ formatDateTime(booking.bookedAt) }}</td>
+            <td>
+              <button type="button" class="btn btn-danger btn-sm" (click)="deleteBooking(booking)">
+                <i class="fas fa-unlock"></i>
+                Liberer
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #emptyBookings>
+      <div class="empty-admin">
+        <i class="fas fa-calendar-check"></i>
+        <strong>Aucun rendez-vous pris</strong>
+        <span>Les reservations apparaitront ici apres le choix d'un utilisateur.</span>
+      </div>
+    </ng-template>
+  </div>
+</section>

@@ -30,7 +30,7 @@ export class MotDePasseOublie {
     private readonly router: Router,
   ) {}
 
-  requestReset() {
+  async requestReset() {
     this.infoMessage = '';
     this.errorMessage = '';
 
@@ -42,7 +42,7 @@ export class MotDePasseOublie {
     this.isRequesting = true;
 
     try {
-      const reset = this.auth.requestPasswordReset(this.form.email);
+      const reset = await this.auth.requestPasswordReset(this.form.email);
       this.resetCode = reset.token;
       this.form.token = reset.token;
       this.infoMessage = 'Code de verification cree. Il reste valable 20 minutes.';

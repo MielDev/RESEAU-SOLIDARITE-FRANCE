@@ -110,6 +110,13 @@ export class AdminApiService {
     return this.http.put<ApiResponse<unknown>>(`${this.apiUrl}/settings`, payload).pipe(this.refreshViewAfterResponse());
   }
 
+  getDashboardStats<T = Record<string, unknown>>() {
+    return this.http.get<ApiResponse<T>>(`${this.apiUrl}/dashboard/stats`).pipe(
+      map((response) => response?.data as T),
+      this.refreshViewAfterResponse(),
+    );
+  }
+
   getContactMessages() {
     return this.http.get<ApiResponse<Record<string, unknown>[]>>(`${this.apiUrl}/contact/messages`).pipe(
       map((response) => (Array.isArray(response?.data) ? response.data : [])),

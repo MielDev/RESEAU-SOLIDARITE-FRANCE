@@ -10,11 +10,14 @@ router.use('/actions-solidaires', require('./actions-solidaires')); // New route
 
 router.use('/contact',      require('./contact'));   // public POST + admin GET
 router.use('/join-requests', require('./joinRequests')); // public POST + admin processing
+router.use('/help-auth',    require('./helpAuth'));  // comptes demande d'aide
+router.use('/appointments', require('./appointments')); // creneaux + reservations
 
 // ── Routes protégées (JWT requis) ─────────────────────────────────────────────
 router.use(authenticate);
 
 router.use('/pages',        require('./pages'));
+router.use('/dashboard',    require('./dashboard'));
 router.use('/team',         require('./team'));
 router.use('/missions',     require('./missions'));
 router.use('/actions',      require('./actions'));

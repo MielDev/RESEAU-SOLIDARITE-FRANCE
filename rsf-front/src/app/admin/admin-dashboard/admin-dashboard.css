@@ -14,9 +14,23 @@
   gap: 10px;
 }
 
+.dashboard-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  background: #fff1f2;
+  color: #be123c;
+  font-size: 13px;
+  font-weight: 800;
+}
+
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -56,6 +70,11 @@
 .metric-card.tone-gray .metric-icon {
   background: #eef2f7;
   color: #475569;
+}
+
+.metric-card.tone-purple .metric-icon {
+  background: #f3e8ff;
+  color: #7e22ce;
 }
 
 .metric-card span,
@@ -104,6 +123,164 @@
 .dashboard-side {
   position: sticky;
   top: 18px;
+}
+
+.panel-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid #d9e2f2;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.request-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.request-card {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #e4eaf5;
+  border-radius: 8px;
+  background: #fbfdff;
+}
+
+.request-card > i {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 8px;
+  background: #eaf1ff;
+  color: #2563eb;
+}
+
+.request-card span,
+.request-card small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.request-card span {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.request-card strong {
+  display: block;
+  color: #172033;
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.request-card small {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.rank-list,
+.status-list,
+.activity-list {
+  display: grid;
+  gap: 10px;
+}
+
+.rank-item {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) minmax(120px, 2fr) 44px;
+  gap: 12px;
+  align-items: center;
+  min-width: 0;
+}
+
+.rank-copy {
+  min-width: 0;
+}
+
+.rank-copy strong,
+.rank-copy span,
+.status-list strong,
+.status-list span,
+.status-list small,
+.activity-list strong,
+.activity-list small,
+.activity-list time {
+  display: block;
+}
+
+.rank-copy strong {
+  overflow: hidden;
+  color: #172033;
+  font-size: 13px;
+  font-weight: 850;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rank-copy span,
+.status-list small,
+.activity-list small,
+.activity-list time {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.rank-meter {
+  overflow: hidden;
+  height: 9px;
+  border-radius: 999px;
+  background: #e9eff8;
+}
+
+.rank-meter span {
+  display: block;
+  min-width: 6px;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #2563eb, #22c55e);
+}
+
+.rank-item em {
+  color: #475569;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 900;
+  text-align: right;
+}
+
+.empty-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 12px;
+  border: 1px dashed #d9e2f2;
+  border-radius: 8px;
+  background: #fbfdff;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.empty-inline i {
+  color: #2563eb;
 }
 
 .action-grid {
@@ -178,7 +355,7 @@
 
 .admin-map {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 14px;
 }
 
@@ -266,6 +443,121 @@
   font-size: 12.5px;
 }
 
+.appointment-panel {
+  display: grid;
+  gap: 14px;
+}
+
+.appointment-score {
+  display: grid;
+  min-height: 118px;
+  place-items: center;
+  border: 1px solid #dbeafe;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+}
+
+.appointment-score strong {
+  color: #172033;
+  font-size: 38px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.appointment-score span {
+  color: #475569;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.appointment-lines {
+  display: grid;
+  gap: 8px;
+}
+
+.appointment-lines div,
+.status-list article,
+.activity-list article {
+  border: 1px solid #e4eaf5;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.appointment-lines div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 42px;
+  padding: 0 12px;
+}
+
+.appointment-lines span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.appointment-lines strong {
+  color: #172033;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.status-list article {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+}
+
+.status-list article > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.status-list strong,
+.activity-list strong {
+  min-width: 0;
+  overflow: hidden;
+  color: #172033;
+  font-size: 13px;
+  font-weight: 850;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status-list span {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.activity-list article {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 10px;
+}
+
+.activity-icon {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: 8px;
+  background: #eaf1ff;
+  color: #2563eb;
+}
+
+.activity-list time {
+  margin-top: 3px;
+  font-size: 11.5px;
+}
+
 .side-links {
   padding: 0;
 }
@@ -276,9 +568,12 @@
 }
 
 @media (max-width: 1180px) {
-  .metrics-grid,
-  .admin-map {
+  .metrics-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .request-grid {
+    grid-template-columns: 1fr;
   }
 
   .dashboard-layout {
@@ -301,6 +596,7 @@
   .toolbar-actions .btn,
   .action-grid,
   .metrics-grid,
+  .request-grid,
   .admin-map {
     grid-template-columns: 1fr;
     width: 100%;
@@ -308,7 +604,17 @@
 
   .action-grid,
   .metrics-grid,
+  .request-grid,
   .admin-map {
     display: grid;
+  }
+
+  .rank-item {
+    grid-template-columns: 1fr 46px;
+  }
+
+  .rank-meter {
+    grid-column: 1 / -1;
+    order: 3;
   }
 }
