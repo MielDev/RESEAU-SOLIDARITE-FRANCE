@@ -239,16 +239,16 @@ const pageDefaults = {
 
   evenements: {
     hero: {
-      badge: 'Rencontres',
-      title: 'Événements',
-      text: "Nos événements créent du lien entre membres, bénévoles, partenaires et personnes accompagnées.",
+      badge: 'Informations',
+      title: 'Actualites',
+      text: "Les actualites du reseau mettent en avant les rencontres, annonces et informations utiles.",
     },
     regular: {
-      label: 'Éditions',
-      title: 'Toutes les rencontres du réseau',
+      label: 'Publications',
+      title: 'Toutes les actualites du reseau',
     },
     cta: {
-      title: 'Une idée d\'événement solidaire ?',
+      title: 'Une information a partager ?',
       text: "Nous sommes ouverts aux propositions utiles pour renforcer l'entraide et la cohesion.",
       href: '/contact',
       label: 'Nous contacter',
@@ -291,7 +291,7 @@ const pageDefaults = {
       title: 'Plusieurs manières de s\'engager',
       description: "Que vous ayez besoin d'aide ou envie de contribuer, votre place existe dans le réseau.",
       benefits: [
-        { icon: 'fas fa-hands-helping', boxClass: 'icon-primary', title: 'Aider sur le terrain', description: 'Participer aux collectes, distributions et événements.' },
+        { icon: 'fas fa-hands-helping', boxClass: 'icon-primary', title: 'Aider sur le terrain', description: 'Participer aux collectes, distributions et actualites du reseau.' },
         { icon: 'fas fa-comments', boxClass: 'icon-secondary', title: 'Partager son expérience', description: 'Orienter les nouveaux membres et transmettre des conseils utiles.' },
         { icon: 'fas fa-network-wired', boxClass: 'icon-support', title: 'Renforcer le réseau', description: 'Mobiliser des contacts, partenaires ou ressources locales.' },
       ],
@@ -300,7 +300,7 @@ const pageDefaults = {
       title: 'Envoyer une demande',
       statusOptions: ['Étudiant(e)', 'Salarié(e)', 'Demandeur d\'emploi', 'Bénévole', 'Partenaire', 'Autre'],
       intentOptions: ['Recevoir une aide', 'Devenir bénévole', 'Proposer un partenariat', 'Adhérer à l\'association'],
-      interestOptions: ['Administratif', 'Emploi / formation', 'Logement', 'Événements', 'Actions solidaires', 'Communication'],
+      interestOptions: ['Administratif', 'Emploi / formation', 'Logement', 'Actualites', 'Actions solidaires', 'Communication'],
       submitIdle: 'Envoyer ma demande',
       submitPending: 'Envoi en cours...',
     },

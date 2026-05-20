@@ -42,7 +42,7 @@ export class AdminOrganisation implements OnInit {
   private president: TeamMemberRecord = {};
   private readonly fallbackTeamMembers: TeamMemberRecord[] = [
     { name: 'AGBOCOU Belkis', role: 'Comptable', initials: 'AB', is_active: true },
-    { name: 'NOUAZE Alexandre', role: 'Responsable Appui Evenements', initials: 'NA', is_active: true },
+    { name: 'NOUAZE Alexandre', role: 'Responsable Appui Actualites', initials: 'NA', is_active: true },
     { name: 'DOSSOU Oluwakemi', role: 'Secretaire Generale', initials: 'DO', is_active: true },
     { name: 'AGONDANOU Constant', role: 'Coordinateur', initials: 'AC', is_active: true },
   ];

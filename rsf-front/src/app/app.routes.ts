@@ -12,7 +12,6 @@ import { EvenementDetail } from './utilisateurs/evenement-detail/evenement-detai
 import { RencontreAnnuelle } from './utilisateurs/rencontre-annuelle/rencontre-annuelle';
 import { Temoignages } from './utilisateurs/temoignages/temoignages';
 import { NousRejoindre } from './utilisateurs/nous-rejoindre/nous-rejoindre';
-import { Actualites } from './utilisateurs/actualites/actualites';
 import { Contact } from './utilisateurs/contact/contact';
 import { Don } from './utilisateurs/don/don';
 import { settingsResolver, listResolver, pageResolver } from './resolvers/data.resolver';
@@ -71,8 +70,8 @@ export const routes: Routes = [
       },
       {
         path: 'evenements',
-        loadComponent: () => import('./admin/admin-evenements/admin-evenements').then((m) => m.AdminEvenements),
-        data: { title: 'Evenements', section: 'Pages publiques' },
+        pathMatch: 'full',
+        redirectTo: 'actualites',
       },
       {
         path: 'rencontre',
@@ -86,7 +85,7 @@ export const routes: Routes = [
       },
       {
         path: 'actualites',
-        loadComponent: () => import('./admin/admin-actualites/admin-actualites').then((m) => m.AdminActualites),
+        loadComponent: () => import('./admin/admin-evenements/admin-evenements').then((m) => m.AdminEvenements),
         data: { title: 'Actualites', section: 'Pages publiques' },
       },
       {
@@ -151,12 +150,21 @@ export const routes: Routes = [
       { path: 'actions-internationales', component: ActionsInternationales, resolve: { pageContent: pageResolver }, data: { pageKey: 'actions-internationales' } },
       {
         path: 'evenements',
+        pathMatch: 'full',
+        redirectTo: 'actualites'
+      },
+      {
+        path: 'evenements/:id',
+        redirectTo: 'actualites/:id'
+      },
+      {
+        path: 'actualites',
         component: Evenements,
         resolve: { pageContent: pageResolver, events: listResolver },
         data: { pageKey: 'evenements', listType: 'events' }
       },
       {
-        path: 'evenements/:id',
+        path: 'actualites/:id',
         component: EvenementDetail,
         resolve: { pageContent: pageResolver, events: listResolver },
         data: { pageKey: 'evenements', listType: 'events' }
@@ -174,12 +182,6 @@ export const routes: Routes = [
         data: { pageKey: 'temoignages', listType: 'testimonials' }
       },
       { path: 'nous-rejoindre', component: NousRejoindre, resolve: { pageContent: pageResolver }, data: { pageKey: 'nous-rejoindre' } },
-      {
-        path: 'actualites',
-        component: Actualites,
-        resolve: { pageContent: pageResolver, actualities: listResolver },
-        data: { pageKey: 'actualites', listType: 'actualities' }
-      },
       { path: 'contact', component: Contact, resolve: { pageContent: pageResolver }, data: { pageKey: 'contact' } },
       {
         path: 'inscription',

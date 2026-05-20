@@ -192,7 +192,7 @@ const pageDefaults = {
     },
   },
   evenements: {
-    ...heroDefaults('Evenements'),
+    ...heroDefaults('Actualites'),
     featured: {
       buttonLabel: '',
       buttonHref: '',
@@ -483,15 +483,15 @@ export const adminEditorConfigs = {
   },
   evenements: {
     pageKey: 'evenements',
-    pageDescription: 'Page et liste des evenements du reseau.',
+    pageDescription: 'Page et liste des actualites du reseau.',
     pageDefaults: pageDefaults.evenements,
     pageFieldOrder: ['hero', 'featured', 'regular', 'cta'],
     collection: {
       resource: 'events',
-      title: 'Evenements',
-      itemLabel: 'Evenement',
-      description: 'Les evenements publics sont geres ici.',
-      emptyMessage: "Aucun evenement n'est encore enregistre.",
+      title: 'Actualites',
+      itemLabel: 'Actualite',
+      description: 'Les actualites publiques sont gerees ici.',
+      emptyMessage: "Aucune actualite n'est encore enregistree.",
       fields: eventFields,
       defaults: {
         time_start: '10:00',
@@ -511,9 +511,9 @@ export const adminEditorConfigs = {
     collection: {
       resource: 'events',
       title: 'Programme de la rencontre',
-      itemLabel: 'Evenement',
-      description: 'Utilise les memes donnees evenementielles que la page publique.',
-      emptyMessage: "Aucun evenement n'est encore enregistre.",
+      itemLabel: 'Actualite',
+      description: "Utilise les memes donnees d'actualites que la page publique.",
+      emptyMessage: "Aucune actualite n'est encore enregistree.",
       fields: eventFields,
       defaults: {
         time_start: '10:00',

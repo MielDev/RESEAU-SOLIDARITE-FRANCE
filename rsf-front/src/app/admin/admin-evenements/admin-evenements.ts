@@ -71,19 +71,19 @@ export class AdminEvenements implements OnInit {
         this.saving = false;
         this.loadEvents();
         this.showForm = false;
-        void this.alerts.success('Evenement enregistre', 'La liste des evenements a bien ete mise a jour.');
+        void this.alerts.success('Actualite enregistree', 'La liste des actualites a bien ete mise a jour.');
       },
       error: () => {
         this.saving = false;
-        void this.alerts.error('Enregistrement impossible', 'Cet evenement n a pas pu etre sauvegarde.');
+        void this.alerts.error('Enregistrement impossible', 'Cette actualite n a pas pu etre sauvegardee.');
       },
     });
   }
 
   async delete(event: any) {
     const confirmed = await this.alerts.confirm({
-      title: 'Supprimer cet evenement ?',
-      text: 'Cet evenement ne sera plus affiche apres suppression.',
+      title: 'Supprimer cette actualite ?',
+      text: 'Cette actualite ne sera plus affichee apres suppression.',
       confirmText: 'Supprimer',
     });
 
@@ -92,10 +92,10 @@ export class AdminEvenements implements OnInit {
     this.api.deleteResource('events', event.id).subscribe({
       next: () => {
         this.loadEvents();
-        void this.alerts.success('Evenement supprime', 'La liste a ete mise a jour.');
+        void this.alerts.success('Actualite supprimee', 'La liste a ete mise a jour.');
       },
       error: () => {
-        void this.alerts.error('Suppression impossible', 'Cet evenement n a pas pu etre supprime.');
+        void this.alerts.error('Suppression impossible', 'Cette actualite n a pas pu etre supprimee.');
       },
     });
   }

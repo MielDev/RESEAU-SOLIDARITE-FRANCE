@@ -59,7 +59,7 @@ export class Evenements implements OnInit {
   }
 
   getEventUrl(event: any): string {
-    return `/evenements/${event?.id}`;
+    return `/actualites/${event?.id}`;
   }
 
   getCoverPhoto(event: any): any | null {

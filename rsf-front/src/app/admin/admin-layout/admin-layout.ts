@@ -55,9 +55,8 @@ export class AdminLayout implements OnInit, OnDestroy {
     {
       title: 'Publication',
       items: [
-        { href: '/admin/evenements', label: 'Evenements', icon: 'fas fa-calendar-days' },
-        { href: '/admin/rencontre', label: 'Rencontre annuelle', icon: 'fas fa-cake-candles' },
         { href: '/admin/actualites', label: 'Actualites', icon: 'fas fa-newspaper' },
+        { href: '/admin/rencontre', label: 'Rencontre annuelle', icon: 'fas fa-cake-candles' },
       ],
     },
     {

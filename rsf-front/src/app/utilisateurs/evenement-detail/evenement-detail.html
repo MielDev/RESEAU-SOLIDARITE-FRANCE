@@ -3,9 +3,9 @@
     <div class="breadcrumb">
       <a routerLink="/">Accueil</a>
       <span class="sep">&rsaquo;</span>
-      <a routerLink="/evenements">Evenements</a>
+      <a routerLink="/actualites">Actualites</a>
       <span class="sep">&rsaquo;</span>
-      {{ event?.edition || event?.title || 'Evenement' }}
+      {{ event?.edition || event?.title || 'Actualite' }}
     </div>
 
     <ng-container *ngIf="event; else eventMissingHeader">
@@ -21,8 +21,8 @@
     </ng-container>
 
     <ng-template #eventMissingHeader>
-      <h1>Evenement introuvable</h1>
-      <p>Retourne a la liste des evenements pour choisir une edition disponible.</p>
+      <h1>Actualite introuvable</h1>
+      <p>Retourne a la liste des actualites pour choisir une publication disponible.</p>
     </ng-template>
   </div>
 </header>
@@ -39,7 +39,7 @@
 
         <section class="event-gallery" *ngIf="event.photos?.length">
           <div class="s-label">Photos</div>
-          <h2 class="s-title">Galerie de l'evenement</h2>
+          <h2 class="s-title">Galerie de l'actualite</h2>
           <div class="gallery-grid">
             <figure *ngFor="let photo of event.photos">
               <img [src]="photo.image_url" [alt]="photo.alt_text || photo.caption || event.title" />
@@ -107,7 +107,7 @@
 
         <div class="side-card" *ngIf="relatedEvents.length">
           <h3>Autres editions</h3>
-          <a class="related-link" *ngFor="let related of relatedEvents" [routerLink]="['/evenements', related.id]">
+          <a class="related-link" *ngFor="let related of relatedEvents" [routerLink]="['/actualites', related.id]">
             <span>{{ related.edition || related.title }}</span>
             <small>{{ formatDate(related.event_date) }}</small>
           </a>
@@ -120,7 +120,7 @@
 <ng-template #eventMissingBody>
   <section class="section-pad">
     <div class="container">
-      <a routerLink="/evenements" class="btn btn-primary">Voir les evenements</a>
+      <a routerLink="/actualites" class="btn btn-primary">Voir les actualites</a>
     </div>
   </section>
 </ng-template>

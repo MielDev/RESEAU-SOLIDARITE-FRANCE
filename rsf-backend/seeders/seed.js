@@ -87,12 +87,11 @@ const run = async () => {
     { label: 'Actions solidaires', href: '/actions-solidaires', icon: 'fas fa-handshake-angle', sort_order: 4 },
     { label: 'Soutien aux membres', href: '/soutien-aux-membres', icon: 'fas fa-heart', sort_order: 5 },
     { label: 'Actions internationales', href: '/actions-internationales', icon: 'fas fa-globe', sort_order: 6 },
-    { label: 'Événements', href: '/evenements', icon: 'fas fa-calendar-alt', sort_order: 7 },
+    { label: 'Actualites', href: '/actualites', icon: 'fas fa-newspaper', sort_order: 7 },
     { label: 'Témoignages', href: '/temoignages', icon: 'fas fa-comments', sort_order: 8 },
     { label: 'Nous rejoindre', href: '/nous-rejoindre', icon: 'fas fa-hands-holding', sort_order: 9 },
-    { label: 'Actualités', href: '/actualites', icon: 'fas fa-newspaper', sort_order: 10 },
-    { label: 'Contact', href: '/contact', icon: 'fas fa-envelope', sort_order: 11 },
-    { label: 'Faire un don', href: '/don', icon: 'fas fa-heart', sort_order: 12, is_cta: true },
+    { label: 'Contact', href: '/contact', icon: 'fas fa-envelope', sort_order: 10 },
+    { label: 'Faire un don', href: '/don', icon: 'fas fa-heart', sort_order: 11, is_cta: true },
   ];
   for (const navItem of navItems) {
     await db.NavItem.create({ ...navItem, is_visible: true });
@@ -126,10 +125,10 @@ const run = async () => {
       sort_order: 1,
       photo_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=256&h=256&auto=format&fit=crop',
     },
-    { name: 'NOUAZE Alexandre', initials: 'NA', role: 'Responsable Appui Événements', color1: '#7C3AED', color2: '#6366F1', sort_order: 2 },
+    { name: 'NOUAZE Alexandre', initials: 'NA', role: 'Responsable Appui Actualites', color1: '#7C3AED', color2: '#6366F1', sort_order: 2 },
     { name: 'DOSSOU Oluwakèmi', initials: 'DO', role: 'Secrétaire Générale', color1: '#FF8C00', color2: '#e07000', sort_order: 3 },
     { name: 'AGONDANOU Constant', initials: 'AC', role: 'Coordinateur', color1: '#22C55E', color2: '#16A34A', sort_order: 4 },
-    { name: 'NOUAZE Helticia', initials: 'NH', role: 'Responsable Événements', color1: '#4F7CFF', color2: '#7C3AED', sort_order: 5 },
+    { name: 'NOUAZE Helticia', initials: 'NH', role: 'Responsable Actualites', color1: '#4F7CFF', color2: '#7C3AED', sort_order: 5 },
     { name: 'SEHLIN Samson', initials: 'SS', role: 'Responsable Partenariats', color1: '#1E3A8A', color2: '#2F5DFF', sort_order: 6 },
     { name: 'BASSALE Abiyé', initials: 'BA', role: 'Responsable Accompagnement Administratif', color1: '#FF8C00', color2: '#7C3AED', sort_order: 7 },
     { name: 'KOSSOKO Herwick', initials: 'KH', role: 'Responsable Solidarité', color1: '#22C55E', color2: '#2F5DFF', sort_order: 8 },
@@ -292,7 +291,7 @@ const run = async () => {
     {
       icon: 'fas fa-star',
       title: '2ᵉ Édition — Journée annuelle au Parc des Gayeulles',
-      category: 'Événement',
+      category: 'Actualite',
       summary: 'Notre journée annuelle de cohésion revient le 26 juillet 2025 pour une 2ᵉ édition encore plus festive.',
       link_href: '/rencontre-annuelle',
       published_at: '2025-06-01',
@@ -317,9 +316,10 @@ const run = async () => {
       sort_order: 2,
     },
   ];
-  for (const actuality of actualities) {
-    await db.Actuality.create(actuality);
-  }
+  // Collection legacy masquee: /actualites affiche maintenant les donnees events.
+  // for (const actuality of actualities) {
+  //   await db.Actuality.create(actuality);
+  // }
 
   const actions = [
     {

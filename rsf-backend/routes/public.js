@@ -168,7 +168,17 @@ router.get('/nav', async (req, res, next) => {
       where: { is_visible: true },
       order: [['sort_order', 'ASC']],
     });
-    res.json({ success: true, data: rows });
+    const navItems = rows.map((row) => row.get({ plain: true }));
+    const hasLegacyEventItem = navItems.some((item) => item.href === '/evenements');
+    const data = navItems
+      .filter((item) => !(hasLegacyEventItem && item.href === '/actualites'))
+      .map((item) =>
+        item.href === '/evenements'
+          ? { ...item, label: 'Actualites', href: '/actualites', icon: 'fas fa-newspaper' }
+          : item
+      );
+
+    res.json({ success: true, data });
   } catch (err) {
     next(err);
   }

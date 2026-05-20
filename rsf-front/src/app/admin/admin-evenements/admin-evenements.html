@@ -1,12 +1,12 @@
 <section class="admin-page-toolbar">
   <div>
     <p class="admin-eyebrow">Collection</p>
-    <h2>Evenements</h2>
-    <span>Ajoute, modifie ou supprime les evenements publics.</span>
+    <h2>Actualites</h2>
+    <span>Ajoute, modifie ou supprime les actualites publiques.</span>
   </div>
   <button type="button" class="btn btn-primary admin-save-btn" (click)="addNew()">
     <i class="fas fa-plus"></i>
-    <span>Nouvel evenement</span>
+    <span>Nouvelle actualite</span>
   </button>
 </section>
 
@@ -15,8 +15,8 @@
 <div class="panel">
   <div class="panel-header">
     <div>
-      <div class="panel-title"><i class="pi fas fa-calendar-days"></i>Liste des evenements</div>
-      <div class="panel-desc">Gerez les evenements affiches sur la page Evenements.</div>
+      <div class="panel-title"><i class="pi fas fa-newspaper"></i>Liste des actualites</div>
+      <div class="panel-desc">Gerez les actualites affichees sur la page Actualites.</div>
     </div>
   </div>
 
@@ -71,8 +71,8 @@
   <section class="admin-modal admin-modal-xl" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
     <header class="admin-modal-header">
       <div>
-        <p class="admin-modal-kicker">Evenement</p>
-        <h3 class="admin-modal-title">{{ editing ? 'Modifier un evenement' : 'Nouvel evenement' }}</h3>
+        <p class="admin-modal-kicker">Actualite</p>
+        <h3 class="admin-modal-title">{{ editing ? 'Modifier une actualite' : 'Nouvelle actualite' }}</h3>
         <p class="admin-modal-desc">Centralise les informations, la galerie et les options de publication.</p>
       </div>
       <button class="admin-modal-close" type="button" (click)="cancel()" [disabled]="saving" aria-label="Fermer">
@@ -87,7 +87,7 @@
           <div class="form-grid form-grid-2">
             <div class="form-group">
               <label>Titre</label>
-              <input class="input" type="text" [(ngModel)]="currentEvent.title" placeholder="Titre de l'evenement" />
+              <input class="input" type="text" [(ngModel)]="currentEvent.title" placeholder="Titre de l'actualite" />
             </div>
             <div class="form-group">
               <label>Edition</label>
@@ -111,7 +111,7 @@
             </div>
             <div class="form-group">
               <label>Badge</label>
-              <input class="input" type="text" [(ngModel)]="currentEvent.badge_label" placeholder="Evenement phare" />
+              <input class="input" type="text" [(ngModel)]="currentEvent.badge_label" placeholder="Actualite phare" />
             </div>
             <div class="form-group">
               <label>Email de contact</label>
@@ -133,7 +133,7 @@
 
           <div class="form-group">
             <label>Description</label>
-            <textarea class="textarea" [(ngModel)]="currentEvent.description" placeholder="Decrivez l'evenement..."></textarea>
+            <textarea class="textarea" [(ngModel)]="currentEvent.description" placeholder="Decrivez l'actualite..."></textarea>
           </div>
         </section>
 
@@ -141,7 +141,7 @@
           <div class="photo-editor-head">
             <div>
               <h5>Galerie photos</h5>
-              <p>Ajoute plusieurs images qui seront affichees dans la page detail de l'evenement.</p>
+              <p>Ajoute plusieurs images qui seront affichees dans la page detail de l'actualite.</p>
             </div>
             <div class="photo-add-control">
               <input

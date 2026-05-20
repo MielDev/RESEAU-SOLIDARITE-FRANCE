@@ -17,7 +17,7 @@ export class PublicService {
     '/actions-solidaires': 'fas fa-handshake-angle',
     '/soutien-aux-membres': 'fas fa-heart',
     '/actions-internationales': 'fas fa-globe',
-    '/evenements': 'fas fa-calendar-alt',
+    '/evenements': 'fas fa-newspaper',
     '/temoignages': 'fas fa-comments',
     '/nous-rejoindre': 'fas fa-hands-holding',
     '/actualites': 'fas fa-newspaper',

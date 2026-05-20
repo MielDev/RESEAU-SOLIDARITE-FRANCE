@@ -3,10 +3,10 @@
     <div class="breadcrumb">
       <a routerLink="/">Accueil</a>
       <span class="sep">&rsaquo;</span>
-      {{ pageContent?.hero?.title || 'Evenements' }}
+      {{ pageContent?.hero?.title || 'Actualites' }}
     </div>
     <div class="badge" *ngIf="pageContent?.hero?.badge">
-      <i class="fas fa-calendar-days"></i> {{ pageContent.hero.badge }}
+      <i class="fas fa-newspaper"></i> {{ pageContent.hero.badge }}
     </div>
     <h1>{{ pageContent?.hero?.title }}</h1>
     <p>{{ pageContent?.hero?.text }}</p>
@@ -34,7 +34,7 @@
           </ng-container>
           <ng-template #eventCoverPlaceholder>
             <div class="event-cover event-cover-placeholder">
-              <i class="fas fa-calendar-alt"></i>
+              <i class="fas fa-newspaper"></i>
             </div>
           </ng-template>
         </a>
@@ -59,7 +59,7 @@
           <p class="event-desc">{{ event.description }}</p>
 
           <a [routerLink]="getEventUrl(event)" class="event-link">
-            Voir l'evenement <i class="fas fa-arrow-right"></i>
+            Voir l'actualite <i class="fas fa-arrow-right"></i>
           </a>
         </div>
       </article>

@@ -143,7 +143,15 @@ export class UserLayout implements OnInit, OnDestroy {
   }
 
   private buildNavigation(rawItems: NavItem[]) {
-    const items = Array.isArray(rawItems) ? rawItems : [];
+    const sourceItems = Array.isArray(rawItems) ? rawItems : [];
+    const hasLegacyEventItem = sourceItems.some((item) => item?.href === '/evenements');
+    const items = sourceItems
+      .filter((item) => !(hasLegacyEventItem && item?.href === '/actualites'))
+      .map((item) =>
+        item?.href === '/evenements'
+          ? { ...item, href: '/actualites', label: 'Actualites', icon: 'fas fa-newspaper' }
+          : item
+      );
     const regularItems = items.filter((item) => !item?.is_cta);
     const groupedHrefs = new Set([
       '/qui-sommes-nous',
@@ -152,7 +160,7 @@ export class UserLayout implements OnInit, OnDestroy {
       '/actions-solidaires',
       '/soutien-aux-membres',
       '/actions-internationales',
-      '/evenements',
+      '/actualites',
       '/rencontre-annuelle',
     ]);
 
@@ -170,8 +178,8 @@ export class UserLayout implements OnInit, OnDestroy {
         ),
       },
       {
-        label: 'Evenements',
-        items: regularItems.filter((item) => ['/evenements', '/rencontre-annuelle'].includes(item.href)),
+        label: 'Actualites',
+        items: regularItems.filter((item) => ['/actualites', '/rencontre-annuelle'].includes(item.href)),
       },
     ].filter((group) => group.items.length > 0);
 
@@ -179,7 +187,7 @@ export class UserLayout implements OnInit, OnDestroy {
     this.footerGroups = [
       {
         title: "L'association",
-        items: regularItems.filter((item) => ['/qui-sommes-nous', '/organisation', '/temoignages', '/actualites'].includes(item.href)),
+        items: regularItems.filter((item) => ['/qui-sommes-nous', '/organisation', '/temoignages'].includes(item.href)),
       },
       {
         title: 'Nos actions',
@@ -189,7 +197,7 @@ export class UserLayout implements OnInit, OnDestroy {
       },
       {
         title: 'Nous rejoindre',
-        items: regularItems.filter((item) => ['/nous-rejoindre', '/don', '/evenements', '/contact'].includes(item.href)),
+        items: regularItems.filter((item) => ['/nous-rejoindre', '/don', '/actualites', '/contact'].includes(item.href)),
       },
       {
         title: 'Informations legales',

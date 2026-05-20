@@ -137,7 +137,7 @@ const getOne = async (req, res, next) => {
       order: eventOrder,
     });
     if (!row) {
-      throw createError('Evenement introuvable.', 404);
+      throw createError('Actualite introuvable.', 404);
     }
 
     res.json({ success: true, data: row });
@@ -175,7 +175,7 @@ const create = async (req, res, next) => {
       include: includeEventDetails,
       order: eventOrder,
     });
-    res.status(201).json({ success: true, message: 'Evenement cree.', data: fullEvent });
+    res.status(201).json({ success: true, message: 'Actualite creee.', data: fullEvent });
   } catch (err) {
     next(err);
   }
@@ -187,7 +187,7 @@ const update = async (req, res, next) => {
     const event = await Event.findByPk(req.params.id);
 
     if (!event) {
-      throw createError('Evenement introuvable.', 404);
+      throw createError('Actualite introuvable.', 404);
     }
 
     await event.update(eventData);
@@ -224,7 +224,7 @@ const update = async (req, res, next) => {
       include: includeEventDetails,
       order: eventOrder,
     });
-    res.json({ success: true, message: 'Evenement mis a jour.', data: fullEvent });
+    res.json({ success: true, message: 'Actualite mise a jour.', data: fullEvent });
   } catch (err) {
     next(err);
   }
@@ -234,13 +234,13 @@ const remove = async (req, res, next) => {
   try {
     const row = await Event.findByPk(req.params.id);
     if (!row) {
-      throw createError('Evenement introuvable.', 404);
+      throw createError('Actualite introuvable.', 404);
     }
 
     await EventProgram.destroy({ where: { event_id: row.id } });
     await EventPhoto.destroy({ where: { event_id: row.id } });
     await row.destroy();
-    res.json({ success: true, message: 'Evenement supprime.' });
+    res.json({ success: true, message: 'Actualite supprimee.' });
   } catch (err) {
     next(err);
   }
